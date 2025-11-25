@@ -1,0 +1,3737 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!-- edited with XMLSpy v2023 rel. 2 (x64) (http://www.altova.com) by  (Unimed do Brasil) -->
+<!--
+	
+	Projeto: PTU XML
+	Versão: V3_0
+	TargetNameSpace: http://ptu.unimed.coop.br/schemas/V1_0
+	
+	Autores: 
+	Unimed do Brasil
+
+-->
+<schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:ptu="http://ptu.unimed.coop.br/schemas/V3_0" targetNamespace="http://ptu.unimed.coop.br/schemas/V3_0" elementFormDefault="qualified">
+	<include schemaLocation="ptu_SimpleTypes-V3_0.xsd"/>
+	<!-- **************************************************** arquivo ptu Cobranca ou Utilizacao ***********************************************************************************************************-->
+	<complexType name="ct_ArquivoCobrancaUtilizacao">
+		<choice>
+			<element name="Tipoguia" type="ptu:ct_tipoGuia"/>
+			<element name="CobrancaReembolso" type="ptu:ct_CobrancaReembolso"/>
+		</choice>
+	</complexType>
+	<complexType name="ct_tipoGuia">
+		<sequence>
+			<element name="guiaConsulta" type="ptu:ct_Consulta" minOccurs="0" maxOccurs="9999"/>
+			<element name="guiaSADT" type="ptu:ct_SADT" minOccurs="0" maxOccurs="9999"/>
+			<element name="guiaInternacao" type="ptu:ct_Internacao" minOccurs="0" maxOccurs="9999"/>
+			<element name="guiaHonorarios" type="ptu:ct_Honorarios" minOccurs="0" maxOccurs="9999"/>
+			<element name="notaFiscal_Fornecedor" type="ptu:ct_NotaFiscal_Fornecedor" minOccurs="0" maxOccurs="9999"/>
+		</sequence>
+	</complexType>
+	<complexType name="ct_CobrancaReembolso">
+		<choice>
+			<element name="reembolso" type="ptu:ct_Reembolso" maxOccurs="9999"/>
+			<element name="RessarcimentoSus" type="ptu:ct_Ressarcimento_SUS" maxOccurs="9999"/>
+		</choice>
+	</complexType>
+	<!--********************************************************************************************************************************************************************************-->
+	<!--************************************** Cabeçalho Cobranca***********************************************************************************************************************-->
+	<!--********************************************************************************************************************************************************************************-->
+	<complexType name="ct_CabecalhoCobranca">
+		<sequence>
+			<element name="nrVerTra_PTU" type="ptu:st_numero2"/>
+			<element name="unimed" type="ptu:ct_codUnimed"/>
+			<element name="GuiasCobrancaUtilizacao" type="ptu:ct_AvisoCobrancaPrePagamento"/>
+		</sequence>
+	</complexType>
+	<complexType name="ct_AvisoCobrancaPrePagamento">
+		<choice>
+			<element name="Aviso">
+				<complexType>
+					<sequence>
+						<element name="dt_Geracao" type="ptu:st_data2"/>
+						<element name="nr_Competencia" type="ptu:st_nrComp"/>
+					</sequence>
+				</complexType>
+			</element>
+			<element name="Cobranca">
+				<complexType>
+					<sequence>
+						<element name="dt_Geracao" type="ptu:st_data2"/>
+						<element name="nr_Competencia" type="ptu:st_nrComp"/>
+						<element name="tp_Cobranca" type="ptu:st_tpCobranca"/>
+						<element name="documento1">
+							<complexType>
+								<complexContent>
+									<extension base="ptu:ct_Doc">
+										<sequence>
+											<element name="VL_IR" type="ptu:st_Decimal12.2" minOccurs="0"/>
+										</sequence>
+									</extension>
+								</complexContent>
+							</complexType>
+						</element>
+						<element name="documento2" type="ptu:ct_Doc" minOccurs="0"/>
+					</sequence>
+				</complexType>
+			</element>
+			<element name="Utilizacao">
+				<complexType>
+					<sequence>
+						<element name="dt_Geracao" type="ptu:st_data2"/>
+						<element name="dt_InicialPagto" type="ptu:st_data2"/>
+						<element name="dt_FinalPagto" type="ptu:st_data2"/>
+					</sequence>
+				</complexType>
+			</element>
+		</choice>
+	</complexType>
+	<!--****************************************************************************************************************************************************************************-->
+	<!-- ************************************** Cabeçalho PTU***********************************************************************************************************************-->
+	<!--****************************************************************************************************************************************************************************-->
+	<complexType name="ct_CabecalhoPTU">
+		<sequence>
+			<element name="nrVerTra_PTU" type="ptu:st_numero2"/>
+			<element name="unimed" type="ptu:ct_codUnimed"/>
+			<element name="dt_geracao" type="ptu:st_data2"/>
+		</sequence>
+	</complexType>
+	<!--****************************************************************************************************************************************************************************-->
+	<!-- ************************************** Cabeçalho PTU A1200 ***********************************************************************************************************************-->
+	<!--****************************************************************************************************************************************************************************-->
+	<complexType name="ct_CabecalhoPTU_A1200">
+		<sequence>
+			<element name="nrVerTra_PTU" type="ptu:st_numero2"/>
+			<element name="cd_Uni_Origem" type="ptu:st_numero4"/>
+			<element name="dt_geracao" type="ptu:st_data2"/>
+		</sequence>
+	</complexType>
+	<!--****************************************************************************************************************************************************************************-->
+	<!-- ************************************** Guia de Consulta *******************************************************************************************************************-->
+	<!--****************************************************************************************************************************************************************************-->
+	<complexType name="ct_Consulta">
+		<sequence>
+			<element name="dadosBeneficiario">
+				<complexType>
+					<complexContent>
+						<extension base="ptu:ct_identificacaoBenef">
+							<sequence>
+								<element name="nm_Benef" type="ptu:st_nomeBenef" minOccurs="0"/>
+								<element name="id_RN" type="ptu:st_SimNao"/>
+								<element name="tp_Paciente" type="ptu:st_tpPaciente"/>
+							</sequence>
+						</extension>
+					</complexContent>
+				</complexType>
+			</element>
+			<element name="contratadoExecutante" type="ptu:ct_dadosExecutante"/>
+			<element name="profissionalExecutante" type="ptu:ct_profissionalExecutanteConsulta"/>
+			<element name="dadosGuia" type="ptu:ct_dadosGuiaConsulta"/>
+			<element name="reapresentacaoGlosado" type="ptu:ct_reapresentacaoGlosado" minOccurs="0"/>
+		</sequence>
+	</complexType>
+	<!--************************************************************************************************************************************************************************ -->
+	<!-- ************************************** Guia de SADT ******************************************************************************************************************* -->
+	<!-- *********************************************************************************************************************************************************************** -->
+	<complexType name="ct_SADT">
+		<sequence>
+			<element name="dadosBeneficiario">
+				<complexType>
+					<complexContent>
+						<extension base="ptu:ct_identificacaoBenef">
+							<sequence>
+								<element name="nm_Benef" type="ptu:st_nomeBenef" minOccurs="0"/>
+								<element name="id_RN" type="ptu:st_SimNao"/>
+								<element name="tp_Paciente" type="ptu:st_tpPaciente"/>
+							</sequence>
+						</extension>
+					</complexContent>
+				</complexType>
+			</element>
+			<element name="dadosSolicitante" type="ptu:ct_dadosSolicitante"/>
+			<element name="dadosExecutante" type="ptu:ct_dadosExecutante"/>
+			<element name="dadosAtendimento" type="ptu:ct_dadosAtendimento"/>
+			<element name="dadosGuia">
+				<complexType>
+					<complexContent>
+						<extension base="ptu:ct_dadosGuias_SADT">
+							<sequence>
+								<element name="id_GuiaPrincipal" type="ptu:st_SimNao"/>
+							</sequence>
+						</extension>
+					</complexContent>
+				</complexType>
+			</element>
+			<element name="reapresentacaoGlosado" type="ptu:ct_reapresentacaoGlosado" minOccurs="0"/>
+		</sequence>
+	</complexType>
+	<!-- ******************************************************************************************************************************************************************** -->
+	<!-- ************************************** Guia de Internação ********************************************************************************************************** -->
+	<!--********************************************************************************************************************************************************************* -->
+	<complexType name="ct_Internacao">
+		<sequence>
+			<element name="dadosBeneficiario">
+				<complexType>
+					<complexContent>
+						<extension base="ptu:ct_identificacaoBenef">
+							<sequence>
+								<element name="nm_Benef" type="ptu:st_nomeBenef" minOccurs="0"/>
+								<element name="id_RN" type="ptu:st_SimNao"/>
+								<element name="tp_Paciente" type="ptu:st_tpPaciente"/>
+							</sequence>
+						</extension>
+					</complexContent>
+				</complexType>
+			</element>
+			<element name="dadosSolicitante" type="ptu:ct_dadosSolicitante"/>
+			<element name="dadosExecutante" type="ptu:ct_dadosExecutanteInter"/>
+			<element name="dadosInternacao" type="ptu:ct_dadosInternacao" maxOccurs="1"/>
+			<element name="dadosSaidaInternacao" type="ptu:ct_dadosSaidaInternacao" maxOccurs="1"/>
+			<element name="dadosAuditoria" type="ptu:ct_dadosAuditoria" minOccurs="0"/>
+			<element name="dadosGuia" type="ptu:ct_dadosGuias"/>
+			<element name="reapresentacaoGlosado" type="ptu:ct_reapresentacaoGlosado" minOccurs="0"/>
+		</sequence>
+	</complexType>
+	<!-- ******************************************************************************************************************************************************************* -->
+	<!-- ************************************** Guia de Honorário ********************************************************************************************************** -->
+	<!-- ******************************************************************************************************************************************************************* -->
+	<complexType name="ct_Honorarios">
+		<sequence>
+			<element name="dadosBeneficiario">
+				<complexType>
+					<complexContent>
+						<extension base="ptu:ct_identificacaoBenef">
+							<sequence>
+								<element name="nm_Benef" type="ptu:st_nomeBenef" minOccurs="0"/>
+								<element name="id_RN" type="ptu:st_SimNao"/>
+								<element name="tp_Paciente" type="ptu:st_tpPacienteHonorario"/>
+							</sequence>
+						</extension>
+					</complexContent>
+				</complexType>
+			</element>
+			<element name="dadosHospital" type="ptu:ct_dadosHospital" maxOccurs="1"/>
+			<element name="dadosExecutante" type="ptu:ct_dadosExecutante"/>
+			<element name="dataFaturamento" type="ptu:ct_dataFaturamento"/>
+			<element name="dadosGuia">
+				<complexType>
+					<complexContent>
+						<extension base="ptu:ct_dadosGuiasHonorarios"/>
+					</complexContent>
+				</complexType>
+			</element>
+			<element name="reapresentacaoGlosado" type="ptu:ct_reapresentacaoGlosado" minOccurs="0"/>
+		</sequence>
+	</complexType>
+	<!--***************************************************************************************************************************************************************************** -->
+	<!-- ************************************** Guia de Reembolso ******************************************************************************************************************* -->
+	<!-- **************************************************************************************************************************************************************************** -->
+	<complexType name="ct_Reembolso">
+		<sequence>
+			<element name="dadosBeneficiario">
+				<complexType>
+					<complexContent>
+						<extension base="ptu:ct_identificacaoBenef">
+							<sequence>
+								<element name="nm_Benef" type="ptu:st_nomeBenef"/>
+								<element name="dt_Nasc" type="ptu:st_data2"/>
+								<element name="tp_Sexo" type="ptu:st_sexo_a100"/>
+								<element name="id_RN" type="ptu:st_SimNao"/>
+							</sequence>
+						</extension>
+					</complexContent>
+				</complexType>
+			</element>
+			<element name="dadosReembolso" type="ptu:ct_dadosReembolso"/>
+			<element name="Prestador" type="ptu:ct_PrestadorReembolso"/>
+			<element name="dadosProcedimentos" type="ptu:ct_dadosProcedimentosReembolso" maxOccurs="unbounded"/>
+		</sequence>
+	</complexType>
+	<complexType name="ct_Ressarcimento_SUS">
+		<sequence>
+			<element name="dadosBeneficiario">
+				<complexType>
+					<complexContent>
+						<extension base="ptu:ct_identificacaoBenef">
+							<sequence>
+								<element name="nm_Benef" type="ptu:st_nomeBenef"/>
+								<element name="dt_Nasc" type="ptu:st_data2" minOccurs="0"/>
+								<element name="tp_Sexo" type="ptu:st_sexo_a100" minOccurs="0"/>
+								<element name="id_RN" type="ptu:st_SimNao" minOccurs="0"/>
+							</sequence>
+						</extension>
+					</complexContent>
+				</complexType>
+			</element>
+			<element name="caraterAtendimento" type="ptu:st_caraterAtendimento"/>
+			<element name="Prestador" type="ptu:ct_PrestadorRessarcimentoSUS"/>
+			<element name="dadosProcedimentos" type="ptu:ct_procedimentosRessarcimentoSUS" maxOccurs="unbounded"/>
+			<element name="cd_cnes" type="ptu:st_texto7"/>
+		</sequence>
+	</complexType>
+	<!--************************************************************************************************************************************************************************ -->
+	<!-- ********************* PRESTADOR *************************************************************************************************************************************** -->
+	<!--************************************************************************************************************************************************************************ -->
+	<complexType name="ct_dadosExecutante">
+		<sequence>
+			<element name="UnimedPrestador" type="ptu:ct_dadosUnimedPrestador" minOccurs="0"/>
+			<element name="nome" type="ptu:st_texto60"/>
+			<element name="CPF_CNPJ" type="ptu:ct_dadoContratado"/>
+			<element name="CNES" type="ptu:st_texto7"/>
+			<element name="prestador" type="ptu:ct_dadosPrestador"/>
+		</sequence>
+	</complexType>
+	<complexType name="ct_dadosExecutanteInter">
+		<sequence>
+			<element name="UnimedPrestador" type="ptu:ct_dadosUnimedPrestador" minOccurs="0"/>
+			<element name="nome" type="ptu:st_texto60"/>
+			<element name="cd_cnpj" type="ptu:st_CNPJ"/>
+			<element name="CNES" type="ptu:st_texto7"/>
+			<element name="prestador" type="ptu:ct_dadosPrestador"/>
+		</sequence>
+	</complexType>
+	<complexType name="ct_dadoContratado">
+		<choice>
+			<element name="cd_cpf" type="ptu:st_CPF"/>
+			<element name="cd_cnpj" type="ptu:st_CNPJ"/>
+		</choice>
+	</complexType>
+	<complexType name="ct_profissionalExecutanteConsulta">
+		<sequence>
+			<element name="UnimedPrestador" minOccurs="0">
+				<complexType>
+					<complexContent>
+						<extension base="ptu:ct_dadosUnimedPrestador"/>
+					</complexContent>
+				</complexType>
+			</element>
+			<element name="nome" type="ptu:st_texto60"/>
+			<element name="dadosConselho" type="ptu:ct_dadosConselho"/>
+			<element name="CBO" type="ptu:st_CBOS"/>
+		</sequence>
+	</complexType>
+	<complexType name="ct_dadosPrestador">
+		<sequence>
+			<element name="cd_MunicipioCont" type="ptu:st_numero7"/>
+			<element name="tp_RedeMin" type="ptu:st_Rede"/>
+			<element name="tp_Prestador" type="ptu:st_PresExec"/>
+			<element name="id_RecProprio" type="ptu:st_SimNao"/>
+		</sequence>
+	</complexType>
+	<complexType name="ct_dadosConselho">
+		<sequence>
+			<element name="sg_Conselho" type="ptu:st_texto12"/>
+			<element name="nr_Conselho" type="ptu:st_texto15"/>
+			<element name="UF" type="ptu:st_UF"/>
+		</sequence>
+	</complexType>
+	<complexType name="ct_dadosUnimedPrestador">
+		<sequence>
+			<element name="cd_Uni_Prest" type="ptu:st_numero4"/>
+			<element name="cd_Prest" type="ptu:st_numero8"/>
+		</sequence>
+	</complexType>
+	<!--************************************************************************************************************************************************************************ -->
+	<!--************* CABEÇALHO ************************************************************************************************************************************************ -->
+	<!--************************************************************************************************************************************************************************ -->
+	<complexType name="ct_R505complemento">
+		<sequence>
+			<element name="tp_RegCPL" type="ptu:st_tpRegCPL"/>
+			<element name="nm_DescComplemento" type="ptu:st_texto100"/>
+		</sequence>
+	</complexType>
+	<complexType name="ct_NFE">
+		<sequence>
+			<element name="nr_NotaFiscalDoc" type="ptu:st_texto20"/>
+			<element name="link_NFeDoc" type="ptu:st_texto999"/>
+		</sequence>
+	</complexType>
+	<complexType name="ct_codUnimed">
+		<sequence>
+			<element name="cd_Uni_Destino" type="ptu:st_numero4"/>
+			<element name="cd_Uni_Origem" type="ptu:st_numero4"/>
+		</sequence>
+	</complexType>
+	<complexType name="ct_Doc">
+		<sequence>
+			<element name="tp_Documento" type="ptu:st_tpDocumento"/>
+			<element name="nr_Documento" type="ptu:st_texto20"/>
+			<element name="dt_VencimentoDoc" type="ptu:st_data2"/>
+			<element name="dt_EmissaoDoc" type="ptu:st_data2"/>
+			<element name="vl_TotalDoc" type="ptu:st_Decimal12.2"/>
+			<element name="doc_Fiscal" type="ptu:st_texto20"/>
+			<element name="NFE" type="ptu:ct_NFE" minOccurs="0"/>
+		</sequence>
+	</complexType>
+	<!--************************************************************************************************************************************************************************ -->
+	<!-- ************* DADOS DA CONSULTA *************************************************************************************************************************************** -->
+	<!--************************************************************************************************************************************************************************ -->
+	<complexType name="ct_identificacaoBenef">
+		<sequence>
+			<element name="cd_Unimed" type="ptu:st_numero4"/>
+			<element name="id_Benef" type="ptu:st_idBenef"/>
+		</sequence>
+	</complexType>
+	<complexType name="ct_nr_Guias_SADT">
+		<sequence>
+			<element name="nr_GuiaTissPrestador" type="ptu:st_texto20"/>
+			<element name="nr_GuiaTissOperadora" type="ptu:st_texto20"/>
+			<element name="nr_GuiaTissPrincipal" type="ptu:st_texto20" minOccurs="0"/>
+		</sequence>
+	</complexType>
+	<complexType name="ct_nr_Guias">
+		<sequence>
+			<element name="nr_GuiaTissPrestador" type="ptu:st_texto20"/>
+			<element name="nr_GuiaTissOperadora" type="ptu:st_texto20"/>
+			<element name="nr_GuiaTissPrincipal" type="ptu:st_texto20"/>
+		</sequence>
+	</complexType>
+	<complexType name="ct_nr_GuiaConsulta">
+		<sequence>
+			<element name="nr_GuiaTissPrestador" type="ptu:st_texto20"/>
+			<element name="nr_GuiaTissOperadora" type="ptu:st_texto20"/>
+		</sequence>
+	</complexType>
+	<complexType name="ct_dadosGuiaConsulta">
+		<sequence>
+			<element name="nr_Ver_TISS" type="ptu:st_texto7"/>
+			<element name="tp_Consulta" type="ptu:st_tipoConsulta"/>
+			<element name="nr_LotePrestador" type="ptu:st_texto12"/>
+			<element name="dt_Protocolo" type="ptu:st_data2"/>
+			<element name="dt_Conhecimento" type="ptu:st_data2" minOccurs="0"/>
+			<element name="nr_Guias" type="ptu:ct_nr_GuiaConsulta"/>
+			<element name="tp_IndAcidente" type="ptu:st_indicadorAcidente"/>
+			<element name="coberturaEspecial" type="ptu:st_coberturaEspecial" minOccurs="0"/>
+			<element name="regimeAtendimento" type="ptu:st_regimeAtendimento" minOccurs="0"/>
+			<element name="saudeOcupacional" type="ptu:st_saudeOcupacional" minOccurs="0"/>
+			<element name="dt_Atendimento" type="ptu:st_data2"/>
+			<element name="id_Liminar" type="ptu:st_SimNao"/>
+			<element name="id_Continuado" type="ptu:st_SimNao" minOccurs="0"/>
+			<element name="id_Avisado" type="ptu:st_SimNao" minOccurs="0"/>
+			<element name="cd_Excecao" type="ptu:st_Excecao" minOccurs="0"/>
+			<element name="id_GlosaTotal" type="ptu:st_SimNao" minOccurs="0"/>
+			<element name="procedimentos" type="ptu:ct_procedimentoConsulta" minOccurs="0"/>
+			<element name="dadosAutorizacao" type="ptu:ct_dadosAutorizacao" minOccurs="0"/>
+			<element name="complemento" type="ptu:ct_complemento" minOccurs="0" maxOccurs="4"/>
+			<element name="dt_Pagamento" type="ptu:st_data2" minOccurs="0"/>
+		</sequence>
+	</complexType>
+	<complexType name="ct_dadosGuias">
+		<sequence>
+			<element name="nr_Ver_TISS" type="ptu:st_texto7"/>
+			<element name="nr_LotePrestador" type="ptu:st_texto12"/>
+			<element name="dt_Protocolo" type="ptu:st_data2" minOccurs="1"/>
+			<element name="dt_Conhecimento" type="ptu:st_data2" minOccurs="0"/>
+			<element name="nr_Guias" type="ptu:ct_nr_Guias"/>
+			<element name="id_Liminar" type="ptu:st_SimNao"/>
+			<element name="id_Continuado" type="ptu:st_SimNao" minOccurs="0"/>
+			<element name="id_Avisado" type="ptu:st_SimNao" minOccurs="0"/>
+			<element name="cd_Excecao" type="ptu:st_Excecao" minOccurs="0"/>
+			<element name="id_GlosaTotal" type="ptu:st_SimNao" minOccurs="0"/>
+			<element name="procedimentosExecutados" type="ptu:ct_procedimentosExecutados" minOccurs="0" maxOccurs="unbounded"/>
+			<element name="dt_UltimaAutorizacao" type="ptu:st_data2" minOccurs="0"/>
+			<element name="complemento" type="ptu:ct_complemento" minOccurs="0" maxOccurs="4"/>
+			<element name="dt_Pagamento" type="ptu:st_data2" minOccurs="0"/>
+		</sequence>
+	</complexType>
+	<complexType name="ct_dadosGuias_SADT">
+		<sequence>
+			<element name="nr_Ver_TISS" type="ptu:st_texto7"/>
+			<element name="nr_LotePrestador" type="ptu:st_texto12"/>
+			<element name="dt_Protocolo" type="ptu:st_data2" minOccurs="1"/>
+			<element name="dt_Conhecimento" type="ptu:st_data2" minOccurs="0"/>
+			<element name="nr_Guias" type="ptu:ct_nr_Guias_SADT"/>
+			<element name="id_Liminar" type="ptu:st_SimNao"/>
+			<element name="id_Continuado" type="ptu:st_SimNao" minOccurs="0"/>
+			<element name="id_Avisado" type="ptu:st_SimNao" minOccurs="0"/>
+			<element name="cd_Excecao" type="ptu:st_Excecao" minOccurs="0"/>
+			<element name="id_GlosaTotal" type="ptu:st_SimNao" minOccurs="0"/>
+			<element name="procedimentosExecutados" type="ptu:ct_procedimentosExecutados" minOccurs="0" maxOccurs="unbounded"/>
+			<element name="dt_UltimaAutorizacao" type="ptu:st_data2" minOccurs="0"/>
+			<element name="complemento" type="ptu:ct_complemento" minOccurs="0" maxOccurs="4"/>
+			<element name="dt_Pagamento" type="ptu:st_data2" minOccurs="0"/>
+		</sequence>
+	</complexType>
+	<complexType name="ct_dadosGuiasHonorarios">
+		<sequence>
+			<element name="nr_Ver_TISS" type="ptu:st_texto7"/>
+			<element name="nr_LotePrestador" type="ptu:st_texto12"/>
+			<element name="dt_Protocolo" type="ptu:st_data2" minOccurs="1"/>
+			<element name="dt_Conhecimento" type="ptu:st_data2" minOccurs="0"/>
+			<element name="nr_Guias" type="ptu:ct_nr_Guias"/>
+			<element name="id_Liminar" type="ptu:st_SimNao"/>
+			<element name="id_Continuado" type="ptu:st_SimNao" minOccurs="0"/>
+			<element name="id_Avisado" type="ptu:st_SimNao" minOccurs="0"/>
+			<element name="cd_Excecao" type="ptu:st_Excecao" minOccurs="0"/>
+			<element name="id_GlosaTotal" type="ptu:st_SimNao" minOccurs="0"/>
+			<element name="procedimentosExecutados" type="ptu:ct_procedimentosExecutadosHonorarios" minOccurs="0" maxOccurs="unbounded"/>
+			<element name="dt_UltimaAutorizacao" type="ptu:st_data2" minOccurs="0"/>
+			<element name="complemento" type="ptu:ct_complemento" minOccurs="0" maxOccurs="4"/>
+			<element name="dt_Pagamento" type="ptu:st_data2" minOccurs="0"/>
+		</sequence>
+	</complexType>
+	<complexType name="ct_dadosAutorizacao">
+		<sequence>
+			<element name="dt_Solicitacao" type="ptu:st_data2"/>
+			<element name="nr_Autorizacao" type="ptu:st_numero10" minOccurs="0"/>
+			<element name="cd_UniAutorizadora" type="ptu:st_numero4" minOccurs="0"/>
+			<element name="dt_Autorizacao" type="ptu:st_data2"/>
+			<element name="tp_Autorizacao" type="ptu:st_Autorizacao" minOccurs="0"/>
+		</sequence>
+	</complexType>
+	<complexType name="ct_complemento">
+		<sequence>
+			<element name="tp_RegCPL" type="ptu:st_tpRegCPL" minOccurs="1"/>
+			<element name="nm_DescComplemento" type="ptu:st_texto500" minOccurs="1"/>
+		</sequence>
+	</complexType>
+	<complexType name="ct_dadosExecutanteSADT">
+		<sequence>
+			<element name="cd_Unimed" type="ptu:st_numero4"/>
+			<element name="cd_pofExecutante" type="ptu:st_numero8"/>
+			<element name="nm_PrestadorExec" type="ptu:st_texto60"/>
+			<element name="tp_PrestExec" type="ptu:st_PresExec"/>
+			<element name="nr_LotePrestador" type="ptu:st_texto12" minOccurs="0"/>
+			<element name="tp_Pessoa" type="ptu:st_Pessoa"/>
+			<element name="nr_CNPJouCPF" type="ptu:ct_dadoContratado"/>
+			<element name="cd_CNES" type="ptu:st_texto7"/>
+		</sequence>
+	</complexType>
+	<complexType name="ct_reapresentacaoGlosado">
+		<sequence>
+			<element name="nr_DOC1Glosado" type="ptu:st_texto20"/>
+			<element name="nr_DOC2Glosado" type="ptu:st_texto20" minOccurs="0"/>
+			<element name="DadosLoteGuia" type="ptu:ct_LoteGuia"/>
+		</sequence>
+	</complexType>
+	<complexType name="ct_dadosTXT">
+		<sequence>
+			<element name="nr_Lote" type="ptu:st_texto8"/>
+			<element name="nr_Nota" type="ptu:st_texto20"/>
+		</sequence>
+	</complexType>
+	<complexType name="ct_dadosXML">
+		<sequence>
+			<element name="nr_LotePrestador" type="ptu:st_texto12"/>
+			<element name="nr_GuiaTissPrestador" type="ptu:st_texto20"/>
+			<element name="nr_GuiaTissOperadora" type="ptu:st_texto20" minOccurs="0"/>
+		</sequence>
+	</complexType>
+	<complexType name="ct_LoteGuia">
+		<choice>
+			<element name="TXT" type="ptu:ct_dadosTXT"/>
+			<element name="XML" type="ptu:ct_dadosXML"/>
+		</choice>
+	</complexType>
+	<complexType name="ct_dadosCobranca">
+		<sequence>
+			<element name="dt_Geracao" type="ptu:st_data2"/>
+			<element name="nr_Competencia" type="ptu:st_nrComp"/>
+			<element name="tp_Cobranca" type="ptu:st_tpCobranca"/>
+		</sequence>
+	</complexType>
+	<complexType name="ct_dadosCobranca_A550">
+		<sequence>
+			<element name="dt_Geracao" type="ptu:st_data2"/>
+			<element name="tp_Cobranca" type="ptu:st_tpCobranca"/>
+		</sequence>
+	</complexType>
+	<!--************************************************************************************************************************************************************************ -->
+	<!--********************* SADT ********************************************************************************************************************************************* -->
+	<!--************************************************************************************************************************************************************************ -->
+	<complexType name="ct_dadosAturozicaoSADT">
+		<sequence>
+			<element name="nr_GuiaTissOperadora" type="ptu:st_texto20" minOccurs="0"/>
+			<element name="dt_Autorizacao" type="ptu:st_data2" minOccurs="0"/>
+		</sequence>
+	</complexType>
+	<complexType name="ct_dadosSolicitante">
+		<sequence>
+			<element name="contratadoSolicitante" type="ptu:ct_dadosContratadoPrestador_SADT"/>
+			<element name="profissional" type="ptu:ct_profissionalSolicitante" minOccurs="1"/>
+		</sequence>
+	</complexType>
+	<complexType name="ct_dadosContratadoPrestador_SADT">
+		<sequence>
+			<element name="cpf_cnpj" type="ptu:ct_dadoContratado" minOccurs="0"/>
+			<element name="UnimedPrestador" type="ptu:ct_dadosUnimedPrestador" minOccurs="0"/>
+			<element name="nome" type="ptu:st_texto60"/>
+		</sequence>
+	</complexType>
+	<complexType name="ct_contratadoSolicitante">
+		<sequence>
+			<element name="UnimedPrestador" type="ptu:ct_dadosUnimedPrestador" minOccurs="0"/>
+			<element name="nome" type="ptu:st_texto60"/>
+		</sequence>
+	</complexType>
+	<complexType name="ct_profissionalSolicitante">
+		<sequence>
+			<element name="nm_Profissional" type="ptu:st_texto60" minOccurs="0"/>
+			<element name="dadosConselho" type="ptu:ct_dadosConselho"/>
+			<element name="CBO" type="ptu:st_CBOS"/>
+		</sequence>
+	</complexType>
+	<complexType name="ct_contradoExecutante">
+		<sequence>
+			<element name="CPF_CNPJ" type="ptu:ct_dadoContratado" minOccurs="0"/>
+			<element name="CNES" type="ptu:st_texto7"/>
+		</sequence>
+	</complexType>
+	<complexType name="ct_dadosAtendimento">
+		<sequence>
+			<element name="tp_Atendimento" type="ptu:st_tpAtendimento"/>
+			<element name="tp_IndAcidente" type="ptu:st_indicadorAcidente"/>
+			<element name="tp_Consulta" type="ptu:st_tipoConsulta" minOccurs="0"/>
+			<element name="caraterAtendimento" type="ptu:st_caraterAtendimento"/>
+			<element name="mv_Encerramento" type="ptu:st_motivoEncerramento" minOccurs="0"/>
+			<element name="regimeAtendimento" type="ptu:st_regimeAtendimento" minOccurs="0"/>
+			<element name="saudeOcupacional" type="ptu:st_saudeOcupacional" minOccurs="0"/>
+			<element name="coberturaEspecial" type="ptu:st_coberturaEspecial" minOccurs="0"/>
+		</sequence>
+	</complexType>
+	<complexType name="ct_Procedimentos">
+		<sequence>
+			<element name="seq_item" type="ptu:st_numero4"/>
+			<element name="id_itemUnico" type="ptu:st_itemunico"/>
+			<element name="tp_Tabela" type="ptu:st_tabela"/>
+			<element name="cd_Servico" type="ptu:st_texto10"/>
+			<element name="ds_Servico" type="ptu:st_texto80" minOccurs="0"/>
+			<element name="qt_Cobrada" type="ptu:st_Decimal5.4"/>
+		</sequence>
+	</complexType>
+	<complexType name="ct_valores">
+		<sequence>
+			<element name="vl_ServCobrado" type="ptu:st_Decimal12.2" minOccurs="0"/>
+			<element name="vl_FilmeCobrado" type="ptu:st_Decimal12.2" minOccurs="0"/>
+			<element name="vl_CO_Cobrado" type="ptu:st_Decimal12.2" minOccurs="0"/>
+		</sequence>
+	</complexType>
+	<complexType name="ct_taxas">
+		<sequence>
+			<element name="tx_AdmServico" type="ptu:st_Decimal12.2" minOccurs="0"/>
+			<element name="tx_AdmFilme" type="ptu:st_Decimal12.2" minOccurs="0"/>
+			<element name="tx_AdmCO" type="ptu:st_Decimal12.2" minOccurs="0"/>
+		</sequence>
+	</complexType>
+	<complexType name="ct_procedimentoConsulta">
+		<sequence>
+			<element name="seq_item" type="ptu:st_numero4"/>
+			<element name="id_itemUnico" type="ptu:st_itemunico"/>
+			<element name="id_AvisadoItem" type="ptu:st_SimNao" minOccurs="0"/>
+			<element name="tp_Tabela" type="ptu:st_tabela"/>
+			<element name="cd_Servico" type="ptu:st_texto10"/>
+			<element name="vl_ServCobrado" type="ptu:st_Decimal12.2"/>
+			<element name="tx_AdmServico" type="ptu:st_Decimal12.2" minOccurs="0"/>
+			<element name="cd_Ato" type="ptu:st_ato"/>
+			<element name="id_Coparticip" type="ptu:st_SimNao" minOccurs="0"/>
+			<element name="id_reembolso" type="ptu:st_SimNao" minOccurs="0"/>
+		</sequence>
+	</complexType>
+	<complexType name="ct_procedimentosExecutados">
+		<sequence>
+			<element name="dt_Execucao" type="ptu:st_data2"/>
+			<element name="hr_Inicial" type="ptu:st_hora" minOccurs="0"/>
+			<element name="hr_Final" type="ptu:st_hora" minOccurs="0"/>
+			<element name="procedimentos" type="ptu:ct_Procedimentos"/>
+			<element name="via_Acesso" type="ptu:st_viaAcesso" minOccurs="0"/>
+			<element name="tc_Utilizada" type="ptu:st_tecnicaUtilizada" minOccurs="0"/>
+			<element name="id_Acrescimo" type="ptu:st_SimNao"/>
+			<element name="valores" type="ptu:ct_valores"/>
+			<element name="taxas" type="ptu:ct_taxas" minOccurs="0"/>
+			<element name="un_Medida" type="ptu:st_unidadeMedida" minOccurs="0"/>
+			<element name="ft_MultiplicadorServico" type="ptu:st_Decimal1.2"/>
+			<element name="id_AvisadoItem" type="ptu:st_SimNao" minOccurs="0"/>
+			<element name="id_Pacote" type="ptu:st_SimNao" minOccurs="0"/>
+			<element name="cd_Pacote" type="ptu:st_numero10" minOccurs="0"/>
+			<element name="cd_PorteAnestesico" type="ptu:st_texto1" minOccurs="0"/>
+			<element name="nr_RegistroAnvisa" type="ptu:st_texto15" minOccurs="0"/>
+			<element name="equipe_Profissional" type="ptu:ct_profissionalEquipe" minOccurs="0" maxOccurs="unbounded"/>
+			<element name="cd_Ato" type="ptu:st_ato"/>
+			<element name="dadosAutorizacao" type="ptu:ct_dadosAutorizacao" minOccurs="0"/>
+			<element name="id_Coparticip" type="ptu:st_SimNao" minOccurs="0"/>
+			<element name="CNPJ_Fornecedor" type="ptu:st_CNPJ" minOccurs="0"/>
+			<element name="id_reembolso" type="ptu:st_SimNao" minOccurs="0"/>
+		</sequence>
+	</complexType>
+	<complexType name="ct_procedimentosExecutadosHonorarios">
+		<sequence>
+			<element name="dt_Execucao" type="ptu:st_data2"/>
+			<element name="hr_Inicial" type="ptu:st_hora" minOccurs="0"/>
+			<element name="hr_Final" type="ptu:st_hora" minOccurs="0"/>
+			<element name="procedimentos" type="ptu:ct_Procedimentos"/>
+			<element name="via_Acesso" type="ptu:st_viaAcesso" minOccurs="0"/>
+			<element name="tc_Utilizada" type="ptu:st_tecnicaUtilizada" minOccurs="0"/>
+			<element name="id_Acrescimo" type="ptu:st_SimNao"/>
+			<element name="vl_ServCobrado" type="ptu:st_Decimal12.2"/>
+			<element name="tx_AdmServico" type="ptu:st_Decimal12.2" minOccurs="0"/>
+			<element name="ft_MultiplicadorServico" type="ptu:st_Decimal1.2"/>
+			<element name="id_AvisadoItem" type="ptu:st_SimNao" minOccurs="0"/>
+			<element name="cd_PorteAnestesico" type="ptu:st_texto1" minOccurs="0"/>
+			<element name="equipe_Profissional" type="ptu:ct_profissionalEquipeHonorario" maxOccurs="unbounded"/>
+			<element name="cd_Ato" type="ptu:st_ato"/>
+			<element name="dadosAutorizacao" type="ptu:ct_dadosAutorizacao" minOccurs="0"/>
+			<element name="id_Coparticip" type="ptu:st_SimNao" minOccurs="0"/>
+			<element name="id_reembolso" type="ptu:st_SimNao" minOccurs="0"/>
+		</sequence>
+	</complexType>
+	<complexType name="ct_OPME">
+		<sequence>
+			<element name="Pago_Fornecedor" type="ptu:ct_PagoOPME_Fornecedor" minOccurs="0"/>
+			<element name="det_RegistroAnvisa" type="ptu:st_texto50" minOccurs="0"/>
+			<element name="nr_RegistroAnvisa" type="ptu:st_texto15" minOccurs="0"/>
+			<element name="cd_ReferenciaMat_Fab" type="ptu:st_texto60" minOccurs="0"/>
+		</sequence>
+	</complexType>
+	<complexType name="ct_profissionalEquipe">
+		<sequence>
+			<element name="tp_Participacao" type="ptu:st_tpPart" minOccurs="0"/>
+			<element name="Prestador" type="ptu:ct_dadosUnimedPrestador" minOccurs="0"/>
+			<element name="cdCnpjCpf">
+				<complexType>
+					<choice>
+						<element name="cd_cpf" type="ptu:st_CPF" minOccurs="0"/>
+						<element name="cd_cnpj" type="ptu:st_CNPJ" minOccurs="0"/>
+					</choice>
+				</complexType>
+			</element>
+			<element name="nm_Profissional" type="ptu:st_texto60"/>
+			<element name="dadosConselho" type="ptu:ct_dadosConselho"/>
+			<element name="CBO" type="ptu:st_CBOS"/>
+		</sequence>
+	</complexType>
+	<complexType name="ct_profissionalEquipeHonorario">
+		<sequence>
+			<element name="tp_Participacao" type="ptu:st_tpPart"/>
+			<element name="Prestador" type="ptu:ct_dadosUnimedPrestador" minOccurs="0"/>
+			<element name="nm_Profissional" type="ptu:st_texto60"/>
+			<element name="cdCnpjCpf">
+				<complexType>
+					<choice>
+						<element name="cd_cpf" type="ptu:st_CPF" minOccurs="0"/>
+						<element name="cd_cnpj" type="ptu:st_CNPJ" minOccurs="0"/>
+					</choice>
+				</complexType>
+			</element>
+			<element name="dadosConselho" type="ptu:ct_dadosConselho"/>
+			<element name="CBO" type="ptu:st_CBOS"/>
+		</sequence>
+	</complexType>
+	<complexType name="ct_declaracoesUnimed">
+		<sequence>
+			<element name="declaraca_Vivo" type="ptu:st_texto15" minOccurs="0" maxOccurs="5"/>
+			<element name="nr_Declaraca_Obito" type="ptu:st_texto17" minOccurs="0"/>
+			<element name="CID_Obito" type="ptu:st_cdCID" minOccurs="0" maxOccurs="5"/>
+			<element name="nr_DeclaracaObito_RN" type="ptu:st_texto17" maxOccurs="5"/>
+		</sequence>
+	</complexType>
+	<complexType name="ct_declaracoes">
+		<sequence>
+			<element name="declaracao_Nascido" type="ptu:st_texto11" minOccurs="0"/>
+			<element name="CID_Obito" type="ptu:st_texto4" minOccurs="0"/>
+			<element name="declaracao_Obito" type="ptu:st_texto11" minOccurs="0"/>
+			<element name="indicadorDO_RN" type="ptu:st_SimNao" minOccurs="0"/>
+		</sequence>
+	</complexType>
+	<!--************************************************************************************************************************************************************************-->
+	<!--********************* Internação ***************************************************************************************************************************************-->
+	<!--************************************************************************************************************************************************************************-->
+	<complexType name="ct_dadosHospital">
+		<sequence>
+			<element name="cd_uniHospitalar" type="ptu:st_numero4" minOccurs="0"/>
+			<element name="cd_Hospitalar" type="ptu:st_numero8" minOccurs="0"/>
+			<element name="CNPJHospital" type="ptu:st_numero14"/>
+			<element name="nm_Hospital" type="ptu:st_texto60" maxOccurs="1"/>
+			<element name="CNES" type="ptu:st_texto7"/>
+		</sequence>
+	</complexType>
+	<complexType name="ct_dadosInternacao">
+		<sequence>
+			<element name="tp_Acomodacao" type="ptu:st_Acomodacao" minOccurs="0"/>
+			<element name="ft_Multiplicador_AMB" type="ptu:st_Decimal2.2"/>
+			<element name="tp_Internacao" type="ptu:st_tpInternacao"/>
+			<element name="rg_Internacao" type="ptu:st_regimeInternacao" minOccurs="1"/>
+			<element name="caraterAtendimento" type="ptu:st_caraterAtendimento"/>
+			<element name="dadosFaturamento" type="ptu:ct_dadosFaturamento" minOccurs="1"/>
+			<element name="dadosDeclaracoes" type="ptu:ct_declaracoes" minOccurs="0" maxOccurs="8"/>
+		</sequence>
+	</complexType>
+	<complexType name="ct_dadosSaidaInternacao">
+		<sequence>
+			<element name="tp_IndAcidente" type="ptu:st_indicadorAcidente"/>
+			<element name="mv_Encerramento" type="ptu:st_motivoEncerramento"/>
+			<element name="CID" type="ptu:st_cdCID" minOccurs="0" maxOccurs="4"/>
+		</sequence>
+	</complexType>
+	<complexType name="ct_dadosAuditoria">
+		<sequence>
+			<element name="nm_MedicoAuditor" type="ptu:st_texto40"/>
+			<element name="nr_CrmAuditor" type="ptu:st_texto15"/>
+			<element name="cd_UFCRM" type="ptu:st_UF"/>
+			<element name="nm_EnfAuditor" type="ptu:st_texto40" minOccurs="0"/>
+			<element name="nr_CorenAuditor" type="ptu:st_texto15" minOccurs="0"/>
+			<element name="cd_UFCoren" type="ptu:st_UF" minOccurs="0"/>
+		</sequence>
+	</complexType>
+	<complexType name="ct_dadosPrestadorReqInternacao">
+		<sequence>
+			<element name="CPF_CNPJ_PrestadorReq" type="ptu:ct_dadoContratado" minOccurs="0"/>
+			<element name="sg_ConselhoPrestadorReq" type="ptu:st_texto12"/>
+			<element name="nr_ConselhoPrestadorReq" type="ptu:st_texto15"/>
+			<element name="UF_PrestadorReq" type="ptu:st_UF"/>
+			<element name="CBO" type="ptu:st_CBOS" minOccurs="0"/>
+			<element name="nm_PrestadorReq" type="ptu:st_texto60"/>
+		</sequence>
+	</complexType>
+	<complexType name="ct_dadosContratoExeInternacao">
+		<sequence>
+			<element name="CPF_CNPJ_PrestadorExec" type="ptu:ct_dadoContratado" minOccurs="0"/>
+			<element name="CNES" type="ptu:st_texto7"/>
+			<element name="cd_MunicipioCont" type="ptu:st_numero7"/>
+			<element name="nm_Prestador" type="ptu:st_texto60"/>
+			<element name="tp_Prestador" type="ptu:st_PresExec"/>
+		</sequence>
+	</complexType>
+	<complexType name="ct_dadosPrestadorExecInternacao">
+		<sequence>
+			<element name="cd_UniPrestador" type="ptu:st_numero4"/>
+			<element name="cd_Prestador" type="ptu:st_numero8"/>
+			<element name="nm_ProfExecutante" type="ptu:st_texto60" minOccurs="0"/>
+			<element name="sg_Conselho" type="ptu:st_texto12" minOccurs="0"/>
+			<element name="nr_ConselhoPrestador" type="ptu:st_texto15" minOccurs="0"/>
+			<element name="UF_Prestador" type="ptu:st_UF" minOccurs="0"/>
+			<element name="CBO" type="ptu:st_CBOS" minOccurs="0"/>
+		</sequence>
+	</complexType>
+	<complexType name="ct_dadosFaturamento">
+		<sequence>
+			<element name="tp_Faturamento" type="ptu:st_tipoFaturamento"/>
+			<element name="dt_IniFaturamento" type="ptu:st_data1" minOccurs="1"/>
+			<element name="dt_FimFaturamento" type="ptu:st_data1" minOccurs="1"/>
+		</sequence>
+	</complexType>
+	<complexType name="ct_dataFaturamento">
+		<sequence>
+			<element name="dt_IniFaturamento" type="ptu:st_data1" minOccurs="1"/>
+			<element name="dt_FimFaturamento" type="ptu:st_data1" minOccurs="1"/>
+		</sequence>
+	</complexType>
+	<!--************************************************************************************************************************************************************************-->
+	<!--********************* Reembolso ****************************************************************************************************************************************-->
+	<!--************************************************************************************************************************************************************************-->
+	<complexType name="ct_dadosReembolso">
+		<sequence>
+			<element name="idReembolso" type="ptu:st_texto20"/>
+			<element name="caraterAtendimento" type="ptu:st_caraterAtendimento" minOccurs="0"/>
+			<element name="dt_Reembolso" type="ptu:st_data2"/>
+			<element name="id_ReemParInt" type="ptu:st_idReemParInt"/>
+			<element name="cd_cnes" type="ptu:st_texto7" minOccurs="0"/>
+		</sequence>
+	</complexType>
+	<complexType name="ct_procedimentosReembolso">
+		<sequence>
+			<element name="dt_Execucao" type="ptu:st_data2" minOccurs="0"/>
+			<element name="seq_item" type="ptu:st_numero4"/>
+			<element name="id_itemUnico" type="ptu:st_itemunico"/>
+			<element name="tp_Tabela" type="ptu:st_tabela"/>
+			<element name="cd_Servico" type="ptu:st_texto10"/>
+			<element name="ds_Servico" type="ptu:st_texto80" minOccurs="0"/>
+			<element name="qt_Cobrada" type="ptu:st_Decimal5.4"/>
+			<element name="equipe_reembolso" type="ptu:ct_equipe_reembolso" minOccurs="0" maxOccurs="unbounded"/>
+		</sequence>
+	</complexType>
+	<complexType name="ct_dadosProcedimentosReembolso">
+		<sequence>
+			<element name="procedimentos" type="ptu:ct_procedimentosReembolso"/>
+			<element name="nr_Autorizacao" type="ptu:st_numero10" minOccurs="0"/>
+			<element name="vl_a_restituir" type="ptu:st_Decimal12.2"/>
+			<element name="vl_reemb_benef" type="ptu:st_Decimal12.2"/>
+			<element name="vl_pago_benef" type="ptu:st_Decimal12.2"/>
+		</sequence>
+	</complexType>
+	<complexType name="ct_ProfissionalReembolso">
+		<sequence>
+			<element name="tp_PartReembolso" type="ptu:st_tpPart"/>
+			<element name="nome" type="ptu:st_texto60" minOccurs="0"/>
+			<element name="dadosConselho" type="ptu:ct_dadosConselho" minOccurs="0"/>
+		</sequence>
+	</complexType>
+	<complexType name="ct_PrestadorReembolso">
+		<sequence>
+			<element name="nomePrestador" type="ptu:st_texto60" minOccurs="0"/>
+			<element name="nr_CNPJouCPF" type="ptu:ct_dadoContratado"/>
+		</sequence>
+	</complexType>
+	<complexType name="ct_equipe_reembolso">
+		<sequence>
+			<element name="nm_Profissional" type="ptu:st_texto60"/>
+			<element name="tp_Particip_Reem" type="ptu:st_tpPart_reembolso" minOccurs="0"/>
+			<element name="dadosConselho" type="ptu:ct_dadosConselho" minOccurs="0"/>
+		</sequence>
+	</complexType>
+	<!--***************************************************************************Ressarcimento SUS**********************************************-->
+	<complexType name="ct_procedimentosRessarcimentoSUS">
+		<sequence>
+			<element name="id_itemUnico" type="ptu:st_itemunico"/>
+			<element name="dt_Execucao" type="ptu:st_data2"/>
+			<element name="cd_Servico" type="ptu:st_texto10"/>
+			<element name="ds_Servico" type="ptu:st_texto80"/>
+			<element name="qt_Cobrada" type="ptu:st_Decimal5.4"/>
+			<element name="vl_pagoSUS" type="ptu:st_Decimal12.2" minOccurs="0"/>
+		</sequence>
+	</complexType>
+	<complexType name="ct_PrestadorRessarcimentoSUS">
+		<sequence>
+			<element name="nomePrestador" type="ptu:st_texto60"/>
+			<element name="nr_CNPJouCPF" type="ptu:ct_dadoContratado" minOccurs="0"/>
+		</sequence>
+	</complexType>
+	<complexType name="ct_carimbo">
+		<sequence>
+			<element name="dt_postagem" type="ptu:st_data1"/>
+			<element name="nr_protocolo" type="ptu:st_numero10"/>
+		</sequence>
+	</complexType>
+	<!--**********************************************************NotaFiscal_Fornecedor*******************************************************************************************************-->
+	<complexType name="ct_NotaFiscal_Fornecedor">
+		<sequence>
+			<element name="dadosBeneficiario" type="ptu:ct_identificacaoBenef"/>
+			<element name="nr_GuiaTissPrincipal" type="ptu:st_texto20"/>
+			<element name="id_Liminar" type="ptu:st_SimNao"/>
+			<element name="cd_MunicipioCont" type="ptu:st_numero7"/>
+			<element name="cd_Excecao" type="ptu:st_Excecao"/>
+			<element name="Pago_Fornecedor" type="ptu:ct_Pago_Fornecedor"/>
+			<element name="Infor_OPME_Med" type="ptu:ct_InformacoesOPME" maxOccurs="unbounded"/>
+			<element name="nr_Autorizacao" type="ptu:st_numero10" minOccurs="0"/>
+			<element name="complemento" type="ptu:ct_complemento" minOccurs="0" maxOccurs="4"/>
+			<element name="reapresentacaoGlosado" type="ptu:ct_reapresentacaoGlosado_Fornecedor" minOccurs="0"/>
+		</sequence>
+	</complexType>
+	<!--************************************************************-->
+	<complexType name="ct_reapresentacaoGlosado_Fornecedor">
+		<sequence>
+			<element name="nr_DOC1Glosado" type="ptu:st_texto20"/>
+			<element name="nr_DOC2Glosado" type="ptu:st_texto20" minOccurs="0"/>
+			<element name="nr_NotaFiscalFornecedor" type="ptu:st_texto20"/>
+		</sequence>
+	</complexType>
+	<complexType name="ct_Pago_Fornecedor">
+		<sequence>
+			<element name="CNPJ_Fornecedor" type="ptu:st_CNPJ"/>
+			<element name="nm_FornecedorMatMed" type="ptu:st_texto60"/>
+			<element name="nr_NotaFiscalFornecedor" type="ptu:st_texto20"/>
+		</sequence>
+	</complexType>
+	<complexType name="ct_valores_fornecedor">
+		<sequence>
+			<element name="vl_ServCobrado" type="ptu:st_Decimal12.2"/>
+			<element name="tx_AdmServico" type="ptu:st_Decimal12.2" minOccurs="0"/>
+		</sequence>
+	</complexType>
+	<complexType name="ct_InformacoesOPME">
+		<sequence>
+			<element name="dt_Execucao" type="ptu:st_data2"/>
+			<element name="Procedimentos" type="ptu:ct_Procedimentos"/>
+			<element name="valores_fornecedor" type="ptu:ct_valores_fornecedor"/>
+			<element name="det_RegistroAnvisa" type="ptu:st_texto50" minOccurs="0"/>
+			<element name="nr_RegistroAnvisa" type="ptu:st_texto15" minOccurs="0"/>
+			<element name="cd_Referencia_Fab" type="ptu:st_texto60" minOccurs="0"/>
+		</sequence>
+	</complexType>
+	<complexType name="ct_PagoOPME_Fornecedor">
+		<sequence>
+			<element name="CNPJ_Fornecedor" type="ptu:st_CNPJ"/>
+			<element name="nm_FornecedorMaterial" type="ptu:st_texto60"/>
+			<element name="nr_NotaFiscalFornecedor" type="ptu:st_texto20"/>
+		</sequence>
+	</complexType>
+	<!--************************************************************************************************************************************************************************-->
+	<!--****************************************************************A550********************************************************************************************************-->
+	<!--****************************************************************R551********************************************************************************************************-->
+	<complexType name="ct_CabecalhoA550">
+		<sequence>
+			<element name="nrVerTra_PTU" type="ptu:st_numero2"/>
+			<element name="unimed">
+				<complexType>
+					<complexContent>
+						<extension base="ptu:ct_codUnimed">
+							<sequence>
+								<element name="cd_uni_cred" type="ptu:st_numero4"/>
+							</sequence>
+						</extension>
+					</complexContent>
+				</complexType>
+			</element>
+			<element name="dadosCobranca">
+				<complexType>
+					<complexContent>
+						<extension base="ptu:ct_dadosCobranca_A550">
+							<sequence>
+								<element name="tp_Arquivo" type="ptu:st_tp_arquivo"/>
+								<element name="st_Conclusao" type="ptu:st_conclusao" minOccurs="0"/>
+								<element name="tp_arq_parcial" type="ptu:st_arq_parcial" minOccurs="0"/>
+							</sequence>
+						</extension>
+					</complexContent>
+				</complexType>
+			</element>
+			<element name="documento1" type="ptu:ct_DocA550"/>
+			<element name="documento2" type="ptu:ct_Doc_2_A550" minOccurs="0"/>
+		</sequence>
+	</complexType>
+	<complexType name="ct_DocA550">
+		<sequence>
+			<element name="nr_Doc_1_Cob" type="ptu:st_texto20"/>
+			<!--<element name="dt_EmissaoDoc" type="ptu:st_data2"/> -->
+			<element name="vl_Tot_Cont_Doc_1" type="ptu:st_Decimal12.2"/>
+			<element name="vl_Tot_Pago_Doc_1" type="ptu:st_Decimal12.2" minOccurs="0"/>
+			<element name="Nr_NDC_1" type="ptu:st_numero11" minOccurs="0"/>
+			<element name="dt_Venc_NDC_1" type="ptu:st_data2" minOccurs="0"/>
+		</sequence>
+	</complexType>
+	<complexType name="ct_Doc_2_A550">
+		<sequence>
+			<element name="nr_Doc_2_Cob" type="ptu:st_texto20"/>
+			<element name="vl_Tot_Cont_Doc_2" type="ptu:st_Decimal12.2"/>
+			<element name="vl_Tot_Pago_Doc_2" type="ptu:st_Decimal12.2" minOccurs="0"/>
+			<element name="Nr_NDC_2" type="ptu:st_numero11" minOccurs="0"/>
+			<element name="dt_Venc_NDC_2" type="ptu:st_data2" minOccurs="0"/>
+			<!--
+			<element name="tp_Arquivo" type="ptu:st_tp_arquivo"/>
+			<element name="nr_Documento" type="ptu:st_texto20"/>
+			<element name="dt_EmissaoDoc" type="ptu:st_data2"/>
+			<element name="st_Conclusao" type="ptu:st_conclusao" minOccurs="0"/>> -->
+		</sequence>
+	</complexType>
+	<complexType name="ct_Tipo_Questionamento">
+		<choice>
+			<element name="Quest" type="ptu:ct_Tp_Quest"/>
+			<element name="Quest_Reembolso" type="ptu:ct_questionamento_reembolso" maxOccurs="unbounded"/>
+		</choice>
+	</complexType>
+	<complexType name="ct_Tp_Quest">
+		<sequence>
+			<element name="Questionamento" type="ptu:ct_questionamento" minOccurs="0" maxOccurs="unbounded"/>
+			<element name="Questionamento_NFiscalFornec" type="ptu:ct_questionamento_NotaFiscalFornec" minOccurs="0" maxOccurs="9999"/>
+		</sequence>
+	</complexType>
+	<!--************************************************************************************************************************************************************************-->
+	<!--****************************************************************R552********************************************************************************************************-->
+	<complexType name="ct_questionamento">
+		<sequence>
+			<element name="identificacaoBenef">
+				<complexType>
+					<complexContent>
+						<extension base="ptu:ct_identificacaoBenef">
+							<sequence>
+								<element name="nm_benef" type="ptu:st_texto25"/>
+							</sequence>
+						</extension>
+					</complexContent>
+				</complexType>
+			</element>
+			<element name="DadosLoteGuia" type="ptu:ct_LoteGuia"/>
+			<element name="Procedimento" type="ptu:ct_procedimento_a550" minOccurs="1" maxOccurs="unbounded"/>
+			<!--<element name="Valores" type="ptu:ct_valores_a550"/> -->
+		</sequence>
+	</complexType>
+	<!--**********************************************************************************************************-->
+	<complexType name="ct_procedimento_a550">
+		<sequence>
+			<element name="SeqItem" type="ptu:ct_SequenciaItem"/>
+			<element name="id_itemUnico" type="ptu:st_itemunico" minOccurs="0"/>
+			<element name="tp_Tabela" type="ptu:st_tabela"/>
+			<element name="cd_Servico" type="ptu:st_texto10"/>
+			<element name="dt_acordo" type="ptu:st_data2" minOccurs="0"/>
+			<element name="tp_Acordo" type="ptu:st_tp_acordo"/>
+			<element name="qt_Reconh" type="ptu:st_Decimal5.4"/>
+			<element name="qt_Acordada" type="ptu:st_Decimal5.4" minOccurs="0"/>
+			<element name="Valores" type="ptu:ct_valores_a550"/>
+			<element name="Taxas" type="ptu:ct_taxas_a550" minOccurs="0"/>
+			<element name="tp_Aceite" type="ptu:st_tp_aceite" minOccurs="0"/>
+			<element name="Motivo_Questionamento" type="ptu:ct_motivo_questionamento" maxOccurs="5"/>
+		</sequence>
+	</complexType>
+	<complexType name="ct_SequenciaItem">
+		<choice>
+			<element name="seq_itemTXT" type="ptu:st_numero8"/>
+			<element name="seq_itemXML" type="ptu:st_numero4"/>
+		</choice>
+	</complexType>
+	<!--**********************************************************************************************************-->
+	<complexType name="ct_valores_a550">
+		<sequence>
+			<element name="vl_Reconh_Serv" type="ptu:st_Decimal12.2" minOccurs="0"/>
+			<element name="vl_Acordo_Serv" type="ptu:st_Decimal12.2" minOccurs="0"/>
+			<element name="vl_Reconh_CO" type="ptu:st_Decimal12.2" minOccurs="0"/>
+			<element name="vl_Acordo_CO" type="ptu:st_Decimal12.2" minOccurs="0"/>
+			<element name="vl_Reconh_Filme" type="ptu:st_Decimal12.2" minOccurs="0"/>
+			<element name="vl_Acordo_Filme" type="ptu:st_Decimal12.2" minOccurs="0"/>
+		</sequence>
+	</complexType>
+	<complexType name="ct_taxas_a550">
+		<sequence>
+			<element name="vl_Reconh_Adic_Serv" type="ptu:st_Decimal12.2" minOccurs="0"/>
+			<element name="vl_Acordo_Adic_Serv" type="ptu:st_Decimal12.2" minOccurs="0"/>
+			<element name="vl_Reconh_Adic_CO" type="ptu:st_Decimal12.2" minOccurs="0"/>
+			<element name="vl_Acordo_Adic_CO" type="ptu:st_Decimal12.2" minOccurs="0"/>
+			<element name="vl_Reconh_Adic_Filme" type="ptu:st_Decimal12.2" minOccurs="0"/>
+			<element name="vl_Acordo_Adic_Filme" type="ptu:st_Decimal12.2" minOccurs="0"/>
+		</sequence>
+	</complexType>
+	<complexType name="ct_valores_quest_a550">
+		<sequence>
+			<element name="vl_Reconh_Serv" type="ptu:st_Decimal12.2"/>
+			<element name="vl_Acordo_Serv" type="ptu:st_Decimal12.2" minOccurs="0"/>
+		</sequence>
+	</complexType>
+	<complexType name="ct_taxas_NFiscalFornec">
+		<sequence>
+			<element name="vl_Reconh_Adic_Serv" type="ptu:st_Decimal12.2" minOccurs="0"/>
+			<element name="vl_Acordo_Adic_Serv" type="ptu:st_Decimal12.2" minOccurs="0"/>
+		</sequence>
+	</complexType>
+	<!--*****************************************************************R553*******************************************************************************************************-->
+	<complexType name="ct_motivo_questionamento">
+		<sequence>
+			<element name="cd_Motivo_Ques" type="ptu:st_cd_motivo_ques"/>
+			<element name="ds_Motivo_Ques" type="ptu:st_texto500" minOccurs="0"/>
+			<element name="detalheMotivo_Ques" minOccurs="0">
+				<complexType>
+					<sequence>
+						<element name="tagCob" type="ptu:st_texto40" maxOccurs="2"/>
+					</sequence>
+				</complexType>
+			</element>
+		</sequence>
+	</complexType>
+	<!--*************************************************************R557***********************************************************************************************************-->
+	<complexType name="ct_questionamento_reembolso">
+		<sequence>
+			<element name="idReembolso" type="ptu:st_texto20" minOccurs="0"/>
+			<element name="identificacaoBenef" type="ptu:ct_identificacaoBenef"/>
+			<element name="Procedimento" type="ptu:ct_procedimento_a550_reembolso" minOccurs="1" maxOccurs="9999"/>
+		</sequence>
+	</complexType>
+	<complexType name="ct_procedimento_a550_reembolso">
+		<sequence>
+			<element name="SeqItem" type="ptu:ct_SequenciaItem"/>
+			<element name="id_itemUnico" type="ptu:st_itemunico" minOccurs="0"/>
+			<element name="tp_Tabela" type="ptu:st_tabela"/>
+			<element name="cd_Servico" type="ptu:st_texto10"/>
+			<element name="Valores" type="ptu:ct_valores_quest_a550"/>
+			<element name="dt_acordo" type="ptu:st_data2" minOccurs="0"/>
+			<element name="tp_Acordo" type="ptu:st_tp_acordo"/>
+			<element name="qt_Reconh" type="ptu:st_Decimal5.4"/>
+			<element name="qt_Acordada" type="ptu:st_Decimal5.4" minOccurs="0"/>
+			<element name="tp_Aceite" type="ptu:st_tp_aceite" minOccurs="0"/>
+			<element name="Motivo_Questionamento" type="ptu:ct_motivo_questionamento" minOccurs="1" maxOccurs="5"/>
+		</sequence>
+	</complexType>
+	<!--*************************************************************notaFiscalFornecedor******************************************************************************************************-->
+	<complexType name="ct_questionamento_NotaFiscalFornec">
+		<sequence>
+			<element name="identificacaoBenef">
+				<complexType>
+					<complexContent>
+						<extension base="ptu:ct_identificacaoBenef">
+							<sequence>
+								<element name="nm_benef" type="ptu:st_texto25"/>
+							</sequence>
+						</extension>
+					</complexContent>
+				</complexType>
+			</element>
+			<element name="nr_NotaFiscalFornecedor" type="ptu:st_texto20"/>
+			<element name="nr_GuiaTissPrincipal" type="ptu:st_texto20"/>
+			<element name="Procedimento" type="ptu:ct_procedimento_a550_NotaFiscalFornec" minOccurs="1" maxOccurs="9999"/>
+		</sequence>
+	</complexType>
+	<complexType name="ct_procedimento_a550_NotaFiscalFornec">
+		<sequence>
+			<element name="seq_item" type="ptu:st_numero4"/>
+			<element name="id_itemUnico" type="ptu:st_itemunico"/>
+			<element name="tp_Tabela" type="ptu:st_tabela"/>
+			<element name="cd_Servico" type="ptu:st_texto10"/>
+			<element name="Valores" type="ptu:ct_valores_quest_a550"/>
+			<element name="Taxas" type="ptu:ct_taxas_NFiscalFornec" minOccurs="0"/>
+			<element name="dt_acordo" type="ptu:st_data2" minOccurs="0"/>
+			<element name="tp_Acordo" type="ptu:st_tp_acordo"/>
+			<element name="qt_Reconh" type="ptu:st_Decimal5.4"/>
+			<element name="qt_Acordada" type="ptu:st_Decimal5.4" minOccurs="0"/>
+			<element name="tp_Aceite" type="ptu:st_tp_aceite" minOccurs="0"/>
+			<element name="Motivo_Questionamento" type="ptu:ct_motivo_questionamento" minOccurs="1" maxOccurs="5"/>
+		</sequence>
+	</complexType>
+	<!--*************************************************************A560***************************************************************************************************************************************-->
+	<complexType name="ct_CabecalhoA560">
+		<sequence>
+			<element name="nrVerTra_PTU" type="ptu:st_numero2"/>
+			<element name="unimed" type="ptu:ct_codUnimed"/>
+			<element name="tp_arquivoNDC" type="ptu:st_tp_arquivoNDC"/>
+			<element name="tp_arq_parcial" type="ptu:st_arq_parcial" minOccurs="0"/>
+		</sequence>
+	</complexType>
+	<complexType name="ct_arquivo_a560">
+		<sequence>
+			<element name="Documento1" type="ptu:ct_documento1_a560"/>
+			<element name="Documento2" type="ptu:ct_documento1_a560" minOccurs="0"/>
+			<element name="Dados_Credora" type="ptu:ct_dados_credora"/>
+			<element name="Dados_Devedora" type="ptu:ct_dados_devedora"/>
+		</sequence>
+	</complexType>
+	<!--*********************************************************************************************************-->
+	<complexType name="ct_documento1_a560">
+		<sequence>
+			<element name="nr_Doc_Cob" type="ptu:st_texto20"/>
+			<element name="Nota_Debito" type="ptu:ct_nota_debito" minOccurs="0"/>
+			<element name="Boleto" type="ptu:ct_boleto" minOccurs="0"/>
+		</sequence>
+	</complexType>
+	<complexType name="ct_documento2_a560">
+		<sequence>
+			<element name="nr_Nota_Debito" type="ptu:st_numero11"/>
+			<element name="Dados_nota" type="ptu:ct_dados_nota_debito"/>
+			<element name="Boleto" type="ptu:ct_boleto" minOccurs="0"/>
+			<element name="Nota_Debito" type="ptu:ct_nota_debito"/>
+		</sequence>
+	</complexType>
+	<!--*********************************************************************************R562************************-->
+	<complexType name="ct_dados_nota_debito">
+		<sequence>
+			<element name="nr_Nota_Debito" type="ptu:st_numero11"/>
+		</sequence>
+	</complexType>
+	<!--***************************************************Boleto*******************************************************-->
+	<complexType name="ct_boleto">
+		<sequence>
+			<element name="nr_Banco" type="ptu:st_texto5"/>
+			<element name="agencia_Cd_Cedente" type="ptu:st_texto25"/>
+			<element name="nosso_Numero" type="ptu:st_texto20"/>
+			<element name="uso_banco" type="ptu:st_texto15" minOccurs="0"/>
+			<element name="ds_carteira" type="ptu:st_texto10" minOccurs="0"/>
+			<element name="especie" type="ptu:st_texto4" minOccurs="0"/>
+			<element name="especie_doc" type="ptu:st_texto5" minOccurs="0"/>
+			<element name="aceite" type="ptu:st_texto2" minOccurs="0"/>
+			<element name="dt_proces" type="ptu:st_data2" minOccurs="0"/>
+			<element name="local_pgto" type="ptu:st_texto60"/>
+			<element name="obs_local_pagto" type="ptu:st_texto60"/>
+			<element name="ds_instrucao" type="ptu:st_texto60" maxOccurs="3"/>
+			<element name="ds_observacao" type="ptu:st_texto60" minOccurs="0" maxOccurs="5"/>
+			<element name="linha_digitavel" type="ptu:st_texto60"/>
+			<element name="cd_barras" type="ptu:st_cod_barras"/>
+		</sequence>
+	</complexType>
+	<!--***************************************************R567*******************************************************-->
+	<complexType name="ct_dados_credora">
+		<sequence>
+			<element name="nm_credora" type="ptu:st_texto60"/>
+			<element name="info_endereco" type="ptu:ct_infoendereco"/>
+			<element name="cpf_cnpj" type="ptu:ct_dadoContratado"/>
+			<element name="telefone" type="ptu:ct_telefone" minOccurs="0"/>
+		</sequence>
+	</complexType>
+	<complexType name="ct_dados_devedora">
+		<sequence>
+			<element name="nm_devedora" type="ptu:st_texto60"/>
+			<element name="info_endereco" type="ptu:ct_infoendereco"/>
+			<element name="cpf_cnpj" type="ptu:ct_dadoContratado"/>
+			<element name="telefone" type="ptu:ct_telefone" minOccurs="0"/>
+		</sequence>
+	</complexType>
+	<!--***************************************************R568*******************************************************-->
+	<complexType name="ct_nota_debito">
+		<sequence>
+			<element name="nr_Nota_Debito" type="ptu:st_numero11"/>
+			<element name="dt_Emissao_NDC" type="ptu:st_data2"/>
+			<element name="dt_Ven_NDC" type="ptu:st_data2"/>
+			<element name="vl_NDC" type="ptu:st_Decimal12.2"/>
+			<element name="Linha" type="ptu:ct_linha" maxOccurs="32"/>
+		</sequence>
+	</complexType>
+	<complexType name="ct_linha">
+		<sequence>
+			<element name="nr_Linha" type="ptu:st_numero2"/>
+			<element name="ds_linha" type="ptu:st_texto74"/>
+		</sequence>
+	</complexType>
+	<!--***************************************************R569*******************************************************-->
+	<complexType name="ct_dados_cobranca_orig">
+		<sequence>
+			<element name="nr_Doc_1_Cob" type="ptu:st_texto20"/>
+			<element name="nr_Doc_2_Cob" type="ptu:st_texto20"/>
+		</sequence>
+	</complexType>
+	<!--*********************************************************************A580*******************************************************-->
+	<complexType name="ct_CabecalhoCobranca_a580">
+		<sequence>
+			<element name="nrVerTra_PTU" type="ptu:st_numero2"/>
+			<element name="unimed" type="ptu:ct_codUnimed"/>
+		</sequence>
+	</complexType>
+	<complexType name="ct_cobranca_A580">
+		<sequence>
+			<element name="dadosCobranca" type="ptu:ct_dadosCobranca_a580"/>
+			<element name="documento">
+				<complexType>
+					<complexContent>
+						<extension base="ptu:ct_Doc_a580">
+							<sequence>
+								<element name="VL_IR" type="ptu:st_Decimal12.2" minOccurs="0"/>
+							</sequence>
+						</extension>
+					</complexContent>
+				</complexType>
+			</element>
+		</sequence>
+	</complexType>
+	<complexType name="ct_Doc_a580">
+		<sequence>
+			<element name="nr_Documento" type="ptu:st_texto20"/>
+			<element name="dt_VencimentoDoc" type="ptu:st_data2"/>
+			<element name="dt_EmissaoDoc" type="ptu:st_data2"/>
+			<element name="vl_TotalDoc" type="ptu:st_Decimal12.2"/>
+			<element name="doc_Fiscal" type="ptu:st_texto20"/>
+		</sequence>
+	</complexType>
+	<complexType name="ct_dadosCobranca_a580">
+		<sequence>
+			<element name="dt_Geracao" type="ptu:st_data2"/>
+			<element name="nr_Competencia" type="ptu:st_nrComp" minOccurs="0"/>
+			<element name="tp_doc_A580" type="ptu:st_tpDocumento_A580"/>
+			<element name="id_cobranca_A580" type="ptu:st_idCobranca_A580"/>
+		</sequence>
+	</complexType>
+	<!--*********************************************************************A600*******************************************************-->
+	<complexType name="ct_CabecalhoCobranca_a600">
+		<sequence>
+			<element name="nrVerTra_PTU" type="ptu:st_numero2"/>
+			<element name="unimed" type="ptu:ct_codUnimed"/>
+			<element name="dadosCobranca" type="ptu:ct_dadosCobranca_a600"/>
+		</sequence>
+	</complexType>
+	<complexType name="ct_dadosCobranca_a600">
+		<sequence>
+			<element name="dt_Geracao" type="ptu:st_data2"/>
+			<element name="dt_Camara" type="ptu:st_data2"/>
+			<element name="tp_camara" type="ptu:st_tpCamara_A600"/>
+		</sequence>
+	</complexType>
+	<complexType name="ct_Doc_a600">
+		<sequence>
+			<element name="nr_Documento" type="ptu:st_texto20"/>
+			<element name="cd_uni_cred" type="ptu:st_numero4"/>
+			<element name="cd_uni_deve" type="ptu:st_numero4"/>
+			<element name="tp_Doc_A600" type="ptu:st_tpDocumento_A600"/>
+			<element name="vl_TotalDoc" type="ptu:st_Decimal12.2"/>
+		</sequence>
+	</complexType>
+	<!--*********************************************************************A700*******************************************************-->
+	<!--*********************************************************************R701********************************************************-->
+	<complexType name="ct_CabecalhoCobranca_A700">
+		<sequence>
+			<element name="nrVerTra_PTU" type="ptu:st_numero2"/>
+			<element name="unimed" type="ptu:ct_codUnimed"/>
+			<element name="dt_Geracao" type="ptu:st_data2"/>
+			<element name="nr_seq_geracao" type="ptu:st_numero4"/>
+			<element name="dt_Inicial_Pagto" type="ptu:st_data2"/>
+			<element name="dt_Final_Pagto" type="ptu:st_data2"/>
+		</sequence>
+	</complexType>
+	<complexType name="ct_ArquivoA700">
+		<choice>
+			<element name="semMovimento" type="ptu:st_semMovimento"/>
+			<element name="Tipoguia" type="ptu:ct_tipoGuia_A700"/>
+		</choice>
+	</complexType>
+	<complexType name="ct_tipoGuia_A700">
+		<sequence>
+			<element name="guiaConsulta" type="ptu:ct_Consulta_A700" minOccurs="0" maxOccurs="9999"/>
+			<element name="guiaSADT" type="ptu:ct_SADT_A700" minOccurs="0" maxOccurs="9999"/>
+			<element name="guiaInternacao" type="ptu:ct_Internacao_A700" minOccurs="0" maxOccurs="9999"/>
+			<element name="guiaHonorarios" type="ptu:ct_Honorarios_A700" minOccurs="0" maxOccurs="9999"/>
+		</sequence>
+	</complexType>
+	<!--************************************************************************************************************************************************************************-->
+	<!--****************************************************************************************************************************************************************************-->
+	<!-- ************************************** Guia de Consulta A700 *******************************************************************************************************************-->
+	<!--****************************************************************************************************************************************************************************-->
+	<complexType name="ct_Consulta_A700">
+		<sequence>
+			<element name="dadosBeneficiario">
+				<complexType>
+					<complexContent>
+						<extension base="ptu:ct_identificacaoBenef">
+							<sequence>
+								<element name="nm_Benef" type="ptu:st_nomeBenef" minOccurs="0"/>
+								<element name="id_RN" type="ptu:st_SimNao"/>
+								<element name="tp_Paciente" type="ptu:st_tpPaciente"/>
+							</sequence>
+						</extension>
+					</complexContent>
+				</complexType>
+			</element>
+			<element name="contratadoExecutante" type="ptu:ct_dadosExecutante_A700"/>
+			<element name="profissionalExecutante" type="ptu:ct_profissionalExecutanteConsulta"/>
+			<element name="dadosGuia" type="ptu:ct_dadosGuiaConsulta_A700"/>
+		</sequence>
+	</complexType>
+	<!--************************************************************************************************************************************************************************ -->
+	<!-- ************************************** Guia de SADT A700******************************************************************************************************************* -->
+	<!-- *********************************************************************************************************************************************************************** -->
+	<complexType name="ct_SADT_A700">
+		<sequence>
+			<element name="dadosBeneficiario">
+				<complexType>
+					<complexContent>
+						<extension base="ptu:ct_identificacaoBenef">
+							<sequence>
+								<element name="nm_Benef" type="ptu:st_nomeBenef" minOccurs="0"/>
+								<element name="id_RN" type="ptu:st_SimNao"/>
+								<element name="tp_Paciente" type="ptu:st_tpPaciente"/>
+							</sequence>
+						</extension>
+					</complexContent>
+				</complexType>
+			</element>
+			<element name="dadosSolicitante" type="ptu:ct_dadosSolicitante"/>
+			<element name="dadosExecutante" type="ptu:ct_dadosExecutante_A700"/>
+			<element name="dadosAtendimento" type="ptu:ct_dadosAtendimento"/>
+			<element name="dadosGuia">
+				<complexType>
+					<complexContent>
+						<extension base="ptu:ct_dadosGuias_SADT_A700">
+							<sequence>
+								<element name="id_GuiaPrincipal" type="ptu:st_SimNao"/>
+							</sequence>
+						</extension>
+					</complexContent>
+				</complexType>
+			</element>
+		</sequence>
+	</complexType>
+	<!-- ******************************************************************************************************************************************************************** -->
+	<!-- ************************************** Guia de Internação A700********************************************************************************************************** -->
+	<!--********************************************************************************************************************************************************************* -->
+	<complexType name="ct_Internacao_A700">
+		<sequence>
+			<element name="dadosBeneficiario">
+				<complexType>
+					<complexContent>
+						<extension base="ptu:ct_identificacaoBenef">
+							<sequence>
+								<element name="nm_Benef" type="ptu:st_nomeBenef" minOccurs="0"/>
+								<element name="id_RN" type="ptu:st_SimNao"/>
+								<element name="tp_Paciente" type="ptu:st_tpPaciente"/>
+							</sequence>
+						</extension>
+					</complexContent>
+				</complexType>
+			</element>
+			<element name="dadosSolicitante" type="ptu:ct_dadosSolicitante"/>
+			<element name="dadosExecutante" type="ptu:ct_dadosExecutante_A700Inter"/>
+			<element name="dadosInternacao" type="ptu:ct_dadosInternacao_A700" maxOccurs="1"/>
+			<element name="dadosSaidaInternacao" type="ptu:ct_dadosSaidaInternacao_A700" maxOccurs="1"/>
+			<element name="dadosGuia" type="ptu:ct_dadosGuias_A700"/>
+		</sequence>
+	</complexType>
+	<!-- ******************************************************************************************************************************************************************* -->
+	<!-- ************************************** Guia de Honorário A700********************************************************************************************************** -->
+	<!-- ******************************************************************************************************************************************************************* -->
+	<complexType name="ct_Honorarios_A700">
+		<sequence>
+			<element name="dadosBeneficiario">
+				<complexType>
+					<complexContent>
+						<extension base="ptu:ct_identificacaoBenef">
+							<sequence>
+								<element name="nm_Benef" type="ptu:st_nomeBenef" minOccurs="0"/>
+								<element name="id_RN" type="ptu:st_SimNao"/>
+								<element name="tp_Paciente" type="ptu:st_tpPaciente"/>
+							</sequence>
+						</extension>
+					</complexContent>
+				</complexType>
+			</element>
+			<element name="dadosHospital" type="ptu:ct_dadosHospital" maxOccurs="1"/>
+			<element name="dadosExecutante" type="ptu:ct_dadosExecutante_A700"/>
+			<element name="dadosGuia">
+				<complexType>
+					<complexContent>
+						<extension base="ptu:ct_dadosGuiasHonorario_A700"/>
+					</complexContent>
+				</complexType>
+			</element>
+		</sequence>
+	</complexType>
+	<!--***************************************************************************************************************************************************************************** -->
+	<!-- ********************* PRESTADOR A700*************************************************************************************************************************************** -->
+	<!--************************************************************************************************************************************************************************ -->
+	<complexType name="ct_dadosExecutante_A700">
+		<sequence>
+			<element name="UnimedPrestador" type="ptu:ct_dadosUnimedPrestador" minOccurs="0"/>
+			<element name="nome" type="ptu:st_texto60"/>
+			<element name="CPF_CNPJ" type="ptu:ct_dadoContratado"/>
+			<element name="CNES" type="ptu:st_texto7"/>
+			<element name="prestador" type="ptu:ct_dadosPrestador_A700"/>
+		</sequence>
+	</complexType>
+	<complexType name="ct_dadosExecutante_A700Inter">
+		<sequence>
+			<element name="UnimedPrestador" type="ptu:ct_dadosUnimedPrestador" minOccurs="0"/>
+			<element name="nome" type="ptu:st_texto60"/>
+			<element name="CNPJ" type="ptu:st_CNPJ"/>
+			<element name="CNES" type="ptu:st_texto7"/>
+			<element name="prestador" type="ptu:ct_dadosPrestador_A700"/>
+		</sequence>
+	</complexType>
+	<complexType name="ct_dadoContratado_A700">
+		<choice>
+			<element name="cd_cpf" type="ptu:st_CPF"/>
+			<element name="cd_cnpj" type="ptu:st_CNPJ"/>
+		</choice>
+	</complexType>
+	<complexType name="ct_profissionalExecutante_A700">
+		<sequence>
+			<element name="UnimedPrestador_A700">
+				<complexType>
+					<complexContent>
+						<extension base="ptu:ct_dadosUnimedPrestador">
+							<sequence>
+								<element name="nome" type="ptu:st_texto60"/>
+							</sequence>
+						</extension>
+					</complexContent>
+				</complexType>
+			</element>
+			<element name="cd_cpf" type="ptu:st_CPF"/>
+			<element name="dadosConselho" type="ptu:ct_dadosConselho"/>
+			<element name="CBO" type="ptu:st_CBOS"/>
+		</sequence>
+	</complexType>
+	<complexType name="ct_dadosPrestador_A700">
+		<sequence>
+			<element name="cd_MunicipioCont" type="ptu:st_numero7"/>
+			<element name="tp_Prestador" type="ptu:st_PresExec"/>
+			<element name="id_RecProprio" type="ptu:st_SimNao"/>
+		</sequence>
+	</complexType>
+	<complexType name="ct_dadosConselho_A700">
+		<sequence>
+			<element name="sg_Conselho" type="ptu:st_texto12"/>
+			<element name="nr_Conselho" type="ptu:st_texto15"/>
+			<element name="UF" type="ptu:st_UF"/>
+		</sequence>
+	</complexType>
+	<complexType name="ct_dadosUnimedPrestador_A700">
+		<sequence>
+			<element name="cd_Uni_Prest" type="ptu:st_numero4"/>
+			<element name="cd_Prest" type="ptu:st_numero8"/>
+		</sequence>
+	</complexType>
+	<!--************************************************************************************************************************************************************************ -->
+	<!--************* CABEÇALHO A700************************************************************************************************************************************************ -->
+	<!--************************************************************************************************************************************************************************ -->
+	<complexType name="ct_R505complemento_A700">
+		<sequence>
+			<element name="tp_RegCPL" type="ptu:st_tpRegCPL"/>
+			<element name="nm_DescComplemento" type="ptu:st_texto100"/>
+		</sequence>
+	</complexType>
+	<complexType name="ct_codUnimed_A700">
+		<sequence>
+			<element name="cd_Uni_Destino" type="ptu:st_numero4"/>
+			<element name="cd_Uni_Origem" type="ptu:st_numero4"/>
+		</sequence>
+	</complexType>
+	<!--************************************************************************************************************************************************************************ -->
+	<!-- ************* DADOS DA CONSULTA A700*************************************************************************************************************************************** -->
+	<!--************************************************************************************************************************************************************************ -->
+	<complexType name="ct_identificacaoBenef_A700">
+		<sequence>
+			<element name="cd_Unimed" type="ptu:st_numero4"/>
+			<element name="id_Benef" type="ptu:st_idBenef"/>
+		</sequence>
+	</complexType>
+	<complexType name="ct_nr_Guias_SADT_A700">
+		<sequence>
+			<element name="nr_GuiaTissPrestador" type="ptu:st_texto20"/>
+			<element name="nr_GuiaTissOperadora" type="ptu:st_texto20" minOccurs="0"/>
+			<element name="nr_GuiaTissPrincipal" type="ptu:st_texto20" minOccurs="0"/>
+		</sequence>
+	</complexType>
+	<complexType name="ct_nr_Guias_A700">
+		<sequence>
+			<element name="nr_GuiaTissPrestador" type="ptu:st_texto20"/>
+			<element name="nr_GuiaTissOperadora" type="ptu:st_texto20" minOccurs="0"/>
+			<element name="nr_GuiaTissPrincipal" type="ptu:st_texto20"/>
+		</sequence>
+	</complexType>
+	<complexType name="ct_nr_GuiaConsulta_A700">
+		<sequence>
+			<element name="nr_GuiaTissPrestador" type="ptu:st_texto20"/>
+			<element name="nr_GuiaTissOperadora" type="ptu:st_texto20" minOccurs="0"/>
+		</sequence>
+	</complexType>
+	<complexType name="ct_dadosGuiaConsulta_A700">
+		<sequence>
+			<element name="nr_Ver_TISS" type="ptu:st_texto7"/>
+			<element name="tp_Consulta" type="ptu:st_tipoConsulta"/>
+			<element name="nr_LotePrestador" type="ptu:st_texto12"/>
+			<element name="dt_Protocolo" type="ptu:st_data2"/>
+			<element name="nr_Guias" type="ptu:ct_nr_GuiaConsulta"/>
+			<element name="tp_IndAcidente" type="ptu:st_indicadorAcidente"/>
+			<element name="dt_Atendimento" type="ptu:st_data1"/>
+			<element name="procedimentos" type="ptu:ct_procedimentoConsulta_A700"/>
+			<element name="dadosAutorizacao" type="ptu:ct_dadosAutorizacao_A700" minOccurs="0"/>
+			<element name="complemento" type="ptu:ct_complemento_A700" minOccurs="0" maxOccurs="unbounded"/>
+		</sequence>
+	</complexType>
+	<complexType name="ct_dadosGuias_A700">
+		<sequence>
+			<element name="nr_Ver_TISS" type="ptu:st_texto7"/>
+			<element name="nr_LotePrestador" type="ptu:st_texto12"/>
+			<element name="dt_Protocolo" type="ptu:st_data2" minOccurs="1"/>
+			<element name="nr_Guias" type="ptu:ct_nr_Guias"/>
+			<element name="dt_Atendimento" type="ptu:st_data1"/>
+			<element name="procedimentosExecutados" type="ptu:ct_procedimentosExecutados_A700" maxOccurs="unbounded"/>
+			<element name="complemento" type="ptu:ct_complemento_A700" minOccurs="0" maxOccurs="unbounded"/>
+		</sequence>
+	</complexType>
+	<complexType name="ct_dadosGuiasHonorario_A700">
+		<sequence>
+			<element name="nr_Ver_TISS" type="ptu:st_texto7"/>
+			<element name="nr_LotePrestador" type="ptu:st_texto12"/>
+			<element name="dt_Protocolo" type="ptu:st_data2" minOccurs="1"/>
+			<element name="dt_IniFaturamento" type="ptu:st_data1" minOccurs="1"/>
+			<element name="dt_FimFaturamento" type="ptu:st_data1" minOccurs="1"/>
+			<element name="nr_Guias" type="ptu:ct_nr_Guias"/>
+			<element name="dt_Atendimento" type="ptu:st_data1"/>
+			<element name="procedimentosExecutados" type="ptu:ct_procedimentosExecutados_A700" maxOccurs="unbounded"/>
+			<element name="complemento" type="ptu:ct_complemento_A700" minOccurs="0" maxOccurs="unbounded"/>
+		</sequence>
+	</complexType>
+	<complexType name="ct_dadosGuias_SADT_A700">
+		<sequence>
+			<element name="nr_Ver_TISS" type="ptu:st_texto7"/>
+			<element name="nr_LotePrestador" type="ptu:st_texto12"/>
+			<element name="dt_Protocolo" type="ptu:st_data2" minOccurs="1"/>
+			<element name="nr_Guias" type="ptu:ct_nr_Guias_SADT"/>
+			<element name="dt_Atendimento" type="ptu:st_data1"/>
+			<element name="procedimentosExecutados" type="ptu:ct_procedimentosExecutados_A700" maxOccurs="unbounded"/>
+			<element name="dt_UltimaAutorizacao" type="ptu:st_data2" minOccurs="0"/>
+			<element name="complemento" type="ptu:ct_complemento_A700" minOccurs="0" maxOccurs="unbounded"/>
+		</sequence>
+	</complexType>
+	<complexType name="ct_dadosAutorizacao_A700">
+		<sequence>
+			<element name="dt_Solicitacao" type="ptu:st_data2"/>
+			<element name="dt_Autorizacao" type="ptu:st_data2"/>
+		</sequence>
+	</complexType>
+	<complexType name="ct_complemento_A700">
+		<sequence>
+			<element name="tp_RegCPL" type="ptu:st_tpRegCPL" minOccurs="1"/>
+			<element name="nm_DescComplemento" type="ptu:st_texto500" minOccurs="1"/>
+		</sequence>
+	</complexType>
+	<complexType name="ct_dadosExecutanteSADT_A700">
+		<sequence>
+			<element name="cd_Unimed" type="ptu:st_numero4"/>
+			<element name="nm_PrestadorExec" type="ptu:st_texto60"/>
+			<element name="tp_PrestExec" type="ptu:st_PresExec"/>
+			<element name="nr_LotePrestador" type="ptu:st_texto12" minOccurs="0"/>
+			<element name="tp_Pessoa" type="ptu:st_Pessoa"/>
+			<element name="nr_CNPJpuCPF" type="ptu:ct_dadoContratado"/>
+			<element name="cd_CNES" type="ptu:st_texto7"/>
+		</sequence>
+	</complexType>
+	<complexType name="ct_reapresentacaoGlosado_A700">
+		<sequence>
+			<element name="nr_LotePrestadorGlosado" type="ptu:st_texto12"/>
+			<element name="nr_GuiaGlosada" type="ptu:st_texto20"/>
+		</sequence>
+	</complexType>
+	<!--************************************************************************************************************************************************************************ -->
+	<!--********************* SADT A700********************************************************************************************************************************************* -->
+	<!--************************************************************************************************************************************************************************ -->
+	<complexType name="ct_dadosAturozicaoSADT_A700">
+		<sequence>
+			<element name="nr_GuiaTissOperadora" type="ptu:st_texto20" minOccurs="0"/>
+			<element name="dt_Autorizacao" type="ptu:st_data2" minOccurs="0"/>
+		</sequence>
+	</complexType>
+	<complexType name="ct_dadosSolicitante_A700">
+		<sequence>
+			<element name="profissional" type="ptu:ct_profissionalSolicitante" minOccurs="1"/>
+		</sequence>
+	</complexType>
+	<complexType name="ct_profissionalSolicitante_A700">
+		<sequence>
+			<element name="nm_Profissional" type="ptu:st_texto60" minOccurs="0"/>
+			<element name="dadosConselho" type="ptu:ct_dadosConselho"/>
+			<element name="CBO" type="ptu:st_CBOS"/>
+		</sequence>
+	</complexType>
+	<complexType name="ct_contradoExecutante_A700">
+		<sequence>
+			<element name="CPF_CNPJ" type="ptu:ct_dadoContratado" minOccurs="0"/>
+			<element name="CNES" type="ptu:st_texto7"/>
+		</sequence>
+	</complexType>
+	<complexType name="ct_dadosAtendimento_A700">
+		<sequence>
+			<element name="tp_Atendimento" type="ptu:st_tpAtendimento"/>
+			<element name="tp_IndAcidente" type="ptu:st_indicadorAcidente"/>
+			<element name="tp_Consulta" type="ptu:st_tipoConsulta" minOccurs="0"/>
+			<element name="caraterAtendimento" type="ptu:st_caraterAtendimento"/>
+			<element name="mv_Encerramento" type="ptu:st_motivoEncerramento" minOccurs="0"/>
+		</sequence>
+	</complexType>
+	<complexType name="ct_Procedimentos_A700">
+		<sequence>
+			<element name="seq_item" type="ptu:st_numero4"/>
+			<element name="tp_Tabela" type="ptu:st_tabela"/>
+			<element name="cd_Servico" type="ptu:st_texto10"/>
+			<element name="qt_Paga" type="ptu:st_Decimal4.4"/>
+		</sequence>
+	</complexType>
+	<complexType name="ct_procedimentoConsulta_A700">
+		<sequence>
+			<element name="seq_item" type="ptu:st_numero4"/>
+			<element name="tp_Tabela" type="ptu:st_tabela"/>
+			<element name="cd_Servico" type="ptu:st_texto10"/>
+			<element name="vl_ServPago" type="ptu:st_Decimal12.2"/>
+			<element name="cd_Ato" type="ptu:st_ato"/>
+		</sequence>
+	</complexType>
+	<complexType name="ct_procedimentosExecutados_A700">
+		<sequence>
+			<element name="dt_Execucao" type="ptu:st_data2"/>
+			<element name="hr_Inicial" type="ptu:st_hora" minOccurs="0"/>
+			<element name="hr_Final" type="ptu:st_hora" minOccurs="0"/>
+			<element name="procedimentos" type="ptu:ct_Procedimentos_A700"/>
+			<element name="via_Acesso" type="ptu:st_viaAcesso" minOccurs="0"/>
+			<element name="tc_Utilizada" type="ptu:st_tecnicaUtilizada" minOccurs="0"/>
+			<element name="id_Acrescimo" type="ptu:st_SimNao"/>
+			<element name="vl_ServPago" type="ptu:st_Decimal12.2"/>
+			<element name="ft_MultiplicadorServico" type="ptu:st_Decimal1.2"/>
+			<element name="cd_PorteAnestesico" type="ptu:st_texto1" minOccurs="0"/>
+			<element name="equipe_Profissional" type="ptu:ct_profissionalEquipe_A700" minOccurs="0" maxOccurs="unbounded"/>
+			<element name="cd_Ato" type="ptu:st_ato"/>
+			<element name="dadosAutorizacao" type="ptu:ct_dadosAutorizacao_A700" minOccurs="0"/>
+		</sequence>
+	</complexType>
+	<complexType name="ct_profissionalEquipe_A700">
+		<sequence>
+			<element name="tp_Participacao" type="ptu:st_tpPart"/>
+			<element name="Prestador" type="ptu:ct_dadosUnimedPrestador" minOccurs="0"/>
+			<element name="nm_Profissional" type="ptu:st_texto60"/>
+			<element name="cd_cpf" type="ptu:st_CPF" minOccurs="0"/>
+			<element name="dadosConselho" type="ptu:ct_dadosConselho"/>
+			<element name="CBO" type="ptu:st_CBOS"/>
+		</sequence>
+		<!--DUVIDA-->
+	</complexType>
+	<complexType name="ct_declaracoesUnimed_A700">
+		<sequence>
+			<element name="declaraca_Vivo" type="ptu:st_texto15" minOccurs="0" maxOccurs="5"/>
+			<element name="nr_Declaraca_Obito" type="ptu:st_texto17" minOccurs="0"/>
+			<element name="CID_Obito" type="ptu:st_cdCID" minOccurs="0" maxOccurs="5"/>
+			<element name="nr_DeclaracaObito_RN" type="ptu:st_texto17" maxOccurs="5"/>
+		</sequence>
+	</complexType>
+	<complexType name="ct_declaracoes_A700">
+		<sequence>
+			<element name="declaracao_Nascido" type="ptu:st_texto11" minOccurs="0"/>
+			<element name="CID_Obito" type="ptu:st_texto4" minOccurs="0"/>
+			<element name="declaracao_Obito" type="ptu:st_texto11" minOccurs="0"/>
+			<element name="indicadorDO_RN" type="ptu:st_SimNao" minOccurs="0"/>
+		</sequence>
+	</complexType>
+	<!--************************************************************************************************************************************************************************-->
+	<!--********************* Internação A700***************************************************************************************************************************************-->
+	<!--************************************************************************************************************************************************************************-->
+	<complexType name="ct_dadosHospital_A700">
+		<sequence>
+			<element name="cd_uniHospitalar" type="ptu:st_numero4" minOccurs="0"/>
+			<element name="cd_Hospitalar" type="ptu:st_numero8" minOccurs="0"/>
+			<element name="CNPJHospital" type="ptu:st_numero14" minOccurs="0"/>
+			<element name="nm_Hospital" type="ptu:st_texto60" minOccurs="0" maxOccurs="1"/>
+			<element name="CNES" type="ptu:st_texto7"/>
+		</sequence>
+	</complexType>
+	<complexType name="ct_dadosInternacao_A700">
+		<sequence>
+			<element name="tp_Acomodacao" type="ptu:st_Acomodacao" minOccurs="0"/>
+			<element name="ft_Multiplicador_AMB" type="ptu:st_Decimal2.2"/>
+			<element name="tp_Internacao" type="ptu:st_tpInternacao"/>
+			<element name="rg_Internacao" type="ptu:st_regimeInternacao" minOccurs="1"/>
+			<element name="caraterAtendimento" type="ptu:st_caraterAtendimento"/>
+			<element name="dadosFaturamento" type="ptu:ct_dadosFaturamento_A700" minOccurs="1"/>
+			<element name="dadosDeclaracoes" type="ptu:ct_declaracoes" minOccurs="0" maxOccurs="8"/>
+		</sequence>
+	</complexType>
+	<complexType name="ct_dadosSaidaInternacao_A700">
+		<sequence>
+			<element name="tp_IndAcidente" type="ptu:st_indicadorAcidente"/>
+			<element name="mv_Encerramento" type="ptu:st_motivoEncerramento"/>
+			<element name="CID" type="ptu:st_cdCID" minOccurs="0" maxOccurs="4"/>
+		</sequence>
+	</complexType>
+	<complexType name="ct_dadosPrestadorReqInternacao_A700">
+		<sequence>
+			<element name="CPF_CNPJ_PrestadorReq" type="ptu:ct_dadoContratado" minOccurs="0"/>
+			<element name="sg_ConselhoPrestadorReq" type="ptu:st_texto12"/>
+			<element name="nr_ConselhoPrestadorReq" type="ptu:st_texto15"/>
+			<element name="UF_PrestadorReq" type="ptu:st_UF"/>
+			<element name="CBO" type="ptu:st_CBOS" minOccurs="0"/>
+			<element name="nm_PrestadorReq" type="ptu:st_texto60"/>
+		</sequence>
+	</complexType>
+	<complexType name="ct_dadosPrestadorExecInternacao_A700">
+		<sequence>
+			<element name="cd_UniPrestador" type="ptu:st_numero4"/>
+			<element name="cd_Prestador" type="ptu:st_numero8"/>
+			<element name="nm_ProfExecutante" type="ptu:st_texto60" minOccurs="0"/>
+			<element name="sg_Conselho" type="ptu:st_texto12" minOccurs="0"/>
+			<element name="nr_ConselhoPrestador" type="ptu:st_texto15" minOccurs="0"/>
+			<element name="UF_Prestador" type="ptu:st_UF" minOccurs="0"/>
+			<element name="CBO" type="ptu:st_CBOS" minOccurs="0"/>
+		</sequence>
+	</complexType>
+	<complexType name="ct_dadosFaturamento_A700">
+		<sequence>
+			<element name="tp_Faturamento" type="ptu:st_tipoFaturamento"/>
+			<element name="dt_IniFaturamento" type="ptu:st_data1" minOccurs="1"/>
+			<element name="dt_FimFaturamento" type="ptu:st_data1" minOccurs="1"/>
+		</sequence>
+	</complexType>
+	<!--********************* A800 ***************************************************************************************************************************************-->
+	<complexType name="ct_Cabecalho_A800">
+		<sequence>
+			<element name="nrVerTra_PTU" type="ptu:st_numero2"/>
+			<element name="unimed" type="ptu:ct_codUnimed"/>
+		</sequence>
+	</complexType>
+	<complexType name="ct_Cobranca_A800">
+		<sequence>
+			<element name="dadosCobranca">
+				<complexType>
+					<complexContent>
+						<extension base="ptu:ct_cob_a800"/>
+					</complexContent>
+				</complexType>
+			</element>
+			<element name="documento">
+				<complexType>
+					<complexContent>
+						<extension base="ptu:ct_Doc_a800"/>
+					</complexContent>
+				</complexType>
+			</element>
+		</sequence>
+	</complexType>
+	<complexType name="ct_Doc_a800">
+		<sequence>
+			<element name="tp_Documento" type="ptu:st_tpDocumento_a800"/>
+			<element name="nr_Documento" type="ptu:st_texto20"/>
+			<element name="dt_VencimentoDoc" type="ptu:st_data2"/>
+			<element name="dt_EmissaoDoc" type="ptu:st_data2"/>
+			<element name="doc_Fiscal" type="ptu:st_texto20"/>
+			<element name="vl_TotalDoc" type="ptu:st_Decimal12.2"/>
+			<element name="vl_TotalDoc_Liq" type="ptu:st_Decimal12.2"/>
+			<element name="vl_Ajuste_Doc" type="ptu:st_Decimal12.2" minOccurs="0"/>
+			<element name="VL_IR" type="ptu:st_Decimal12.2" minOccurs="0"/>
+		</sequence>
+	</complexType>
+	<complexType name="ct_cob_a800">
+		<sequence>
+			<element name="dt_Geracao" type="ptu:st_data2"/>
+			<element name="nr_Competencia" type="ptu:st_nrComp"/>
+			<element name="dt_Ini_Per" type="ptu:st_data2"/>
+			<element name="dt_Fin_Per" type="ptu:st_data2"/>
+		</sequence>
+	</complexType>
+	<complexType name="ct_Cobranca_Benef_A800">
+		<sequence>
+			<element name="dadosBeneficiario" type="ptu:ct_identificacaoBenef"/>
+			<element name="cd_filial" type="ptu:st_numero3" minOccurs="0"/>
+			<element name="cd_fami" type="ptu:st_numero6" minOccurs="0"/>
+			<element name="cd_depe" type="ptu:st_cd_depe"/>
+			<element name="nm_benef" type="ptu:st_texto25"/>
+			<element name="dt_Nasc" type="ptu:st_data2"/>
+			<element name="valores" type="ptu:ct_valor_a800"/>
+			<element name="cd_empr_ori" type="ptu:st_numero10"/>
+			<element name="cd_plano_inter" type="ptu:st_texto3"/>
+		</sequence>
+	</complexType>
+	<complexType name="ct_valor_a800">
+		<sequence>
+			<element name="vl_Mens_Ori" type="ptu:st_Decimal12.2" minOccurs="0"/>
+			<element name="vl_Insc_Ori" type="ptu:st_Decimal12.2" minOccurs="0"/>
+			<element name="vl_Mens_Cob" type="ptu:st_Decimal12.2" minOccurs="0"/>
+			<element name="vl_Insc_Cob" type="ptu:st_Decimal12.2" minOccurs="0"/>
+			<element name="vl_Ajuste" type="ptu:st_Decimal12.2" minOccurs="0"/>
+		</sequence>
+	</complexType>
+	<!--************************************************************************************************************************************************************************-->
+	<!--********************* A450 ***************************************************************************************************************************************-->
+	<complexType name="ct_ComplementoDados">
+		<sequence>
+			<element name="rede_atend" type="ptu:st_texto4"/>
+			<element name="id_reg_plano_ans" type="ptu:st_id_reg_plano_ans"/>
+			<element name="reg_plano_ans" type="ptu:st_texto20"/>
+			<element name="tp_contratacao" type="ptu:st_tp_contratacao"/>
+			<element name="sit_ans" type="ptu:st_sit_ANS"/>
+			<element name="seg_plano" type="ptu:st_seg_plano"/>
+			<element name="nm_produto" type="ptu:st_texto60"/>
+			<element name="tp_Acomodacao" type="ptu:st_Acomodacao"/>
+			<element name="tp_abrangencia" type="ptu:st_tp_abrangencia"/>
+			<element name="tipo_rede_min" type="ptu:st_Rede" minOccurs="0"/>
+		</sequence>
+	</complexType>
+	<complexType name="ct_excecao_rede_planos">
+		<sequence>
+			<element name="rede_atend" type="ptu:st_texto4"/>
+			<element name="reg_plano_ans" type="ptu:st_texto20" minOccurs="0"/>
+			<element name="nm_produto" type="ptu:st_texto60" minOccurs="0"/>
+			<element name="incl_excl_prest" type="ptu:ct_incl_excl_prest" maxOccurs="unbounded"/>
+		</sequence>
+	</complexType>
+	<complexType name="ct_incl_excl_prest">
+		<sequence>
+			<element name="id_inclu_exclu" type="ptu:st_inclu_exc"/>
+			<element name="cd_Uni_Prest" type="ptu:st_numero4"/>
+			<element name="cd_cnpj_cpf" type="ptu:ct_dadoContratado"/>
+			<element name="cd_gr_serv" type="ptu:st_cd_gr_serv" minOccurs="0"/>
+		</sequence>
+	</complexType>
+	<!--************************************************************************************************************************************************************************-->
+	<!--********************* A1300 ***************************************************************************************************************************************-->
+	<!--************************************************************************************************************************************************************************-->
+	<complexType name="ct_dadosdoenvio">
+		<choice>
+			<element name="tiposdeenvio">
+				<complexType>
+					<sequence>
+						<element name="tipoinclusao" minOccurs="0">
+							<complexType>
+								<sequence>
+									<element name="empresascontratantes" minOccurs="0">
+										<complexType>
+											<sequence>
+												<element name="empresacontratante" type="ptu:ct_empresacontratante" maxOccurs="50000"/>
+											</sequence>
+										</complexType>
+									</element>
+									<element name="dadosdaspessoas" minOccurs="0">
+										<complexType>
+											<sequence>
+												<element name="pessoa" type="ptu:ct_pessoa" maxOccurs="50000"/>
+											</sequence>
+										</complexType>
+									</element>
+									<element name="dadosautogestao" minOccurs="0">
+										<complexType>
+											<sequence>
+												<element name="autogestao" type="ptu:ct_autogestao" maxOccurs="50000"/>
+											</sequence>
+										</complexType>
+									</element>
+								</sequence>
+							</complexType>
+						</element>
+						<element name="tipoalteracao" minOccurs="0">
+							<complexType>
+								<sequence>
+									<element name="empresascontratantes" minOccurs="0">
+										<complexType>
+											<sequence>
+												<element name="empresacontratante" type="ptu:ct_empresacontratante" maxOccurs="50000"/>
+											</sequence>
+										</complexType>
+									</element>
+									<element name="dadosdaspessoas" minOccurs="0">
+										<complexType>
+											<sequence>
+												<element name="pessoa" type="ptu:ct_pessoa" maxOccurs="50000"/>
+											</sequence>
+										</complexType>
+									</element>
+									<element name="dadosautogestao" minOccurs="0">
+										<complexType>
+											<sequence>
+												<element name="autogestao" type="ptu:ct_autogestao" maxOccurs="50000"/>
+											</sequence>
+										</complexType>
+									</element>
+								</sequence>
+							</complexType>
+						</element>
+						<element name="tipoexclusao" minOccurs="0">
+							<complexType>
+								<sequence>
+									<element name="beneficiariosexcluidos" maxOccurs="50000">
+										<complexType>
+											<sequence>
+												<element name="identificacaoBenef" type="ptu:ct_identificacaoBenef"/>
+												<element name="dt_excl_uni" type="ptu:st_data2"/>
+												<element name="motivo_exclusao_benef" type="ptu:st_motivo_exclusao"/>
+												<element name="plano_exclusao" type="ptu:ct_plano_exclusao" maxOccurs="5"/>
+											</sequence>
+										</complexType>
+									</element>
+								</sequence>
+							</complexType>
+						</element>
+					</sequence>
+				</complexType>
+			</element>
+			<element name="tipodeenviomassa">
+				<complexType>
+					<sequence>
+						<element name="seq_arquivo" type="ptu:st_numero4" minOccurs="1"/>
+						<element name="ultimo_arquivo" type="ptu:st_SimNao"/>
+						<element name="empresascontratantes" minOccurs="0">
+							<complexType>
+								<sequence>
+									<element name="empresacontratante" type="ptu:ct_empresacontratante" maxOccurs="50000"/>
+								</sequence>
+							</complexType>
+						</element>
+						<element name="dadosdaspessoas" minOccurs="0">
+							<complexType>
+								<sequence>
+									<element name="pessoa" type="ptu:ct_pessoa" maxOccurs="50000"/>
+								</sequence>
+							</complexType>
+						</element>
+						<element name="dadosautogestao" minOccurs="0">
+							<complexType>
+								<sequence>
+									<element name="autogestao" type="ptu:ct_autogestao" maxOccurs="50000"/>
+								</sequence>
+							</complexType>
+						</element>
+					</sequence>
+				</complexType>
+			</element>
+		</choice>
+	</complexType>
+	<complexType name="ct_tipoempresa">
+		<choice>
+			<element name="cd_cnpj" type="ptu:st_CNPJ"/>
+			<element name="cd_caepf" type="ptu:st_numero14"/>
+		</choice>
+	</complexType>
+	<complexType name="ct_empresacontratante">
+		<sequence>
+			<element name="tipoempresa" type="ptu:ct_tipoempresa"/>
+			<element name="cd_insc_est" type="ptu:st_numero20" minOccurs="0"/>
+			<element name="nm_empr_comp" type="ptu:st_texto40"/>
+			<element name="nm_fantasia_empr" type="ptu:st_texto40"/>
+			<element name="nm_empr_abre" type="ptu:st_texto30" minOccurs="0"/>
+		</sequence>
+	</complexType>
+	<complexType name="ct_pessoa">
+		<sequence>
+			<element name="nm_compl_benef" type="ptu:st_texto70"/>
+			<element name="nm_social" type="ptu:st_texto70" minOccurs="0"/>
+			<element name="dt_nasc" type="ptu:st_data2"/>
+			<element name="tp_sexo" type="ptu:st_sexo"/>
+			<element name="genero_social" type="ptu:st_sexo" minOccurs="0"/>
+			<element name="cd_cpf" type="ptu:st_CPF" minOccurs="0"/>
+			<element name="id_estrangeiro" type="ptu:st_SimNao"/>
+			<element name="cd_rg" type="ptu:ct_rg" minOccurs="0"/>
+			<element name="cd_pais" type="ptu:st_cd_pais" minOccurs="0"/>
+			<element name="cd_cns" type="ptu:st_texto15"/>
+			<element name="cd_est_civil" type="ptu:st_cd_est_civil"/>
+			<element name="nm_mae" type="ptu:st_texto70" minOccurs="0"/>
+			<element name="pis_pasep" type="ptu:st_numero11" minOccurs="0"/>
+			<element name="cd_munic_natural" type="ptu:st_numero7" minOccurs="0"/>
+			<element name="cd_munic" type="ptu:st_numero7"/>
+			<element name="dadosdosbeneficiarios">
+				<complexType>
+					<sequence>
+						<element name="beneficiario" type="ptu:ct_beneficiario" maxOccurs="unbounded"/>
+					</sequence>
+				</complexType>
+			</element>
+			<element name="complementoscadastrais">
+				<complexType>
+					<sequence>
+						<element name="endereco" type="ptu:ct_endereco" maxOccurs="5"/>
+						<element name="contato" type="ptu:ct_contatos" minOccurs="0"/>
+					</sequence>
+				</complexType>
+			</element>
+		</sequence>
+	</complexType>
+	<complexType name="ct_beneficiario">
+		<sequence>
+			<element name="identificacaoBenef" type="ptu:ct_identificacaoBenef"/>
+			<element name="nm_benef" type="ptu:st_texto25"/>
+			<element name="nm_social_cartao" type="ptu:st_texto25" minOccurs="0"/>
+			<element name="cd_depe" type="ptu:st_cd_depe"/>
+			<element name="id_Benef_tit" type="ptu:st_idBenef"/>
+			<element name="dt_incl_uni" type="ptu:st_data2"/>
+			<element name="dt_excl_uni" type="ptu:st_data2" minOccurs="0"/>
+			<element name="motivo_exclusao_benef" type="ptu:st_motivo_exclusao" minOccurs="0"/>
+			<element name="id_sib" type="ptu:st_SimNao"/>
+			<element name="nr_pla_port" type="ptu:st_texto20" minOccurs="0"/>
+			<element name="id_remido" type="ptu:st_SimNao"/>
+			<element name="id_benef_coop" type="ptu:st_SimNao"/>
+			<element name="dados_cooperado" type="ptu:ct_dadoscooperado" minOccurs="0"/>
+			<element name="tipoempresa" type="ptu:ct_tipoempresa" minOccurs="0"/>
+			<element name="id_benef_low_cost" type="ptu:st_SimNao"/>
+			<element name="dadosdecompartilhamentoderisco" minOccurs="0">
+				<complexType>
+					<sequence>
+						<element name="compartilhamentoderisco" type="ptu:ct_compartilhamentoderisco" maxOccurs="unbounded"/>
+					</sequence>
+				</complexType>
+			</element>
+			<element name="dadosdosplanos">
+				<complexType>
+					<sequence>
+						<element name="plano" type="ptu:ct_plano" maxOccurs="5"/>
+					</sequence>
+				</complexType>
+			</element>
+		</sequence>
+	</complexType>
+	<complexType name="ct_endereco">
+		<sequence>
+			<element name="ind_resid" type="ptu:st_ind_resid"/>
+			<element name="tp_end" type="ptu:st_tp_end"/>
+			<element name="info_endereco" type="ptu:ct_infoendereco"/>
+		</sequence>
+	</complexType>
+	<complexType name="ct_endereco_a100">
+		<sequence>
+			<element name="tp_end" type="ptu:st_tp_end"/>
+			<element name="info_endereco" type="ptu:ct_infoendereco"/>
+		</sequence>
+	</complexType>
+	<complexType name="ct_infoendereco">
+		<sequence>
+			<element name="tp_logradouro" type="ptu:st_tp_logradouro"/>
+			<element name="ds_lograd" type="ptu:st_texto40"/>
+			<element name="nr_lograd" type="ptu:st_texto6"/>
+			<element name="compl_lograd" type="ptu:st_texto20" minOccurs="0"/>
+			<element name="ds_bairro" type="ptu:st_texto30" minOccurs="0"/>
+			<element name="cd_munic" type="ptu:st_numero7"/>
+			<element name="nr_cep" type="ptu:st_numero8"/>
+		</sequence>
+	</complexType>
+	<complexType name="ct_contatos">
+		<sequence>
+			<element name="telefone" type="ptu:ct_telefone" minOccurs="0" maxOccurs="5"/>
+			<element name="email" type="ptu:ct_email" minOccurs="0" maxOccurs="5"/>
+		</sequence>
+	</complexType>
+	<complexType name="ct_telefone">
+		<sequence>
+			<element name="tp_fone" type="ptu:st_tp_fone"/>
+			<element name="nr_ddd" type="ptu:st_numero4"/>
+			<element name="nr_fone" type="ptu:st_numero9"/>
+		</sequence>
+	</complexType>
+	<complexType name="ct_telefone_empresa">
+		<sequence>
+			<element name="nr_ddd" type="ptu:st_numero4"/>
+			<element name="nr_fone" type="ptu:st_numero9"/>
+		</sequence>
+	</complexType>
+	<complexType name="ct_email">
+		<sequence>
+			<element name="tp_email" type="ptu:st_tp_email"/>
+			<element name="end_email" type="ptu:st_texto70"/>
+		</sequence>
+	</complexType>
+	<complexType name="ct_compartilhamentoderisco">
+		<sequence>
+			<element name="unimed" type="ptu:ct_codUnimed"/>
+			<element name="tp_com_risco" type="ptu:st_tp_com_risco"/>
+			<element name="dt_comp_risco" type="ptu:st_data2"/>
+			<element name="dt_fim_comp_risco" type="ptu:st_data2" minOccurs="0"/>
+			<element name="cd_uni_des_com" type="ptu:st_numero4"/>
+			<element name="id_Benef_des" type="ptu:st_idBenef"/>
+			<element name="via_cartao" type="ptu:st_numero2"/>
+			<element name="dt_val_carteira" type="ptu:st_data2"/>
+			<element name="nm_contr" type="ptu:st_texto40" minOccurs="0"/>
+			<element name="dt_inicio_vigencia" type="ptu:st_data2"/>
+			<element name="tp_abrangencia" type="ptu:st_tp_abrangencia"/>
+			<element name="tp_contratacao" type="ptu:st_tp_contratacao"/>
+			<element name="tp_acomodacao" type="ptu:st_Acomodacao"/>
+			<element name="id_reg_plano_ans" type="ptu:st_id_reg_plano_ans"/>
+			<element name="reg_plano_ans" type="ptu:st_texto20"/>
+			<element name="seg_plano" type="ptu:st_seg_plano"/>
+			<element name="cd_rede" type="ptu:st_texto4"/>
+			<element name="cd_lcat" type="ptu:st_numero4"/>
+			<element name="id_cpt" type="ptu:st_SimNao"/>
+			<element name="dt_fim_cpt" type="ptu:st_data2" minOccurs="0"/>
+			<element name="nm_produto" type="ptu:st_texto60"/>
+			<element name="tipo_rede_min" type="ptu:st_Rede"/>
+			<element name="complemento_1" type="ptu:st_texto45" minOccurs="0"/>
+			<element name="complemento_2" type="ptu:st_texto45" minOccurs="0"/>
+			<element name="abrangencias" minOccurs="0">
+				<complexType>
+					<sequence>
+						<element name="abrangencia" type="ptu:ct_abrangencia" maxOccurs="unbounded"/>
+					</sequence>
+				</complexType>
+			</element>
+			<element name="carenciasdosbeneficiarios" minOccurs="0">
+				<complexType>
+					<sequence>
+						<element name="carenciadobeneficiario" type="ptu:ct_carenciasdosbeneficiarios" maxOccurs="100"/>
+					</sequence>
+				</complexType>
+			</element>
+		</sequence>
+	</complexType>
+	<complexType name="ct_plano">
+		<sequence>
+			<element name="nm_contr" type="ptu:st_texto40" minOccurs="0"/>
+			<element name="dt_inicio_vigencia" type="ptu:st_data2"/>
+			<element name="dt_fim_vigencia" type="ptu:st_data2" minOccurs="0"/>
+			<element name="tp_abrangencia" type="ptu:st_tp_abrangencia"/>
+			<element name="tp_contratacao" type="ptu:st_tp_contratacao"/>
+			<element name="tp_acomodacao" type="ptu:st_Acomodacao"/>
+			<element name="id_reg_plano_ans" type="ptu:st_id_reg_plano_ans"/>
+			<element name="reg_plano_ans" type="ptu:st_texto20"/>
+			<element name="seg_plano" type="ptu:st_seg_plano"/>
+			<element name="cd_rede" type="ptu:st_texto4"/>
+			<element name="nm_rede" type="ptu:st_texto40" minOccurs="0"/>
+			<element name="via_cartao" type="ptu:st_numero2" minOccurs="0"/>
+			<element name="dt_val_carteira" type="ptu:st_data2" minOccurs="0"/>
+			<element name="cd_lcat" type="ptu:st_numero4"/>
+			<element name="id_cpt" type="ptu:st_SimNao"/>
+			<element name="dt_fim_cpt" type="ptu:st_data2" minOccurs="0"/>
+			<element name="tp_contrato" type="ptu:st_tp_com_risco"/>
+			<element name="cd_cnpj_adm_benef" type="ptu:st_CNPJ" minOccurs="0"/>
+			<element name="raz_soc_adm_benef" type="ptu:st_texto40" minOccurs="0"/>
+			<element name="nm_adm_benef" type="ptu:st_texto40" minOccurs="0"/>
+			<element name="nm_produto" type="ptu:st_texto60"/>
+			<element name="nr_contrato" type="ptu:st_texto15"/>
+			<element name="dt_contr_plano" type="ptu:st_data2"/>
+			<element name="tipo_rede_min" type="ptu:st_Rede"/>
+			<element name="complemento_1" type="ptu:st_texto45" minOccurs="0"/>
+			<element name="complemento_2" type="ptu:st_texto45" minOccurs="0"/>
+			<element name="abrangencias" minOccurs="0">
+				<complexType>
+					<sequence>
+						<element name="abrangencia" type="ptu:ct_abrangencia" maxOccurs="unbounded"/>
+					</sequence>
+				</complexType>
+			</element>
+			<element name="carenciasdosbeneficiarios" minOccurs="0">
+				<complexType>
+					<sequence>
+						<element name="carenciadobeneficiario" type="ptu:ct_carenciasdosbeneficiarios" maxOccurs="100"/>
+					</sequence>
+				</complexType>
+			</element>
+		</sequence>
+	</complexType>
+	<complexType name="ct_plano_exclusao">
+		<sequence>
+			<element name="reg_plano_ans" type="ptu:st_texto20"/>
+			<element name="dt_fim_vigencia" type="ptu:st_data2"/>
+		</sequence>
+	</complexType>
+	<complexType name="ct_abrangencia">
+		<choice>
+			<element name="cd_munic" type="ptu:st_numero7"/>
+			<element name="cd_uf" type="ptu:st_UF"/>
+		</choice>
+	</complexType>
+	<complexType name="ct_carenciasdosbeneficiarios">
+		<sequence>
+			<element name="tp_cobertura" type="ptu:st_tp_cobertura"/>
+			<element name="dt_fim_carencia" type="ptu:st_data2"/>
+		</sequence>
+	</complexType>
+	<complexType name="ct_autogestao">
+		<sequence>
+			<element name="identificacaoBenef" type="ptu:ct_identificacaoBenef"/>
+			<element name="nm_benef" type="ptu:st_texto70"/>
+			<element name="dt_nasc" type="ptu:st_data2"/>
+			<element name="tp_sexo" type="ptu:st_sexo"/>
+			<element name="cd_cns" type="ptu:st_texto15" minOccurs="0"/>
+			<element name="cd_cnpj" type="ptu:st_CNPJ"/>
+			<element name="cd_aut_gest_ans" type="ptu:st_numero10"/>
+			<element name="cd_cpf" type="ptu:st_CPF" minOccurs="0"/>
+			<element name="dt_incl" type="ptu:st_data2"/>
+			<element name="dt_excl" type="ptu:st_data2" minOccurs="0"/>
+		</sequence>
+	</complexType>
+	<complexType name="ct_dadoscooperado">
+		<sequence>
+			<element name="cd_crm" type="ptu:st_texto15" minOccurs="0"/>
+			<element name="cd_uf_conselho" type="ptu:st_UF" minOccurs="0"/>
+		</sequence>
+	</complexType>
+	<!--********************* Carimbo CMB R999 ***************************************************************************************************************************************-->
+	<!--************************************************************************************************************************************************************************-->
+	<!--********************* A100 ***************************************************************************************************************************************-->
+	<!--************************************************************************************************************************************************************************-->
+	<complexType name="ct_prepag">
+		<sequence>
+			<element name="Compart_Pos" type="ptu:ct_pos2"/>
+		</sequence>
+	</complexType>
+	<complexType name="ct_prepag2">
+		<sequence>
+			<element name="Compart_Pos" type="ptu:ct_pos"/>
+		</sequence>
+	</complexType>
+	<!--************************************************************************************************************************************************************************-->
+	<!--<complexType name="ct_pre">
+		<sequence>
+			<element name="Compart_Pre" type="ptu:ct_dadosdoenvioA100"/>
+		</sequence>
+	</complexType> -->
+	<!--************************************************************************************************************************************************************************-->
+	<complexType name="ct_pos">
+		<sequence>
+			<element name="Cad_simplificado" type="ptu:ct_dadosdoenvioA100_simp"/>
+		</sequence>
+	</complexType>
+	<complexType name="ct_pos3">
+		<sequence>
+			<element name="Compart_Pos">
+				<complexType>
+					<sequence>
+						<element name="Beneficiarios_Proprios" type="ptu:ct_dadosdoenvioA100_simp2" minOccurs="0" maxOccurs="10000"/>
+						<element name="Beneficiarios_Outros" type="ptu:ct_dadosdoenvioA100_simp3" minOccurs="0" maxOccurs="10000"/>
+					</sequence>
+				</complexType>
+			</element>
+		</sequence>
+	</complexType>
+	<complexType name="ct_pos2">
+		<choice>
+			<element name="Cad_simplificado" type="ptu:ct_dadosdoenvioA100_simp"/>
+			<element name="Cad_completo" type="ptu:ct_dadosdoenvioA100_Pos"/>
+		</choice>
+	</complexType>
+	<!--************************************************************************************************************************************************************************-->
+	<complexType name="ct_dadosdoenvioA100">
+		<choice>
+			<element name="Periodico">
+				<complexType>
+					<sequence>
+						<element name="tipoinclusao" minOccurs="0">
+							<complexType>
+								<sequence>
+									<element name="empresascontratantes" minOccurs="0">
+										<complexType>
+											<sequence>
+												<element name="empresacontratante" type="ptu:ct_empresacontratanteA100" maxOccurs="200000"/>
+											</sequence>
+										</complexType>
+									</element>
+									<element name="planos">
+										<complexType>
+											<sequence>
+												<element name="plano" type="ptu:ct_plano_empresa" maxOccurs="unbounded"/>
+											</sequence>
+										</complexType>
+									</element>
+									<element name="dadosdosbeneficiarios">
+										<complexType>
+											<sequence>
+												<element name="beneficiario" type="ptu:ct_beneficiarioA100" maxOccurs="200000"/>
+											</sequence>
+										</complexType>
+									</element>
+								</sequence>
+							</complexType>
+						</element>
+						<element name="tipoalteracao" minOccurs="0">
+							<complexType>
+								<sequence>
+									<element name="empresascontratantes_alteracao" minOccurs="0">
+										<complexType>
+											<sequence>
+												<element name="empresacontratante" type="ptu:ct_empresacontratanteA100_alt" maxOccurs="200000"/>
+											</sequence>
+										</complexType>
+									</element>
+									<element name="planos" minOccurs="0">
+										<complexType>
+											<sequence>
+												<element name="plano" type="ptu:ct_plano_empresa_alt" maxOccurs="unbounded"/>
+											</sequence>
+										</complexType>
+									</element>
+									<element name="dadosdosbeneficiarios_alteracao" minOccurs="0">
+										<complexType>
+											<sequence>
+												<element name="beneficiario_alteracao" type="ptu:ct_beneficiarioA100_alt" maxOccurs="200000"/>
+												<element name="carenciadobeneficiario" type="ptu:ct_carenciasdosbeneficiarios" minOccurs="0" maxOccurs="100"/>
+												<element name="moduloopbenef_alteracao" type="ptu:ct_modulo_op_benef_alt" minOccurs="0" maxOccurs="100"/>
+												<element name="complementoscadastrais_alteracao" minOccurs="0">
+													<complexType>
+														<sequence>
+															<element name="endereco" type="ptu:ct_endereco_a100_alt" minOccurs="0" maxOccurs="5"/>
+															<element name="contato" type="ptu:ct_contatos_alt" minOccurs="0"/>
+														</sequence>
+													</complexType>
+												</element>
+												<element name="preex_benef_alteracao" type="ptu:ct_preex_benef_alt" minOccurs="0" maxOccurs="100"/>
+											</sequence>
+										</complexType>
+									</element>
+								</sequence>
+							</complexType>
+						</element>
+						<element name="tipoexclusao" minOccurs="0">
+							<complexType>
+								<sequence>
+									<element name="beneficiariosexcluidos" maxOccurs="200000">
+										<complexType>
+											<sequence>
+												<element name="identificacaoBenef" type="ptu:ct_identificacaoBenef"/>
+												<element name="dt_excl_uni" type="ptu:st_data2"/>
+												<element name="motivo_exclusao_benef" type="ptu:st_motivo_exclusao"/>
+											</sequence>
+										</complexType>
+									</element>
+								</sequence>
+							</complexType>
+						</element>
+					</sequence>
+				</complexType>
+			</element>
+			<!--********************************** -->
+			<element name="TipoMassa" minOccurs="0">
+				<complexType>
+					<sequence>
+						<element name="tp_mov" type="ptu:st_tp_mov_a100"/>
+						<element name="empresascontratantes" minOccurs="0">
+							<complexType>
+								<sequence>
+									<element name="empresacontratante" type="ptu:ct_empresacontratanteA100" maxOccurs="200000"/>
+								</sequence>
+							</complexType>
+						</element>
+						<element name="planos">
+							<complexType>
+								<sequence>
+									<element name="plano" type="ptu:ct_plano_empresa" maxOccurs="unbounded"/>
+								</sequence>
+							</complexType>
+						</element>
+						<element name="dadosdosbeneficiarios">
+							<complexType>
+								<sequence>
+									<!--<element name="beneficiario" type="ptu:ct_beneficiarioA100" maxOccurs="200000"/> -->
+									<element name="beneficiario">
+										<complexType>
+											<complexContent>
+												<extension base="ptu:ct_beneficiarioA100">
+													<sequence>
+														<element name="dt_exc_unimed" type="ptu:st_data2" minOccurs="0"/>
+														<element name="motivo_exclusao_benef" type="ptu:st_motivo_exclusao"/>
+													</sequence>
+												</extension>
+											</complexContent>
+										</complexType>
+									</element>
+								</sequence>
+							</complexType>
+						</element>
+					</sequence>
+				</complexType>
+			</element>
+			<!--	********************* -->
+		</choice>
+	</complexType>
+	<complexType name="ct_dadosdoenvioA100_Pos">
+		<choice>
+			<element name="Periodico">
+				<complexType>
+					<sequence>
+						<element name="tipoinclusao" minOccurs="0">
+							<complexType>
+								<sequence>
+									<element name="empresascontratantes" minOccurs="0">
+										<complexType>
+											<sequence>
+												<element name="empresacontratante" type="ptu:ct_empresacontratanteA100" maxOccurs="200000"/>
+											</sequence>
+										</complexType>
+									</element>
+									<element name="planos">
+										<complexType>
+											<sequence>
+												<element name="plano" type="ptu:ct_plano_empresa" maxOccurs="unbounded"/>
+											</sequence>
+										</complexType>
+									</element>
+									<element name="dadosdosbeneficiarios">
+										<complexType>
+											<sequence>
+												<element name="beneficiario" maxOccurs="200000">
+													<complexType>
+														<complexContent>
+															<extension base="ptu:ct_beneficiarioA100">
+																<sequence>
+																	<element name="dt_exc_unimed" type="ptu:st_data2" minOccurs="0"/>
+																</sequence>
+															</extension>
+														</complexContent>
+													</complexType>
+												</element>
+											</sequence>
+										</complexType>
+									</element>
+								</sequence>
+							</complexType>
+						</element>
+						<element name="tipoalteracao" minOccurs="0">
+							<complexType>
+								<sequence>
+									<element name="empresascontratantes_alteracao" minOccurs="0">
+										<complexType>
+											<sequence>
+												<element name="empresacontratante" type="ptu:ct_empresacontratanteA100_alt" maxOccurs="200000"/>
+											</sequence>
+										</complexType>
+									</element>
+									<element name="planos" minOccurs="0">
+										<complexType>
+											<sequence>
+												<element name="plano" type="ptu:ct_plano_empresa_alt" maxOccurs="unbounded"/>
+											</sequence>
+										</complexType>
+									</element>
+									<element name="dadosdosbeneficiarios_alteracao" minOccurs="0" maxOccurs="200000">
+										<complexType>
+											<sequence>
+												<element name="beneficiario_alteracao" type="ptu:ct_beneficiarioA100_alt"/>
+												<element name="carenciadobeneficiario" type="ptu:ct_carenciasdosbeneficiarios" minOccurs="0" maxOccurs="100"/>
+												<element name="moduloopbenef_alteracao" type="ptu:ct_modulo_op_benef_alt" minOccurs="0" maxOccurs="100"/>
+												<element name="complementoscadastrais_alteracao" minOccurs="0">
+													<complexType>
+														<sequence>
+															<element name="endereco" type="ptu:ct_endereco_a100_alt" minOccurs="0" maxOccurs="5"/>
+															<element name="contato" type="ptu:ct_contatos_alt" minOccurs="0"/>
+														</sequence>
+													</complexType>
+												</element>
+												<element name="preex_benef_alteracao" type="ptu:ct_preex_benef_alt" minOccurs="0" maxOccurs="100"/>
+											</sequence>
+										</complexType>
+									</element>
+								</sequence>
+							</complexType>
+						</element>
+						<element name="tipoexclusao" minOccurs="0">
+							<complexType>
+								<sequence>
+									<element name="beneficiariosexcluidos" maxOccurs="200000">
+										<complexType>
+											<sequence>
+												<element name="identificacaoBenef" type="ptu:ct_identificacaoBenef"/>
+												<element name="dt_excl_uni" type="ptu:st_data2"/>
+												<element name="motivo_exclusao_benef" type="ptu:st_motivo_exclusao"/>
+											</sequence>
+										</complexType>
+									</element>
+								</sequence>
+							</complexType>
+						</element>
+					</sequence>
+				</complexType>
+			</element>
+			<!--********************************** -->
+			<element name="TipoMassa" minOccurs="0">
+				<complexType>
+					<sequence>
+						<element name="tp_mov" type="ptu:st_tp_mov_a100"/>
+						<element name="empresascontratantes" minOccurs="0">
+							<complexType>
+								<sequence>
+									<element name="empresacontratante" type="ptu:ct_empresacontratanteA100" maxOccurs="200000"/>
+								</sequence>
+							</complexType>
+						</element>
+						<element name="planos">
+							<complexType>
+								<sequence>
+									<element name="plano" type="ptu:ct_plano_empresa" maxOccurs="unbounded"/>
+								</sequence>
+							</complexType>
+						</element>
+						<element name="dadosdosbeneficiarios">
+							<complexType>
+								<sequence>
+									<!--<element name="beneficiario" type="ptu:ct_beneficiarioA100" maxOccurs="200000"/> -->
+									<element name="beneficiario" maxOccurs="200000">
+										<complexType>
+											<complexContent>
+												<extension base="ptu:ct_beneficiarioA100">
+													<sequence>
+														<element name="dt_exc_unimed" type="ptu:st_data2" minOccurs="0"/>
+													</sequence>
+												</extension>
+											</complexContent>
+										</complexType>
+									</element>
+								</sequence>
+							</complexType>
+						</element>
+					</sequence>
+				</complexType>
+			</element>
+			<!--	********************* -->
+		</choice>
+	</complexType>
+	<!--************************************************************************************************************************************************************************-->
+	<complexType name="ct_plano_empresa">
+		<sequence>
+			<element name="cd_plano_origem" type="ptu:st_texto20"/>
+			<element name="ds_plano_origem" type="ptu:st_texto40" minOccurs="0"/>
+			<element name="tipoempresa" type="ptu:ct_tipoempresa" minOccurs="0"/>
+			<element name="tp_abrangencia" type="ptu:st_tp_abrangencia"/>
+			<element name="cd_plano_inter" type="ptu:st_texto3"/>
+			<element name="seg_plano" type="ptu:st_seg_plano"/>
+			<element name="nr_ind_reembolso" type="ptu:st_Decimal3.2" minOccurs="0"/>
+			<element name="tp_contratacao" type="ptu:st_tp_contratacao"/>
+			<element name="id_reg_plano_ans" type="ptu:st_id_reg_plano_ans"/>
+			<element name="cd_ope_ans" type="ptu:st_numero10"/>
+			<element name="cd_prod_ans" type="ptu:st_texto20"/>
+			<element name="dt_inc_unimed" type="ptu:st_data2"/>
+			<element name="dt_exc_unimed" type="ptu:st_data2" minOccurs="0"/>
+		</sequence>
+	</complexType>
+	<complexType name="ct_empresacontratanteA100">
+		<sequence>
+			<element name="tipoempresa" type="ptu:ct_tipoempresa"/>
+			<element name="cd_filial" type="ptu:st_numero3" minOccurs="0"/>
+			<element name="nm_empr_comp" type="ptu:st_texto40"/>
+			<element name="nm_fantasia_empr" type="ptu:st_texto40"/>
+			<element name="nm_empr_abre" type="ptu:st_texto30"/>
+			<element name="cd_insc_est" type="ptu:st_numero20" minOccurs="0"/>
+			<element name="telefone" type="ptu:ct_telefone_empresa" minOccurs="0" maxOccurs="5"/>
+			<element name="info_endereco" type="ptu:ct_infoendereco" maxOccurs="5"/>
+			<element name="tp_contr_local" type="ptu:st_tp_contr_local"/>
+			<element name="dt_inc_unimed" type="ptu:st_data2" minOccurs="0"/>
+			<element name="dt_exc_unimed" type="ptu:st_data2" minOccurs="0"/>
+			<element name="cd_empr_ori" type="ptu:st_numero10"/>
+		</sequence>
+	</complexType>
+	<complexType name="ct_beneficiarioA100">
+		<sequence>
+			<element name="identificacaoBenef" type="ptu:ct_identificacaoBenef"/>
+			<element name="tipoempresa" type="ptu:ct_tipoempresa" minOccurs="0"/>
+			<element name="cd_plano_origem" type="ptu:st_texto20"/>
+			<element name="cd_fami" type="ptu:st_numero6" minOccurs="0"/>
+			<element name="nm_compl_benef" type="ptu:st_texto70"/>
+			<element name="nm_benef" type="ptu:st_texto25"/>
+			<element name="nm_social" type="ptu:st_texto70" minOccurs="0"/>
+			<element name="nm_social_cartao" type="ptu:st_texto25" minOccurs="0"/>
+			<element name="dt_Nasc" type="ptu:st_data2"/>
+			<element name="tp_Sexo" type="ptu:st_sexo_a100"/>
+			<element name="genero_social" type="ptu:st_sexo_a100" minOccurs="0"/>
+			<element name="cd_cpf" type="ptu:st_CPF" minOccurs="0"/>
+			<element name="cd_rg" type="ptu:ct_rg" minOccurs="0"/>
+			<element name="cd_est_civil" type="ptu:st_cd_est_civil"/>
+			<element name="nm_mae" type="ptu:st_texto70" minOccurs="0"/>
+			<element name="id_nato" type="ptu:st_SimNao" minOccurs="0"/>
+			<element name="cd_depe" type="ptu:st_cd_depe"/>
+			<element name="id_Benef_tit" type="ptu:st_idBenef"/>
+			<element name="cd_cns" type="ptu:st_texto15"/>
+			<element name="pis_pasep" type="ptu:st_numero11" minOccurs="0"/>
+			<element name="nr_contrato" type="ptu:st_texto15"/>
+			<element name="dt_inc_unimed" type="ptu:st_data2"/>
+			<element name="dt_exc_unimed" type="ptu:st_data2" minOccurs="0"/>
+			<element name="nr_matricula" type="ptu:st_texto20" minOccurs="0"/>
+			<element name="dt_val_carteira" type="ptu:st_data2" minOccurs="0"/>
+			<element name="cd_lcat" type="ptu:st_numero4"/>
+			<element name="cd_lotacao" type="ptu:st_texto8" minOccurs="0"/>
+			<element name="ds_lotacao" type="ptu:st_texto30" minOccurs="0"/>
+			<element name="dt_comp_risco" type="ptu:st_data2"/>
+			<element name="dt_fim_comp_risco" type="ptu:st_data2" minOccurs="0"/>
+			<element name="dt_incl_plano" type="ptu:st_data2"/>
+			<element name="nr_vig_origem" type="ptu:st_numero4" minOccurs="0"/>
+			<element name="id_excl_RN412" type="ptu:st_SimNao"/>
+			<element name="carenciadobeneficiario" type="ptu:ct_carenciasdosbeneficiarios" minOccurs="0" maxOccurs="100"/>
+			<element name="moduloopbenef" type="ptu:ct_modulo_op_benef" minOccurs="0" maxOccurs="100"/>
+			<element name="complementoscadastrais">
+				<complexType>
+					<sequence>
+						<element name="endereco" type="ptu:ct_endereco_a100" maxOccurs="5"/>
+						<element name="contato" type="ptu:ct_contatos" minOccurs="0"/>
+					</sequence>
+				</complexType>
+			</element>
+			<element name="preex_benef" type="ptu:ct_preex_benef" minOccurs="0" maxOccurs="100"/>
+		</sequence>
+	</complexType>
+	<complexType name="ct_modulo_op_benef">
+		<sequence>
+			<element name="tp_produto" type="ptu:st_Produtos"/>
+			<element name="ds_produto" type="ptu:st_texto20" minOccurs="0"/>
+		</sequence>
+	</complexType>
+	<complexType name="ct_preex_benef">
+		<sequence>
+			<element name="cd_CID" type="ptu:st_cdCID"/>
+			<element name="dt_fim_carencia" type="ptu:st_data2"/>
+		</sequence>
+	</complexType>
+	<!-- *************************************************ALTERAÇÃO********************************************************************************-->
+	<complexType name="ct_plano_empresa_alt">
+		<sequence>
+			<element name="cd_plano_origem" type="ptu:st_texto20"/>
+			<element name="ds_plano_origem" type="ptu:st_texto40" minOccurs="0"/>
+			<element name="tipoempresa" type="ptu:ct_tipoempresa" minOccurs="0"/>
+			<element name="tp_abrangencia" type="ptu:st_tp_abrangencia" minOccurs="0"/>
+			<element name="cd_plano_inter" type="ptu:st_texto3" minOccurs="0"/>
+			<element name="seg_plano" type="ptu:st_seg_plano" minOccurs="0"/>
+			<element name="nr_ind_reembolso" type="ptu:st_Decimal3.2" minOccurs="0"/>
+			<element name="tp_contratacao" type="ptu:st_tp_contratacao" minOccurs="0"/>
+			<element name="id_reg_plano_ans" type="ptu:st_id_reg_plano_ans" minOccurs="0"/>
+			<element name="cd_ope_ans" type="ptu:st_numero10" minOccurs="0"/>
+			<element name="cd_prod_ans" type="ptu:st_texto20" minOccurs="0"/>
+			<element name="dt_inc_unimed" type="ptu:st_data2" minOccurs="0"/>
+			<element name="dt_exc_unimed" type="ptu:st_data2" minOccurs="0"/>
+		</sequence>
+	</complexType>
+	<complexType name="ct_empresacontratanteA100_alt">
+		<sequence>
+			<element name="tipoempresa" type="ptu:ct_tipoempresa"/>
+			<element name="cd_filial" type="ptu:st_numero3" minOccurs="0"/>
+			<element name="nm_empr_comp" type="ptu:st_texto40" minOccurs="0"/>
+			<element name="nm_fantasia_empr" type="ptu:st_texto40" minOccurs="0"/>
+			<element name="nm_empr_abre" type="ptu:st_texto30" minOccurs="0"/>
+			<element name="cd_insc_est" type="ptu:st_numero20" minOccurs="0"/>
+			<element name="telefone" type="ptu:ct_telefone_empresa_alt" minOccurs="0" maxOccurs="5"/>
+			<element name="info_endereco" type="ptu:ct_infoendereco_alt" minOccurs="0"/>
+			<element name="tp_contr_local" type="ptu:st_tp_contr_local" minOccurs="0"/>
+			<element name="dt_inc_unimed" type="ptu:st_data2" minOccurs="0"/>
+			<element name="dt_exc_unimed" type="ptu:st_data2" minOccurs="0"/>
+			<element name="cd_empr_ori" type="ptu:st_numero10" minOccurs="0"/>
+		</sequence>
+	</complexType>
+	<complexType name="ct_beneficiarioA100_alt">
+		<sequence>
+			<element name="identificacaoBenef" type="ptu:ct_identificacaoBenef"/>
+			<element name="tipoempresa" type="ptu:ct_tipoempresa" minOccurs="0"/>
+			<element name="cd_plano_origem" type="ptu:st_texto20"/>
+			<element name="cd_fami" type="ptu:st_numero6" minOccurs="0"/>
+			<element name="nm_compl_benef" type="ptu:st_texto70" minOccurs="0"/>
+			<element name="nm_benef" type="ptu:st_texto25" minOccurs="0"/>
+			<element name="nm_social" type="ptu:st_texto70" minOccurs="0"/>
+			<element name="nm_social_cartao" type="ptu:st_texto25" minOccurs="0"/>
+			<element name="dt_Nasc" type="ptu:st_data2" minOccurs="0"/>
+			<element name="tp_Sexo" type="ptu:st_sexo_a100" minOccurs="0"/>
+			<element name="genero_social" type="ptu:st_sexo_a100" minOccurs="0"/>
+			<element name="cd_cpf" type="ptu:st_CPF" minOccurs="0"/>
+			<element name="cd_rg" type="ptu:ct_rg" minOccurs="0"/>
+			<element name="cd_est_civil" type="ptu:st_cd_est_civil" minOccurs="0"/>
+			<element name="nm_mae" type="ptu:st_texto70" minOccurs="0"/>
+			<element name="id_nato" type="ptu:st_SimNao" minOccurs="0"/>
+			<element name="cd_depe" type="ptu:st_cd_depe" minOccurs="0"/>
+			<element name="id_Benef_tit" type="ptu:st_idBenef"/>
+			<element name="cd_cns" type="ptu:st_texto15" minOccurs="0"/>
+			<element name="pis_pasep" type="ptu:st_numero11" minOccurs="0"/>
+			<element name="nr_contrato" type="ptu:st_texto15" minOccurs="0"/>
+			<element name="dt_inc_unimed" type="ptu:st_data2" minOccurs="0"/>
+			<element name="nr_matricula" type="ptu:st_texto20" minOccurs="0"/>
+			<element name="dt_val_carteira" type="ptu:st_data2" minOccurs="0"/>
+			<element name="cd_lcat" type="ptu:st_numero4" minOccurs="0"/>
+			<element name="cd_lotacao" type="ptu:st_texto8" minOccurs="0"/>
+			<element name="ds_lotacao" type="ptu:st_texto30" minOccurs="0"/>
+			<element name="dt_comp_risco" type="ptu:st_data2" minOccurs="0"/>
+			<element name="dt_fim_comp_risco" type="ptu:st_data2" minOccurs="0"/>
+			<element name="dt_incl_plano" type="ptu:st_data2" minOccurs="0"/>
+			<element name="nr_vig_origem" type="ptu:st_numero4" minOccurs="0"/>
+			<element name="id_excl_RN412" type="ptu:st_SimNao" minOccurs="0"/>
+		</sequence>
+	</complexType>
+	<complexType name="ct_modulo_op_benef_alt">
+		<sequence>
+			<element name="tp_produto" type="ptu:st_Produtos"/>
+			<element name="ds_produto" type="ptu:st_texto20" minOccurs="0"/>
+		</sequence>
+	</complexType>
+	<complexType name="ct_preex_benef_alt">
+		<sequence>
+			<element name="ds_produto" type="ptu:st_cdCID"/>
+			<element name="dt_fim_carencia" type="ptu:st_data2"/>
+		</sequence>
+	</complexType>
+	<complexType name="ct_infoendereco_alt">
+		<sequence>
+			<element name="tp_logradouro" type="ptu:st_tp_logradouro" minOccurs="0"/>
+			<element name="ds_lograd" type="ptu:st_texto40" minOccurs="0"/>
+			<element name="nr_lograd" type="ptu:st_texto6" minOccurs="0"/>
+			<element name="compl_lograd" type="ptu:st_texto20" minOccurs="0"/>
+			<element name="ds_bairro" type="ptu:st_texto30" minOccurs="0"/>
+			<element name="cd_munic" type="ptu:st_numero7" minOccurs="0"/>
+			<element name="nr_cep" type="ptu:st_numero8" minOccurs="0"/>
+		</sequence>
+	</complexType>
+	<complexType name="ct_email_alt">
+		<sequence>
+			<element name="tp_email" type="ptu:st_tp_email" minOccurs="0"/>
+			<element name="end_email" type="ptu:st_texto70" minOccurs="0"/>
+		</sequence>
+	</complexType>
+	<complexType name="ct_contatos_alt">
+		<sequence>
+			<element name="telefone" type="ptu:ct_telefone_alt" minOccurs="0" maxOccurs="5"/>
+			<element name="email" type="ptu:ct_email_alt" minOccurs="0" maxOccurs="5"/>
+		</sequence>
+	</complexType>
+	<complexType name="ct_telefone_alt">
+		<sequence>
+			<element name="tp_fone" type="ptu:st_tp_fone" minOccurs="0"/>
+			<element name="nr_ddd" type="ptu:st_numero4" minOccurs="0"/>
+			<element name="nr_fone" type="ptu:st_numero9" minOccurs="0"/>
+		</sequence>
+	</complexType>
+	<complexType name="ct_telefone_empresa_alt">
+		<sequence>
+			<element name="nr_ddd" type="ptu:st_numero4"/>
+			<element name="nr_fone" type="ptu:st_numero9"/>
+		</sequence>
+	</complexType>
+	<complexType name="ct_endereco_alt">
+		<sequence>
+			<element name="ind_resid" type="ptu:st_ind_resid" minOccurs="0"/>
+			<element name="tp_end" type="ptu:st_tp_end" minOccurs="0"/>
+			<element name="info_endereco" type="ptu:ct_infoendereco" minOccurs="0"/>
+		</sequence>
+	</complexType>
+	<complexType name="ct_endereco_a100_alt">
+		<sequence>
+			<element name="tp_end" type="ptu:st_tp_end" minOccurs="0"/>
+			<element name="info_endereco" type="ptu:ct_infoendereco" minOccurs="0"/>
+		</sequence>
+	</complexType>
+	<!-- ********************************************** Simplificado Pós **************************************************** -->
+	<complexType name="ct_dadosdoenvioA100_simp">
+		<sequence>
+			<!--			<element name="tipoinclusao" minOccurs="0">
+				<complexType>
+					<sequence>
+						<element name="empresascontratantes" minOccurs="0">
+							<complexType>
+								<sequence>
+									<element name="empresa" type="ptu:ct_tipoempresa" maxOccurs="200000"/>
+								</sequence>
+							</complexType>
+						</element>
+						<element name="planos">
+							<complexType>
+								<sequence>
+									<element name="plano" type="ptu:ct_plano_simp" maxOccurs="unbounded"/>
+								</sequence>
+							</complexType>
+						</element>
+-->
+			<!--			<element name="dadosdosbeneficiarios">
+				<complexType>
+					<sequence> -->
+			<element name="beneficiario" type="ptu:ct_benef_simp" maxOccurs="unbounded"/>
+			<!--					</sequence>
+				</complexType>
+			</element> -->
+		</sequence>
+	</complexType>
+	<!--			</element>
+			<element name="tipoalteracao" minOccurs="0">
+				<complexType>
+					<sequence>
+						<element name="empresascontratantes" minOccurs="0">
+							<complexType>
+								<sequence>
+									<element name="empresa" type="ptu:ct_tipoempresa" maxOccurs="200000"/>
+								</sequence>
+							</complexType>
+						</element>
+						<element name="planos">
+							<complexType>
+								<sequence>
+									<element name="plano" type="ptu:ct_plano_simp" maxOccurs="unbounded"/>
+								</sequence>
+							</complexType>
+						</element>
+						<element name="dadosdosbeneficiarios" minOccurs="0">
+							<complexType>
+								<sequence>
+									<element name="beneficiario" type="ptu:ct_benef_simp" maxOccurs="unbounded"/>
+								</sequence>
+							</complexType>
+						</element>
+					</sequence>
+				</complexType>
+			</element>
+			<element name="tipoexclusao" minOccurs="0">
+				<complexType>
+					<sequence>
+						<element name="beneficiariosexcluidos" maxOccurs="200000">
+							<complexType>
+								<sequence>
+									<element name="identificacaoBenef" type="ptu:ct_identificacaoBenef"/>
+									<element name="cd_plano_origem" type="ptu:st_texto6"/>
+									<element name="tipoempresa" type="ptu:ct_tipoempresa"/>
+									<element name="dt_fim_comp_risco" type="ptu:st_data2" minOccurs="0"/>
+								</sequence>
+							</complexType>
+						</element>
+					</sequence>
+				</complexType>
+			</element>
+		</sequence>
+	</complexType> -->
+	<complexType name="ct_dadosdoenvioA100_simp2">
+		<sequence>
+			<element name="cd_Uni_Destino" type="ptu:st_numero4"/>
+			<element name="beneficiario" type="ptu:ct_benef_simp_UB" maxOccurs="unbounded"/>
+			<!--					</sequence>
+				</complexType>
+			</element> -->
+		</sequence>
+	</complexType>
+	<complexType name="ct_dadosdoenvioA100_simp3">
+		<sequence>
+			<element name="cd_Uni_Origem" type="ptu:st_numero4"/>
+			<element name="beneficiario" type="ptu:ct_benef_simp_UB" maxOccurs="unbounded"/>
+			<!--					</sequence>
+				</complexType>
+			</element> -->
+		</sequence>
+	</complexType>
+	<!--********************************** -->
+	<complexType name="ct_rg">
+		<sequence>
+			<element name="cd_ident" type="ptu:st_texto15" minOccurs="0"/>
+			<element name="orgao_emissor" type="ptu:st_texto30" minOccurs="0"/>
+			<element name="cd_uf" type="ptu:st_UF" minOccurs="0"/>
+		</sequence>
+	</complexType>
+	<complexType name="ct_plano_simp">
+		<sequence>
+			<element name="cd_plano_origem" type="ptu:st_texto20"/>
+			<element name="tipoempresa" type="ptu:ct_tipoempresa" minOccurs="0"/>
+			<element name="tp_contratacao" type="ptu:st_tp_contratacao"/>
+			<element name="cd_prod_ans" type="ptu:st_texto20"/>
+			<element name="id_reg_plano_ans" type="ptu:st_id_reg_plano_ans"/>
+			<element name="nr_contrato" type="ptu:st_texto15"/>
+		</sequence>
+	</complexType>
+	<complexType name="ct_benef_simp">
+		<sequence>
+			<element name="identificacaoBenef" type="ptu:ct_identificacaoBenef"/>
+			<!--			<element name="tipoempresa" type="ptu:ct_tipoempresa" minOccurs="0"/>
+			<element name="cd_plano_origem" type="ptu:st_texto6"/>  -->
+			<element name="cd_cpf" type="ptu:st_CPF" minOccurs="0"/>
+			<element name="nm_compl_benef" type="ptu:st_texto70"/>
+			<element name="dt_Nasc" type="ptu:st_data2"/>
+			<element name="tp_contr_local" type="ptu:st_tp_contr_local"/>
+			<element name="dt_ini_comp_risco" type="ptu:st_data2"/>
+			<element name="dt_fim_comp_risco" type="ptu:st_data2" minOccurs="0"/>
+		</sequence>
+	</complexType>
+	<complexType name="ct_benef_simp_UB">
+		<sequence>
+			<element name="identificacaoBenef" type="ptu:ct_identificacaoBenef"/>
+			<!--			<element name="tipoempresa" type="ptu:ct_tipoempresa" minOccurs="0"/>
+			<element name="cd_plano_origem" type="ptu:st_texto6"/>  -->
+			<element name="cd_cpf" type="ptu:st_CPF" minOccurs="0"/>
+			<element name="nm_compl_benef" type="ptu:st_texto70" minOccurs="0"/>
+			<element name="dt_Nasc" type="ptu:st_data2" minOccurs="0"/>
+			<element name="tp_contr_local" type="ptu:st_tp_contr_local" minOccurs="0"/>
+			<element name="dt_ini_comp_risco" type="ptu:st_data2"/>
+			<element name="dt_fim_comp_risco" type="ptu:st_data2" minOccurs="0"/>
+		</sequence>
+	</complexType>
+	<!--*****************************************************A1350***************************************************-->
+	<complexType name="ct_atualizacaoDadosBenef">
+		<sequence>
+			<element name="atualizacao_dados_benef" type="ptu:ct_pessoa_a1350" maxOccurs="200000"/>
+		</sequence>
+	</complexType>
+	<complexType name="ct_pessoa_a1350">
+		<sequence>
+			<element name="identificacaoBenef" type="ptu:ct_identificacaoBenef"/>
+			<element name="nr_protocoloAtend" type="ptu:st_numero20"/>
+			<element name="dt_atualizacao" type="ptu:st_data2"/>
+			<element name="nm_compl_benef" type="ptu:st_texto70" minOccurs="0"/>
+			<element name="nm_social" type="ptu:st_texto70" minOccurs="0"/>
+			<element name="nm_mae" type="ptu:st_texto70" minOccurs="0"/>
+			<element name="dt_Nasc" type="ptu:st_data2" minOccurs="0"/>
+			<element name="tp_Sexo" type="ptu:st_sexo" minOccurs="0"/>
+			<element name="cd_est_civil" type="ptu:st_cd_est_civil" minOccurs="0"/>
+			<element name="cd_rg" type="ptu:ct_rg" minOccurs="0"/>
+			<element name="cd_pais" type="ptu:st_cd_pais" minOccurs="0"/>
+			<element name="cd_cns" type="ptu:st_texto15" minOccurs="0"/>
+			<element name="pis_pasep" type="ptu:st_numero11" minOccurs="0"/>
+			<element name="cd_munic_natural" type="ptu:st_numero7" minOccurs="0"/>
+			<element name="complementoscadastrais" minOccurs="0">
+				<complexType>
+					<sequence>
+						<element name="endereco" type="ptu:ct_endereco_alt" minOccurs="0" maxOccurs="5"/>
+						<element name="contato" type="ptu:ct_contatos_alt" minOccurs="0"/>
+					</sequence>
+				</complexType>
+			</element>
+		</sequence>
+	</complexType>
+	<!--*****************************************************A200***************************************************-->
+	<complexType name="ct_benef_a200">
+		<sequence>
+			<element name="retorno_mov_benef" type="ptu:ct_beneficiario_a200" maxOccurs="unbounded"/>
+		</sequence>
+	</complexType>
+	<complexType name="ct_beneficiario_a200">
+		<sequence>
+			<element name="identificacaoBenef" type="ptu:ct_identificacaoBenef"/>
+			<element name="cd_mens_retorno" type="ptu:st_cd_mens_erro"/>
+			<element name="identificacaoBenef_compRisco" minOccurs="0">
+				<complexType>
+					<complexContent>
+						<extension base="ptu:ct_identificacaoBenef">
+							<sequence>
+								<element name="via_cartao" type="ptu:st_numero2" minOccurs="0"/>
+								<element name="dt_val_carteira" type="ptu:st_data2" minOccurs="0"/>
+							</sequence>
+						</extension>
+					</complexContent>
+				</complexType>
+			</element>
+		</sequence>
+	</complexType>
+	<!--*****************************************************A300***************************************************-->
+	<!--************************************************************************************************************************************************************************-->
+	<complexType name="ct_tipoempresa_A300">
+		<choice>
+			<element name="cd_cnpj" type="ptu:st_CNPJ"/>
+			<element name="cd_caepf" type="ptu:st_numero14"/>
+			<element name="cd_cpf" type="ptu:st_CPF"/>
+		</choice>
+	</complexType>
+	<!--************************************************************************************************************************************************************************-->
+	<complexType name="ct_dadosdoenvioA300">
+		<choice>
+			<element name="Periodico">
+				<complexType>
+					<sequence>
+						<element name="tipoinclusao" minOccurs="0">
+							<complexType>
+								<sequence>
+									<element name="empresascontratantes" minOccurs="0">
+										<complexType>
+											<sequence>
+												<element name="empresacontratante" type="ptu:ct_empresacontratante_A300" maxOccurs="200000"/>
+											</sequence>
+										</complexType>
+									</element>
+									<element name="dadosdosbeneficiarios">
+										<complexType>
+											<sequence>
+												<element name="beneficiario" type="ptu:ct_beneficiario_A300" maxOccurs="200000"/>
+											</sequence>
+										</complexType>
+									</element>
+								</sequence>
+							</complexType>
+						</element>
+						<element name="tipoalteracao" minOccurs="0">
+							<complexType>
+								<sequence>
+									<element name="empresascontratantes_alteracao" minOccurs="0">
+										<complexType>
+											<sequence>
+												<element name="empresacontratante" type="ptu:ct_empresacontratante_A300_alt" maxOccurs="200000"/>
+											</sequence>
+										</complexType>
+									</element>
+									<element name="dadosdosbeneficiarios_alteracao" minOccurs="0">
+										<complexType>
+											<sequence>
+												<element name="beneficiario_alteracao" type="ptu:ct_beneficiario_A300_alt" maxOccurs="200000"/>
+											</sequence>
+										</complexType>
+									</element>
+								</sequence>
+							</complexType>
+						</element>
+						<element name="tipoexclusao" minOccurs="0">
+							<complexType>
+								<sequence>
+									<element name="beneficiariosexcluidos" maxOccurs="200000">
+										<complexType>
+											<sequence>
+												<element name="identificacaoBenef" type="ptu:ct_identificacaoBenef"/>
+												<element name="dt_excl_uni" type="ptu:st_data2"/>
+											</sequence>
+										</complexType>
+									</element>
+								</sequence>
+							</complexType>
+						</element>
+					</sequence>
+				</complexType>
+			</element>
+			<!--********************************** -->
+			<element name="TipoMassa">
+				<complexType>
+					<sequence>
+						<element name="tp_mov" type="ptu:st_tp_mov_a100"/>
+						<element name="empresascontratantes" minOccurs="0">
+							<complexType>
+								<sequence>
+									<element name="empresacontratante" type="ptu:ct_empresacontratante_A300" maxOccurs="200000"/>
+								</sequence>
+							</complexType>
+						</element>
+						<element name="dadosdosbeneficiarios">
+							<complexType>
+								<sequence>
+									<!--<element name="beneficiario" type="ptu:ct_beneficiarioA100" maxOccurs="200000"/> -->
+									<element name="beneficiario" type="ptu:ct_beneficiario_A300"/>
+								</sequence>
+							</complexType>
+						</element>
+					</sequence>
+				</complexType>
+			</element>
+		</choice>
+	</complexType>
+	<!--	********************* -->
+	<!--************************************************************************************************************************************************************************-->
+	<complexType name="ct_empresacontratante_A300">
+		<sequence>
+			<element name="tipoempresa" type="ptu:ct_tipoempresa_A300"/>
+			<element name="cd_filial" type="ptu:st_numero3" minOccurs="0"/>
+			<element name="nm_empr_comp" type="ptu:st_texto40"/>
+			<element name="nm_empr_abre" type="ptu:st_texto30"/>
+			<element name="cd_insc_est" type="ptu:st_numero20" minOccurs="0"/>
+			<element name="dt_inc_unimed" type="ptu:st_data2" minOccurs="0"/>
+			<element name="dt_exc_unimed" type="ptu:st_data2" minOccurs="0"/>
+			<element name="cd_empr_ori" type="ptu:st_numero10"/>
+			<element name="tp_contratacao" type="ptu:st_tp_contratacao"/>
+			<element name="nr_contrato" type="ptu:st_texto15" minOccurs="0"/>
+			<element name="info_endereco" type="ptu:ct_infoendereco"/>
+			<element name="telefone" type="ptu:ct_telefone_empresa" minOccurs="0" maxOccurs="5"/>
+		</sequence>
+	</complexType>
+	<complexType name="ct_beneficiario_A300">
+		<sequence>
+			<element name="identificacaoBenef" type="ptu:ct_identificacaoBenef"/>
+			<element name="tipoempresa" type="ptu:ct_tipoempresa_A300" minOccurs="0"/>
+			<element name="cd_fami" type="ptu:st_numero6" minOccurs="0"/>
+			<element name="nm_benef" type="ptu:st_texto25"/>
+			<element name="nm_compl_benef" type="ptu:st_texto70"/>
+			<element name="cd_plano_des" type="ptu:st_texto6"/>
+			<element name="dt_Nasc" type="ptu:st_data2"/>
+			<element name="tp_Sexo" type="ptu:st_sexo_a100"/>
+			<element name="cd_cpf" type="ptu:st_CPF" minOccurs="0"/>
+			<element name="id_estrangeiro" type="ptu:st_SimNao"/>
+			<element name="cd_rg" type="ptu:ct_rg" minOccurs="0"/>
+			<element name="cd_pais" type="ptu:st_cd_pais" minOccurs="0"/>
+			<element name="cd_est_civil" type="ptu:st_cd_est_civil"/>
+			<element name="dt_inc_unimed" type="ptu:st_data2"/>
+			<element name="dt_exc_unimed" type="ptu:st_data2" minOccurs="0"/>
+			<element name="cd_depe" type="ptu:st_cd_depe"/>
+			<element name="dt_repasse" type="ptu:st_data2"/>
+			<element name="dt_base_carencia" type="ptu:st_data2"/>
+			<element name="dt_incl_plano" type="ptu:st_data2"/>
+			<element name="dt_inc_empr_uni" type="ptu:st_data2"/>
+			<element name="vl_mensalidade" type="ptu:st_Decimal12.2" minOccurs="0"/>
+			<element name="cd_Uni_Ant" type="ptu:st_numero4" minOccurs="0"/>
+			<element name="id_Benef_ant" type="ptu:st_idBenef"/>
+			<element name="id_Benef_tit" type="ptu:st_idBenef"/>
+			<element name="id_filho" type="ptu:st_id_filho" minOccurs="0"/>
+			<element name="cd_empr_ori" type="ptu:st_numero10"/>
+			<element name="tp_Acomodacao" type="ptu:st_Acomodacao"/>
+			<element name="cd_cns" type="ptu:st_texto15"/>
+			<element name="nm_mae" type="ptu:st_texto70" minOccurs="0"/>
+			<element name="pis_pasep" type="ptu:st_numero11" minOccurs="0"/>
+			<element name="renda_mensal" type="ptu:st_Decimal12.2" minOccurs="0"/>
+			<element name="complementoscadastrais">
+				<complexType>
+					<sequence>
+						<element name="endereco" type="ptu:ct_endereco_a100" maxOccurs="2"/>
+						<element name="contato" type="ptu:ct_contatos" minOccurs="0"/>
+					</sequence>
+				</complexType>
+			</element>
+		</sequence>
+	</complexType>
+	<!-- *************************************************ALTERAÇÃO********************************************************************************-->
+	<complexType name="ct_empresacontratante_A300_alt">
+		<sequence>
+			<element name="tipoempresa" type="ptu:ct_tipoempresa_A300"/>
+			<element name="cd_filial" type="ptu:st_numero3" minOccurs="0"/>
+			<element name="nm_empr_comp" type="ptu:st_texto40" minOccurs="0"/>
+			<element name="nm_empr_abre" type="ptu:st_texto30" minOccurs="0"/>
+			<element name="cd_insc_est" type="ptu:st_numero20" minOccurs="0"/>
+			<element name="dt_inc_unimed" type="ptu:st_data2" minOccurs="0"/>
+			<element name="dt_exc_unimed" type="ptu:st_data2" minOccurs="0"/>
+			<element name="cd_empr_ori" type="ptu:st_numero10" minOccurs="0"/>
+			<element name="tp_contratacao" type="ptu:st_tp_contratacao"/>
+			<element name="nr_contrato" type="ptu:st_texto15" minOccurs="0"/>
+			<element name="info_endereco" type="ptu:ct_infoendereco"/>
+			<element name="telefone" type="ptu:ct_telefone_empresa" minOccurs="0" maxOccurs="5"/>
+		</sequence>
+	</complexType>
+	<complexType name="ct_beneficiario_A300_alt">
+		<sequence>
+			<element name="identificacaoBenef" type="ptu:ct_identificacaoBenef"/>
+			<element name="tipoempresa" type="ptu:ct_tipoempresa_A300" minOccurs="0"/>
+			<element name="cd_fami" type="ptu:st_numero6" minOccurs="0"/>
+			<element name="nm_benef" type="ptu:st_texto25" minOccurs="0"/>
+			<element name="nm_compl_benef" type="ptu:st_texto70" minOccurs="0"/>
+			<element name="cd_plano_des" type="ptu:st_texto6" minOccurs="0"/>
+			<element name="dt_Nasc" type="ptu:st_data2" minOccurs="0"/>
+			<element name="tp_Sexo" type="ptu:st_sexo_a100" minOccurs="0"/>
+			<element name="cd_cpf" type="ptu:st_CPF" minOccurs="0"/>
+			<element name="cd_rg" type="ptu:ct_rg" minOccurs="0"/>
+			<element name="cd_est_civil" type="ptu:st_cd_est_civil" minOccurs="0"/>
+			<element name="dt_inc_unimed" type="ptu:st_data2" minOccurs="0"/>
+			<element name="dt_exc_unimed" type="ptu:st_data2" minOccurs="0"/>
+			<element name="cd_depe" type="ptu:st_cd_depe" minOccurs="0"/>
+			<element name="dt_repasse" type="ptu:st_data2" minOccurs="0"/>
+			<element name="dt_base_carencia" type="ptu:st_data2" minOccurs="0"/>
+			<element name="dt_incl_plano" type="ptu:st_data2" minOccurs="0"/>
+			<element name="dt_inc_empr_uni" type="ptu:st_data2" minOccurs="0"/>
+			<element name="vl_mensalidade" type="ptu:st_Decimal12.2" minOccurs="0"/>
+			<element name="cd_Uni_Ant" type="ptu:st_numero4" minOccurs="0"/>
+			<element name="id_Benef_ant" type="ptu:st_idBenef"/>
+			<element name="id_Benef_tit" type="ptu:st_idBenef"/>
+			<element name="id_filho" type="ptu:st_id_filho" minOccurs="0"/>
+			<element name="cd_empr_ori" type="ptu:st_numero10" minOccurs="0"/>
+			<element name="tp_Acomodacao" type="ptu:st_Acomodacao" minOccurs="0"/>
+			<element name="id_estrangeiro" type="ptu:st_SimNao" minOccurs="0"/>
+			<element name="cd_pais" type="ptu:st_cd_pais" minOccurs="0"/>
+			<element name="cd_cns" type="ptu:st_texto15" minOccurs="0"/>
+			<element name="nm_mae" type="ptu:st_texto70" minOccurs="0"/>
+			<element name="pis_pasep" type="ptu:st_numero11" minOccurs="0"/>
+			<element name="renda_mensal" type="ptu:st_Decimal12.2" minOccurs="0"/>
+			<element name="complementoscadastrais" minOccurs="0">
+				<complexType>
+					<sequence>
+						<element name="endereco" type="ptu:ct_endereco_a100" maxOccurs="2"/>
+						<element name="contato" type="ptu:ct_contatos" minOccurs="0"/>
+					</sequence>
+				</complexType>
+			</element>
+		</sequence>
+	</complexType>
+	<complexType name="ct_infoendereco_alt_A300">
+		<sequence>
+			<element name="tp_logradouro" type="ptu:st_tp_logradouro" minOccurs="0"/>
+			<element name="ds_lograd" type="ptu:st_texto40" minOccurs="0"/>
+			<element name="nr_lograd" type="ptu:st_texto6" minOccurs="0"/>
+			<element name="compl_lograd" type="ptu:st_texto20" minOccurs="0"/>
+			<element name="ds_bairro" type="ptu:st_texto30" minOccurs="0"/>
+			<element name="cd_munic" type="ptu:st_numero7" minOccurs="0"/>
+			<element name="nr_cep" type="ptu:st_numero8" minOccurs="0"/>
+		</sequence>
+	</complexType>
+	<complexType name="ct_email_alt_A300">
+		<sequence>
+			<element name="tp_email" type="ptu:st_tp_email" minOccurs="0"/>
+			<element name="end_email" type="ptu:st_texto70" minOccurs="0"/>
+		</sequence>
+	</complexType>
+	<complexType name="ct_contatos_alt_A300">
+		<sequence>
+			<element name="telefone" type="ptu:ct_telefone_alt" minOccurs="0" maxOccurs="5"/>
+			<element name="email" type="ptu:ct_email_alt" minOccurs="0" maxOccurs="5"/>
+		</sequence>
+	</complexType>
+	<complexType name="ct_telefone_alt_A300">
+		<sequence>
+			<element name="tp_fone" type="ptu:st_tp_fone" minOccurs="0"/>
+			<element name="nr_ddd" type="ptu:st_numero4" minOccurs="0"/>
+			<element name="nr_fone" type="ptu:st_numero9" minOccurs="0"/>
+		</sequence>
+	</complexType>
+	<complexType name="ct_telefone_empresa_alt_A300">
+		<sequence>
+			<element name="nr_ddd" type="ptu:st_numero4"/>
+			<element name="nr_fone" type="ptu:st_numero9"/>
+		</sequence>
+	</complexType>
+	<complexType name="ct_endereco_alt_A300">
+		<sequence>
+			<element name="ind_resid" type="ptu:st_ind_resid" minOccurs="0"/>
+			<element name="tp_end" type="ptu:st_tp_end" minOccurs="0"/>
+			<element name="info_endereco" type="ptu:ct_infoendereco" minOccurs="0"/>
+		</sequence>
+	</complexType>
+	<complexType name="ct_endereco_a300_alt">
+		<sequence>
+			<element name="tp_end" type="ptu:st_tp_end" minOccurs="0"/>
+			<element name="info_endereco" type="ptu:ct_infoendereco" minOccurs="0"/>
+		</sequence>
+	</complexType>
+	<!--*****************************************************A400***************************************************-->
+	<complexType name="ct_CabecalhoPTUA400">
+		<sequence>
+			<element name="nrVerTra_PTU" type="ptu:st_numero2"/>
+			<element name="cd_Uni_Origem" type="ptu:st_numero4"/>
+			<element name="cd_Uni_Destino" type="ptu:st_numero4"/>
+			<element name="dt_geracao" type="ptu:st_data2"/>
+			<element name="Nr_Registro_ANS" type="ptu:st_numero6" minOccurs="0"/>
+		</sequence>
+	</complexType>
+	<!--******************************************R402**********************************************************-->
+	<!--<complexType name="ct_prestador_a400">
+		<sequence>
+			<element name="prestador" type="ptu:ct_prest_a400" maxOccurs="unbounded"/>
+		</sequence>
+	</complexType> -->
+	<complexType name="ct_dadosprestador_A400">
+		<sequence>
+			<element name="nm_Prestador" type="ptu:st_texto60"/>
+			<element name="nm_fantasia" type="ptu:st_texto60" minOccurs="0"/>
+			<element name="cd_cnpj_cpf" type="ptu:ct_dadoContratado"/>
+			<element name="cd_insc_est" type="ptu:st_numero20" minOccurs="0"/>
+			<element name="dt_Nasc" type="ptu:st_data2" minOccurs="0"/>
+			<element name="Tp_Sexo" type="ptu:st_sexo_a100" minOccurs="0"/>
+		</sequence>
+	</complexType>
+	<complexType name="ct_infadicprest_a400">
+		<sequence>
+			<element name="cd_Uni_Prest" type="ptu:st_numero4" minOccurs="0"/>
+			<element name="cd_prest" type="ptu:st_numero8"/>
+			<element name="tp_prest" type="ptu:st_tp_prest"/>
+			<element name="Nr_Registro_ANS" type="ptu:st_numero6" minOccurs="0"/>
+			<element name="Nr_CBO" type="ptu:st_numero6" minOccurs="0"/>
+			<element name="dados_conselho" type="ptu:ct_dadosConselho" minOccurs="0"/>
+			<element name="tp_vinculo" type="ptu:st_tp_vinculo"/>
+			<element name="tp_contratualizacao" type="ptu:st_tp_contratualizacao" minOccurs="0"/>
+			<element name="tp_class_estabelec" type="ptu:st_tp_class_estabelec"/>
+			<element name="especialidade" type="ptu:ct_espec_a400" minOccurs="0" maxOccurs="2"/>
+			<element name="area_atuacao" type="ptu:ct_atua_a400" minOccurs="0" maxOccurs="2"/>
+			<element name="id_prestador" type="ptu:ct_indicadores"/>
+			<element name="Tp_Disponibilidade" type="ptu:st_tp_disponibilidade"/>
+			<element name="cd_perfil_assist" type="ptu:st_cd_perfil_assist" minOccurs="0"/>
+			<element name="conselho_diretor" type="ptu:ct_conselho_diretor" minOccurs="0"/>
+			<element name="tipo_rede_min" type="ptu:st_Rede"/>
+		</sequence>
+	</complexType>
+	<complexType name="ct_prest_a400">
+		<sequence>
+			<element name="dados_prest" type="ptu:ct_dadosprestador_A400"/>
+			<element name="infor_adic_prest" type="ptu:ct_infadicprest_a400"/>
+			<element name="dt_incl_uni" type="ptu:st_data2"/>
+			<element name="dt_excl_uni" type="ptu:st_data2" minOccurs="0"/>
+			<element name="dt_Ini_Servico" type="ptu:st_data2"/>
+			<element name="dt_Ini_Contrato" type="ptu:st_data2" minOccurs="0"/>
+			<element name="dt_atualizacao" type="ptu:st_data2"/>
+			<element name="endereco_prest" type="ptu:ct_endereco_prestador" maxOccurs="unbounded"/>
+			<element name="rede_referenciada" type="ptu:ct_rede_refer" maxOccurs="unbounded"/>
+			<element name="exc_subs_red" type="ptu:ct_excl_subs_red" minOccurs="0" maxOccurs="unbounded"/>
+			<element name="impostos" type="ptu:ct_impostos" minOccurs="0" maxOccurs="unbounded"/>
+			<element name="observacoes" type="ptu:st_texto250" minOccurs="0"/>
+		</sequence>
+	</complexType>
+	<complexType name="ct_espec_a400">
+		<sequence>
+			<element name="cd_espec" type="ptu:st_codEspecialidade"/>
+			<element name="id_rce_espec" type="ptu:st_SimNao"/>
+			<element name="nr_rce_espec" type="ptu:st_numero10" minOccurs="0"/>
+			<element name="nr_rce_2_espec" type="ptu:st_numero10" minOccurs="0"/>
+			<element name="cod_titulacao" type="ptu:st_cd_titulacao" minOccurs="0"/>
+			<element name="indic_resid_espec" type="ptu:st_SimNao"/>
+			<element name="Id_Guia_Medico_Espec" type="ptu:st_SimNao"/>
+			<element name="Ind_ginec_obst" type="ptu:st_ind_ginec_obst" minOccurs="0"/>
+		</sequence>
+	</complexType>
+	<complexType name="ct_atua_a400">
+		<sequence>
+			<element name="cd_atua" type="ptu:st_cd_atua"/>
+			<element name="id_rce_atua" type="ptu:st_SimNao"/>
+			<element name="nr_rce_atua" type="ptu:st_numero10" minOccurs="0"/>
+			<element name="nr_rce_2_atua" type="ptu:st_numero10" minOccurs="0"/>
+			<element name="indic_resid_atua" type="ptu:st_SimNao"/>
+			<element name="Id_Guia_Medico_Atua" type="ptu:st_SimNao"/>
+		</sequence>
+	</complexType>
+	<complexType name="ct_indicadores">
+		<sequence>
+			<element name="id_cat_dif" type="ptu:st_SimNao"/>
+			<element name="id_acid_trab" type="ptu:st_SimNao"/>
+			<element name="id_urg_emer" type="ptu:st_SimNao"/>
+			<element name="Id_Tab_Propria" type="ptu:st_SimNao" minOccurs="0"/>
+			<element name="id_tp_prod" type="ptu:st_id_tp_prod" minOccurs="0"/>
+			<element name="id_guia_medico" type="ptu:st_SimNao" minOccurs="0"/>
+			<element name="id_iso9001" type="ptu:st_SimNao"/>
+			<element name="id_particip_notivisa" type="ptu:st_SimNao"/>
+			<element name="id_particip_qualiss_ANS" type="ptu:st_SimNao" minOccurs="0"/>
+			<element name="id_Intercambio" type="ptu:st_SimNao"/>
+			<element name="id_Login_WSD_TISS" type="ptu:st_SimNao"/>
+			<element name="id_CADU" type="ptu:st_SimNao"/>
+			<element name="id_Inativo" type="ptu:st_SimNao"/>
+			<element name="id_mestrado" type="ptu:st_SimNao" minOccurs="0"/>
+			<element name="id_resid" type="ptu:st_SimNao" minOccurs="0"/>
+			<element name="id_pos_grad" type="ptu:st_SimNao" minOccurs="0"/>
+			<element name="id_dr_pos_dr" type="ptu:st_SimNao" minOccurs="0"/>
+			<element name="id_tit_espec" type="ptu:st_SimNao" minOccurs="0"/>
+		</sequence>
+	</complexType>
+	<complexType name="ct_conselho_diretor">
+		<sequence>
+			<element name="Nm_diretor_tecnico" type="ptu:st_texto60"/>
+			<element name="sg_cons_diretor_tecnico" type="ptu:st_siglaConselho"/>
+			<element name="cd_cons_diretor_tecnico" type="ptu:st_texto15"/>
+			<element name="sg_uf_cons_diretor_tecnico" type="ptu:st_UF"/>
+		</sequence>
+	</complexType>
+	<!--*********************************************R403*******************************************************-->
+	<complexType name="ct_endereco_prestador">
+		<sequence>
+			<element name="referencia_end" type="ptu:st_numero2"/>
+			<element name="tp_end" type="ptu:st_tp_end_A400"/>
+			<element name="info_endereco" type="ptu:ct_infoendereco"/>
+			<element name="contato" type="ptu:ct_contatos_a400"/>
+			<element name="contatoWhats" type="ptu:ct_telefone_empresaA400" minOccurs="0"/>
+			<element name="cd_CNES" type="ptu:st_texto7" minOccurs="0"/>
+			<element name="cnpj_filial" type="ptu:st_CNPJ" minOccurs="0"/>
+			<element name="leitos" type="ptu:ct_leitos_a400" minOccurs="0"/>
+			<element name="latitude_longitude" type="ptu:ct_lat_long" minOccurs="0"/>
+			<element name="cd_gr_serv" type="ptu:st_cd_gr_serv" minOccurs="0" maxOccurs="unbounded"/>
+			<element name="prestador_acred" type="ptu:ct_prest_acred" minOccurs="0" maxOccurs="unbounded"/>
+		</sequence>
+	</complexType>
+	<complexType name="ct_leitos_a400">
+		<sequence>
+			<element name="nr_leitos_contrat" type="ptu:st_numero6" minOccurs="0"/>
+			<element name="nr_leitos_psiquiat" type="ptu:st_numero6" minOccurs="0"/>
+			<element name="nr_uti_adulto" type="ptu:st_numero6" minOccurs="0"/>
+			<element name="nr_uti_neonatal" type="ptu:st_numero6" minOccurs="0"/>
+			<element name="nr_uti_pediatria" type="ptu:st_numero6" minOccurs="0"/>
+			<element name="nr_leitos_intermed_neo" type="ptu:st_numero6" minOccurs="0"/>
+			<element name="nr_leitos_hosp_dia" type="ptu:st_numero6" minOccurs="0"/>
+			<element name="nr_leitos_intermed" type="ptu:st_numero6" minOccurs="0"/>
+			<element name="nr_leitos_tot_clinic" type="ptu:st_numero6" minOccurs="0"/>
+			<element name="nr_leitos_tot_cirur" type="ptu:st_numero6" minOccurs="0"/>
+			<element name="nr_leitos_tot_obstr" type="ptu:st_numero6" minOccurs="0"/>
+			<element name="nr_leitos_tot_pediat" type="ptu:st_numero6" minOccurs="0"/>
+			<element name="nr_leitos_tot_psiqu" type="ptu:st_numero6" minOccurs="0"/>
+			<element name="nr_leitos_totais" type="ptu:st_numero6" minOccurs="0"/>
+		</sequence>
+	</complexType>
+	<complexType name="ct_contatos_a400">
+		<sequence>
+			<element name="nr_fone_1" type="ptu:ct_telefone_empresaA400" maxOccurs="2"/>
+			<element name="email" type="ptu:ct_email" minOccurs="0" maxOccurs="2"/>
+			<element name="ds_endereco_web" type="ptu:st_texto80" minOccurs="0"/>
+		</sequence>
+	</complexType>
+	<complexType name="ct_telefone_empresaA400">
+		<sequence>
+			<element name="nr_ddd" type="ptu:st_numero4"/>
+			<element name="nr_fone" type="ptu:st_numero9"/>
+		</sequence>
+	</complexType>
+	<complexType name="ct_lat_long">
+		<sequence>
+			<element name="nr_latitude" type="ptu:st_texto20"/>
+			<element name="nr_longitude" type="ptu:st_texto20"/>
+		</sequence>
+	</complexType>
+	<!--*****************************************R405******************************************************-->
+	<complexType name="ct_rede_refer">
+		<sequence>
+			<element name="cd_rede" type="ptu:st_texto4"/>
+			<element name="nm_rede" type="ptu:st_texto40" minOccurs="0"/>
+		</sequence>
+	</complexType>
+	<!--*******************************************R406******************************************************-->
+	<complexType name="ct_excl_subs_red">
+		<sequence>
+			<element name="exclusao" type="ptu:ct_excl_403"/>
+			<element name="id_substituicao" type="ptu:ct_subst_403" minOccurs="0"/>
+		</sequence>
+	</complexType>
+	<complexType name="ct_excl_403">
+		<sequence>
+			<element name="nivel_exclusao" type="ptu:st_nivel_excl"/>
+			<element name="exclusao_rede" type="ptu:st_texto4" minOccurs="0"/>
+			<element name="exclusao_pla_prod" type="ptu:st_texto20" minOccurs="0"/>
+			<element name="exclusao_end" type="ptu:st_numero2" minOccurs="0"/>
+			<element name="motivo_exclusao" type="ptu:st_motivo_exclusaoprestador" minOccurs="0"/>
+			<element name="dt_termino_prest" type="ptu:st_data2"/>
+			<element name="id_prestSubstit" type="ptu:st_SimNao"/>
+		</sequence>
+	</complexType>
+	<complexType name="ct_subst_403">
+		<sequence>
+			<element name="cd_cnpj_cpf" type="ptu:ct_dadoContratado"/>
+			<element name="dt_inicio_prest" type="ptu:st_data2"/>
+			<element name="motivo_substit" type="ptu:st_motivo_substit" minOccurs="0"/>
+			<element name="nr_oficio" type="ptu:st_texto45" minOccurs="0"/>
+		</sequence>
+	</complexType>
+	<!--**********************************************R407******************************************************-->
+	<complexType name="ct_impostos">
+		<sequence>
+			<element name="cd_imposto" type="ptu:st_cd_imposto"/>
+			<element name="valor" type="ptu:st_Decimal3.2"/>
+		</sequence>
+	</complexType>
+	<!--****************************************************************************************************-->
+	<!--*******************************************R408*********************************************************-->
+	<complexType name="ct_prest_acred">
+		<sequence>
+			<element name="inst_acred" type="ptu:st_inst_acred"/>
+			<element name="nivel_acred" type="ptu:st_nivel_acred"/>
+		</sequence>
+	</complexType>
+	<!--*****************************************************A410***************************************************-->
+	<complexType name="ct_CabecalhoPTUA410">
+		<sequence>
+			<element name="nrVerTra_PTU" type="ptu:st_numero2"/>
+			<element name="cd_Uni_Origem" type="ptu:st_numero4"/>
+			<element name="cd_Uni_Destino" type="ptu:st_numero4"/>
+			<element name="dt_geracao" type="ptu:st_data2"/>
+		</sequence>
+	</complexType>
+	<complexType name="ct_a410">
+		<sequence>
+			<element name="dados_prestador_a410" type="ptu:ct_dados_prestador_a410" maxOccurs="500"/>
+		</sequence>
+	</complexType>
+	<complexType name="ct_dados_prestador_a410">
+		<sequence>
+			<element name="nr_CNPJouCPF" type="ptu:ct_dadoContratado"/>
+			<element name="cd_prest" type="ptu:st_numero8"/>
+			<element name="id_nivel_disp" type="ptu:st_numero3"/>
+			<element name="id_uti" type="ptu:st_id_uti"/>
+			<element name="id_sadt" type="ptu:st_SimNao"/>
+			<element name="tp_acreditacao" type="ptu:st_acreditacaoprest"/>
+			<element name="espMedHopEsp" type="ptu:ct_EspMedHopEsp" maxOccurs="500"/>
+			<element name="servHosp" type="ptu:ct_ServHosp" maxOccurs="500"/>
+			<element name="sadt_a410" type="ptu:ct_sadt_a410" minOccurs="0" maxOccurs="200"/>
+			<element name="leitos_a410" type="ptu:ct_leitos_a410"/>
+			<element name="criterios_economicos_a410" type="ptu:ct_criterios_economicos_a410"/>
+			<element name="diarias_taxas_a410" type="ptu:ct_diaria_taxa_hospitalar_a410" maxOccurs="4000"/>
+		</sequence>
+	</complexType>
+	<complexType name="ct_EspMedHopEsp">
+		<sequence>
+			<element name="cd_serv_exist" type="ptu:st_numero3"/>
+			<element name="serv_disp" type="ptu:st_SimNao"/>
+			<element name="id_internacao" type="ptu:st_sim_nao_aplica"/>
+			<element name="id_eletivo_amb" type="ptu:st_sim_nao_aplica"/>
+			<element name="id_12h" type="ptu:st_sim_nao_aplica"/>
+			<element name="id_24h" type="ptu:st_sim_nao_aplica"/>
+			<element name="id_sobreaviso" type="ptu:st_sim_nao_aplica"/>
+			<element name="id_hosp_espec" type="ptu:st_sim_nao_aplica"/>
+		</sequence>
+	</complexType>
+	<complexType name="ct_ServHosp">
+		<sequence>
+			<element name="cd_serv_exist" type="ptu:st_numero3"/>
+			<element name="serv_disp" type="ptu:st_SimNao"/>
+		</sequence>
+	</complexType>
+	<complexType name="ct_sadt_a410">
+		<sequence>
+			<element name="cd_serv_exist" type="ptu:st_numero3"/>
+			<element name="serv_disp" type="ptu:st_SimNao"/>
+			<element name="tp_contrat_sadt" type="ptu:st_tp_contrato_sadt"/>
+			<element name="sadt_nm_terc_1" type="ptu:st_texto60" minOccurs="0"/>
+			<element name="sadt_cnpj_cpf_terc_1" type="ptu:st_numero14" minOccurs="0"/>
+			<element name="sadt_nm_terc_2" type="ptu:st_texto60" minOccurs="0"/>
+			<element name="sadt_cnpj_cpf_terc_2" type="ptu:st_numero14" minOccurs="0"/>
+		</sequence>
+	</complexType>
+	<complexType name="ct_leitos_a410">
+		<sequence>
+			<element name="nr_leitos_psiquiat_exist" type="ptu:st_numero4" minOccurs="0"/>
+			<element name="nr_leitos_psiquiat_disp" type="ptu:st_numero4" minOccurs="0"/>
+			<element name="nr_leitos_intermed_neo_exist" type="ptu:st_numero4" minOccurs="0"/>
+			<element name="nr_leitos_intermed_neo_disp" type="ptu:st_numero4" minOccurs="0"/>
+			<element name="nr_leitos_hosp_dia_exist" type="ptu:st_numero4" minOccurs="0"/>
+			<element name="nr_leitos_hosp_dia_disp" type="ptu:st_numero4" minOccurs="0"/>
+			<element name="nr_leitos_bercario_exist" type="ptu:st_numero4" minOccurs="0"/>
+			<element name="nr_leitos_bercario_disp" type="ptu:st_numero4" minOccurs="0"/>
+			<element name="nr_leitos_individual_exist" type="ptu:st_numero4" minOccurs="0"/>
+			<element name="nr_leitos_individual_disp" type="ptu:st_numero4" minOccurs="0"/>
+			<element name="nr_leitos_coletivo_exist" type="ptu:st_numero4" minOccurs="0"/>
+			<element name="nr_leitos_coletivo_disp" type="ptu:st_numero4" minOccurs="0"/>
+			<element name="nr_leitos_isolamento_exist" type="ptu:st_numero4" minOccurs="0"/>
+			<element name="nr_leitos_isolamento_disp" type="ptu:st_numero4" minOccurs="0"/>
+			<element name="nr_leitos_ucc_exist" type="ptu:st_numero4" minOccurs="0"/>
+			<element name="nr_leitos_ucc_disp" type="ptu:st_numero4" minOccurs="0"/>
+			<element name="nr_leitos_semi_exist" type="ptu:st_numero4" minOccurs="0"/>
+			<element name="nr_leitos_semi_disp" type="ptu:st_numero4" minOccurs="0"/>
+			<element name="nr_leitos_uci_neo_conv_exist" type="ptu:st_numero4" minOccurs="0"/>
+			<element name="nr_leitos_uci_neo_conv_disp" type="ptu:st_numero4" minOccurs="0"/>
+			<element name="nr_leitos_uci_neo_cang_exist" type="ptu:st_numero4" minOccurs="0"/>
+			<element name="nr_leitos_uci_neo_cang_disp" type="ptu:st_numero4" minOccurs="0"/>
+			<element name="nr_leitos_uci_pediatrico_exist" type="ptu:st_numero4" minOccurs="0"/>
+			<element name="nr_leitos_uci_pediatrico_disp" type="ptu:st_numero4" minOccurs="0"/>
+			<element name="nr_leitos_uci_adulto_exist" type="ptu:st_numero4" minOccurs="0"/>
+			<element name="nr_leitos_uci_adulto_disp" type="ptu:st_numero4" minOccurs="0"/>
+			<element name="nr_leitos_coronariana_exist" type="ptu:st_numero4" minOccurs="0"/>
+			<element name="nr_leitos_coronariana_disp" type="ptu:st_numero4" minOccurs="0"/>
+			<element name="nr_uti_adulto_exist" type="ptu:st_numero4" minOccurs="0"/>
+			<element name="nr_uti_adulto_disp" type="ptu:st_numero4" minOccurs="0"/>
+			<element name="nr_uti_neonatal_exist" type="ptu:st_numero4" minOccurs="0"/>
+			<element name="nr_uti_neonatal_disp" type="ptu:st_numero4" minOccurs="0"/>
+			<element name="nr_uti_pediatria_exist" type="ptu:st_numero4" minOccurs="0"/>
+			<element name="nr_uti_pediatria_disp" type="ptu:st_numero4" minOccurs="0"/>
+			<element name="nr_uti_adulto_tp_1_exist" type="ptu:st_numero4" minOccurs="0"/>
+			<element name="nr_uti_adulto_tp_1_disp" type="ptu:st_numero4" minOccurs="0"/>
+			<element name="nr_uti_adulto_tp_2_exist" type="ptu:st_numero4" minOccurs="0"/>
+			<element name="nr_uti_adulto_tp_2_disp" type="ptu:st_numero4" minOccurs="0"/>
+			<element name="nr_uti_adulto_tp_3_exist" type="ptu:st_numero4" minOccurs="0"/>
+			<element name="nr_uti_adulto_tp_3_disp" type="ptu:st_numero4" minOccurs="0"/>
+			<element name="nr_uti_pediatrica_tp_1_exist" type="ptu:st_numero4" minOccurs="0"/>
+			<element name="nr_uti_pediatrica_tp_1_disp" type="ptu:st_numero4" minOccurs="0"/>
+			<element name="nr_uti_pediatrica_tp_2_exist" type="ptu:st_numero4" minOccurs="0"/>
+			<element name="nr_uti_pediatrica_tp_2_disp" type="ptu:st_numero4" minOccurs="0"/>
+			<element name="nr_uti_pediatrica_tp_3_exist" type="ptu:st_numero4" minOccurs="0"/>
+			<element name="nr_uti_pediatrica_tp_3_disp" type="ptu:st_numero4" minOccurs="0"/>
+			<element name="nr_uti_neonatal_tp_1_exist" type="ptu:st_numero4" minOccurs="0"/>
+			<element name="nr_uti_neonatal_tp_1_disp" type="ptu:st_numero4" minOccurs="0"/>
+			<element name="nr_uti_neonatal_tp_2_exist" type="ptu:st_numero4" minOccurs="0"/>
+			<element name="nr_uti_neonatal_tp_2_disp" type="ptu:st_numero4" minOccurs="0"/>
+			<element name="nr_uti_neonatal_tp_3_exist" type="ptu:st_numero4" minOccurs="0"/>
+			<element name="nr_uti_neonatal_tp_3_disp" type="ptu:st_numero4" minOccurs="0"/>
+			<element name="nr_uti_queimados_exist" type="ptu:st_numero4" minOccurs="0"/>
+			<element name="nr_uti_queimados_disp" type="ptu:st_numero4" minOccurs="0"/>
+			<element name="nr_uti_coronariana_tp_2_exist" type="ptu:st_numero4" minOccurs="0"/>
+			<element name="nr_uti_coronariana_tp_2_disp" type="ptu:st_numero4" minOccurs="0"/>
+			<element name="nr_obs_pa_exist" type="ptu:st_numero4" minOccurs="0"/>
+			<element name="nr_obs_pa_disp" type="ptu:st_numero4" minOccurs="0"/>
+			<element name="nr_emerg_pa_exist" type="ptu:st_numero4" minOccurs="0"/>
+			<element name="nr_emerg_pa_disp" type="ptu:st_numero4" minOccurs="0"/>
+		</sequence>
+	</complexType>
+	<complexType name="ct_criterios_economicos_a410">
+		<sequence>
+			<element name="tp_negociacao_diarias_taxas" type="ptu:st_tp_neg_diarias_taxas"/>
+			<element name="exec_diarias" type="ptu:st_texto1000" minOccurs="0"/>
+			<element name="tp_negociacao_mat_consumo" type="ptu:st_tp_neg_mat_consumo"/>
+			<element name="tp_negociacao_equipos" type="ptu:st_tp_neg_equipos"/>
+			<element name="tp_negociacao_op" type="ptu:st_tp_neg_op"/>
+			<element name="tx_comercializacao_op" type="ptu:st_Decimal3.2" minOccurs="0"/>
+			<element name="tp_negociacao_mat_espec" type="ptu:st_tp_neg_mat_espec"/>
+			<element name="tx_comercializacao_mat_espec" type="ptu:st_Decimal3.2" minOccurs="0"/>
+			<element name="tp_negociacao_med" type="ptu:st_tp_neg_med"/>
+			<element name="tp_negociacao_dietas" type="ptu:st_tp_neg_dietas"/>
+			<element name="tp_negociacao_sadt" type="ptu:st_tp_neg_sadt"/>
+			<element name="excecao_prest_sadt" type="ptu:ct_excecao_sadt" minOccurs="0"/>
+			<element name="tp_negociacao_hm" type="ptu:st_tp_neg_hm"/>
+			<element name="excecao_prest_hm_espec" type="ptu:ct_excecao_hm_espec" minOccurs="0"/>
+			<element name="excecao_prest_hm_area_atua" type="ptu:ct_excecao_hm_area_atua" minOccurs="0"/>
+		</sequence>
+	</complexType>
+	<complexType name="ct_excecao_sadt">
+		<sequence>
+			<element name="exc_prest_sadt" type="ptu:st_numero3" minOccurs="0" maxOccurs="100"/>
+		</sequence>
+	</complexType>
+	<complexType name="ct_excecao_hm_espec">
+		<sequence>
+			<element name="exc_prest_hm_espec" type="ptu:st_numero2" minOccurs="0" maxOccurs="100"/>
+		</sequence>
+	</complexType>
+	<complexType name="ct_excecao_hm_area_atua">
+		<sequence>
+			<element name="exc_prest_hm_area_atua" type="ptu:st_numero2" minOccurs="0" maxOccurs="100"/>
+		</sequence>
+	</complexType>
+	<complexType name="ct_diaria_taxa_hospitalar_a410">
+		<sequence>
+			<element name="cd_dth" type="ptu:st_texto8"/>
+			<element name="vl_dth" type="ptu:st_Decimal12.2"/>
+		</sequence>
+	</complexType>
+	<!--******************************************************************************************A1200**************************************************************************-->
+	<complexType name="ct_pacote">
+		<sequence>
+			<element name="pacote" type="ptu:ct_pacote_a1200" maxOccurs="200000"/>
+		</sequence>
+	</complexType>
+	<complexType name="ct_pacote_a1200">
+		<sequence>
+			<element name="pacote" type="ptu:ct_pacote_202" maxOccurs="unbounded"/>
+		</sequence>
+	</complexType>
+	<!--******************************************************************************************R202-A1200**************************************************************************-->
+	<complexType name="ct_pacote_202">
+		<sequence>
+			<element name="cd_Pacote" type="ptu:st_texto10"/>
+			<element name="dt_Negociacao" type="ptu:st_data2"/>
+			<element name="dt_Publicacao" type="ptu:st_data2" minOccurs="0"/>
+			<element name="tp_Acomodacao" type="ptu:st_Acomodacao"/>
+			<element name="tp_Pacote" type="ptu:st_tp_pacote"/>
+			<element name="cd_espec" type="ptu:st_codEspecialidade"/>
+			<element name="dt_Ini_Vigencia" type="ptu:st_data2"/>
+			<element name="dt_Fim_Vigencia" type="ptu:st_data2" minOccurs="0"/>
+			<element name="tp_Internacao" type="ptu:st_tpInternacao" minOccurs="0"/>
+			<element name="vl_pacotes" type="ptu:ct_vl_pacote" minOccurs="0"/>
+			<element name="vl_Tot_Pacote" type="ptu:st_Decimal12.2"/>
+			<element name="id_Honor" type="ptu:st_SimNao"/>
+			<element name="tipo_rede_min" type="ptu:st_Rede" minOccurs="0"/>
+			<element name="id_OPME" type="ptu:st_SimNao"/>
+			<element name="id_Anestesista" type="ptu:st_SimNao"/>
+			<element name="id_Auxiliar" type="ptu:st_SimNao"/>
+			<element name="obs_pacote" type="ptu:st_texto999" minOccurs="0"/>
+			<element name="servico_pacote" type="ptu:ct_servico_pacote" maxOccurs="unbounded"/>
+			<element name="prestador" type="ptu:ct_prestador" maxOccurs="unbounded"/>
+		</sequence>
+	</complexType>
+	<complexType name="ct_vl_pacote">
+		<sequence>
+			<element name="vl_Tot_Taxas" type="ptu:st_Decimal12.2" minOccurs="0"/>
+			<element name="vl_Tot_Diarias" type="ptu:st_Decimal12.2" minOccurs="0"/>
+			<element name="vl_Tot_Gases" type="ptu:st_Decimal12.2" minOccurs="0"/>
+			<element name="vl_Tot_Mat" type="ptu:st_Decimal12.2" minOccurs="0"/>
+			<element name="vl_Tot_Med" type="ptu:st_Decimal12.2" minOccurs="0"/>
+			<element name="vl_Tot_Proc" type="ptu:st_Decimal12.2" minOccurs="0"/>
+			<element name="vl_Tot_OPME" type="ptu:st_Decimal12.2" minOccurs="0"/>
+		</sequence>
+	</complexType>
+	<!--******************************************************************************************R203-A1200**************************************************************************-->
+	<complexType name="ct_observacao">
+		<sequence>
+			<element name="cd_Pacote" type="ptu:st_numero8"/>
+			<element name="ds_Pacote" type="ptu:st_texto999" minOccurs="0"/>
+		</sequence>
+	</complexType>
+	<!--******************************************************************************************R204-A1200**************************************************************************-->
+	<complexType name="ct_servico_pacote">
+		<sequence>
+			<element name="tp_item" type="ptu:st_tp_item"/>
+			<element name="tp_Tabela" type="ptu:st_tp_tab_ptu"/>
+			<element name="cd_Servico" type="ptu:st_texto10"/>
+			<element name="id_serv" type="ptu:st_id_serv"/>
+			<element name="qt_serv" type="ptu:st_Decimal4.4"/>
+			<element name="vl_Serv" type="ptu:st_Decimal12.2" minOccurs="0"/>
+			<element name="ds_Servico" type="ptu:st_texto80" minOccurs="0"/>
+			<element name="vl_Serv_Tot" type="ptu:st_Decimal12.2" minOccurs="0"/>
+			<element name="Unidade_Medida" type="ptu:st_unidadeMedida" minOccurs="0"/>
+		</sequence>
+	</complexType>
+	<!--******************************************************************************************R205-A1200**************************************************************************-->
+	<complexType name="ct_prestador">
+		<sequence>
+			<element name="cd_Uni_Prest" type="ptu:st_numero4"/>
+			<element name="cd_Prest" type="ptu:st_numero8" minOccurs="0"/>
+			<element name="nm_Prestador" type="ptu:st_texto60"/>
+			<element name="cd_cnpj_cpf" type="ptu:ct_dadoContratado" minOccurs="0"/>
+			<element name="cd_CNES" type="ptu:st_texto7" minOccurs="0"/>
+			<element name="id_reajuste" type="ptu:st_SimNao"/>
+			<element name="id_anexoReajuste" type="ptu:st_texto29" minOccurs="0"/>
+		</sequence>
+	</complexType>
+</schema>

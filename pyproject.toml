@@ -1,0 +1,6 @@
+[project]
+name = "audit_plus_v2"
+version = "0.1.0"
+
+[tool.setuptools]
+packages = ["src"]

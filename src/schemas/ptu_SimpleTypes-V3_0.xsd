@@ -1,0 +1,1979 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!-- edited with XMLSpy v2018 sp1 (x64) (http://www.altova.com) by  (Unimed do Brasil) -->
+<!--
+	
+	Projeto: PTU XML
+	Versão: V3_0 
+	TargetNameSpace: http://ptu.unimed.coop.br/schemas/V1_0
+	
+	Autores: 
+	Unimed do Brasil
+
+-->
+<schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:ptu="http://ptu.unimed.coop.br/schemas/V3_0" targetNamespace="http://ptu.unimed.coop.br/schemas/V3_0" elementFormDefault="qualified">
+	<!-- *******************************************************************Campos Especificos **************************************************************************************************************************************-->
+	<!-- data 2  Formato YYYYMMDD -->
+	<simpleType name="st_data2">
+		<restriction base="string">
+			<maxLength value="8"/>
+			<pattern value="[0-9]{4}[0-9]{2}[0-9]{2}"/>
+		</restriction>
+	</simpleType>
+	<!-- data 1  Formato YYYY/MM/DDHH:MI:SS~GG -->
+	<simpleType name="st_data1">
+		<restriction base="string">
+			<minLength value="1"/>
+			<maxLength value="21"/>
+			<pattern value="[0-9]{4}/[0-9]{2}/[0-9]{2}[0-9]{2}:[0-9]{2}:[0-9]{2}[+-][0-9]{2}"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="st_CNPJ">
+		<restriction base="integer">
+			<totalDigits value="14"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="st_CPF">
+		<restriction base="integer">
+			<totalDigits value="11"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="st_nrComp">
+		<restriction base="string">
+			<maxLength value="4"/>
+			<pattern value="[0-9]{2}[0-9]{2}"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="st_idBenef">
+		<restriction base="string">
+			<pattern value="[0-9]{13}"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="st_hora">
+		<restriction base="string">
+			<maxLength value="8"/>
+			<pattern value="[0-9]{2}:[0-9]{2}:[0-9]{2}"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="st_cdCID">
+		<restriction base="string">
+			<pattern value="[A-Z][0-9]{2}[0-9]?"/>
+			<!-- Composto por uma letra e dois digitos de preenchimento obrigatorio e adicionalmente um digito opcional-->
+		</restriction>
+	</simpleType>
+	<simpleType name="st_cod_barras">
+		<restriction base="string">
+			<maxLength value="44"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="st_texto74">
+		<restriction base="string">
+			<maxLength value="74"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="st_texto45">
+		<restriction base="string">
+			<maxLength value="45"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="st_texto250">
+		<restriction base="string">
+			<maxLength value="250"/>
+		</restriction>
+	</simpleType>
+	<!-- Campo para identificar que o item é único no arquivo-->
+	<simpleType name="st_itemunico">
+		<restriction base="string">
+			<minLength value="28"/>
+			<maxLength value="28"/>
+		</restriction>
+	</simpleType>
+	<!-- *********************************************************** CAMPOS TEXTO "STRING" ****************************************************************************************************************************************-->
+	<simpleType name="st_texto1">
+		<restriction base="string">
+			<maxLength value="1"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="st_texto2">
+		<restriction base="string">
+			<maxLength value="2"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="st_texto3">
+		<restriction base="string">
+			<maxLength value="3"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="st_texto4">
+		<restriction base="string">
+			<maxLength value="4"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="st_texto5">
+		<restriction base="string">
+			<maxLength value="5"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="st_texto6">
+		<restriction base="string">
+			<maxLength value="6"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="st_texto7">
+		<restriction base="string">
+			<maxLength value="7"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="st_texto8">
+		<restriction base="string">
+			<maxLength value="8"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="st_texto10">
+		<restriction base="string">
+			<maxLength value="10"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="st_texto11">
+		<restriction base="string">
+			<maxLength value="11"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="st_texto12">
+		<restriction base="string">
+			<maxLength value="12"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="st_texto15">
+		<restriction base="string">
+			<maxLength value="15"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="st_texto17">
+		<restriction base="string">
+			<maxLength value="17"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="st_texto20">
+		<restriction base="string">
+			<maxLength value="20"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="st_texto25">
+		<restriction base="string">
+			<maxLength value="25"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="st_texto29">
+		<restriction base="string">
+			<maxLength value="29"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="st_texto30">
+		<restriction base="string">
+			<maxLength value="30"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="st_texto32">
+		<restriction base="string">
+			<maxLength value="32"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="st_texto40">
+		<restriction base="string">
+			<maxLength value="40"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="st_texto50">
+		<restriction base="string">
+			<maxLength value="50"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="st_texto60">
+		<restriction base="string">
+			<maxLength value="60"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="st_texto70">
+		<restriction base="string">
+			<maxLength value="70"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="st_texto80">
+		<restriction base="string">
+			<maxLength value="80"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="st_texto100">
+		<restriction base="string">
+			<maxLength value="100"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="st_texto120">
+		<restriction base="string">
+			<maxLength value="120"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="st_texto500">
+		<restriction base="string">
+			<maxLength value="500"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="st_texto999">
+		<restriction base="string">
+			<maxLength value="999"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="st_texto1000">
+		<restriction base="string">
+			<maxLength value="1000"/>
+		</restriction>
+	</simpleType>
+	<!-- ***************************************************************** CAMPOS DECIMAL "DECIMAL" **************************************************************************************************************************************** -->
+	<simpleType name="st_Decimal1.2">
+		<restriction base="decimal">
+			<totalDigits value="3"/>
+			<fractionDigits value="2"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="st_Decimal2.2">
+		<restriction base="decimal">
+			<totalDigits value="4"/>
+			<fractionDigits value="2"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="st_Decimal3.2">
+		<restriction base="decimal">
+			<totalDigits value="5"/>
+			<fractionDigits value="2"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="st_Decimal4.4">
+		<restriction base="decimal">
+			<totalDigits value="8"/>
+			<fractionDigits value="4"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="st_Decimal5.4">
+		<restriction base="decimal">
+			<totalDigits value="9"/>
+			<fractionDigits value="4"/>
+			<!-- INCLUIDO 22/11/2021 -->
+		</restriction>
+	</simpleType>
+	<simpleType name="st_Decimal12.2">
+		<restriction base="decimal">
+			<totalDigits value="14"/>
+			<fractionDigits value="2"/>
+		</restriction>
+	</simpleType>
+	<!-- ***************************************************************** CAMPOS INTEIROS "INTEGER" ****************************************************************************************************************************************-->
+	<simpleType name="st_numero1">
+		<restriction base="integer">
+			<totalDigits value="1"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="st_numero2">
+		<restriction base="integer">
+			<totalDigits value="2"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="st_numero3">
+		<restriction base="integer">
+			<totalDigits value="3"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="st_numero4">
+		<restriction base="integer">
+			<totalDigits value="4"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="st_numero6">
+		<restriction base="integer">
+			<totalDigits value="6"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="st_numero7">
+		<restriction base="integer">
+			<totalDigits value="7"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="st_numero8">
+		<restriction base="integer">
+			<totalDigits value="8"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="st_numero9">
+		<restriction base="integer">
+			<totalDigits value="9"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="st_numero10">
+		<restriction base="integer">
+			<totalDigits value="10"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="st_numero11">
+		<restriction base="integer">
+			<totalDigits value="11"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="st_numero12">
+		<restriction base="integer">
+			<totalDigits value="12"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="st_numero13">
+		<restriction base="integer">
+			<totalDigits value="13"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="st_numero14">
+		<restriction base="integer">
+			<totalDigits value="14"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="st_numero15">
+		<restriction base="integer">
+			<totalDigits value="15"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="st_numero20">
+		<restriction base="integer">
+			<totalDigits value="20"/>
+		</restriction>
+	</simpleType>
+	<!-- ************************************* PADRÃO PARA O PTU ***************************************************************************************************************-->
+	<simpleType name="st_Hash">
+		<restriction base="string"/>
+	</simpleType>
+	<simpleType name="st_UF">
+		<restriction base="integer">
+			<enumeration value="11"/>
+			<enumeration value="12"/>
+			<enumeration value="13"/>
+			<enumeration value="14"/>
+			<enumeration value="15"/>
+			<enumeration value="16"/>
+			<enumeration value="17"/>
+			<enumeration value="21"/>
+			<enumeration value="22"/>
+			<enumeration value="23"/>
+			<enumeration value="24"/>
+			<enumeration value="25"/>
+			<enumeration value="26"/>
+			<enumeration value="27"/>
+			<enumeration value="28"/>
+			<enumeration value="29"/>
+			<enumeration value="31"/>
+			<enumeration value="32"/>
+			<enumeration value="33"/>
+			<enumeration value="35"/>
+			<enumeration value="41"/>
+			<enumeration value="42"/>
+			<enumeration value="43"/>
+			<enumeration value="50"/>
+			<enumeration value="51"/>
+			<enumeration value="52"/>
+			<enumeration value="53"/>
+			<enumeration value="98"/>
+			<!--			
+				11	Rondônia	RO
+				12	Acre	AC
+				13	Amazonas	AM
+				14	Roraima	RR
+				15	Pará	PA
+				16	Amapá	AP
+				17	Tocantins	TO
+				21	Maranhão	MA
+				22	Piauí	PI
+				23	Ceará	CE
+				24	Rio Grande do Norte	RN
+				25	Paraíba	PB
+				26	Pernambuco	PE
+				27	Alagoas	AL
+				28	Sergipe	SE
+				29	Bahia	BA
+				31	Minas Gerais	MG
+				32	Espírito Santo	ES
+				33	Rio de Janeiro	RJ
+				35	São Paulo	SP
+				41	Paraná	PR
+				42	Santa Catarina	SC
+				43	Rio Grande do Sul	RS
+				50	Mato Grosso do Sul	MS
+				51	Mato Grosso	MT
+				52	Goiás	GO
+				53	Distrito Federal	DF
+				98	Países Estrangeiros	EX
+			-->
+		</restriction>
+	</simpleType>
+	<simpleType name="st_SimNao">
+		<restriction base="string">
+			<enumeration value="S"/>
+			<enumeration value="N"/>
+			<!-- 
+				 S = Sim
+				 N = Nao
+			-->
+		</restriction>
+	</simpleType>
+	<simpleType name="st_Pessoa">
+		<restriction base="string">
+			<enumeration value="F"/>
+			<enumeration value="J"/>
+			<!-- 
+				 F = Fisica
+				 J = Juridica
+			-->
+		</restriction>
+	</simpleType>
+	<simpleType name="st_Autorizacao">
+		<restriction base="integer">
+			<enumeration value="1"/>
+			<enumeration value="2"/>
+			<!-- 
+				 1 = Unimed
+				 2 = WSD
+			-->
+		</restriction>
+	</simpleType>
+	<simpleType name="st_Rede">
+		<restriction base="integer">
+			<enumeration value="1"/>
+			<enumeration value="2"/>
+			<enumeration value="3"/>
+			<!-- 
+				 1 = Básica 
+				 2 = Especial (Tabela Própria)
+				 3 = Master (Alto Custo)
+			-->
+		</restriction>
+	</simpleType>
+	<simpleType name="st_Acomodacao">
+		<restriction base="string">
+			<enumeration value="A"/>
+			<enumeration value="B"/>
+			<enumeration value="C"/>
+			<!--	
+				A = Coletiva Intercâmbio _ Plano A 
+				B = Individual Intercâmbio _ Plano B
+				C = Ambulatorial			
+-->
+		</restriction>
+	</simpleType>
+	<simpleType name="st_codEspecialidade">
+		<restriction base="string">
+			<minLength value="2"/>
+			<maxLength value="2"/>
+		</restriction>
+	</simpleType>
+	<!-- 
+		Tabela de Especialidade (Tabela A)
+	-->
+	<simpleType name="st_tpDocumento">
+		<restriction base="integer">
+			<enumeration value="1"/>
+			<enumeration value="2"/>
+			<enumeration value="3"/>
+			<enumeration value="4"/>
+			<!-- 1 = Fatura 
+				 2 = Nota Fiscal
+				 3 = Nota Fiscal Eletronica
+				 4 = NDC
+			-->
+		</restriction>
+	</simpleType>
+	<simpleType name="st_tpAtendimento">
+		<restriction base="string">
+			<minLength value="2"/>
+			<maxLength value="2"/>
+			<!-- 
+				Tabela X8 - Tabela - Tipo de Atendimento
+			-->
+		</restriction>
+	</simpleType>
+	<simpleType name="st_indicadorAcidente">
+		<restriction base="string">
+			<enumeration value="0"/>
+			<enumeration value="1"/>
+			<enumeration value="2"/>
+			<enumeration value="9"/>
+			<!--
+				0 = Acidente do trabalho
+				1 = Acidente de trânsito
+				2 = Acidente _ outros
+				9 = Não acidente 
+			-->
+		</restriction>
+	</simpleType>
+	<simpleType name="st_motivoEncerramento">
+		<restriction base="string">
+			<minLength value="2"/>
+			<maxLength value="2"/>
+			<!--
+			 Tabela O - Tabela de Motivos de Saída da Internação - TISS - Motivo de Encerramento
+		-->
+		</restriction>
+	</simpleType>
+	<simpleType name="st_siglaConselho">
+		<restriction base="string">
+			<maxLength value="12"/>
+			<!--	
+				Tabela M - Tabela de Códigos do Conselho Profissional
+			-->
+		</restriction>
+	</simpleType>
+	<simpleType name="st_CBOS">
+		<restriction base="string">
+			<minLength value="6"/>
+			<maxLength value="6"/>
+		</restriction>
+		<!--		
+				Tabela X1 - Tabela de Classificação Brasileira de Ocupações (CBO) 
+			-->
+	</simpleType>
+	<simpleType name="st_caraterAtendimento">
+		<restriction base="integer">
+			<enumeration value="1"/>
+			<enumeration value="2"/>
+			<!-- 
+				1 = Eletiva 
+				2 = Urgência/Emergência  
+			-->
+		</restriction>
+	</simpleType>
+	<simpleType name="st_idReemParInt">
+		<restriction base="integer">
+			<enumeration value="1"/>
+			<enumeration value="2"/>
+			<!--	
+				1 = Parcial
+				2 = Integral
+			-->
+		</restriction>
+	</simpleType>
+	<simpleType name="st_tpPart">
+		<restriction base="string">
+			<maxLength value="2"/>
+			<enumeration value="00"/>
+			<enumeration value="01"/>
+			<enumeration value="02"/>
+			<enumeration value="03"/>
+			<enumeration value="04"/>
+			<enumeration value="06"/>
+			<enumeration value="07"/>
+			<enumeration value="09"/>
+			<enumeration value="10"/>
+			<enumeration value="11"/>
+			<enumeration value="12"/>
+			<enumeration value="13"/>
+			<!--			
+				
+	00    Cirurgião
+	01    Primeiro Auxiliar
+	02    Segundo Auxiliar
+	03    Terceiro Auxiliar
+	04    Quarto Auxiliar
+	06    Anestesista
+	07    Auxiliar de Anestesista
+	09    Perfusionista
+	10    Pediatra na sala de parto
+	11    Auxiliar SADT
+	12    Clínico
+	13    Intensivista
+
+			-->
+		</restriction>
+	</simpleType>
+	<simpleType name="st_tpPart_reembolso">
+		<restriction base="string">
+			<maxLength value="2"/>
+			<enumeration value="00"/>
+			<enumeration value="01"/>
+			<enumeration value="02"/>
+			<enumeration value="03"/>
+			<enumeration value="04"/>
+			<enumeration value="05"/>
+			<enumeration value="06"/>
+			<enumeration value="07"/>
+			<enumeration value="09"/>
+			<enumeration value="10"/>
+			<enumeration value="11"/>
+			<enumeration value="12"/>
+			<enumeration value="13"/>
+			<!--			
+				
+	00    Cirurgião
+	01    Primeiro Auxiliar
+	02    Segundo Auxiliar
+	03    Terceiro Auxiliar
+	04    Quarto Auxiliar
+    05    Instrumentador
+	06    Anestesista
+	07    Auxiliar de Anestesista
+	09    Perfusionista
+	10    Pediatra na sala de parto
+	11    Auxiliar SADT
+	12    Clínico
+	13    Intensivista
+
+			-->
+		</restriction>
+	</simpleType>
+	<!--**************************************************************************************************************************************************************************************
+					Arquivo de Cobranca ou Utilizacao - PROCEDIMENTOS ( BLOCO DE SERVIÇO )
+******************************************************************************************************************************************************************************************-->
+	<simpleType name="st_tecnicaUtilizada">
+		<restriction base="string">
+			<enumeration value="1"/>
+			<enumeration value="2"/>
+			<enumeration value="3"/>
+			<!--
+				1 = Convencional
+				2 = Videolaparoscopia
+				3 = Robótica
+			-->
+		</restriction>
+	</simpleType>
+	<simpleType name="st_tabela">
+		<restriction base="string">
+			<enumeration value="18"/>
+			<enumeration value="19"/>
+			<enumeration value="20"/>
+			<enumeration value="22"/>
+			<enumeration value="98"/>
+			<enumeration value="00"/>
+		</restriction>
+		<!-- 
+				 18 = TUSS _ Taxas hospitalares, diárias e gases medicinais
+				 19 = TUSS _ Materiais
+				 20 = TUSS - Medicamentos
+				 22 = TUSS _ Procedimentos e eventos em saúde (medicina, odonto e demais áreas de saúde)
+				 98 = Tabela Própria de Pacotes 
+				 00 = Tabela Própria das Operadoras  
+		-->
+	</simpleType>
+	<simpleType name="st_viaAcesso">
+		<restriction base="string">
+			<enumeration value="0"/>
+			<enumeration value="1"/>
+			<enumeration value="2"/>
+			<!--
+				0 = Independe da via (100% HM)
+				1 = Mesma via (50% HM)
+				2 = Via diferente (70% HM)
+			-->
+		</restriction>
+	</simpleType>
+	<simpleType name="st_ato">
+		<restriction base="string">
+			<enumeration value="1"/>
+			<enumeration value="2"/>
+			<enumeration value="3"/>
+			<!-- 
+				1 = Ato cooperativo principal
+				2 = Ato cooperativo acessório
+				3 = Ato não cooperativo
+			-->
+		</restriction>
+	</simpleType>
+	<!--**************************************************************************************************************************************************************************************
+					OPME GENÉRICO
+******************************************************************************************************************************************************************************************-->
+	<simpleType name="st_idPagFonecedor">
+		<restriction base="string">
+			<enumeration value="1"/>
+			<enumeration value="2"/>
+			<!-- 
+				 0 = Demais Casos
+				 1 = Pagamento ao fornecedor (compra feita pela Unimed)		
+             	 2 = Pagamento para o hospital (compra feita pelo prestador)
+			-->
+		</restriction>
+	</simpleType>
+	<!--**************************************************************************************************************************************************************************************
+					CABEÇALHO COBRANÇA
+******************************************************************************************************************************************************************************************-->
+	<simpleType name="st_toNota">
+		<restriction base="integer">
+			<enumeration value="1"/>
+			<enumeration value="2"/>
+			<enumeration value="3"/>
+			<enumeration value="4"/>
+			<!-- 
+				 1 = Consulta
+				 2 = SP/SADT
+				 3 = Internação
+				 4 = Honorário Individual
+			-->
+		</restriction>
+	</simpleType>
+	<simpleType name="st_tpRegCPL">
+		<restriction base="integer">
+			<enumeration value="1"/>
+			<enumeration value="2"/>
+			<enumeration value="3"/>
+			<enumeration value="4"/>
+			<!-- 
+				1 = Indicação Clínica (máximo 5 linhas)
+				2 = Observação da nota (máximo 5 linhas)
+				3 = Justificativa Técnica (máximo 10 linhas) _ de OPME
+				4 = Especificação do material solicitado (máximo 10 linhas) 
+			-->
+		</restriction>
+	</simpleType>
+	<!--**************************************************************************************************************************************************************************************
+					Arquivo de Cobranca ou Utilizacao - TABELA DE DOMINIO
+******************************************************************************************************************************************************************************************-->
+	<simpleType name="st_tpCobranca">
+		<restriction base="integer">
+			<enumeration value="2"/>
+			<enumeration value="3"/>
+			<!-- 
+				 2 = DOC_1 (Valor do Item + Taxa Administrativa)
+				 3 = DOC_1 (Taxa Administrativa) + DOC_2 (Valor do Item)
+			-->
+		</restriction>
+	</simpleType>
+	<simpleType name="st_Excecao">
+		<restriction base="string">
+			<enumeration value="0"/>
+			<enumeration value="C"/>
+			<enumeration value="I"/>
+			<enumeration value="L"/>
+			<enumeration value="O"/>
+			<enumeration value="E"/>
+			<enumeration value="J"/>
+			<enumeration value="A"/>
+			<enumeration value="K"/>
+			<!-- 
+				 0 = Atendimento Normal, não exigiu autorização	
+				 C = Atendimento autorizado em CO, fora das regras de intercambio
+				 I = Nota glosada reapresentada pelo prestador
+				 L = Atendimento autorizado, dentro das regras de intercambio mas exige autorizacao
+				 O = Atendimento autorizado antes da inclusao do Beneficiario
+				 E = Código de excecao utilizado para cobranças de conta aberta nas situacoes dispostas no Manual do Intercambio Nacional
+				 J = Nota glosada (Ajius) reapresentada
+				 A = Aviso da cobranca
+				 K = Cobrança de complemento de valor reapresentado pelo prestador
+			-->
+		</restriction>
+	</simpleType>
+	<simpleType name="st_tpPaciente">
+		<restriction base="integer">
+			<enumeration value="1"/>
+			<enumeration value="9"/>
+			<!-- 
+			     1 = Medicina Assistencial
+				 9 = Saude Ocupacional
+			-->
+		</restriction>
+	</simpleType>
+	<simpleType name="st_tpPacienteHonorario">
+		<restriction base="integer">
+			<enumeration value="1"/>
+			<!-- 
+			     1 = Medicina Assistencial
+			-->
+		</restriction>
+	</simpleType>
+	<simpleType name="st_tipoConsulta">
+		<restriction base="integer">
+			<enumeration value="1"/>
+			<enumeration value="2"/>
+			<enumeration value="3"/>
+			<enumeration value="4"/>
+			<!--
+				1 = Primeira Consulta
+				2 = Retorno
+				3 = Pré-natal
+				4 = Por encaminhamento
+			-->
+		</restriction>
+	</simpleType>
+	<simpleType name="st_PresExec">
+		<restriction base="string">
+			<enumeration value="01"/>
+			<enumeration value="02"/>
+			<enumeration value="03"/>
+			<enumeration value="04"/>
+			<enumeration value="05"/>
+			<enumeration value="06"/>
+			<enumeration value="08"/>
+			<enumeration value="09"/>
+			<enumeration value="10"/>
+			<enumeration value="11"/>
+			<enumeration value="13"/>
+			<enumeration value="14"/>
+			<enumeration value="15"/>
+			<enumeration value="16"/>
+			<enumeration value="17"/>
+			<enumeration value="18"/>
+			<!-- 	
+				01 = Médico
+				02 = Hospital
+				03 = Laboratório
+				04 = Clínica
+				05 = Pessoa Física _ Não médico
+				06 = Centro de Diagnósticos
+				08 = Home Care (atendimentos domiciliares)
+				09 = Cooperativa
+				11 = Pronto Atendimento
+				13 = Clínica de Especialidade
+				14 = Centro de Oncologia
+				15 = Centro Multiprofissional
+				16 = Centro de Hemodiálise
+				17 = = Centro de Hemodinâmica
+				18 = Remoção
+			-->
+		</restriction>
+	</simpleType>
+	<simpleType name="st_tpInternacao">
+		<restriction base="integer">
+			<enumeration value="1"/>
+			<enumeration value="2"/>
+			<enumeration value="3"/>
+			<enumeration value="4"/>
+			<enumeration value="5"/>
+			<!--
+				1 = Internação Clínica
+				2 = Internação Cirúrgica
+				3 = Internação Obstétrica
+				4 = Internação Pediátrica
+				5 = Internação Psiquiátrica
+			-->
+		</restriction>
+	</simpleType>
+	<simpleType name="st_tipoFaturamento">
+		<restriction base="integer">
+			<enumeration value="1"/>
+			<enumeration value="2"/>
+			<enumeration value="3"/>
+			<enumeration value="4"/>
+			<!--
+				1 = Parcial
+				2 = Final
+				3 = Complementar
+				4 =  Total
+			-->
+		</restriction>
+	</simpleType>
+	<simpleType name="st_regimeInternacao">
+		<restriction base="string">
+			<enumeration value="1"/>
+			<enumeration value="2"/>
+			<enumeration value="3"/>
+			<!--
+				1 = Hospitala
+				2 = Hospital-Dia
+				3 = Domiciliar
+			-->
+		</restriction>
+	</simpleType>
+	<!---->
+	<simpleType name="st_nomeBenef">
+		<restriction base="string">
+			<maxLength value="25"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="st_ReembolsoSUS">
+		<restriction base="integer">
+			<enumeration value="1"/>
+			<enumeration value="2"/>
+			<!--	
+				1 = Reembolso
+				2 = Ressarcimento ao SUS
+			-->
+		</restriction>
+	</simpleType>
+	<simpleType name="st_sexo">
+		<restriction base="string">
+			<enumeration value="M"/>
+			<enumeration value="F"/>
+			<!--	
+				F = Feminino
+				M = Masculino
+			-->
+		</restriction>
+	</simpleType>
+	<simpleType name="st_sexo_a100">
+		<restriction base="string">
+			<enumeration value="M"/>
+			<enumeration value="F"/>
+			<!--	
+				F = Feminino
+				M = Masculino
+			-->
+		</restriction>
+	</simpleType>
+	<simpleType name="st_unidadeMedida">
+		<restriction base="string">
+			<minLength value="3"/>
+			<maxLength value="3"/>
+			<!--
+		Tabela X2 - Tabela de Unidade de Medida
+		-->
+		</restriction>
+	</simpleType>
+	<simpleType name="st_tpRedeMIN">
+		<restriction base="integer">
+			<enumeration value="1"/>
+			<enumeration value="2"/>
+			<enumeration value="3"/>
+			<!-- 
+				1 = Básica
+				2 = Especial (Tabela Própria)
+				3 = Master (Alto Custo)
+			-->
+		</restriction>
+	</simpleType>
+	<simpleType name="st_coberturaEspecial">
+		<restriction base="string">
+			<maxLength value="2"/>
+			<!--
+				INCLUIDO 22/11/2021 PARA V TISS4
+				Tabela X15 - Terminologia de Cobertura Especial (TISS)
+				Validar na tabela de domínios
+
+					01 Gestante
+					02 Pré-operatório
+					03 Pós-operatório
+			-->
+		</restriction>
+	</simpleType>
+	<simpleType name="st_regimeAtendimento">
+		<restriction base="string">
+			<maxLength value="2"/>
+			<!--
+				INCLUIDO 22/11/2021 PARA V TISS4 
+				Tabela X13 - Terminologia de Regime de Atendimento (TISS)
+				Validar na tabela de domínios
+
+					01 Ambulatorial
+					02 Domiciliar
+					03 Internação 
+					04 Pronto Socorro
+					05 TELESSAÚDE
+			-->
+		</restriction>
+	</simpleType>
+	<simpleType name="st_saudeOcupacional">
+		<restriction base="string">
+			<maxLength value="2"/>
+			<!--
+				INCLUIDO 22/11/2021 PARA V TISS4
+				Tabela X14 - Terminologia de Saúde Ocupacional (TISS)
+				Validar na tabela de domínios
+
+					01 Admissional
+					02 Demissional
+					03 Periódico
+					04 Retorno ao trabalho
+					05 Mudança de função
+					06 Promoção a saúde
+			-->
+		</restriction>
+	</simpleType>
+	<!--
+**************************************************************************************************************************************************************************************
+					A1300 - TABELA DE DOMINIO
+**************************************************************************************************************************************************************************************-->
+	<simpleType name="st_tp_mov">
+		<restriction base="integer">
+			<enumeration value="1"/>
+			<enumeration value="2"/>
+			<enumeration value="3"/>
+			<enumeration value="4"/>
+			<!--
+				1 = Inclusão
+				2 = Alteração
+				3 = Exclusão
+				4 = Massa Ativa
+				-->
+		</restriction>
+	</simpleType>
+	<simpleType name="st_tp_logradouro">
+		<restriction base="string">
+			<minLength value="2"/>
+			<maxLength value="2"/>
+			<!-- 
+				 Tabela de Tipo de Logradouro (Tabela Y)
+			-->
+		</restriction>
+	</simpleType>
+	<simpleType name="st_cd_pais">
+		<restriction base="string">
+			<minLength value="3"/>
+			<maxLength value="3"/>
+			<!-- 
+				 Tabela de Países (Tabela S)
+			-->
+		</restriction>
+	</simpleType>
+	<simpleType name="st_cd_est_civil">
+		<restriction base="string">
+			<enumeration value="A"/>
+			<enumeration value="D"/>
+			<enumeration value="M"/>
+			<enumeration value="S"/>
+			<enumeration value="W"/>
+			<enumeration value="U"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="st_cd_depe">
+		<restriction base="string">
+			<enumeration value="00"/>
+			<enumeration value="01"/>
+			<enumeration value="02"/>
+			<enumeration value="10"/>
+			<enumeration value="50"/>
+			<enumeration value="52"/>
+			<enumeration value="60"/>
+			<enumeration value="70"/>
+			<enumeration value="75"/>
+			<enumeration value="80"/>
+			<enumeration value="90"/>
+			<!-- 
+				00 = Titular
+				01 = Cônjuge
+				02 = Companheiro (a)
+				10 = Filhos (as)
+				50 = Pais
+				52 = Sogro (a)
+				60 = Outros dependentes
+				70 = Filho(as) adotivos
+				75 = Enteado (a)
+				80 = Irmãos (ãs)
+				90 = Agregados
+			-->
+		</restriction>
+	</simpleType>
+	<simpleType name="st_motivo_exclusao">
+		<restriction base="string">
+			<minLength value="2"/>
+			<maxLength value="2"/>
+			<!-- 
+				 Tabela de Motivo de Exclusão (Tabela X9)
+			-->
+		</restriction>
+	</simpleType>
+	<simpleType name="st_ind_resid">
+		<restriction base="integer">
+			<enumeration value="1"/>
+			<enumeration value="2"/>
+			<!--
+				1 = Brasil
+				2 = Exterior
+			 -->
+		</restriction>
+	</simpleType>
+	<simpleType name="st_tp_end">
+		<restriction base="integer">
+			<enumeration value="1"/>
+			<enumeration value="2"/>
+			<!--
+				1 = Residencial
+				2 = Profissional
+			 -->
+		</restriction>
+	</simpleType>
+	<simpleType name="st_tp_end_A400">
+		<restriction base="integer">
+			<enumeration value="1"/>
+			<enumeration value="2"/>
+			<enumeration value="3"/>
+			<!--
+				1 = Atendimento
+				2 = Comercial - envio de correspondência
+				3 = Atendimento e Comercial
+			 -->
+		</restriction>
+	</simpleType>
+	<simpleType name="st_tp_fone">
+		<restriction base="integer">
+			<enumeration value="1"/>
+			<enumeration value="2"/>
+			<enumeration value="3"/>
+			<!--
+				1 = Residencial
+				2 = Profissional
+				3 = Celular
+			-->
+		</restriction>
+	</simpleType>
+	<simpleType name="st_tp_email">
+		<restriction base="integer">
+			<enumeration value="1"/>
+			<enumeration value="2"/>
+			<!--
+				1 = Principal
+				2 = Alternativo
+				-->
+		</restriction>
+	</simpleType>
+	<simpleType name="st_tp_com_risco">
+		<restriction base="string">
+			<enumeration value="P"/>
+			<enumeration value="C"/>
+			<!--
+				P = em Pré-Pagamento
+				C = em Custo Operacional
+				-->
+		</restriction>
+	</simpleType>
+	<simpleType name="st_tp_abrangencia">
+		<restriction base="integer">
+			<enumeration value="1"/>
+			<enumeration value="2"/>
+			<enumeration value="3"/>
+			<enumeration value="4"/>
+			<enumeration value="5"/>
+			<!--
+				1 = Nacional
+				2 = Regional A _ Grupo de Estados
+				3 = Estadual
+				4 = Regional B _ Grupo de Municípios
+				5 = Municipal
+				-->
+		</restriction>
+	</simpleType>
+	<simpleType name="st_tp_contratacao">
+		<restriction base="integer">
+			<enumeration value="2"/>
+			<enumeration value="3"/>
+			<enumeration value="4"/>
+			<!--
+				2 = Individual ou Familiar
+				3 = Coletivo Empresarial
+				4 = Coletivo por Adesão
+				-->
+		</restriction>
+	</simpleType>
+	<simpleType name="st_id_reg_plano_ans">
+		<restriction base="integer">
+			<enumeration value="1"/>
+			<enumeration value="2"/>
+			<enumeration value="3"/>
+			<!--
+				1 = Regulamentado
+				2 = Não Regulamentado 
+				3 = Adaptado 
+				-->
+		</restriction>
+	</simpleType>
+	<simpleType name="st_seg_plano">
+		<restriction base="string">
+			<minLength value="2"/>
+			<maxLength value="2"/>
+			<!-- 
+				 Tabela de Segmentação do Produto (Tabela V)
+			-->
+		</restriction>
+	</simpleType>
+	<simpleType name="st_tp_cobertura">
+		<restriction base="string">
+			<minLength value="3"/>
+			<maxLength value="3"/>
+			<!-- 
+				 Tabela de Coberturas dos Planos de Intercâmbio (Tabela K)
+			-->
+		</restriction>
+	</simpleType>
+	<!--*************************************************************A100********************************************************-->
+	<simpleType name="st_tp_contr_local">
+		<restriction base="integer">
+			<enumeration value="1"/>
+			<enumeration value="2"/>
+			<!--
+				1 = Pré-Pagamento
+				2 = Pós-Pagamento
+			 -->
+		</restriction>
+	</simpleType>
+	<simpleType name="st_Produtos">
+		<restriction base="string">
+			<minLength value="1"/>
+			<maxLength value="2"/>
+			<!-- 
+				 Tabela de Produtos (Tabela J)
+			-->
+		</restriction>
+	</simpleType>
+	<simpleType name="st_tp_mov_a100">
+		<restriction base="string">
+			<enumeration value="A"/>
+			<enumeration value="M"/>
+			<!-- 
+				 A = Cadastro Ativo - Massa total somente com beneficiários ativos
+				 M = Cadastro Completo - Massa total com beneficiários ativos e excluídos de todos os períodos já enviados e existentes no cadastro
+			-->
+		</restriction>
+	</simpleType>
+	<!-- ********************************************************************************A200***********************************************************-->
+	<simpleType name="st_cd_mens_erro">
+		<restriction base="integer">
+			<totalDigits value="4"/>
+			<!-- 
+				 Mensagens de Erros - Anexo 2
+			-->
+		</restriction>
+	</simpleType>
+	<!-- Descrição do motivo da negativa -->
+	<!--	
+**************************************************************************************************************************************************************************************
+					A410 - TABELA DE DOMINIO
+**************************************************************************************************************************************************************************************-->
+	<simpleType name="st_sim_nao_aplica">
+		<restriction base="string">
+			<enumeration value="01"/>
+			<enumeration value="02"/>
+			<enumeration value="03"/>
+			<!-- 
+				 01 = Sim
+				 02 = Nao
+				 03 = Nao se Aplica
+			-->
+		</restriction>
+	</simpleType>
+	<simpleType name="st_tp_contrato_sadt">
+		<restriction base="string">
+			<enumeration value="01"/>
+			<enumeration value="02"/>
+			<!-- 
+01 = Serviço Próprio do Prestador
+02 = Serviço Terceirizado do Prestador  
+			-->
+		</restriction>
+	</simpleType>
+	<simpleType name="st_tp_neg_diarias_taxas">
+		<restriction base="string">
+			<enumeration value="01"/>
+			<enumeration value="02"/>
+			<enumeration value="03"/>
+			<enumeration value="04"/>
+			<!--
+01 = Abertas (Sem Compactação)
+02 = Diária hospitalar Unimed com exceções 
+03 = Diária hospitalar Unimed sem exceções 
+04 = Diária Global/Semi Global
+				-->
+		</restriction>
+	</simpleType>
+	<simpleType name="st_tp_neg_mat_consumo">
+		<restriction base="string">
+			<enumeration value="01"/>
+			<enumeration value="02"/>
+			<enumeration value="03"/>
+			<enumeration value="04"/>
+			<!--
+01 = TNUMM (Brasíndice/Simpro/PF) com acréscimo
+02 = TNUMM (Brasíndice/Simpro/PF)
+03 = TNUMM (Brasíndice/Simpro/PF) com desconto
+04 = Valor Acordado Base Custo com Acréscimo
+
+				-->
+		</restriction>
+	</simpleType>
+	<simpleType name="st_tp_neg_equipos">
+		<restriction base="string">
+			<enumeration value="01"/>
+			<enumeration value="02"/>
+			<enumeration value="03"/>
+			<enumeration value="04"/>
+			<enumeration value="05"/>
+			<!--
+M	01 = Pratica preço acima da TNUMM (mais que 100%)
+02 = Pratica preço acima da TNUMM (até 100%)
+03 = Pratica TNUMM
+04 = Pratica preços inferiores à TNUMM
+05 = Não possui negociação ou não se aplica
+				-->
+		</restriction>
+	</simpleType>
+	<simpleType name="st_tp_neg_op">
+		<restriction base="string">
+			<enumeration value="01"/>
+			<enumeration value="02"/>
+			<enumeration value="03"/>
+			<enumeration value="04"/>
+			<enumeration value="05"/>
+			<!--
+01 = Ausência de Regulação e ou Taxa de Comercialização Acima do Permitido no Intercâmbio
+02 = Aceita Regulação com Taxa de Comercialização
+03 = Aceita Regulação sem Taxa de Comercialização
+04 = Aceita Pagamento Direto ao Fornecedor
+05 = Não possui negociação ou não se aplica
+				-->
+		</restriction>
+	</simpleType>
+	<simpleType name="st_tp_neg_mat_espec">
+		<restriction base="string">
+			<enumeration value="01"/>
+			<enumeration value="02"/>
+			<enumeration value="03"/>
+			<enumeration value="04"/>
+			<enumeration value="05"/>
+			<!--
+01 = Ausência de Regulação e ou Taxa de Comercialização Acima do Permitido no Intercâmbio
+02 = Aceita Regulação com Taxa de Comercialização
+03 = Aceita Regulação sem Taxa de Comercialização
+04 = Aceita Pagamento Direto ao Fornecedor
+05 = Não possui negociação ou não se aplica
+				-->
+		</restriction>
+	</simpleType>
+	<simpleType name="st_tp_neg_med">
+		<restriction base="string">
+			<enumeration value="01"/>
+			<enumeration value="02"/>
+			<enumeration value="03"/>
+			<enumeration value="04"/>
+			<enumeration value="05"/>
+			<!--
+01 = TNUMM (CMED PF + 20%) com Acréscimo
+02 = TNUMM (CMED PF + 20%)
+03 = TNUMM (CMED PF + 20%) com Desconto ou Tabela Baseada em Genéricos
+04 = Valor Acordado Base Custo com Acréscimo
+05 = Não possui negociação ou não se aplica
+				-->
+		</restriction>
+	</simpleType>
+	<simpleType name="st_tp_neg_dietas">
+		<restriction base="string">
+			<enumeration value="01"/>
+			<enumeration value="02"/>
+			<enumeration value="03"/>
+			<enumeration value="04"/>
+			<enumeration value="05"/>
+			<!--
+01 = Pratica preço acima da TNUMM (mais que 100%)
+02 = Pratica preço acima da TNUMM (até 100%)
+03 = Pratica TNUMM
+04 = Pratica preços inferiores à TNUMM
+05 = Não possui negociação ou não se aplica
+				-->
+		</restriction>
+	</simpleType>
+	<simpleType name="st_tp_neg_sadt">
+		<restriction base="string">
+			<enumeration value="01"/>
+			<enumeration value="02"/>
+			<enumeration value="03"/>
+			<enumeration value="04"/>
+			<enumeration value="05"/>
+			<!--
+01 = Não Aceita o ROL Unimed
+02 = Aceita o ROL Unimed com Exceção de mais de um grupo de serviço
+03 = Aceita o ROL Unimed com Exceção de um grupo de serviço
+04 = Aceita 100% do ROL Unimed 
+05 = Não possui negociação ou não se aplica
+				-->
+		</restriction>
+	</simpleType>
+	<simpleType name="st_tp_neg_hm">
+		<restriction base="string">
+			<enumeration value="01"/>
+			<enumeration value="02"/>
+			<enumeration value="03"/>
+			<enumeration value="04"/>
+			<enumeration value="05"/>
+			<!--
+01 = Não Aceita o ROL Unimed
+02 = Aceita o ROL Unimed com Exceção de mais de uma Especialidade Médica
+03 = Aceita o ROL Unimed com Exceção de uma Especialidade Médica
+04 = Aceita 100% do ROL Unimed
+05 = Não possui negociação ou não se aplica
+				-->
+		</restriction>
+	</simpleType>
+	<simpleType name="st_id_uti">
+		<restriction base="string">
+			<enumeration value="01"/>
+			<enumeration value="02"/>
+			<enumeration value="03"/>
+			<enumeration value="04"/>
+			<!--
+01 = Possui UTI Tipo I
+02 = Possui UTI Tipo II
+03 = Possui UTI Tipo III 
+04 = Não possui UTI
+				-->
+		</restriction>
+	</simpleType>
+	<simpleType name="st_acreditacaoprest">
+		<restriction base="string">
+			<enumeration value="01"/>
+			<enumeration value="02"/>
+			<enumeration value="03"/>
+			<enumeration value="04"/>
+			<!-- 
+				01 = Sem Classificação / Acreditação
+				02 = Certificação local
+				03 = Acreditação Nacional
+				04 = Acreditação Internacional / ONA Nível III
+			-->
+		</restriction>
+	</simpleType>
+	<!--**************************************************************************************************************************************************************************************
+					                                                      A550
+**************************************************************************************************************************************************************************************-->
+	<simpleType name="st_tp_arquivo">
+		<restriction base="integer">
+			<enumeration value="1"/>
+			<enumeration value="3"/>
+			<enumeration value="4"/>
+			<enumeration value="5"/>
+			<enumeration value="6"/>
+			<enumeration value="7"/>
+			<enumeration value="8"/>
+			<enumeration value="9"/>
+			<!--	1 - Arquivo para inclusão de questionamentos
+3 - Fechamento parcial da Unimed Credora da NDC
+4 - Fechamento parcial da Unimed Devedora da NDC
+5 - Arquivo de fechmanto da Unimed Credora da NDC
+6 - Arquivo de fechamento da Unimed Devedora da NDC
+7 - Fechamento complementar da Unimed Credora da NDC
+8 - Fechamento complementar da Unimed Devedora da NDC
+9 - Fechamento por decurso de prazo
+-->
+		</restriction>
+	</simpleType>
+	<simpleType name="st_conclusao">
+		<restriction base="integer">
+			<enumeration value="1"/>
+			<enumeration value="2"/>
+			<enumeration value="3"/>
+			<enumeration value="4"/>
+			<enumeration value="5"/>
+			<!--	1 - Decurso de Prazo
+2 - Acordado entre as Unimeds
+3 - Concluído pela Câmara Técnica
+4 - Decurso de Prazo Parcial
+5 - Decurso de Prazo Complementar
+-->
+		</restriction>
+	</simpleType>
+	<simpleType name="st_arq_parcial">
+		<restriction base="integer">
+			<enumeration value="1"/>
+			<enumeration value="2"/>
+			<!--	1 - Parcial 1
+            2 - Parcial 2
+-->
+		</restriction>
+	</simpleType>
+	<simpleType name="st_tp_acordo">
+		<restriction base="string">
+			<enumeration value="00"/>
+			<enumeration value="01"/>
+			<enumeration value="02"/>
+			<enumeration value="03"/>
+			<enumeration value="04"/>
+			<enumeration value="05"/>
+			<enumeration value="06"/>
+			<enumeration value="10"/>
+			<enumeration value="11"/>
+			<enumeration value="12"/>
+			<enumeration value="13"/>
+			<enumeration value="14"/>
+			<enumeration value="15"/>
+			<!--	00 - Questionamento em negociação
+01 - Questionamento encerrado com Acordo
+02 - Questionamento encerrado com Acordo sem emissão de nota de débito
+03 - Ignorado
+04 - Excluído pelo autor
+05 - Remetido para Câmara Técnica
+06 - Reservado
+10 - Encerrado pelo administrador
+11 - Questionamento não contestado
+12 - Parcial
+13 - Encerrado pelo administrador - Parcial
+14 - Encerrado pelo administrador - Tempo máximo de contestação expirado
+15 - Encerrado pelo Administrador - Expiradas finalizadas pelo Administrador
+-->
+		</restriction>
+	</simpleType>
+	<simpleType name="st_cd_motivo_ques">
+		<restriction base="integer">
+			<totalDigits value="3"/>
+			<!-- 
+				 Tabela de Motivos de Questionamento (Tabela N)
+			-->
+		</restriction>
+	</simpleType>
+	<simpleType name="st_tp_aceite">
+		<restriction base="string">
+			<enumeration value="1"/>
+			<enumeration value="2"/>
+			<enumeration value="3"/>
+			<!--
+			1 - Acatar _ para descontar do prestador
+			2 - Acatar - Custo assumido pela Unimed Executora
+			3 - Acatar _ Refaturamento
+			-->
+		</restriction>
+	</simpleType>
+	<!--*************************************************A560************************************************************************************************-->
+	<simpleType name="st_tp_NDC">
+		<restriction base="integer">
+			<enumeration value="1"/>
+			<enumeration value="2"/>
+			<!--	1 - Doc_2
+            2 - Doc_1
+-->
+		</restriction>
+	</simpleType>
+	<simpleType name="st_tp_cred_dev">
+		<restriction base="integer">
+			<enumeration value="1"/>
+			<enumeration value="2"/>
+			<!--	1 - Credora
+            2 - Devedora-->
+		</restriction>
+	</simpleType>
+	<simpleType name="st_tp_arquivoNDC">
+		<restriction base="integer">
+			<enumeration value="1"/>
+			<enumeration value="2"/>
+			<enumeration value="3"/>
+			<!--	1 - NDC Cobranca Integral
+            2 - NDC Cobranca Parcial
+			3 - NDC Cobranca Complementar
+-->
+		</restriction>
+	</simpleType>
+	<!--*************************************************A580************************************************************************************************-->
+	<simpleType name="st_tpDocumento_A580">
+		<restriction base="integer">
+			<enumeration value="1"/>
+			<enumeration value="2"/>
+			<enumeration value="3"/>
+			<enumeration value="4"/>
+			<enumeration value="5"/>
+			<!-- 1 = Fatura 
+				 2 = Nota Fiscal
+				 3 = Nota Fiscal Eletronica
+				 4 = NDC
+				 5 = Nota de Débito
+			-->
+		</restriction>
+	</simpleType>
+	<simpleType name="st_idCobranca_A580">
+		<restriction base="integer">
+			<enumeration value="1"/>
+			<enumeration value="2"/>
+			<enumeration value="3"/>
+			<enumeration value="4"/>
+			<enumeration value="9"/>
+			<enumeration value="10"/>
+			<enumeration value="11"/>
+			<enumeration value="12"/>
+			<enumeration value="13"/>
+			<enumeration value="14"/>
+			<enumeration value="15"/>
+			<enumeration value="16"/>
+			<enumeration value="17"/>
+			<enumeration value="18"/>
+			<!-- 1 = Benefício Família
+				 2 = Câmara Nacional de Compensação e Liquidação
+				 3 = Contribuição Confederativa
+				 4 = Programas/Fundos Especiais
+				 9 = Outros
+				 10 = Produtos de TI 
+				 11 = Consultorias
+				 12 = Rateios e mensalidades de servicos e/ou produtos
+				 13 = Compensação do processo de aferição
+				 14 = Programas de Atenção à saúde
+			     15 = Remoção/Transporte
+				 16 = RDA
+				 17 = Acordo Operacional - CNU e Sócias
+				 18 = Fluxo Pagamento Dinâmico somente entre Unimeds da Mercosul
+				 
+			-->
+		</restriction>
+	</simpleType>
+	<!--*************************************************A600************************************************************************************************-->
+	<simpleType name="st_tpCamara_A600">
+		<restriction base="integer">
+			<enumeration value="1"/>
+			<enumeration value="2"/>
+			<enumeration value="3"/>
+			<enumeration value="4"/>
+			<!-- 1 = Intra-Federativa 
+				 2 = Federativa
+				 3 = Inter-Federativa
+				 4 = Nacional
+			-->
+		</restriction>
+	</simpleType>
+	<simpleType name="st_tpDocumento_A600">
+		<restriction base="integer">
+			<enumeration value="1"/>
+			<enumeration value="2"/>
+			<enumeration value="3"/>
+			<enumeration value="4"/>
+			<enumeration value="5"/>
+			<enumeration value="6"/>
+			<!-- 1 = Pré-Pagamento
+				 2 = Custo Operacional
+				 3 = Contestação/Glosa
+				 4 = Outros
+				 5 = Fatura PCMSO (Programa de Controle de Saúde Ocupacional)
+				 6 = Recontestação
+			-->
+		</restriction>
+	</simpleType>
+	<!--*************************************************A800************************************************************************************************-->
+	<simpleType name="st_tpDocumento_a800">
+		<restriction base="integer">
+			<enumeration value="1"/>
+			<enumeration value="2"/>
+			<enumeration value="3"/>
+			<!-- 1 = Fatura 
+				 2 = Nota Fiscal
+				 3 = Nota Fiscal Eletronica
+			-->
+		</restriction>
+	</simpleType>
+	<!--*************************************************A300************************************************************************************************-->
+	<simpleType name="st_id_filho">
+		<restriction base="integer">
+			<enumeration value="01"/>
+			<enumeration value="02"/>
+			<enumeration value="99"/>
+			<!--	01 - Filho Universitário
+					02 - Deficiente
+					99 - Outros-->
+		</restriction>
+	</simpleType>
+	<!--*************************************************A400************************************************************************************************-->
+	<simpleType name="st_id_ope_prest">
+		<restriction base="integer">
+			<enumeration value="1"/>
+			<enumeration value="2"/>
+			<!--	1 - Prestadora
+					2 - Operadora
+					-->
+		</restriction>
+	</simpleType>
+	<simpleType name="st_tp_prest">
+		<restriction base="string">
+			<enumeration value="01"/>
+			<enumeration value="02"/>
+			<enumeration value="03"/>
+			<enumeration value="04"/>
+			<enumeration value="05"/>
+			<enumeration value="06"/>
+			<enumeration value="08"/>
+			<enumeration value="10"/>
+			<enumeration value="11"/>
+			<enumeration value="13"/>
+			<enumeration value="14"/>
+			<enumeration value="15"/>
+			<enumeration value="16"/>
+			<enumeration value="17"/>
+			<!-- 	
+				01 = Médico
+				02 = Hospital
+				03 = Laboratório
+				04 = Clínica
+				05 = Pessoa Física _ Não médico
+				06 = Centro de Diagnósticos
+				07 = Parceiro Comercial (excluido acima - não existe na cobrança)
+				08 = Home Care (atendimentos domiciliares)
+				10 = Hospital Dia
+				11 = Pronto Atendimento
+                12 = Pronto Socorro (excluido acima - não existe na cobrança)
+				13 = Clínica de Especialidade
+				14 = Centro de Oncologia
+				15 = Centro Multiprofissional
+				16 = Centro de Hemodiálise
+				17 = Centro de Hemodinâmica
+			-->
+		</restriction>
+	</simpleType>
+	<simpleType name="st_tp_vinculo">
+		<restriction base="integer">
+			<enumeration value="1"/>
+			<enumeration value="2"/>
+			<enumeration value="3"/>
+			<!--	1 - Cooperado
+					2 - Recurso Próprio
+                    3 - Credenciado / Contratualizado
+					-->
+		</restriction>
+	</simpleType>
+	<simpleType name="st_cd_atua">
+		<restriction base="string">
+			<minLength value="2"/>
+			<maxLength value="2"/>
+			<!-- 	
+				Conforme tabela L
+			-->
+		</restriction>
+	</simpleType>
+	<simpleType name="st_tp_contratualizacao">
+		<restriction base="integer">
+			<enumeration value="1"/>
+			<enumeration value="2"/>
+			<!--	1 - Direta (instrumento jurídico assinado pelas partes)
+					2 - Operadora (intermediada por outra operaadora, convênio de reciprocidade ou intercâmbio operacional)
+					-->
+		</restriction>
+	</simpleType>
+	<simpleType name="st_tp_class_estabelec">
+		<restriction base="integer">
+			<enumeration value="1"/>
+			<enumeration value="2"/>
+			<enumeration value="3"/>
+			<!--	1 = Assistência Hospitalar (somente para TP_PREST =
+02 e 10)
+					2 = Serviços de Alta Complexidade (somente paraTP_PREST = 03, 04, 06, 10, 11 e 12)
+					3 = Demais estabelecimentos (somente para TP_PREST = 01, 03, 04, 05, 06, 07, 08, 10, 11 e 12)
+Observação: cada prestador deve ter apenas um único
+tipo de classificação. Caso o hospital não tenha sido
+contratado para internações, não o informar como
+assistência hospitalar.
+					-->
+		</restriction>
+	</simpleType>
+	<simpleType name="st_tp_disponibilidade">
+		<restriction base="integer">
+			<enumeration value="1"/>
+			<enumeration value="2"/>
+			<!--	
+				1 = Parcial
+				2 = Total			-->
+		</restriction>
+	</simpleType>
+	<simpleType name="st_cd_perfil_assist">
+		<restriction base="string">
+			<minLength value="1"/>
+			<maxLength value="2"/>
+			<!-- 	
+				Conforme tabela R
+			-->
+		</restriction>
+	</simpleType>
+	<simpleType name="st_id_tp_prod">
+		<restriction base="integer">
+			<enumeration value="1"/>
+			<enumeration value="2"/>
+			<enumeration value="3"/>
+			<!--
+				1 = Regulamentado
+				2 = Não Regulamentado 
+				3 = Ambos
+				-->
+		</restriction>
+	</simpleType>
+	<simpleType name="st_ind_ginec_obst">
+		<restriction base="integer">
+			<enumeration value="1"/>
+			<enumeration value="2"/>
+			<enumeration value="3"/>
+			<!--
+				1 = Somente Ginecologia
+				2 = Somente Obstetrícia
+				3 = Ginecologia e Obstetrícia
+				-->
+		</restriction>
+	</simpleType>
+	<simpleType name="st_cd_titulacao">
+		<restriction base="string">
+			<minLength value="3"/>
+			<maxLength value="3"/>
+			<!-- 	
+				Conforme tabela Z
+			-->
+		</restriction>
+	</simpleType>
+	<simpleType name="st_nivel_excl">
+		<restriction base="string">
+			<enumeration value="01"/>
+			<enumeration value="02"/>
+			<enumeration value="03"/>
+			<enumeration value="04"/>
+			<enumeration value="05"/>
+			<enumeration value="06"/>
+			<enumeration value="07"/>
+			<enumeration value="08"/>
+			<!-- 	
+				01 = Prestador
+				02 = Plano/Produto
+				03 = Rede
+				04 = Endereço
+				05 = Plano/Produto x Rede
+				06 = Plano/Produto x Endereço
+				07 = Rede x Endereço
+				08 = Plano/Produto x Rede x Endereco
+			-->
+		</restriction>
+	</simpleType>
+	<simpleType name="st_motivo_exclusaoprestador">
+		<restriction base="string">
+			<minLength value="2"/>
+			<maxLength value="2"/>
+			<!-- 
+				 Tabela de Motivo de Exclusão do Prestador (Tabela Z1)
+			-->
+		</restriction>
+	</simpleType>
+	<simpleType name="st_motivo_substit">
+		<restriction base="string">
+			<minLength value="2"/>
+			<maxLength value="2"/>
+			<!-- 	
+				Conforme tabela Z2
+			-->
+		</restriction>
+	</simpleType>
+	<simpleType name="st_cd_imposto">
+		<restriction base="string">
+			<minLength value="2"/>
+			<maxLength value="2"/>
+			<!-- 	
+				Conforme tabela T
+			-->
+		</restriction>
+	</simpleType>
+	<simpleType name="st_inst_acred">
+		<restriction base="string">
+			<minLength value="3"/>
+			<maxLength value="3"/>
+			<!-- 	
+				Conforme tabela U
+			-->
+		</restriction>
+	</simpleType>
+	<simpleType name="st_nivel_acred">
+		<restriction base="string">
+			<enumeration value="01"/>
+			<enumeration value="02"/>
+			<enumeration value="03"/>
+			<enumeration value="04"/>
+			<!-- 	
+				01 = Acreditado / Ceertificado
+				02 = Acreditado Pleno
+				03 = Acreditado com Excelência
+				04 = Acreditado sem nivel de acreditação
+			-->
+		</restriction>
+	</simpleType>
+	<!--*************************************************A700************************************************************************************************-->
+	<simpleType name="st_semMovimento">
+		<restriction base="integer">
+			<enumeration value="1"/>
+			<!--	1 - Sem Movimento-->
+		</restriction>
+	</simpleType>
+	<!--*************************************************A1200************************************************************************************************-->
+	<simpleType name="st_tp_carga">
+		<restriction base="integer">
+			<enumeration value="1"/>
+			<enumeration value="2"/>
+			<enumeration value="3"/>
+			<enumeration value="4"/>
+			<!--	1 - Carga para Aprovação
+					2 - Carga Aprovada - Nacional
+					3 - Carga publicada sem análise - Nacional
+                    4 - Carga Reprovada - Nacional-->
+		</restriction>
+	</simpleType>
+	<simpleType name="st_tp_inf">
+		<restriction base="integer">
+			<enumeration value="1"/>
+			<enumeration value="2"/>
+			<!--	1 - Pacote
+					2 - Tabela Contratualizada
+					-->
+		</restriction>
+	</simpleType>
+	<simpleType name="st_tp_pacote">
+		<restriction base="integer">
+			<enumeration value="3"/>
+			<enumeration value="4"/>
+			<enumeration value="5"/>
+			<enumeration value="6"/>
+			<enumeration value="7"/>
+			<enumeration value="8"/>
+			<!--	3 - SADT
+					4 - Hospitalar
+					5 - Consulta
+                    6 - Atendimento Domiciliar
+					7 - Saúde Ocupacional
+					8 = Ambulatorial-->
+		</restriction>
+	</simpleType>
+	<simpleType name="st_tp_item">
+		<restriction base="integer">
+			<enumeration value="1"/>
+			<enumeration value="2"/>
+			<enumeration value="4"/>
+			<enumeration value="5"/>
+			<enumeration value="6"/>
+			<enumeration value="7"/>
+			<!--	1 - Taxas e Gases
+					2 - Diárias
+                    4 - Materias de Consumo
+					5 - Medicamentos
+					6 - Procedimentos
+					7 - OPME-->
+		</restriction>
+	</simpleType>
+	<simpleType name="st_tp_tab_ptu">
+		<restriction base="integer">
+			<enumeration value="18"/>
+			<enumeration value="19"/>
+			<enumeration value="20"/>
+			<enumeration value="22"/>
+			<enumeration value="00"/>
+			<!-- 
+				 18 = TUSS _ Taxas hospitalares, diárias e gases medicinais
+				 19 = TUSS _ Materiais
+				 20 = TUSS - Medicamentos
+				 22 = TUSS _ Procedimentos e eventos em saúde (medicina, odonto e demais áreas de saúde)
+				 00 = Tabela Própria das Operadoras
+		-->
+		</restriction>
+	</simpleType>
+	<simpleType name="st_id_serv">
+		<restriction base="integer">
+			<enumeration value="1"/>
+			<enumeration value="2"/>
+			<enumeration value="3"/>
+			<!--	1 - Principal
+					2 - Composição
+                    3 - Alternativo-->
+		</restriction>
+	</simpleType>
+	<simpleType name="st_sit_ANS">
+		<restriction base="integer">
+			<enumeration value="1"/>
+			<enumeration value="2"/>
+			<enumeration value="3"/>
+			<!--	1 - Ativo
+					2 - Ativo com Comercialização Suspensa
+                    3 - Cancelado-->
+		</restriction>
+	</simpleType>
+	<simpleType name="st_inclu_exc">
+		<restriction base="integer">
+			<enumeration value="1"/>
+			<enumeration value="2"/>
+			<!--	1 - Inclusão
+					2 - Exclusão
+                    -->
+		</restriction>
+	</simpleType>
+	<simpleType name="st_cd_gr_serv">
+		<restriction base="string">
+			<minLength value="3"/>
+			<maxLength value="3"/>
+			<!-- 
+				 Tabela de Grupos de Serviços (Tabela H)
+			-->
+		</restriction>
+	</simpleType>
+</schema>

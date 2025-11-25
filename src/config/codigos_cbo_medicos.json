@@ -1,0 +1,254 @@
+[
+  {
+    "cbo": "225103",
+    "descricao": "Médico infectologista"
+  },
+  {
+    "cbo": "225105",
+    "descricao": "Médico acupunturista"
+  },
+  {
+    "cbo": "225106",
+    "descricao": "Médico legista"
+  },
+  {
+    "cbo": "225109",
+    "descricao": "Médico nefrologista"
+  },
+  {
+    "cbo": "225110",
+    "descricao": "Médico alergista e imunologista"
+  },
+  {
+    "cbo": "225112",
+    "descricao": "Médico neurologista"
+  },
+  {
+    "cbo": "225115",
+    "descricao": "Médico angiologista"
+  },
+  {
+    "cbo": "225118",
+    "descricao": "Médico nutrologista"
+  },
+  {
+    "cbo": "225120",
+    "descricao": "Médico cardiologista"
+  },
+  {
+    "cbo": "225121",
+    "descricao": "Médico oncologista clínico"
+  },
+  {
+    "cbo": "225122",
+    "descricao": "Médico cancerologista pediátrico"
+  },
+  {
+    "cbo": "225124",
+    "descricao": "Médico pediatra"
+  },
+  {
+    "cbo": "225125",
+    "descricao": "Médico clínico"
+  },
+  {
+    "cbo": "225127",
+    "descricao": "Médico pneumologista"
+  },
+  {
+    "cbo": "225130",
+    "descricao": "Médico de família e comunidade"
+  },
+  {
+    "cbo": "225133",
+    "descricao": "Médico psiquiatra"
+  },
+  {
+    "cbo": "225135",
+    "descricao": "Médico dermatologista"
+  },
+  {
+    "cbo": "225136",
+    "descricao": "Médico reumatologista"
+  },
+  {
+    "cbo": "225139",
+    "descricao": "Médico sanitarista"
+  },
+  {
+    "cbo": "225140",
+    "descricao": "Médico do trabalho"
+  },
+  {
+    "cbo": "225142",
+    "descricao": "Médico da estratégia de saúde da família"
+  },
+  {
+    "cbo": "225145",
+    "descricao": "Médico em medicina de tráfego"
+  },
+  {
+    "cbo": "225148",
+    "descricao": "Médico anatomopatologista"
+  },
+  {
+    "cbo": "225150",
+    "descricao": "Médico em medicina intensiva"
+  },
+  {
+    "cbo": "225151",
+    "descricao": "Médico anestesiologista"
+  },
+  {
+    "cbo": "225154",
+    "descricao": "Médico antroposófico"
+  },
+  {
+    "cbo": "225155",
+    "descricao": "Médico endocrinologista e metabologista"
+  },
+  {
+    "cbo": "225160",
+    "descricao": "Médico fisiatra"
+  },
+  {
+    "cbo": "225165",
+    "descricao": "Médico gastroenterologista"
+  },
+  {
+    "cbo": "225170",
+    "descricao": "Médico generalista"
+  },
+  {
+    "cbo": "225175",
+    "descricao": "Médico geneticista"
+  },
+  {
+    "cbo": "225180",
+    "descricao": "Médico geriatra"
+  },
+  {
+    "cbo": "225185",
+    "descricao": "Médico hematologista"
+  },
+  {
+    "cbo": "225195",
+    "descricao": "Médico Homeopata"
+  },
+  {
+    "cbo": "225203",
+    "descricao": "Médico em cirurgia vascular"
+  },
+  {
+    "cbo": "225210",
+    "descricao": "Médico cirurgião cardiovascular"
+  },
+  {
+    "cbo": "225215",
+    "descricao": "Médico cirurgião de cabeça e pescoço"
+  },
+  {
+    "cbo": "225220",
+    "descricao": "Médico cirurgião do aparelho digestivo"
+  },
+  {
+    "cbo": "225225",
+    "descricao": "Médico cirurgião geral"
+  },
+  {
+    "cbo": "225230",
+    "descricao": "Médico cirurgião pediátrico"
+  },
+  {
+    "cbo": "225235",
+    "descricao": "Médico cirurgião plástico"
+  },
+  {
+    "cbo": "225240",
+    "descricao": "Médico cirurgião torácico"
+  },
+  {
+    "cbo": "225250",
+    "descricao": "Médico ginecologista e obstetra"
+  },
+  {
+    "cbo": "225255",
+    "descricao": "Médico Mastologista"
+  },
+  {
+    "cbo": "225260",
+    "descricao": "Médico neurocirurgião"
+  },
+  {
+    "cbo": "225265",
+    "descricao": "Médico oftalmologista"
+  },
+  {
+    "cbo": "225270",
+    "descricao": "Médico ortopedista e traumatologista"
+  },
+  {
+    "cbo": "225275",
+    "descricao": "Médico otorrinolaringologista"
+  },
+  {
+    "cbo": "225280",
+    "descricao": "Médico proctologista"
+  },
+  {
+    "cbo": "225285",
+    "descricao": "Médico urologista"
+  },
+  {
+    "cbo": "225290",
+    "descricao": "Médico cancerologista cirurgico"
+  },
+  {
+    "cbo": "225295",
+    "descricao": "Médico cirurgião da mão"
+  },
+  {
+    "cbo": "225305",
+    "descricao": "Médico citopatologista"
+  },
+  {
+    "cbo": "225310",
+    "descricao": "Médico em endoscopia"
+  },
+  {
+    "cbo": "225315",
+    "descricao": "Médico em medicina nuclear"
+  },
+  {
+    "cbo": "225320",
+    "descricao": "Médico em radiologia e diagnóstico por imagem"
+  },
+  {
+    "cbo": "225325",
+    "descricao": "Médico patologista"
+  },
+  {
+    "cbo": "225330",
+    "descricao": "Médico radioterapeuta"
+  },
+  {
+    "cbo": "225335",
+    "descricao": "Médico patologista clínico / medicina laboratorial"
+  },
+  {
+    "cbo": "225340",
+    "descricao": "Médico hemoterapeuta"
+  },
+  {
+    "cbo": "225345",
+    "descricao": "Médico hiperbarista"
+  },
+  {
+    "cbo": "225350",
+    "descricao": "Médico neurofisiologista"
+  },
+  {
+    "cbo": "225355",
+    "descricao": "Médico radiologista intervencionista"
+  }
+]

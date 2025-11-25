@@ -1,0 +1,758 @@
+[
+  {
+    "ITENS QUE OBRIGAM PARTICIPAÇÃO": 20103093,
+    "Unnamed: 1": 22,
+    "Unnamed: 2": "ATENDIMENTO FISIÁTRICO NO PRÉ E PÓS-OPERATÓRIO DE PACIENTES PARA PREVENÇÃO DE SEQUELAS",
+    "Especialidade": "Fisioterapia",
+    "CBO": 223605
+  },
+  {
+    "ITENS QUE OBRIGAM PARTICIPAÇÃO": 20103689,
+    "Unnamed: 1": 22,
+    "Unnamed: 2": "RETARDO DO DESENVOLVIMENTO PSICOMOTOR",
+    "Especialidade": "Psicologia",
+    "CBO": 251510
+  },
+  {
+    "ITENS QUE OBRIGAM PARTICIPAÇÃO": 20203012,
+    "Unnamed: 1": 22,
+    "Unnamed: 2": "ASSISTÊNCIA FISIÁTRICA RESPIRATÓRIA EM PACIENTE INTERNADO COM VENTILAÇÃO MECÂNICA",
+    "Especialidade": "Fisioterapia",
+    "CBO": 223605
+  },
+  {
+    "ITENS QUE OBRIGAM PARTICIPAÇÃO": 20203047,
+    "Unnamed: 1": 22,
+    "Unnamed: 2": "ASSISTÊNCIA FISIÁTRICA RESPIRATÓRIA EM DOENTE CLÍNICO INTERNADO",
+    "Especialidade": "Fisioterapia",
+    "CBO": 223605
+  },
+  {
+    "ITENS QUE OBRIGAM PARTICIPAÇÃO": 50000012,
+    "Unnamed: 1": 22,
+    "Unnamed: 2": "SESSÃO DE PSICOMOTRICIDADE INDIVIDUAL",
+    "Especialidade": "Psicologia",
+    "CBO": 251510
+  },
+  {
+    "ITENS QUE OBRIGAM PARTICIPAÇÃO": 50000020,
+    "Unnamed: 1": 22,
+    "Unnamed: 2": "SESSÃO DE PSICOMOTRICIDADE EM GRUPO",
+    "Especialidade": "Psicologia",
+    "CBO": 251510
+  },
+  {
+    "ITENS QUE OBRIGAM PARTICIPAÇÃO": 50000144,
+    "Unnamed: 1": 22,
+    "Unnamed: 2": "CONSULTA AMBULATORIAL EM FISIOTERAPIA",
+    "Especialidade": "Fisioterapia",
+    "CBO": 223605
+  },
+  {
+    "ITENS QUE OBRIGAM PARTICIPAÇÃO": 50000160,
+    "Unnamed: 1": 22,
+    "Unnamed: 2": "ATENDIMENTO FISIOTERAPEUTICO AMBULATORIAL AO PACIENTE COM DISFUNÇÃO DECORRENTE DE ALTERAÇÕES DO SISTEMA MUSCULO-ESQUELETICO",
+    "Especialidade": "Fisioterapia",
+    "CBO": 223605
+  },
+  {
+    "ITENS QUE OBRIGAM PARTICIPAÇÃO": 50000195,
+    "Unnamed: 1": 22,
+    "Unnamed: 2": "ATENDIMENTO FISIOTERAPEUTICO AMBULATORIAL AO PACIENTE COM DISFUNÇÃO DECORRENTE DE QUEIMADURAS",
+    "Especialidade": "Fisioterapia",
+    "CBO": 223605
+  },
+  {
+    "ITENS QUE OBRIGAM PARTICIPAÇÃO": 50000209,
+    "Unnamed: 1": 22,
+    "Unnamed: 2": "ATENDIMENTO FISIOTERAPEUTICO AMBULATORIAL AO PACIENTE COM DISFUNÇÃO DECORRENTE DE ALTERAÇÕES DO SISTEMA LINFATICO E/OU VASCULAR PERIFERICO",
+    "Especialidade": "Fisioterapia",
+    "CBO": 223605
+  },
+  {
+    "ITENS QUE OBRIGAM PARTICIPAÇÃO": 50000217,
+    "Unnamed: 1": 22,
+    "Unnamed: 2": "ATENDIMENTO FISIOTERAPEUTICO AMBULATORIAL NO PRÉ OU PÓS CIRURGICO E EM RECUPERAÇÃO DE TECIDOS",
+    "Especialidade": "Fisioterapia",
+    "CBO": 223605
+  },
+  {
+    "ITENS QUE OBRIGAM PARTICIPAÇÃO": 50000233,
+    "Unnamed: 1": 22,
+    "Unnamed: 2": "ATENDIMENTO FISIOTERAPEUTICO AMBULATORIAL PARA ALTERAÇÕES INFLAMATORIAS E OU DEGENERATIVAS DO APARELHO GENITO-URINARIO E REPRODUTOR, E/OU PROCTOLÓGICO",
+    "Especialidade": "Fisioterapia",
+    "CBO": 223605
+  },
+  {
+    "ITENS QUE OBRIGAM PARTICIPAÇÃO": 50000241,
+    "Unnamed: 1": 22,
+    "Unnamed: 2": "CONSULTA DOMICILIAR EM FISIOTERAPIA",
+    "Especialidade": "Fisioterapia",
+    "CBO": 223605
+  },
+  {
+    "ITENS QUE OBRIGAM PARTICIPAÇÃO": 50000250,
+    "Unnamed: 1": 22,
+    "Unnamed: 2": "ATENDIMENTO FISIOTERAPEUTICO DOMICILIAR AO PACIENTE COM DISFUNÇÃO DECORRENTE DE LESAO DO SISTEMA NERVOSO CENTRAL E/OU PERIFERICO",
+    "Especialidade": "Fisioterapia",
+    "CBO": 223605
+  },
+  {
+    "ITENS QUE OBRIGAM PARTICIPAÇÃO": 50000268,
+    "Unnamed: 1": 22,
+    "Unnamed: 2": "ATENDIMENTO FISIOTERAPEUTICO DOMICILIAR AO PACIENTE COM DISFUNÇÃO DECORRENTE DE ALTERAÇÕES DO SISTEMA MUSCULO-ESQUELETICO",
+    "Especialidade": "Fisioterapia",
+    "CBO": 223605
+  },
+  {
+    "ITENS QUE OBRIGAM PARTICIPAÇÃO": 50000276,
+    "Unnamed: 1": 22,
+    "Unnamed: 2": "ATENDIMENTO FISIOTERAPEUTICO DOMICILIAR AO PACIENTE COM DISFUNÇÃO DECORRENTE DE ALTERAÇÕES NO SISTEMA RESPIRATORIO",
+    "Especialidade": "Fisioterapia",
+    "CBO": 223605
+  },
+  {
+    "ITENS QUE OBRIGAM PARTICIPAÇÃO": 50000284,
+    "Unnamed: 1": 22,
+    "Unnamed: 2": "ATENDIMENTO FISIOTERAPEUTICO DOMICILIAR AO PACIENTE COM DISFUNÇÃO DECORRENTE DE ALTERAÇÕES DO SISTEMA CARDIOVASCULAR",
+    "Especialidade": "Fisioterapia",
+    "CBO": 223605
+  },
+  {
+    "ITENS QUE OBRIGAM PARTICIPAÇÃO": 50000292,
+    "Unnamed: 1": 22,
+    "Unnamed: 2": "ATENDIMENTO FISIOTERAPEUTICO DOMICILIAR AO PACIENTE COM DISFUNÇÃO DECORRENTE DE QUEIMADURAS.",
+    "Especialidade": "Fisioterapia",
+    "CBO": 223605
+  },
+  {
+    "ITENS QUE OBRIGAM PARTICIPAÇÃO": 50000306,
+    "Unnamed: 1": 22,
+    "Unnamed: 2": "ATENDIMENTO FISIOTERAPEUTICO DOMICILIAR AO PACIENTE COM DISFUNÇÃO DECORRENTE DE ALTERAÇÕES DO SISTEMA LINFATICO E/OU VASCULAR PERIFERICO",
+    "Especialidade": "Fisioterapia",
+    "CBO": 223605
+  },
+  {
+    "ITENS QUE OBRIGAM PARTICIPAÇÃO": 50000314,
+    "Unnamed: 1": 22,
+    "Unnamed: 2": "ATENDIMENTO FISIOTERAPEUTICO DOMICILIAR NO PRE E POS CIRURGICO E EM RECUPERAÇÃO DE TECIDOS",
+    "Especialidade": "Fisioterapia",
+    "CBO": 223605
+  },
+  {
+    "ITENS QUE OBRIGAM PARTICIPAÇÃO": 50000322,
+    "Unnamed: 1": 22,
+    "Unnamed: 2": "ATENDIMENTO FISIOTERAPEUTICO DOMICILIAR POR ALTERAÇÕES ENDOCRINO-METABOLICAS",
+    "Especialidade": "Fisioterapia",
+    "CBO": 223605
+  },
+  {
+    "ITENS QUE OBRIGAM PARTICIPAÇÃO": 50000330,
+    "Unnamed: 1": 22,
+    "Unnamed: 2": "ATENDIMENTO FISIOTERAPEUTICO DOMICILIAR PARA ALTERAÇÕES INFLAMATORIAS E OU DEGENERATIVAS DO APARELHO GENITO-URINARIO, REPRODUTOR E/OU PROCTOLOGICO",
+    "Especialidade": "Fisioterapia",
+    "CBO": 223605
+  },
+  {
+    "ITENS QUE OBRIGAM PARTICIPAÇÃO": 50000349,
+    "Unnamed: 1": 22,
+    "Unnamed: 2": "CONSULTA HOSPITALAR EM FISIOTERAPIA",
+    "Especialidade": "Fisioterapia",
+    "CBO": 223605
+  },
+  {
+    "ITENS QUE OBRIGAM PARTICIPAÇÃO": 50000365,
+    "Unnamed: 1": 22,
+    "Unnamed: 2": "ATENDIMENTO FISIOTERAPEUTICO HOSPITALAR AO PACIENTE COM DISFUNÇÃO DECORRENTE DE ALTERAÇÕES DO SISTEMA MUSCULO-ESQUELETICO",
+    "Especialidade": "Fisioterapia",
+    "CBO": 223605
+  },
+  {
+    "ITENS QUE OBRIGAM PARTICIPAÇÃO": 50000381,
+    "Unnamed: 1": 22,
+    "Unnamed: 2": "ATENDIMENTO FISIOTERAPEUTICO HOSPITALAR AO PACIENTE COM DISFUNÇÃO DECORRENTE DE ALTERAÇÕES DO SISTEMA CARDIOVASCULAR",
+    "Especialidade": "Fisioterapia",
+    "CBO": 223605
+  },
+  {
+    "ITENS QUE OBRIGAM PARTICIPAÇÃO": 50000390,
+    "Unnamed: 1": 22,
+    "Unnamed: 2": "ATENDIMENTO FISIOTERAPEUTICO HOSPITALAR AO PACIENTE COM DISFUNÇÃO DECORRENTE DE QUEIMADURAS",
+    "Especialidade": "Fisioterapia",
+    "CBO": 223605
+  },
+  {
+    "ITENS QUE OBRIGAM PARTICIPAÇÃO": 50000403,
+    "Unnamed: 1": 22,
+    "Unnamed: 2": "ATENDIMENTO FISIOTERAPEUTICO HOSPITALAR AO PACIENTE COM DISFUNÇÃO DECORENTE DE ALTERAÇÕES DO SISTEMA LINFATICO E/OU VASCULAR PERIFERICO",
+    "Especialidade": "Fisioterapia",
+    "CBO": 223605
+  },
+  {
+    "ITENS QUE OBRIGAM PARTICIPAÇÃO": 50000411,
+    "Unnamed: 1": 22,
+    "Unnamed: 2": "ATENDIMENTO FISIOTERAPEUTICO HOSPITALAR NO PRÉ E PÓS CIRURGICO E EM RECUPERAÇÃO DE TECIDOS",
+    "Especialidade": "Fisioterapia",
+    "CBO": 223605
+  },
+  {
+    "ITENS QUE OBRIGAM PARTICIPAÇÃO": 50000420,
+    "Unnamed: 1": 22,
+    "Unnamed: 2": "ATENDIMENTO FISIOTERAPEUTICO HOSPITALAR POR ALTERAÇÕES ENDOCRINO-METABOLICAS",
+    "Especialidade": "Fisioterapia",
+    "CBO": 223605
+  },
+  {
+    "ITENS QUE OBRIGAM PARTICIPAÇÃO": 50000454,
+    "Unnamed: 1": 22,
+    "Unnamed: 2": "ATENDIMENTO FISIOTERAPEUTICO HOSPITALAR PARA ALTERAÇÕES INFLAMATORIAS E OU DEGENERATIVAS DO APARELHO GENITO-URINARIO, REPRODUTOR E/OU PROCTOLÓGICO",
+    "Especialidade": "Fisioterapia",
+    "CBO": 223605
+  },
+  {
+    "ITENS QUE OBRIGAM PARTICIPAÇÃO": 50000470,
+    "Unnamed: 1": 22,
+    "Unnamed: 2": "SESSÃO DE PSICOTERAPIA INDIVIDUAL POR PSICÓLOGO",
+    "Especialidade": "Psicologia",
+    "CBO": 251510
+  },
+  {
+    "ITENS QUE OBRIGAM PARTICIPAÇÃO": 50000489,
+    "Unnamed: 1": 22,
+    "Unnamed: 2": "SESSÃO DE PSICOTERAPIA EM GRUPO POR PSICÓLOGO",
+    "Especialidade": "Psicologia",
+    "CBO": 251510
+  },
+  {
+    "ITENS QUE OBRIGAM PARTICIPAÇÃO": 50000497,
+    "Unnamed: 1": 22,
+    "Unnamed: 2": "SESSÃO DE PSICOTERAPIA EM CASAL POR PSICÓLOGO",
+    "Especialidade": "Psicologia",
+    "CBO": 251510
+  },
+  {
+    "ITENS QUE OBRIGAM PARTICIPAÇÃO": 50000500,
+    "Unnamed: 1": 22,
+    "Unnamed: 2": "SESSÃO DE PSICOTERAPIA FAMILIAR POR PSICÓLOGO",
+    "Especialidade": "Psicologia",
+    "CBO": 251510
+  },
+  {
+    "ITENS QUE OBRIGAM PARTICIPAÇÃO": 50000560,
+    "Unnamed: 1": 22,
+    "Unnamed: 2": "CONSULTA AMBULATORIAL POR NUTRICIONISTA (COM DIRETRIZ DEFINIDA PELA ANS - Nº 103)",
+    "Especialidade": "Nutrição",
+    "CBO": 223710
+  },
+  {
+    "ITENS QUE OBRIGAM PARTICIPAÇÃO": 50000578,
+    "Unnamed: 1": 22,
+    "Unnamed: 2": "CONSULTA DOMICILIAR POR NUTRICIONISTA",
+    "Especialidade": "Nutrição",
+    "CBO": 223710
+  },
+  {
+    "ITENS QUE OBRIGAM PARTICIPAÇÃO": 50000586,
+    "Unnamed: 1": 22,
+    "Unnamed: 2": "CONSULTA INDIVIDUAL AMBULATORIAL DE FONOAUDIOLOGIA",
+    "Especialidade": "Fonoaudiologia",
+    "CBO": 223810
+  },
+  {
+    "ITENS QUE OBRIGAM PARTICIPAÇÃO": 50000594,
+    "Unnamed: 1": 22,
+    "Unnamed: 2": "CONSULTA INDIVIDUAL DOMICILIAR DE FONOAUDIOLOGIA",
+    "Especialidade": "Fonoaudiologia",
+    "CBO": 223810
+  },
+  {
+    "ITENS QUE OBRIGAM PARTICIPAÇÃO": 50000608,
+    "Unnamed: 1": 22,
+    "Unnamed: 2": "CONSULTA INDIVIDUAL HOSPITALAR DE FONOAUDIOLOGIA",
+    "Especialidade": "Fonoaudiologia",
+    "CBO": 223810
+  },
+  {
+    "ITENS QUE OBRIGAM PARTICIPAÇÃO": 50000616,
+    "Unnamed: 1": 22,
+    "Unnamed: 2": "SESSÃO INDIVIDUAL AMBULATORIAL DE FONOAUDIOLOGIA",
+    "Especialidade": "Fonoaudiologia",
+    "CBO": 223810
+  },
+  {
+    "ITENS QUE OBRIGAM PARTICIPAÇÃO": 50000624,
+    "Unnamed: 1": 22,
+    "Unnamed: 2": "SESSÃO INDIVIDUAL DOMICILIAR DE FONOAUDIOLOGIA",
+    "Especialidade": "Fonoaudiologia",
+    "CBO": 223810
+  },
+  {
+    "ITENS QUE OBRIGAM PARTICIPAÇÃO": 50000632,
+    "Unnamed: 1": 22,
+    "Unnamed: 2": "SESSÃO INDIVIDUAL HOSPITALAR DE FONOAUDIOLOGIA",
+    "Especialidade": "Fonoaudiologia",
+    "CBO": 223810
+  },
+  {
+    "ITENS QUE OBRIGAM PARTICIPAÇÃO": 50000640,
+    "Unnamed: 1": 22,
+    "Unnamed: 2": "SESSÃO DE FONOAUDIOLOGIA EM GRUPO",
+    "Especialidade": "Fonoaudiologia",
+    "CBO": 223810
+  },
+  {
+    "ITENS QUE OBRIGAM PARTICIPAÇÃO": 50000659,
+    "Unnamed: 1": 22,
+    "Unnamed: 2": "ORIENTAÇÃO FONOAUDIOLÓGICA AOS PAIS/ESCOLAR/CUIDADOR",
+    "Especialidade": "Fonoaudiologia",
+    "CBO": 223810
+  },
+  {
+    "ITENS QUE OBRIGAM PARTICIPAÇÃO": 50000667,
+    "Unnamed: 1": 22,
+    "Unnamed: 2": "ANÁLISE ACÚSTICA DA VOZ POR FONOAUDIÓLOGO",
+    "Especialidade": "Fonoaudiologia",
+    "CBO": 223810
+  },
+  {
+    "ITENS QUE OBRIGAM PARTICIPAÇÃO": 50000675,
+    "Unnamed: 1": 22,
+    "Unnamed: 2": "AVALIAÇÃO DO PROCESSAMENTO AUDITIVO CENTRAL POR FONOAUDIÓLOGO (COM DIRETRIZ DEFINIDA PELA ANS - Nº 5)",
+    "Especialidade": "Fonoaudiologia",
+    "CBO": 223810
+  },
+  {
+    "ITENS QUE OBRIGAM PARTICIPAÇÃO": 50000691,
+    "Unnamed: 1": 22,
+    "Unnamed: 2": "CONSULTA HOSPITALAR POR NUTRICIONISTA",
+    "Especialidade": "Nutrição",
+    "CBO": 223710
+  },
+  {
+    "ITENS QUE OBRIGAM PARTICIPAÇÃO": 50000713,
+    "Unnamed: 1": 22,
+    "Unnamed: 2": "ATENDIMENTO FISIOTERAPEUTICO AMBULATORIAL AO PACIENTE INDEPENDENTE OU COM DEPENDENCIA PARCIAL, COM DISFUNÇÃO DECORRENTE DE LESÃO DO SISTEMA NERVOSO CE",
+    "Especialidade": "Fisioterapia",
+    "CBO": 223605
+  },
+  {
+    "ITENS QUE OBRIGAM PARTICIPAÇÃO": 50000730,
+    "Unnamed: 1": 22,
+    "Unnamed: 2": "ATENDIMENTO FISIOTERAPEUTICO AMBULATORIAL INDIVIDUAL AO PACIENTE COM DISFUNÇÃO DECORRENTE DE ALTERAÇÕES NO SISTEMA RESPIRATORIO",
+    "Especialidade": "Fisioterapia",
+    "CBO": 223605
+  },
+  {
+    "ITENS QUE OBRIGAM PARTICIPAÇÃO": 50000748,
+    "Unnamed: 1": 22,
+    "Unnamed: 2": "ATENDIMENTO FISIOTERAPEUTICO AMBULATORIAL EM GRUPO AOS PACIENTES COM DISFUNÇÃO DECORRENTE DE ALTERAÇÕES NO SISTEMA RESPIRATÓRIO",
+    "Especialidade": "Fisioterapia",
+    "CBO": 223605
+  },
+  {
+    "ITENS QUE OBRIGAM PARTICIPAÇÃO": 50000756,
+    "Unnamed: 1": 22,
+    "Unnamed: 2": "ATENDIMENTO FISIOTERAPEUTICO AMBULATORIAL INDIVIDUAL AO PACIENTE COM DISFUNÇÃO DECORRENTE DE ALTERAÇÕES NO SISTEMA CARDIOVASCULAR",
+    "Especialidade": "Fisioterapia",
+    "CBO": 223605
+  },
+  {
+    "ITENS QUE OBRIGAM PARTICIPAÇÃO": 50000764,
+    "Unnamed: 1": 22,
+    "Unnamed: 2": "ATENDIMENTO FISIOTERAPEUTICO AMBULATORIAL EM GRUPO AOS PACIENTES COM DISFUNÇÃO DECORRENTE DE ALTERAÇÕES NO SISTEMA CARDIOVASCULAR",
+    "Especialidade": "Fisioterapia",
+    "CBO": 223605
+  },
+  {
+    "ITENS QUE OBRIGAM PARTICIPAÇÃO": 50000772,
+    "Unnamed: 1": 22,
+    "Unnamed: 2": "ATENDIMENTO FISIOTERAPEUTICO AMBULATORIAL INDIVIDUAL POR ALTERAÇÕES ENDOCRINO-METABOLICAS",
+    "Especialidade": "Fisioterapia",
+    "CBO": 223605
+  },
+  {
+    "ITENS QUE OBRIGAM PARTICIPAÇÃO": 50000780,
+    "Unnamed: 1": 22,
+    "Unnamed: 2": "ATENDIMENTO FISIOTERAPEUTICO AMBULATORIAL EM GRUPO POR ALTERAÇÕES ENDOCRINO-METABOLICAS",
+    "Especialidade": "Fisioterapia",
+    "CBO": 223605
+  },
+  {
+    "ITENS QUE OBRIGAM PARTICIPAÇÃO": 50000799,
+    "Unnamed: 1": 22,
+    "Unnamed: 2": "ATENDIMENTO FISIOTERAPEUTICO HOSPITALAR AO PACIENTE INDEPENDENTE OU COM DEPENDENCIA PARCIAL, COM DISFUNÇÃO DECORRENTE DE LESÃO DO SISTEMA NERVOSO CENT",
+    "Especialidade": "Fisioterapia",
+    "CBO": 223605
+  },
+  {
+    "ITENS QUE OBRIGAM PARTICIPAÇÃO": 50000802,
+    "Unnamed: 1": 22,
+    "Unnamed: 2": "ATENDIMENTO FISIOTERAPEUTICO HOSPITALAR AO PACIENTE DEPENDENTE COM DISFUNÇÃO DECORRENTE DE LESAO DO SISTEMA NERVOSO CENTRAL E/OU PERIFERICO",
+    "Especialidade": "Fisioterapia",
+    "CBO": 223605
+  },
+  {
+    "ITENS QUE OBRIGAM PARTICIPAÇÃO": 50000810,
+    "Unnamed: 1": 22,
+    "Unnamed: 2": "ATENDIMENTO FISIOTERAPEUTICO HOSPITALAR AO PACIENTE COM DISFUNÇÃO DECORRENTE DE ALTERAÇÕES NO SISTEMA RESPIRATÓRIO COM ASSISTENCIA VENTILATÓRIA",
+    "Especialidade": "Fisioterapia",
+    "CBO": 223605
+  },
+  {
+    "ITENS QUE OBRIGAM PARTICIPAÇÃO": 50000829,
+    "Unnamed: 1": 22,
+    "Unnamed: 2": "ATENDIMENTO FISIOTERAPEUTICO HOSPITALAR AO PACIENTE COM DISFUNÇÃO DECORRENTE DE ALTERAÇÕES NO SISTEMA RESPIRATÓRIO SEM ASSISTENCIA VENTILATÓRIA",
+    "Especialidade": "Fisioterapia",
+    "CBO": 223605
+  },
+  {
+    "ITENS QUE OBRIGAM PARTICIPAÇÃO": 50000837,
+    "Unnamed: 1": 22,
+    "Unnamed: 2": "FISIOTERAPIA AQUATICA INDIVIDUAL (HIDROTERAPIA)",
+    "Especialidade": "Fisioterapia",
+    "CBO": 223605
+  },
+  {
+    "ITENS QUE OBRIGAM PARTICIPAÇÃO": 50000845,
+    "Unnamed: 1": 22,
+    "Unnamed: 2": "FISIOTERAPIA AQUATICA EM GRUPO (HIDROTERAPIA)",
+    "Especialidade": "Fisioterapia",
+    "CBO": 223605
+  },
+  {
+    "ITENS QUE OBRIGAM PARTICIPAÇÃO": 50000853,
+    "Unnamed: 1": 22,
+    "Unnamed: 2": "ATENDIMENTO FISIOTERAPEUTICO INDIVIDUAL EM PILATES",
+    "Especialidade": "Fisioterapia",
+    "CBO": 223605
+  },
+  {
+    "ITENS QUE OBRIGAM PARTICIPAÇÃO": 50000861,
+    "Unnamed: 1": 22,
+    "Unnamed: 2": "ATENDIMENTO FISIOTERAPEUTICO EM GRUPO EM PILATES",
+    "Especialidade": "Fisioterapia",
+    "CBO": 223605
+  },
+  {
+    "ITENS QUE OBRIGAM PARTICIPAÇÃO": 50000870,
+    "Unnamed: 1": 22,
+    "Unnamed: 2": "ATENDIMENTO FISIOTERAPEUTICO EM QUIROPRAXIA",
+    "Especialidade": "Fisioterapia",
+    "CBO": 223605
+  },
+  {
+    "ITENS QUE OBRIGAM PARTICIPAÇÃO": 50001000,
+    "Unnamed: 1": 22,
+    "Unnamed: 2": "ATENDIMENTO FISIOTERAPEUTICO HOSPITALAR AO PACIENTE COM DISFUNÇÃO DECORRENTE DE ALTERAÇÕES NO SISTEMA RESPIRATORIO SEM ASSISTENCIA VENTILATÓRIA MECÂNI",
+    "Especialidade": "Fisioterapia",
+    "CBO": 223605
+  },
+  {
+    "ITENS QUE OBRIGAM PARTICIPAÇÃO": 50001019,
+    "Unnamed: 1": 22,
+    "Unnamed: 2": "ATENDIMENTO FISIOTERAPEUTICO HOSPITALAR AO PACIENTE COM DISFUNÇÃO DECORRENTE DE ALTERAÇÕES NO SISTEMA RESPIRATORIO COM ASSISTENCIA VENTILATÓRIA MECÂNI",
+    "Especialidade": "Fisioterapia",
+    "CBO": 223605
+  },
+  {
+    "ITENS QUE OBRIGAM PARTICIPAÇÃO": 50001043,
+    "Unnamed: 1": 22,
+    "Unnamed: 2": "ATENDIMENTO FISIOTERAPEUTICO HOSPITALAR AO PACIENTE COM DEPENDENCIA PARCIAL COM DISFUNÇÃO DECORRENTE DE LESÃO DO SISTEMA NERVOSO CENTRAL E/OU PERIFERI",
+    "Especialidade": "Fisioterapia",
+    "CBO": 223605
+  },
+  {
+    "ITENS QUE OBRIGAM PARTICIPAÇÃO": 50001051,
+    "Unnamed: 1": 22,
+    "Unnamed: 2": "ATENDIMENTO FISIOTERAPEUTICO HOSPITALAR AO PACIENTE COM DEPENDENCIA TOAL COM DISFUNÇÃO DECORRENTE DE LESAO DO SISTEMA NERVOSO CENTRAL E/OU PERIFERICO",
+    "Especialidade": "Fisioterapia",
+    "CBO": 223605
+  },
+  {
+    "ITENS QUE OBRIGAM PARTICIPAÇÃO": 50001078,
+    "Unnamed: 1": 22,
+    "Unnamed: 2": "ATENDIMENTO FISIOTERAPEUTICO AMBULATORIAL AO PACIENTE COM DEPENDENCIA TOTAL COM DISFUNÇÃO DECORRENTE DE LESÃO DO SISTEMA NERVOSO CENTRAL E/OU PERIFERI",
+    "Especialidade": "Fisioterapia",
+    "CBO": 223605
+  },
+  {
+    "ITENS QUE OBRIGAM PARTICIPAÇÃO": 50001183,
+    "Unnamed: 1": 22,
+    "Unnamed: 2": "SESSÃO EM PSICOLOGIA INDIVIDUAL",
+    "Especialidade": "Psicologia",
+    "CBO": 251510
+  },
+  {
+    "ITENS QUE OBRIGAM PARTICIPAÇÃO": 50001191,
+    "Unnamed: 1": 22,
+    "Unnamed: 2": "SESSÃO EM PSICOLOGIA EM GRUPO",
+    "Especialidade": "Psicologia",
+    "CBO": 251510
+  },
+  {
+    "ITENS QUE OBRIGAM PARTICIPAÇÃO": 50001221,
+    "Unnamed: 1": 22,
+    "Unnamed: 2": "CONSULTA AMBULATORIAL EM PSICOLOGIA",
+    "Especialidade": "Psicologia",
+    "CBO": 251510
+  },
+  {
+    "ITENS QUE OBRIGAM PARTICIPAÇÃO": 50001230,
+    "Unnamed: 1": 22,
+    "Unnamed: 2": "CONSULTA HOSPITALAR EM PSICOLOGIA",
+    "Especialidade": "Psicologia",
+    "CBO": 251510
+  },
+  {
+    "ITENS QUE OBRIGAM PARTICIPAÇÃO": 50001248,
+    "Unnamed: 1": 22,
+    "Unnamed: 2": "CONSULTA DOMICILIAR EM PSICOLOGIA",
+    "Especialidade": "Psicologia",
+    "CBO": 251510
+  },
+  {
+    "ITENS QUE OBRIGAM PARTICIPAÇÃO": 2250001922,
+    "Unnamed: 1": "00",
+    "Unnamed: 2": "VISITA DOMICILIAR EM PSICOLÓGO",
+    "Especialidade": "Psicologia",
+    "CBO": 251510
+  },
+  {
+    "ITENS QUE OBRIGAM PARTICIPAÇÃO": 2250005103,
+    "Unnamed: 1": "00",
+    "Unnamed: 2": "TERAPIA ABA - PSICOLOGIA - TERAPIAS PEDIATRICAS ESPECIAIS",
+    "Especialidade": "Psicologia",
+    "CBO": 251510
+  },
+  {
+    "ITENS QUE OBRIGAM PARTICIPAÇÃO": 2250005111,
+    "Unnamed: 1": "00",
+    "Unnamed: 2": "METODO BOBATH - FISIOTERAPIA  NEUROLÓGICA ESPECIAL",
+    "Especialidade": "Fisioterapia",
+    "CBO": 223605
+  },
+  {
+    "ITENS QUE OBRIGAM PARTICIPAÇÃO": 2250005120,
+    "Unnamed: 1": "00",
+    "Unnamed: 2": "METODO CUEVAS MEDEK EXERCISES (CME) - FISIOTERAPIA NEUROLÓGICA ESPECIAL",
+    "Especialidade": "Fisioterapia",
+    "CBO": 223605
+  },
+  {
+    "ITENS QUE OBRIGAM PARTICIPAÇÃO": 2250005138,
+    "Unnamed: 1": "00",
+    "Unnamed: 2": "METODO TEACCH - PSICOLOGIA - TERAPIAS PEDIATRICAS ESPECIAIS",
+    "Especialidade": "Psicologia",
+    "CBO": 251510
+  },
+  {
+    "ITENS QUE OBRIGAM PARTICIPAÇÃO": 2250005146,
+    "Unnamed: 1": "00",
+    "Unnamed: 2": "METODO PECS - FONOAUDIOLOGIA - TERAPIAS PEDIATRICAS ESPECIAIS",
+    "Especialidade": "Fonoaudiologia",
+    "CBO": 223810
+  },
+  {
+    "ITENS QUE OBRIGAM PARTICIPAÇÃO": 2250005189,
+    "Unnamed: 1": "00",
+    "Unnamed: 2": "TERAPIA ABA - FONOAUDIOLOGIA - TERAPIAS PEDIATRICAS ESPECIAIS",
+    "Especialidade": "Fonoaudiologia",
+    "CBO": 223810
+  },
+  {
+    "ITENS QUE OBRIGAM PARTICIPAÇÃO": 2250005219,
+    "Unnamed: 1": "00",
+    "Unnamed: 2": "METODO TEACCH - FONOAUDIOLOGIA - TERAPIAS PEDIATRICAS ESPECIAIS",
+    "Especialidade": "Fonoaudiologia",
+    "CBO": 223810
+  },
+  {
+    "ITENS QUE OBRIGAM PARTICIPAÇÃO": 2250005227,
+    "Unnamed: 1": "00",
+    "Unnamed: 2": "METODO DENVER - PSICOLOGIA - TERAPIAS PEDIATRICAS ESPECIAIS",
+    "Especialidade": "Psicologia",
+    "CBO": 251510
+  },
+  {
+    "ITENS QUE OBRIGAM PARTICIPAÇÃO": 2250005243,
+    "Unnamed: 1": "00",
+    "Unnamed: 2": "METODO DENVER - FONOAUDIOLOGIA - TERAPIAS PEDIATRICAS ESPECIAIS",
+    "Especialidade": "Fonoaudiologia",
+    "CBO": 223810
+  },
+  {
+    "ITENS QUE OBRIGAM PARTICIPAÇÃO": 2250005251,
+    "Unnamed: 1": "00",
+    "Unnamed: 2": "MÉTODO BOBATH – FONOAUDIOLOGIA - TERAPIAS PEDIÁTRICAS ESPECIAIS",
+    "Especialidade": "Fonoaudiologia",
+    "CBO": 223810
+  },
+  {
+    "ITENS QUE OBRIGAM PARTICIPAÇÃO": 2250005278,
+    "Unnamed: 1": "00",
+    "Unnamed: 2": "PSICOPEDAGOGIA - TERAPIAS PEDIÁTRICAS ESPECIAIS",
+    "Especialidade": "Psicologia",
+    "CBO": 251510
+  },
+  {
+    "ITENS QUE OBRIGAM PARTICIPAÇÃO": 2250005308,
+    "Unnamed: 1": "00",
+    "Unnamed: 2": "FONOAUDIÓLOGO - TERAPIAS PARA TRANSTORNOS GLOBAIS DE DESENVOLVIMENTO",
+    "Especialidade": "Fonoaudiologia",
+    "CBO": 223810
+  },
+  {
+    "ITENS QUE OBRIGAM PARTICIPAÇÃO": 2250005359,
+    "Unnamed: 1": "00",
+    "Unnamed: 2": "FISIOTERAPIA - TERAPIAS PARA TRANSTORNOS GLOBAIS DE DESENVOLVIMENTO",
+    "Especialidade": "Fisioterapia",
+    "CBO": 223605
+  },
+  {
+    "ITENS QUE OBRIGAM PARTICIPAÇÃO": 2250005421,
+    "Unnamed: 1": "00",
+    "Unnamed: 2": "CONSULTA NUTRICIONISTA POR TELEATENDIMENTO",
+    "Especialidade": "Nutrição",
+    "CBO": 223710
+  },
+  {
+    "ITENS QUE OBRIGAM PARTICIPAÇÃO": 2250005430,
+    "Unnamed: 1": "00",
+    "Unnamed: 2": "CONSULTA FONOAUDIÓLOGO POR TELEATENDIMENTO",
+    "Especialidade": "Fonoaudiologia",
+    "CBO": 223810
+  },
+  {
+    "ITENS QUE OBRIGAM PARTICIPAÇÃO": 2250005448,
+    "Unnamed: 1": "00",
+    "Unnamed: 2": "SESSÃO FONOAUDIÓLOGO POR TELEATENDIMENTO",
+    "Especialidade": "Fonoaudiologia",
+    "CBO": 223810
+  },
+  {
+    "ITENS QUE OBRIGAM PARTICIPAÇÃO": 20103492,
+    "Unnamed: 1": 22,
+    "Unnamed: 2": "PATOLOGIA OSTEOMIOARTICULAR EM DOIS OU MAIS MEMBROS",
+    "Especialidade": "Fisioterapia",
+    "CBO": 223605
+  },
+  {
+    "ITENS QUE OBRIGAM PARTICIPAÇÃO": 20103638,
+    "Unnamed: 1": 22,
+    "Unnamed: 2": "REABILITAÇÃO LABIRÍNTICA (POR SESSÃO)",
+    "Especialidade": "Fisioterapia; Fonoaudiologia",
+    "CBO": "223605; 223810"
+  },
+  {
+    "ITENS QUE OBRIGAM PARTICIPAÇÃO": 20103646,
+    "Unnamed: 1": 22,
+    "Unnamed: 2": "REABILITAÇÃO PERINEAL COM BIOFEEDBACK",
+    "Especialidade": "Fisioterapia",
+    "CBO": 223605
+  },
+  {
+    "ITENS QUE OBRIGAM PARTICIPAÇÃO": 20203020,
+    "Unnamed: 1": 22,
+    "Unnamed: 2": "ELETROESTIMULAÇÃO DO ASSOALHO PÉLVICO E/OU OUTRA TÉCNICA DE EXERCÍCIOS PERINEAIS",
+    "Especialidade": "Fisioterapia",
+    "CBO": 223605
+  },
+  {
+    "ITENS QUE OBRIGAM PARTICIPAÇÃO": 50000039,
+    "Unnamed: 1": 22,
+    "Unnamed: 2": "SESSÃO DE LUDOTERAPIA INDIVIDUAL",
+    "Especialidade": "Psicologia",
+    "CBO": 251510
+  },
+  {
+    "ITENS QUE OBRIGAM PARTICIPAÇÃO": 50000047,
+    "Unnamed: 1": 22,
+    "Unnamed: 2": "SESSÃO DE LUDOTERAPIA EM GRUPO",
+    "Especialidade": "Psicologia",
+    "CBO": 251510
+  },
+  {
+    "ITENS QUE OBRIGAM PARTICIPAÇÃO": 50000055,
+    "Unnamed: 1": 22,
+    "Unnamed: 2": "CONSULTA INDIVIDUAL AMBULATORIAL, EM TERAPIA OCUPACIONAL",
+    "Especialidade": "Fisioterapia",
+    "CBO": 223605
+  },
+  {
+    "ITENS QUE OBRIGAM PARTICIPAÇÃO": 50000071,
+    "Unnamed: 1": 22,
+    "Unnamed: 2": "CONSULTA INDIVIDUAL HOSPITALAR, EM TERAPIA OCUPACIONAL",
+    "Especialidade": "Fisioterapia",
+    "CBO": 223605
+  },
+  {
+    "ITENS QUE OBRIGAM PARTICIPAÇÃO": 50000080,
+    "Unnamed: 1": 22,
+    "Unnamed: 2": "SESSÃO INDIVIDUAL AMBULATORIAL, EM TERAPIA OCUPACIONAL",
+    "Especialidade": "Psicologia",
+    "CBO": 251510
+  },
+  {
+    "ITENS QUE OBRIGAM PARTICIPAÇÃO": 50000101,
+    "Unnamed: 1": 22,
+    "Unnamed: 2": "SESSÃO INDIVIDUAL HOSPITALAR, EM TERAPIA OCUPACIONAL",
+    "Especialidade": "Psicologia",
+    "CBO": 251510
+  },
+  {
+    "ITENS QUE OBRIGAM PARTICIPAÇÃO": 50000110,
+    "Unnamed: 1": 22,
+    "Unnamed: 2": "SESSÃO DE TERAPIA OCUPACIONAL FAMILIAR",
+    "Especialidade": "Psicologia",
+    "CBO": 251510
+  },
+  {
+    "ITENS QUE OBRIGAM PARTICIPAÇÃO": 50000128,
+    "Unnamed: 1": 22,
+    "Unnamed: 2": "SESSÃO DE TERAPIA OCUPACIONAL EM GRUPO",
+    "Especialidade": "Psicologia",
+    "CBO": 251510
+  },
+  {
+    "ITENS QUE OBRIGAM PARTICIPAÇÃO": 50000136,
+    "Unnamed: 1": 22,
+    "Unnamed: 2": "SESSÃO DE TERAPIA OCUPACIONAL PARA TREINAMENTO ORTESES, PRÓTESES E ADAPTAÇÕES",
+    "Especialidade": "Fisioterapia",
+    "CBO": 223605
+  },
+  {
+    "ITENS QUE OBRIGAM PARTICIPAÇÃO": 50001060,
+    "Unnamed: 1": 22,
+    "Unnamed: 2": "ATENDIMENTO FISIOTERAPEUTICO AMBULATORIAL AO PACIENTE COM DEPENDENCIA PARCIAL CO",
+    "Especialidade": "Fisioterapia",
+    "CBO": 223605
+  },
+  {
+    "ITENS QUE OBRIGAM PARTICIPAÇÃO": 50000519,
+    "Unnamed: 1": 22,
+    "Unnamed: 2": "ACOMPANHAMENTO E REABILITAÇÃO PROFISSIONAL POR PSICÓLOGO",
+    "Especialidade": "Psicologia",
+    "CBO": 251510
+  },
+  {
+    "ITENS QUE OBRIGAM PARTICIPAÇÃO": 2250005286,
+    "Unnamed: 1": 22,
+    "Unnamed: 2": "PSICOLOGO   TERAPIAS PARA TRANSTORNOS GLOBAIS DE DESENVOLVIMENTO",
+    "Especialidade": "Psicologia",
+    "CBO": 251510
+  },
+  {
+    "ITENS QUE OBRIGAM PARTICIPAÇÃO": 2250005260,
+    "Unnamed: 1": 22,
+    "Unnamed: 2": "INTEGRACAO SENSORIAL   TERAPIAS PEDIATRICAS ESPECIAIS",
+    "Especialidade": "Fisioterapia",
+    "CBO": 223605
+  },
+  {
+    "ITENS QUE OBRIGAM PARTICIPAÇÃO": 2250005367,
+    "Unnamed: 1": 22,
+    "Unnamed: 2": "AVALIACAO NEUROPSICOLOGICA",
+    "Especialidade": "Psicologia",
+    "CBO": 251510
+  }
+]

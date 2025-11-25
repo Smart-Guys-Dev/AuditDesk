@@ -1,0 +1,286 @@
+# src/rule_engine.py
+
+import json
+import os
+import logging
+import lxml.etree as etree
+
+# Assumindo que os módulos xml_reader e file_handler estão no mesmo diretório 'src'
+from .xml_reader import XMLReader, NAMESPACES
+from .file_handler import FileHandler
+
+logger = logging.getLogger(__name__)
+
+# Centraliza as configurações das listas para evitar erros de digitação e facilitar a manutenção.
+LIST_CONFIG = {
+    "codigos_terapias_seriadas": {"key": "ITENS QUE OBRIGAM PARTICIPAÇÃO", "type": "map"},
+    "codigos_equipe_obrigatoria": {"key": "ITENS QUE OBRIGAM PARTICIPAÇÃO", "type": "set"},
+    "codigos_cbo_medicos": {"key": "cbo", "type": "set"},
+    "ignore_00": {"key": "Código", "type": "set"}
+}
+
+class RuleEngine:
+    """
+    Motor de regras para carregar, interpretar e aplicar correções em arquivos XML
+    baseado em um conjunto de regras declarativas definidas em arquivos JSON.
+    """
+    def __init__(self, config_dir="config/"):
+        base_path = os.path.dirname(os.path.abspath(__file__))
+        self.config_dir = os.path.join(base_path, config_dir)
+        
+        self.rules_config_master = {}
+        self.loaded_rules = []
+        self.external_lists = {}
+        self.xml_reader = XMLReader()
+        self.file_handler = FileHandler()
+
+    def _load_json_file(self, file_path):
+        """Carrega e decodifica um arquivo JSON de forma segura."""
+        if not os.path.exists(file_path): 
+            logger.error(f"Arquivo de configuração não encontrado: {file_path}")
+            return None
+        try:
+            with open(file_path, 'r', encoding='utf-8') as f: 
+                return json.load(f)
+        except json.JSONDecodeError as e: 
+            logger.error(f"Erro de sintaxe no JSON {os.path.basename(file_path)}: {e}")
+            return None
+        except Exception as e: 
+            logger.error(f"Erro inesperado ao ler o arquivo {os.path.basename(file_path)}: {e}")
+            return None
+
+    def _load_list_from_json(self, list_id, file_name):
+        """
+        Carrega uma lista de dados de um arquivo JSON e a armazena de forma otimizada.
+        Utiliza o dicionário LIST_CONFIG para determinar como processar cada arquivo.
+        """
+        json_path = os.path.join(self.config_dir, file_name)
+        raw_list = self._load_json_file(json_path)
+        if not isinstance(raw_list, list) or not raw_list: 
+            logger.error(f"Conteúdo da lista '{list_id}' em '{file_name}' é inválido ou está vazio.")
+            return False
+        
+        config = LIST_CONFIG.get(list_id)
+        if not config:
+            logger.error(f"Configuração para a lista '{list_id}' não encontrada em LIST_CONFIG.")
+            return False
+
+        # Remove a primeira linha se for um cabeçalho
+        first_item = raw_list[0]
+        if isinstance(first_item, dict) and any(str(v).lower() in ["código", "tabela", "descrição", "cbo"] for v in first_item.values()):
+            raw_list = raw_list[1:]
+
+        key_name = config["key"]
+        storage_type = config["type"]
+
+        if storage_type == "map":
+            mapped_codes = {
+                str(item[key_name]): {
+                    "Especialidade": item.get("Especialidade"), 
+                    "CBO": str(item.get("CBO")) if item.get("CBO") else None
+                } 
+                for item in raw_list if item.get(key_name)
+            }
+            self.external_lists[list_id] = mapped_codes
+        else: # storage_type == "set"
+            self.external_lists[list_id] = {str(item.get(key_name)) for item in raw_list if item.get(key_name)}
+        
+        logger.info(f"Lista '{list_id}' carregada com {len(self.external_lists[list_id])} itens.")
+        return True
+
+    def load_all_rules(self):
+        """
+        Carrega a configuração mestre, todas as listas de dados e todas as regras ativas
+        dos arquivos JSON especificados.
+        """
+        master_config_path = os.path.join(self.config_dir, "rules_config.json")
+        self.rules_config_master = self._load_json_file(master_config_path)
+        if not self.rules_config_master: return False
+        
+        for list_id, file_name in self.rules_config_master.get("listas_comuns", {}).items():
+            if not self._load_list_from_json(list_id, file_name): return False
+        
+        self.loaded_rules = []
+        for group in self.rules_config_master.get("grupos_para_carregar", []):
+            if group.get("ativo", False):
+                rules_file = group.get("arquivo_regras")
+                if not rules_file: continue
+                
+                rules_path = os.path.join(self.config_dir, rules_file)
+                group_rules = self._load_json_file(rules_path)
+                
+                if group_rules and isinstance(group_rules, list):
+                    self.loaded_rules.extend(rule for rule in group_rules if rule.get("ativo", False))
+                    logger.info(f"Grupo '{group.get('nome_grupo')}' carregado.")
+        
+        logger.info(f"Total de {len(self.loaded_rules)} regras ativas carregadas.")
+        return True
+
+    def _evaluate_condition(self, element, condition):
+        """Avalia recursivamente se um elemento XML atende a um conjunto de condições."""
+        if not condition:
+            return True
+
+        if "condicao_multipla" in condition:
+            multi_cond = condition["condicao_multipla"]
+            sub_conditions = multi_cond.get("sub_condicoes", [])
+            logic_type = multi_cond.get("tipo")
+            if logic_type == "AND": 
+                return all(self._evaluate_condition(element, sc) for sc in sub_conditions)
+            if logic_type == "OR": 
+                return any(self._evaluate_condition(element, sc) for sc in sub_conditions)
+
+        if "condicao_tag_valor" in condition:
+            tag_cond = condition["condicao_tag_valor"]
+            xpath_expr = tag_cond.get("xpath")
+            compare_type = tag_cond.get("tipo_comparacao", "valor_permitido")
+            
+            nodes = self.xml_reader.find_elements_by_xpath(element, xpath_expr)
+            
+            if compare_type == "existe": return bool(nodes)
+            if compare_type == "nao_existe": return not bool(nodes)
+            if not nodes: return False
+            
+            node_text = self.xml_reader.get_element_text(nodes[0])
+            if node_text is None: return False
+            
+            list_id = tag_cond.get("id_lista")
+            
+            if compare_type == "not_in_lista":
+                return list_id in self.external_lists and node_text not in self.external_lists[list_id]
+            elif compare_type == "in_lista":
+                return list_id in self.external_lists and node_text in self.external_lists[list_id]
+            elif compare_type == "contem_e_especialidade":
+                specialty = tag_cond.get("especialidade_esperada")
+                return (list_id in self.external_lists and 
+                        node_text in self.external_lists[list_id] and 
+                        self.external_lists[list_id].get(node_text, {}).get("Especialidade") == specialty)
+            elif compare_type == "valor_atual_diferente":
+                return str(node_text) != str(tag_cond.get("valor_atual"))
+            elif compare_type == "valor_atual_igual":
+                return str(node_text) == str(tag_cond.get("valor_atual"))
+            elif "valor_permitido" in tag_cond:
+                return node_text in tag_cond["valor_permitido"]
+        
+        return True
+
+    def _apply_action(self, element, action_config):
+        """Aplica uma ação de modificação em um elemento XML com base na configuração da regra."""
+        action_type = action_config.get("tipo_acao")
+        tag_alvo_xpath = action_config.get("tag_alvo")
+
+        if action_type == "multiplas_acoes":
+            modified = False
+            for sub_action in action_config.get("sub_acoes", []):
+                if self._apply_action(element, sub_action):
+                    modified = True
+            return modified
+
+        if action_type == "reordenar_elementos_filhos":
+            target_node_for_reorder = element
+            if tag_alvo_xpath:
+                found_nodes = self.xml_reader.find_elements_by_xpath(element, tag_alvo_xpath)
+                if not found_nodes: return False
+                target_node_for_reorder = found_nodes[0]
+
+            ordem_correta = action_config.get("ordem_correta", [])
+            if not ordem_correta: return False
+
+            all_children = list(target_node_for_reorder)
+            children_map = {etree.QName(child).localname: child for child in all_children}
+            order_set = set(ordem_correta)
+            
+            new_children_sequence = [children_map[tag_name] for tag_name in ordem_correta if tag_name in children_map]
+            new_children_sequence.extend(child for child in all_children if etree.QName(child).localname not in order_set)
+            
+            target_node_for_reorder.clear()
+            for child in new_children_sequence:
+                target_node_for_reorder.append(child)
+            
+            return True
+
+        if not tag_alvo_xpath: return False
+
+        modified = False
+        target_nodes = self.xml_reader.find_elements_by_xpath(element, tag_alvo_xpath)
+
+        if action_type == "substituir_conteudo_tag":
+            if target_nodes:
+                new_content = str(action_config.get("novo_conteudo", ""))
+                if target_nodes[0].text != new_content:
+                    target_nodes[0].text = new_content
+                    modified = True
+        
+        elif action_type == "remover_tag_inteira":
+            for node in target_nodes:
+                parent = node.getparent()
+                if parent is not None:
+                    parent.remove(node)
+                    modified = True
+
+        elif action_type == "garantir_tag_com_conteudo":
+            novo_conteudo = str(action_config.get("novo_conteudo", ""))
+            if target_nodes:
+                if target_nodes[0].text != novo_conteudo:
+                    target_nodes[0].text = novo_conteudo
+                    modified = True
+            else:
+                parts = tag_alvo_xpath.split('/')
+                tag_parts = parts[-1].split(':')
+                prefix = tag_parts[0] if len(tag_parts) > 1 else 'ptu'
+                tag_name = tag_parts[-1]
+                ns = NAMESPACES.get(prefix)
+
+                if not ns: return False
+
+                new_tag = etree.Element(f"{{{ns}}}{tag_name}", nsmap=NAMESPACES)
+                new_tag.text = novo_conteudo
+                
+                parent_xpath = '/'.join(parts[:-1]) if len(parts) > 1 else '.'
+                parent_nodes = self.xml_reader.find_elements_by_xpath(element, parent_xpath)
+                if not parent_nodes: return False
+                parent_node = parent_nodes[0]
+                
+                tag_ref_xpath = action_config.get("tag_referencia_posicao")
+                posicao_insercao = action_config.get("posicao_insercao")
+
+                if tag_ref_xpath and (ref_nodes := self.xml_reader.find_elements_by_xpath(element, tag_ref_xpath)):
+                    ref_nodes[0].addnext(new_tag)
+                elif posicao_insercao == "primeiro_filho":
+                    parent_node.insert(0, new_tag)
+                else:
+                    parent_node.append(new_tag)
+                modified = True
+                
+        return modified
+    
+    def apply_rules_to_xml(self, xml_tree):
+        """
+        Aplica todo o conjunto de regras carregadas a uma árvore XML.
+
+        Args:
+            xml_tree (lxml.etree._ElementTree): A árvore XML a ser modificada.
+
+        Returns:
+            bool: True se alguma alteração foi feita, False caso contrário.
+        """
+        alterations_made = False
+        root = xml_tree.getroot()
+        
+        for rule in self.loaded_rules:
+            try:
+                conditions = rule.get("condicoes", {})
+                tipo_elemento = conditions.get("tipo_elemento")
+                
+                target_elements = self.xml_reader.find_elements_by_xpath(root, f".//ptu:{tipo_elemento}") if tipo_elemento else [root]
+                
+                for element in target_elements:
+                    if self._evaluate_condition(element, conditions):
+                        if self._apply_action(element, rule.get("acao", {})):
+                            logger.info(f"Regra '{rule.get('id')}' aplicada com sucesso.")
+                            alterations_made = True
+            except Exception as e:
+                logger.error(f"ERRO na regra {rule.get('id')}: {e}")
+                continue
+                        
+        return alterations_made

@@ -1,0 +1,24 @@
+{
+  "grupos_para_carregar": [
+    {
+      "nome_grupo": "Regras Equipe Profissional SADT",
+      "arquivo_regras": "regras_grupo_1200.json",
+      "ativo": true
+    },
+    {
+      "nome_grupo": "Regras para Terapias Seriadas",
+      "arquivo_regras": "regras_grupo_1201.json",
+      "ativo": true
+    },
+    {
+      "nome_grupo": "Regras de Correção de tp_Participacao",
+      "arquivo_regras": "regras_tp_participacao.json",
+      "ativo": true
+    }
+  ],
+  "listas_comuns": {
+    "codigos_equipe_obrigatoria": "codigos_equipe_obrigatoria.json",
+    "codigos_terapias_seriadas": "codigos_terapias_seriadas.json",
+    "codigos_cbo_medicos": "codigos_cbo_medicos.json"
+  }
+}

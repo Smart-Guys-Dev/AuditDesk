@@ -1,0 +1,592 @@
+[
+  {
+    "id": "REGRA_PARTICIPACAO_20104103",
+    "descricao": "Garante tp_Participacao = '12' para o serviço 20104103.",
+    "ativo": true,
+    "condicoes": {
+      "tipo_elemento": "procedimentosExecutados",
+      "condicao_tag_valor": {
+        "xpath": "./ptu:procedimentos/ptu:cd_Servico",
+        "valor_permitido": [
+          "20104103"
+        ]
+      }
+    },
+    "acao": {
+      "tipo_acao": "garantir_tag_com_conteudo",
+      "tag_alvo": "./ptu:equipe_Profissional/ptu:tp_Participacao",
+      "novo_conteudo": "12",
+      "posicao_insercao": "primeiro_filho",
+      "tag_pai_referencia": "./ptu:equipe_Profissional"
+    }
+  },
+  {
+    "id": "REGRA_PARTICIPACAO_20104090",
+    "descricao": "Garante tp_Participacao = '12' para o serviço 20104090.",
+    "ativo": true,
+    "condicoes": {
+      "tipo_elemento": "procedimentosExecutados",
+      "condicao_tag_valor": {
+        "xpath": "./ptu:procedimentos/ptu:cd_Servico",
+        "valor_permitido": [
+          "20104090"
+        ]
+      }
+    },
+    "acao": {
+      "tipo_acao": "garantir_tag_com_conteudo",
+      "tag_alvo": "./ptu:equipe_Profissional/ptu:tp_Participacao",
+      "novo_conteudo": "12",
+      "posicao_insercao": "primeiro_filho",
+      "tag_pai_referencia": "./ptu:equipe_Profissional"
+    }
+  },
+  {
+    "id": "REGRA_PARTICIPACAO_20103301",
+    "descricao": "Garante tp_Participacao = '12' para o serviço 20103301.",
+    "ativo": true,
+    "condicoes": {
+      "tipo_elemento": "procedimentosExecutados",
+      "condicao_tag_valor": {
+        "xpath": "./ptu:procedimentos/ptu:cd_Servico",
+        "valor_permitido": [
+          "20103301"
+        ]
+      }
+    },
+    "acao": {
+      "tipo_acao": "garantir_tag_com_conteudo",
+      "tag_alvo": "./ptu:equipe_Profissional/ptu:tp_Participacao",
+      "novo_conteudo": "12",
+      "posicao_insercao": "primeiro_filho",
+      "tag_pai_referencia": "./ptu:equipe_Profissional"
+    }
+  },
+  {
+    "id": "REGRA_PARTICIPACAO_40813363",
+    "descricao": "Garante tp_Participacao = '00' para o serviço 40813363.",
+    "ativo": false,
+    "condicoes": {
+      "tipo_elemento": "procedimentosExecutados",
+      "condicao_tag_valor": {
+        "xpath": "./ptu:procedimentos/ptu:cd_Servico",
+        "valor_permitido": [
+          "40813363"
+        ]
+      }
+    },
+    "acao": {
+      "tipo_acao": "garantir_tag_com_conteudo",
+      "tag_alvo": "./ptu:equipe_Profissional/ptu:tp_Participacao",
+      "novo_conteudo": "00",
+      "posicao_insercao": "primeiro_filho",
+      "tag_pai_referencia": "./ptu:equipe_Profissional"
+    }
+  },
+  {
+    "id": "REGRA_PARTICIPACAO_10102019",
+    "descricao": "Garante tp_Participacao = '12' para o serviço 10102019.",
+    "ativo": true,
+    "condicoes": {
+      "tipo_elemento": "procedimentosExecutados",
+      "condicao_tag_valor": {
+        "xpath": "./ptu:procedimentos/ptu:cd_Servico",
+        "valor_permitido": [
+          "10102019"
+        ]
+      }
+    },
+    "acao": {
+      "tipo_acao": "garantir_tag_com_conteudo",
+      "tag_alvo": "./ptu:equipe_Profissional/ptu:tp_Participacao",
+      "novo_conteudo": "12",
+      "posicao_insercao": "primeiro_filho",
+      "tag_pai_referencia": "./ptu:equipe_Profissional"
+    }
+  },
+  {
+    "id": "REGRA_PARTICIPACAO_40813363_COM_ANESTESIA",
+    "descricao": "Garante tp_Participacao = '06' para o serviço 40813363 quando houver Porte Anestésico.",
+    "ativo": true,
+    "condicoes": {
+      "tipo_elemento": "procedimentosExecutados",
+      "condicao_multipla": {
+        "tipo": "AND",
+        "sub_condicoes": [
+          {
+            "condicao_tag_valor": {
+              "xpath": "./ptu:procedimentos/ptu:cd_Servico",
+              "valor_permitido": [
+                "40813363"
+              ]
+            }
+          },
+          {
+            "condicao_tag_valor": {
+              "xpath": "./ptu:cd_PorteAnestesico",
+              "tipo_comparacao": "existe"
+            }
+          }
+        ]
+      }
+    },
+    "acao": {
+      "tipo_acao": "garantir_tag_com_conteudo",
+      "tag_alvo": "./ptu:equipe_Profissional/ptu:tp_Participacao",
+      "novo_conteudo": "06",
+      "posicao_insercao": "primeiro_filho",
+      "tag_pai_referencia": "./ptu:equipe_Profissional"
+    }
+  },
+  {
+    "id": "REGRA_PARTICIPACAO_40813363_SEM_ANESTESIA",
+    "descricao": "Garante tp_Participacao = '00' para o serviço 40813363 quando NÃO houver Porte Anestésico.",
+    "ativo": true,
+    "condicoes": {
+      "tipo_elemento": "procedimentosExecutados",
+      "condicao_multipla": {
+        "tipo": "AND",
+        "sub_condicoes": [
+          {
+            "condicao_tag_valor": {
+              "xpath": "./ptu:procedimentos/ptu:cd_Servico",
+              "valor_permitido": [
+                "40813363"
+              ]
+            }
+          },
+          {
+            "condicao_tag_valor": {
+              "xpath": "./ptu:cd_PorteAnestesico",
+              "tipo_comparacao": "nao_existe"
+            }
+          }
+        ]
+      }
+    },
+    "acao": {
+      "tipo_acao": "garantir_tag_com_conteudo",
+      "tag_alvo": "./ptu:equipe_Profissional/ptu:tp_Participacao",
+      "novo_conteudo": "00",
+      "posicao_insercao": "primeiro_filho",
+      "tag_pai_referencia": "./ptu:equipe_Profissional"
+    }
+  },
+  {
+    "id": "REGRA_PARTICIPACAO_31602207",
+    "descricao": "Garante tp_Participacao = '06' para o serviço 31602207.",
+    "ativo": true,
+    "condicoes": {
+      "tipo_elemento": "procedimentosExecutados",
+      "condicao_tag_valor": {
+        "xpath": "./ptu:procedimentos/ptu:cd_Servico",
+        "valor_permitido": [
+          "31602207"
+        ]
+      }
+    },
+    "acao": {
+      "tipo_acao": "garantir_tag_com_conteudo",
+      "tag_alvo": "./ptu:equipe_Profissional/ptu:tp_Participacao",
+      "novo_conteudo": "06",
+      "posicao_insercao": "primeiro_filho",
+      "tag_pai_referencia": "./ptu:equipe_Profissional"
+    }
+  },
+  {
+    "id": "REGRA_PARTICIPACAO_31403026",
+    "descricao": "Garante tp_Participacao = '00' para o serviço 31403026.",
+    "ativo": true,
+    "condicoes": {
+      "tipo_elemento": "procedimentosExecutados",
+      "condicao_tag_valor": {
+        "xpath": "./ptu:procedimentos/ptu:cd_Servico",
+        "valor_permitido": [
+          "31403026"
+        ]
+      }
+    },
+    "acao": {
+      "tipo_acao": "garantir_tag_com_conteudo",
+      "tag_alvo": "./ptu:equipe_Profissional/ptu:tp_Participacao",
+      "novo_conteudo": "00",
+      "posicao_insercao": "primeiro_filho",
+      "tag_pai_referencia": "./ptu:equipe_Profissional"
+    }
+  },
+  {
+    "id": "REGRA_PARTICIPACAO_30720109",
+    "descricao": "Garante tp_Participacao = '00' para o serviço 30720109, 30711010, 30101611.",
+    "ativo": true,
+    "condicoes": {
+      "tipo_elemento": "procedimentosExecutados",
+      "condicao_tag_valor": {
+        "xpath": "./ptu:procedimentos/ptu:cd_Servico",
+        "valor_permitido": [
+          "30720109",
+          "30711010",
+          "30101611",
+          "30711037",
+          "30310067",
+          "30711029"
+        ]
+      }
+    },
+    "acao": {
+      "tipo_acao": "garantir_tag_com_conteudo",
+      "tag_alvo": "./ptu:equipe_Profissional/ptu:tp_Participacao",
+      "novo_conteudo": "00",
+      "posicao_insercao": "primeiro_filho",
+      "tag_pai_referencia": "./ptu:equipe_Profissional"
+    }
+  },
+  {
+    "id": "REGRA_PARTICIPACAO_40202445",
+    "descricao": "Garante tp_Participacao = '00' para o serviço 40202445.",
+    "ativo": true,
+    "condicoes": {
+      "tipo_elemento": "procedimentosExecutados",
+      "condicao_tag_valor": {
+        "xpath": "./ptu:procedimentos/ptu:cd_Servico",
+        "valor_permitido": [
+          "40202445"
+        ]
+      }
+    },
+    "acao": {
+      "tipo_acao": "garantir_tag_com_conteudo",
+      "tag_alvo": "./ptu:equipe_Profissional/ptu:tp_Participacao",
+      "novo_conteudo": "00",
+      "posicao_insercao": "primeiro_filho",
+      "tag_pai_referencia": "./ptu:equipe_Profissional"
+    }
+  },
+  {
+    "id": "REGRA_PARTICIPACAO_40809218",
+    "descricao": "Garante tp_Participacao = '00' para o serviço 40809218.",
+    "ativo": true,
+    "condicoes": {
+      "tipo_elemento": "procedimentosExecutados",
+      "condicao_tag_valor": {
+        "xpath": "./ptu:procedimentos/ptu:cd_Servico",
+        "valor_permitido": [
+          "40809218"
+        ]
+      }
+    },
+    "acao": {
+      "tipo_acao": "garantir_tag_com_conteudo",
+      "tag_alvo": "./ptu:equipe_Profissional/ptu:tp_Participacao",
+      "novo_conteudo": "00",
+      "posicao_insercao": "primeiro_filho",
+      "tag_pai_referencia": "./ptu:equipe_Profissional"
+    }
+  },
+  {
+    "id": "REGRA_PARTICIPACAO_40809226_40809161",
+    "descricao": "Garante tp_Participacao = '12' para o serviço 40809226 e 40809161.",
+    "ativo": true,
+    "condicoes": {
+      "tipo_elemento": "procedimentosExecutados",
+      "condicao_tag_valor": {
+        "xpath": "./ptu:procedimentos/ptu:cd_Servico",
+        "valor_permitido": [
+          "40809226",
+          "40809161"
+        ]
+      }
+    },
+    "acao": {
+      "tipo_acao": "garantir_tag_com_conteudo",
+      "tag_alvo": "./ptu:equipe_Profissional/ptu:tp_Participacao",
+      "novo_conteudo": "12",
+      "posicao_insercao": "primeiro_filho",
+      "tag_pai_referencia": "./ptu:equipe_Profissional"
+    }
+  },
+  {
+    "id": "REGRA_PARTICIPACAO_40813401",
+    "descricao": "Garante tp_Participacao = '00' para o serviço 40813401.",
+    "ativo": true,
+    "condicoes": {
+      "tipo_elemento": "procedimentosExecutados",
+      "condicao_tag_valor": {
+        "xpath": "./ptu:procedimentos/ptu:cd_Servico",
+        "valor_permitido": [
+          "40813401"
+        ]
+      }
+    },
+    "acao": {
+      "tipo_acao": "garantir_tag_com_conteudo",
+      "tag_alvo": "./ptu:equipe_Profissional/ptu:tp_Participacao",
+      "novo_conteudo": "00",
+      "posicao_insercao": "primeiro_filho",
+      "tag_pai_referencia": "./ptu:equipe_Profissional"
+    }
+  },
+  {
+    "id": "REGRA_PARTICIPACAO_31602070",
+    "descricao": "Garante tp_Participacao = '00' para o serviço 31602070.",
+    "ativo": true,
+    "condicoes": {
+      "tipo_elemento": "procedimentosExecutados",
+      "condicao_tag_valor": {
+        "xpath": "./ptu:procedimentos/ptu:cd_Servico",
+        "valor_permitido": [
+          "31602070"
+        ]
+      }
+    },
+    "acao": {
+      "tipo_acao": "garantir_tag_com_conteudo",
+      "tag_alvo": "./ptu:equipe_Profissional/ptu:tp_Participacao",
+      "novo_conteudo": "00",
+      "posicao_insercao": "primeiro_filho",
+      "tag_pai_referencia": "./ptu:equipe_Profissional"
+    }
+  },
+  {
+    "id": "REGRA_PARTICIPACAO_30302064",
+    "descricao": "Garante tp_Participacao = '00' para o serviço 30302064.",
+    "ativo": true,
+    "condicoes": {
+      "tipo_elemento": "procedimentosExecutados",
+      "condicao_tag_valor": {
+        "xpath": "./ptu:procedimentos/ptu:cd_Servico",
+        "valor_permitido": [
+          "30302064"
+        ]
+      }
+    },
+    "acao": {
+      "tipo_acao": "garantir_tag_com_conteudo",
+      "tag_alvo": "./ptu:equipe_Profissional/ptu:tp_Participacao",
+      "novo_conteudo": "00",
+      "posicao_insercao": "primeiro_filho",
+      "tag_pai_referencia": "./ptu:equipe_Profissional"
+    }
+  },
+  {
+    "id": "REGRA_PARTICIPACAO_20102038",
+    "descricao": "Garante tp_Participacao = '12' para o serviço 20102038.",
+    "ativo": true,
+    "condicoes": {
+      "tipo_elemento": "procedimentosExecutados",
+      "condicao_tag_valor": {
+        "xpath": "./ptu:procedimentos/ptu:cd_Servico",
+        "valor_permitido": [
+          "20102038"
+        ]
+      }
+    },
+    "acao": {
+      "tipo_acao": "garantir_tag_com_conteudo",
+      "tag_alvo": "./ptu:equipe_Profissional/ptu:tp_Participacao",
+      "novo_conteudo": "12",
+      "posicao_insercao": "primeiro_filho",
+      "tag_pai_referencia": "./ptu:equipe_Profissional"
+    }
+  },
+  {
+    "id": "REGRA_PARTICIPACAO_10101039",
+    "descricao": "Garante tp_Participacao = '12' para o serviço 10101039.",
+    "ativo": true,
+    "condicoes": {
+      "tipo_elemento": "procedimentosExecutados",
+      "condicao_tag_valor": {
+        "xpath": "./ptu:procedimentos/ptu:cd_Servico",
+        "valor_permitido": [
+          "10101039"
+        ]
+      }
+    },
+    "acao": {
+      "tipo_acao": "garantir_tag_com_conteudo",
+      "tag_alvo": "./ptu:equipe_Profissional/ptu:tp_Participacao",
+      "novo_conteudo": "12",
+      "posicao_insercao": "primeiro_filho",
+      "tag_pai_referencia": "./ptu:equipe_Profissional"
+    }
+  },
+  {
+    "id": "REGRA_PARTICIPACAO_40808262",
+    "descricao": "Garante tp_Participacao = '12' para o serviço 40808262.",
+    "ativo": true,
+    "condicoes": {
+      "tipo_elemento": "procedimentosExecutados",
+      "condicao_tag_valor": {
+        "xpath": "./ptu:procedimentos/ptu:cd_Servico",
+        "valor_permitido": [
+          "40808262"
+        ]
+      }
+    },
+    "acao": {
+      "tipo_acao": "garantir_tag_com_conteudo",
+      "tag_alvo": "./ptu:equipe_Profissional/ptu:tp_Participacao",
+      "novo_conteudo": "12",
+      "posicao_insercao": "primeiro_filho",
+      "tag_pai_referencia": "./ptu:equipe_Profissional"
+    }
+  },
+  {
+    "id": "REGRA_PARTICIPACAO_40808238",
+    "descricao": "Garante tp_Participacao = '12' para o serviço 40808238.",
+    "ativo": true,
+    "condicoes": {
+      "tipo_elemento": "procedimentosExecutados",
+      "condicao_tag_valor": {
+        "xpath": "./ptu:procedimentos/ptu:cd_Servico",
+        "valor_permitido": [
+          "40808238"
+        ]
+      }
+    },
+    "acao": {
+      "tipo_acao": "garantir_tag_com_conteudo",
+      "tag_alvo": "./ptu:equipe_Profissional/ptu:tp_Participacao",
+      "novo_conteudo": "12",
+      "posicao_insercao": "primeiro_filho",
+      "tag_pai_referencia": "./ptu:equipe_Profissional"
+    }
+  },
+  {
+    "id": "REGRA_PARTICIPACAO_30721130",
+    "descricao": "Garante tp_Participacao = '00' para o serviço 30721130.",
+    "ativo": true,
+    "condicoes": {
+      "tipo_elemento": "procedimentosExecutados",
+      "condicao_tag_valor": {
+        "xpath": "./ptu:procedimentos/ptu:cd_Servico",
+        "valor_permitido": [
+          "30721130"
+        ]
+      }
+    },
+    "acao": {
+      "tipo_acao": "garantir_tag_com_conteudo",
+      "tag_alvo": "./ptu:equipe_Profissional/ptu:tp_Participacao",
+      "novo_conteudo": "00",
+      "posicao_insercao": "primeiro_filho",
+      "tag_pai_referencia": "./ptu:equipe_Profissional"
+    }
+  },
+  {
+    "id": "REGRA_PARTICIPACAO_40902110",
+    "descricao": "Garante tp_Participacao = '00' para o serviço 40902110.",
+    "ativo": true,
+    "condicoes": {
+      "tipo_elemento": "procedimentosExecutados",
+      "condicao_tag_valor": {
+        "xpath": "./ptu:procedimentos/ptu:cd_Servico",
+        "valor_permitido": [
+          "40902110"
+        ]
+      }
+    },
+    "acao": {
+      "tipo_acao": "garantir_tag_com_conteudo",
+      "tag_alvo": "./ptu:equipe_Profissional/ptu:tp_Participacao",
+      "novo_conteudo": "00",
+      "posicao_insercao": "primeiro_filho",
+      "tag_pai_referencia": "./ptu:equipe_Profissional"
+    }
+  },
+  {
+    "id": "REGRA_PARTICIPACAO_30712092_REMOVER",
+    "descricao": "Remove <ptu:tp_Participacao> para o serviço 30712092 (não deve ser informado).",
+    "ativo": true,
+    "condicoes": {
+      "tipo_elemento": "procedimentosExecutados",
+      "condicao_multipla": {
+        "tipo": "AND",
+        "sub_condicoes": [
+          {
+            "condicao_tag_valor": {
+              "xpath": "./ptu:procedimentos/ptu:cd_Servico",
+              "valor_permitido": [
+                "30712092"
+              ]
+            }
+          },
+          {
+            "condicao_tag_valor": {
+              "xpath": "./ptu:equipe_Profissional/ptu:tp_Participacao",
+              "tipo_comparacao": "existe"
+            }
+          }
+        ]
+      }
+    },
+    "acao": {
+      "tipo_acao": "remover_tag_inteira",
+      "tag_alvo": "./ptu:equipe_Profissional/ptu:tp_Participacao"
+    },
+    "log_sucesso": "tp_Participacao removido para o serviço 30712092."
+  },
+  {
+    "id": "REGRA_REMOVER_TP_PARTICIPACAO_TERAPIAS_SERIADAS",
+    "descricao": "Remove a tag <ptu:tp_Participacao> para serviços de Terapias Seriadas (ex.: 2250005260), pois não deve ser informada.",
+    "ativo": true,
+    "condicoes": {
+      "tipo_elemento": "procedimentosExecutados",
+      "condicao_multipla": {
+        "tipo": "AND",
+        "sub_condicoes": [
+          {
+            "condicao_tag_valor": {
+              "xpath": "./ptu:procedimentos/ptu:cd_Servico",
+              "id_lista": "codigos_terapias_seriadas",
+              "tipo_comparacao": "in_lista"
+            }
+          },
+          {
+            "condicao_tag_valor": {
+              "xpath": "./ptu:equipe_Profissional/ptu:tp_Participacao",
+              "tipo_comparacao": "existe"
+            }
+          }
+        ]
+      }
+    },
+    "acao": {
+      "tipo_acao": "remover_tag_inteira",
+      "tag_alvo": "./ptu:equipe_Profissional/ptu:tp_Participacao"
+    },
+    "log_sucesso": "tp_Participacao removido para serviço de terapia seriada."
+  },
+  {
+    "id": "REGRA_TP_PARTICIPACAO_REMOVER_SE_11_FORA_TERAPIA",
+    "descricao": "Remove <ptu:tp_Participacao> quando o valor for '11' e o serviço NÃO for terapia seriada.",
+    "ativo": true,
+    "condicoes": {
+      "tipo_elemento": "procedimentosExecutados",
+      "condicao_multipla": {
+        "tipo": "AND",
+        "sub_condicoes": [
+          {
+            "condicao_tag_valor": {
+              "xpath": "./ptu:equipe_Profissional/ptu:tp_Participacao",
+              "valor_permitido": [
+                "11"
+              ]
+            }
+          },
+          {
+            "condicao_tag_valor": {
+              "xpath": "./ptu:procedimentos/ptu:cd_Servico",
+              "id_lista": "codigos_terapias_seriadas",
+              "tipo_comparacao": "in_lista"
+            }
+          }
+        ]
+      }
+    },
+    "acao": {
+      "tipo_acao": "remover_tag_inteira",
+      "tag_alvo": "./ptu:equipe_Profissional/ptu:tp_Participacao"
+    },
+    "log_sucesso": "tp_Participacao removido (valor '11' fora de terapia seriada)."
+  }
+]

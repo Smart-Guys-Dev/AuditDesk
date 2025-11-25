@@ -1,0 +1,395 @@
+[
+  {
+    "id": "REGRA_TERAPIA_REMOVER_TP_PARTICIPACAO",
+    "descricao": "Remover a tag <ptu:tp_Participacao> dentro do bloco <ptu:equipe_Profissional> para serviços de terapias seriadas, se presente.",
+    "ativo": true,
+    "condicoes": {
+      "tipo_elemento": "procedimentosExecutados",
+      "condicao_multipla": {
+        "tipo": "AND",
+        "sub_condicoes": [
+          {
+            "condicao_tag_valor": {
+              "xpath": "./ptu:procedimentos/ptu:tp_Tabela",
+              "valor_permitido": [
+                "22",
+                "00"
+              ]
+            }
+          },
+          {
+            "condicao_tag_valor": {
+              "xpath": "./ptu:procedimentos/ptu:cd_Servico",
+              "tipo_comparacao": "in_lista",
+              "id_lista": "codigos_terapias_seriadas"
+            }
+          },
+          {
+            "condicao_tag_valor": {
+              "xpath": "./ptu:equipe_Profissional/ptu:tp_Participacao",
+              "tipo_comparacao": "existe"
+            }
+          }
+        ]
+      }
+    },
+    "acao": {
+      "tipo_acao": "remover_tag_inteira",
+      "tag_alvo": "./ptu:equipe_Profissional/ptu:tp_Participacao"
+    },
+    "log_sucesso": "Tag <ptu:tp_Participacao> removida para serviço de terapia seriada.",
+    "log_falha": "Serviço de terapia seriada encontrado, mas <ptu:tp:Participacao> não removida ou não encontrada."
+  },
+  {
+    "id": "REGRA_TERAPIA_CORRIGIR_CONSELHO_PSICO",
+    "descricao": "Corrigir a tag <ptu:sg_Conselho> para 'CRP' para serviços de Psicologia, se incorreto.",
+    "ativo": true,
+    "condicoes": {
+      "tipo_elemento": "procedimentosExecutados",
+      "condicao_multipla": {
+        "tipo": "AND",
+        "sub_condicoes": [
+          {
+            "condicao_tag_valor": {
+              "xpath": "./ptu:procedimentos/ptu:tp_Tabela",
+              "valor_permitido": [
+                "22",
+                "00"
+              ]
+            }
+          },
+          {
+            "condicao_tag_valor": {
+              "xpath": "./ptu:procedimentos/ptu:cd_Servico",
+              "tipo_comparacao": "contem_e_especialidade",
+              "id_lista": "codigos_terapias_seriadas",
+              "especialidade_esperada": "Psicologia"
+            }
+          },
+          {
+            "condicao_tag_valor": {
+              "xpath": "./ptu:equipe_Profissional/ptu:dadosConselho/ptu:sg_Conselho",
+              "tipo_comparacao": "valor_atual_diferente",
+              "valor_atual": "CRP"
+            }
+          }
+        ]
+      }
+    },
+    "acao": {
+      "tipo_acao": "substituir_conteudo_tag",
+      "tag_alvo": "./ptu:equipe_Profissional/ptu:dadosConselho/ptu:sg_Conselho",
+      "novo_conteudo": "CRP"
+    },
+    "log_sucesso": "Conselho de Psicólogo corrigido para 'CRP'.",
+    "log_falha": "Conselho de Psicólogo não corrigido."
+  },
+  {
+    "id": "REGRA_TERAPIA_CORRIGIR_CBO_PSICO",
+    "descricao": "Corrigir a tag <ptu:CBO> para '251510' para serviços de Psicologia, se incorreto.",
+    "ativo": true,
+    "condicoes": {
+      "tipo_elemento": "procedimentosExecutados",
+      "condicao_multipla": {
+        "tipo": "AND",
+        "sub_condicoes": [
+          {
+            "condicao_tag_valor": {
+              "xpath": "./ptu:procedimentos/ptu:tp_Tabela",
+              "valor_permitido": [
+                "22",
+                "00"
+              ]
+            }
+          },
+          {
+            "condicao_tag_valor": {
+              "xpath": "./ptu:procedimentos/ptu:cd_Servico",
+              "tipo_comparacao": "contem_e_especialidade",
+              "id_lista": "codigos_terapias_seriadas",
+              "especialidade_esperada": "Psicologia"
+            }
+          },
+          {
+            "condicao_tag_valor": {
+              "xpath": "./ptu:equipe_Profissional/ptu:CBO",
+              "tipo_comparacao": "valor_atual_diferente",
+              "valor_atual": "251510"
+            }
+          }
+        ]
+      }
+    },
+    "acao": {
+      "tipo_acao": "substituir_conteudo_tag",
+      "tag_alvo": "./ptu:equipe_Profissional/ptu:CBO",
+      "novo_conteudo": "251510"
+    },
+    "log_sucesso": "CBO de Psicólogo corrigido para '251510'.",
+    "log_falha": "CBO de Psicólogo não corrigido."
+  },
+  {
+    "id": "REGRA_TERAPIA_CORRIGIR_CONSELHO_FISIO",
+    "descricao": "Corrigir a tag <ptu:sg_Conselho> para 'CREFITO' para serviços de Fisioterapia, se incorreto.",
+    "ativo": true,
+    "condicoes": {
+      "tipo_elemento": "procedimentosExecutados",
+      "condicao_multipla": {
+        "tipo": "AND",
+        "sub_condicoes": [
+          {
+            "condicao_tag_valor": {
+              "xpath": "./ptu:procedimentos/ptu:tp_Tabela",
+              "valor_permitido": [
+                "22",
+                "00"
+              ]
+            }
+          },
+          {
+            "condicao_tag_valor": {
+              "xpath": "./ptu:procedimentos/ptu:cd_Servico",
+              "tipo_comparacao": "contem_e_especialidade",
+              "id_lista": "codigos_terapias_seriadas",
+              "especialidade_esperada": "Fisioterapia"
+            }
+          },
+          {
+            "condicao_tag_valor": {
+              "xpath": "./ptu:equipe_Profissional/ptu:dadosConselho/ptu:sg_Conselho",
+              "tipo_comparacao": "valor_atual_diferente",
+              "valor_atual": "CREFITO"
+            }
+          }
+        ]
+      }
+    },
+    "acao": {
+      "tipo_acao": "substituir_conteudo_tag",
+      "tag_alvo": "./ptu:equipe_Profissional/ptu:dadosConselho/ptu:sg_Conselho",
+      "novo_conteudo": "CREFITO"
+    },
+    "log_sucesso": "Conselho de Fisioterapeuta corrigido para 'CREFITO'.",
+    "log_falha": "Conselho de Fisioterapeuta não corrigido."
+  },
+  {
+    "id": "REGRA_TERAPIA_CORRIGIR_CBO_FISIO",
+    "descricao": "Corrigir a tag <ptu:CBO> para '223605' para serviços de Fisioterapia, se incorreto.",
+    "ativo": true,
+    "condicoes": {
+      "tipo_elemento": "procedimentosExecutados",
+      "condicao_multipla": {
+        "tipo": "AND",
+        "sub_condicoes": [
+          {
+            "condicao_tag_valor": {
+              "xpath": "./ptu:procedimentos/ptu:tp_Tabela",
+              "valor_permitido": [
+                "22",
+                "00"
+              ]
+            }
+          },
+          {
+            "condicao_tag_valor": {
+              "xpath": "./ptu:procedimentos/ptu:cd_Servico",
+              "tipo_comparacao": "contem_e_especialidade",
+              "id_lista": "codigos_terapias_seriadas",
+              "especialidade_esperada": "Fisioterapia"
+            }
+          },
+          {
+            "condicao_tag_valor": {
+              "xpath": "./ptu:equipe_Profissional/ptu:CBO",
+              "tipo_comparacao": "valor_atual_diferente",
+              "valor_atual": "223605"
+            }
+          }
+        ]
+      }
+    },
+    "acao": {
+      "tipo_acao": "substituir_conteudo_tag",
+      "tag_alvo": "./ptu:equipe_Profissional/ptu:CBO",
+      "novo_conteudo": "223605"
+    },
+    "log_sucesso": "CBO de Fisioterapeuta corrigido para '223605'.",
+    "log_falha": "CBO de Fisioterapeuta não corrigido."
+  },
+  {
+    "id": "REGRA_TERAPIA_CORRIGIR_CONSELHO_FONO",
+    "descricao": "Corrigir a tag <ptu:sg_Conselho> para 'CREFONO' para serviços de Fonoaudiologia, se incorreto.",
+    "ativo": true,
+    "condicoes": {
+      "tipo_elemento": "procedimentosExecutados",
+      "condicao_multipla": {
+        "tipo": "AND",
+        "sub_condicoes": [
+          {
+            "condicao_tag_valor": {
+              "xpath": "./ptu:procedimentos/ptu:tp_Tabela",
+              "valor_permitido": [
+                "22",
+                "00"
+              ]
+            }
+          },
+          {
+            "condicao_tag_valor": {
+              "xpath": "./ptu:procedimentos/ptu:cd_Servico",
+              "tipo_comparacao": "contem_e_especialidade",
+              "id_lista": "codigos_terapias_seriadas",
+              "especialidade_esperada": "Fonoaudiologia"
+            }
+          },
+          {
+            "condicao_tag_valor": {
+              "xpath": "./ptu:equipe_Profissional/ptu:dadosConselho/ptu:sg_Conselho",
+              "tipo_comparacao": "valor_atual_diferente",
+              "valor_atual": "CREFONO"
+            }
+          }
+        ]
+      }
+    },
+    "acao": {
+      "tipo_acao": "substituir_conteudo_tag",
+      "tag_alvo": "./ptu:equipe_Profissional/ptu:dadosConselho/ptu:sg_Conselho",
+      "novo_conteudo": "CREFONO"
+    },
+    "log_sucesso": "Conselho de Fonoaudiólogo corrigido para 'CREFONO'.",
+    "log_falha": "Conselho de Fonoaudiólogo não corrigido."
+  },
+  {
+    "id": "REGRA_TERAPIA_CORRIGIR_CBO_FONO",
+    "descricao": "Corrigir a tag <ptu:CBO> para '223810' para serviços de Fonoaudiologia, se incorreto.",
+    "ativo": true,
+    "condicoes": {
+      "tipo_elemento": "procedimentosExecutados",
+      "condicao_multipla": {
+        "tipo": "AND",
+        "sub_condicoes": [
+          {
+            "condicao_tag_valor": {
+              "xpath": "./ptu:procedimentos/ptu:tp_Tabela",
+              "valor_permitido": [
+                "22",
+                "00"
+              ]
+            }
+          },
+          {
+            "condicao_tag_valor": {
+              "xpath": "./ptu:procedimentos/ptu:cd_Servico",
+              "tipo_comparacao": "contem_e_especialidade",
+              "id_lista": "codigos_terapias_seriadas",
+              "especialidade_esperada": "Fonoaudiologia"
+            }
+          },
+          {
+            "condicao_tag_valor": {
+              "xpath": "./ptu:equipe_Profissional/ptu:CBO",
+              "tipo_comparacao": "valor_atual_diferente",
+              "valor_atual": "223810"
+            }
+          }
+        ]
+      }
+    },
+    "acao": {
+      "tipo_acao": "substituir_conteudo_tag",
+      "tag_alvo": "./ptu:equipe_Profissional/ptu:CBO",
+      "novo_conteudo": "223810"
+    },
+    "log_sucesso": "CBO de Fonoaudiólogo corrigido para '223810'.",
+    "log_falha": "CBO de Fonoaudiólogo não corrigido."
+  },
+  {
+    "id": "REGRA_TERAPIA_CORRIGIR_CONSELHO_NUTRI",
+    "descricao": "Corrigir a tag <ptu:sg_Conselho> para 'CRN' para serviços de Nutrição, se incorreto.",
+    "ativo": true,
+    "condicoes": {
+      "tipo_elemento": "procedimentosExecutados",
+      "condicao_multipla": {
+        "tipo": "AND",
+        "sub_condicoes": [
+          {
+            "condicao_tag_valor": {
+              "xpath": "./ptu:procedimentos/ptu:tp_Tabela",
+              "valor_permitido": [
+                "22",
+                "00"
+              ]
+            }
+          },
+          {
+            "condicao_tag_valor": {
+              "xpath": "./ptu:procedimentos/ptu:cd_Servico",
+              "tipo_comparacao": "contem_e_especialidade",
+              "id_lista": "codigos_terapias_seriadas",
+              "especialidade_esperada": "Nutrição"
+            }
+          },
+          {
+            "condicao_tag_valor": {
+              "xpath": "./ptu:equipe_Profissional/ptu:dadosConselho/ptu:sg_Conselho",
+              "tipo_comparacao": "valor_atual_diferente",
+              "valor_atual": "CRN"
+            }
+          }
+        ]
+      }
+    },
+    "acao": {
+      "tipo_acao": "substituir_conteudo_tag",
+      "tag_alvo": "./ptu:equipe_Profissional/ptu:dadosConselho/ptu:sg_Conselho",
+      "novo_conteudo": "CRN"
+    },
+    "log_sucesso": "Conselho de Nutricionista corrigido para 'CRN'.",
+    "log_falha": "Conselho de Nutricionista não corrigido."
+  },
+  {
+    "id": "REGRA_TERAPIA_CORRIGIR_CBO_NUTRI",
+    "descricao": "Corrigir a tag <ptu:CBO> para '223710' para serviços de Nutrição, se incorreto.",
+    "ativo": true,
+    "condicoes": {
+      "tipo_elemento": "procedimentosExecutados",
+      "condicao_multipla": {
+        "tipo": "AND",
+        "sub_condicoes": [
+          {
+            "condicao_tag_valor": {
+              "xpath": "./ptu:procedimentos/ptu:tp_Tabela",
+              "valor_permitido": [
+                "22",
+                "00"
+              ]
+            }
+          },
+          {
+            "condicao_tag_valor": {
+              "xpath": "./ptu:procedimentos/ptu:cd_Servico",
+              "tipo_comparacao": "contem_e_especialidade",
+              "id_lista": "codigos_terapias_seriadas",
+              "especialidade_esperada": "Nutrição"
+            }
+          },
+          {
+            "condicao_tag_valor": {
+              "xpath": "./ptu:equipe_Profissional/ptu:CBO",
+              "tipo_comparacao": "valor_atual_diferente",
+              "valor_atual": "223710"
+            }
+          }
+        ]
+      }
+    },
+    "acao": {
+      "tipo_acao": "substituir_conteudo_tag",
+      "tag_alvo": "./ptu:equipe_Profissional/ptu:CBO",
+      "novo_conteudo": "223710"
+    },
+    "log_sucesso": "CBO de Nutricionista corrigido para '223710'.",
+    "log_falha": "CBO de Nutricionista não corrigido."
+  }
+]

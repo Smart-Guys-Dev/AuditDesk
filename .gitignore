@@ -1,0 +1,25 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+env/
+venv/
+.env
+.venv/
+
+# VS Code
+.vscode/
+
+# Logs
+*.log
+
+# AuditPlus specific
+tmp/
+dist/
+build/
+*.spec
+Backup/
+Distribuição/
+Correção XML/
