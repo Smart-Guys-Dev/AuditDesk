@@ -188,7 +188,7 @@ class WorkflowController:
                     log(f"ERRO: Falha ao ler o XML: {nome_arquivo}")
                     continue
                 
-                if engine.apply_rules_to_xml(xml_tree):
+                if engine.apply_rules_to_xml(xml_tree, self.current_execution_id, nome_arquivo):
                     engine.file_handler.save_xml_tree(xml_tree, xml_file)
                     log(f"INFO: Arquivo modificado e salvo.")
                     modificados += 1
