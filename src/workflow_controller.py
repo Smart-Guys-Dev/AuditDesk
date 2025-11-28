@@ -18,6 +18,7 @@ class WorkflowController:
         self.pasta_faturas_importadas_atual: Optional[str] = None
         self.plano_ultima_distribuicao: dict = {}
         self.guias_relevantes_por_fatura: dict = {}
+        self.current_execution_id = -1  # Para tracking de ROI
 
         data_manager.carregar_dados_unimed()
         data_manager.carregar_codigos_hm_tabela00_a_ignorar()
