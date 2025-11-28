@@ -35,6 +35,7 @@ class ExecutionLog(Base):
     
     files = relationship("FileLog", back_populates="execution")
     user = relationship("User", back_populates="executions")
+    alerts = relationship("AlertMetrics", back_populates="execution")  # NOVO
 
     def __repr__(self):
         return f"<ExecutionLog(id={self.id}, op={self.operation_type}, status={self.status})>"
@@ -69,3 +70,25 @@ class ROIMetrics(Base):
 
     def __repr__(self):
         return f"<ROIMetrics(rule={self.rule_id}, impact={self.financial_impact})>"
+
+class AlertMetrics(Base):
+    """
+    Armazena alertas identificados pelo sistema (ex: internações curtas).
+    Representa ROI POTENCIAL - glosas evitáveis com revisão manual.
+    """
+    __tablename__ = 'alert_metrics'
+
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    execution_id = Column(Integer, ForeignKey('execution_logs.id'))
+    file_name = Column(String(255), nullable=False)
+    alert_type = Column(String(100))  # 'INTERNACAO_CURTA', futuramente outros tipos
+    alert_description = Column(String(255))
+    financial_impact = Column(Float, default=0.0)  # ROI potencial
+    status = Column(String(20), default='POTENCIAL')  # POTENCIAL, REVISADO, IGNORADO
+    timestamp = Column(DateTime, default=datetime.now)
+    
+    # Relacionamento
+    execution = relationship("ExecutionLog", back_populates="alerts")
+
+    def __repr__(self):
+        return f"<AlertMetrics(type={self.alert_type}, impact=R${self.financial_impact:.2f})>"

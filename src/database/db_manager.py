@@ -400,3 +400,54 @@ def get_roi_stats():
         session.close()
         
     return stats
+
+
+def log_alert_metric(execution_id: int, file_name: str, alert_type: str, 
+                     description: str, financial_impact: float) -> bool:
+    '''Registra um alerta no banco de dados.'''
+    session = get_session()
+    try:
+        from .models import AlertMetrics
+        
+        new_alert = AlertMetrics(
+            execution_id=execution_id,
+            file_name=file_name,
+            alert_type=alert_type,
+            alert_description=description,
+            financial_impact=financial_impact,
+            status='POTENCIAL'
+        )
+        
+        session.add(new_alert)
+        session.commit()
+        return True
+    except Exception as e:
+        session.rollback()
+        print(f'Erro ao logar alerta: {e}')
+        return False
+    finally:
+        session.close()
+
+
+def get_alert_stats(execution_id: int) -> dict:
+    '''Retorna estatísticas de alertas de uma execução.'''
+    session = get_session()
+    try:
+        from .models import AlertMetrics
+        from sqlalchemy import func
+        
+        total = session.query(func.count(AlertMetrics.id)).\
+                filter_by(execution_id=execution_id).scalar() or 0
+        
+        roi = session.query(func.sum(AlertMetrics.financial_impact)).\
+              filter_by(execution_id=execution_id).scalar() or 0.0
+        
+        return {
+            'total_alertas': total,
+            'roi_potencial': roi
+        }
+    except Exception as e:
+        print(f'Erro ao obter estatísticas de alertas: {e}')
+        return {'total_alertas': 0, 'roi_potencial': 0.0}
+    finally:
+        session.close()
