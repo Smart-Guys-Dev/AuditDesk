@@ -9,6 +9,7 @@ from typing import Callable, List, Optional
 from . import (data_manager, distribution_engine, file_manager,
                hash_calculator, report_generator, xml_parser,
                rule_engine)
+from .database import db_manager
 
 class WorkflowController:
     VALOR_MINIMO_GUIA = 25000.0
@@ -178,6 +179,14 @@ class WorkflowController:
                 return True, "Nenhum arquivo .051 para validar."
 
             log(f"INFO: {len(xml_files)} arquivo(s) encontrados. Iniciando validação...")
+            
+            # Criar registro de execução para tracking de ROI
+            self.current_execution_id = db_manager.log_execution_start(
+                operation_type='VALIDATION',
+                total_files=len(xml_files)
+            )
+            log(f"INFO: Execução ID {self.current_execution_id} criada.")
+            
             modificados = 0
             
             for xml_file in xml_files:
@@ -198,6 +207,15 @@ class WorkflowController:
             
             msg_final = f"Validação concluída. {modificados} de {len(xml_files)} arquivo(s) foram modificados."
             log(f"SUCESSO: {msg_final}")
+            
+            # Finalizar registro de execução
+            db_manager.log_execution_end(
+                execution_id=self.current_execution_id,
+                status='COMPLETED',
+                success_count=modificados,
+                error_count=len(xml_files) - modificados
+            )
+            
             return True, msg_final
             
         except Exception as e:
