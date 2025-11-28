@@ -1,0 +1,624 @@
+[
+  {
+    "id": "REGRA_REMOVER_EQUIPE_SADT_SE_NAO_OBRIGATORIO",
+    "ativo": true,
+    "condicoes": {
+      "tipo_elemento": "procedimentosExecutados",
+      "condicao_multipla": {
+        "tipo": "AND",
+        "sub_condicoes": [
+          {
+            "condicao_tag_valor": {
+              "xpath": "./ptu:procedimentos/ptu:tp_Tabela",
+              "valor_permitido": [
+                "22",
+                "00"
+              ]
+            }
+          },
+          {
+            "condicao_tag_valor": {
+              "xpath": "./ptu:procedimentos/ptu:cd_Servico",
+              "tipo_comparacao": "not_in_lista",
+              "id_lista": "codigos_equipe_obrigatoria"
+            }
+          },
+          {
+            "condicao_tag_valor": {
+              "xpath": "./ptu:equipe_Profissional",
+              "tipo_comparacao": "existe"
+            }
+          }
+        ]
+      }
+    },
+    "acao": {
+      "tipo_acao": "remover_tag_inteira",
+      "tag_alvo": "./ptu:equipe_Profissional"
+    }
+  },
+  {
+    "id": "REGRA_ORDEM_EQUIPE_PARA_HONORARIOS",
+    "ativo": true,
+    "descricao": "Garante a ordem correta das tags em <equipe_Profissional> dentro de guias de Honorários.",
+    "condicoes": {
+      "tipo_elemento": "procedimentosExecutados",
+      "condicao_multipla": {
+        "tipo": "AND",
+        "sub_condicoes": [
+          {
+            "condicao_tag_valor": {
+              "xpath": "./ptu:equipe_Profissional",
+              "tipo_comparacao": "existe"
+            }
+          },
+          {
+            "condicao_tag_valor": {
+              "xpath": "ancestor::ptu:guiaHonorarios",
+              "tipo_comparacao": "existe"
+            }
+          }
+        ]
+      }
+    },
+    "acao": {
+      "tipo_acao": "reordenar_elementos_filhos",
+      "tag_alvo": "./ptu:equipe_Profissional",
+      "ordem_correta": [
+        "tp_Participacao",
+        "Prestador",
+        "nm_Profissional",
+        "cdCnpjCpf",
+        "dadosConselho",
+        "CBO"
+      ]
+    }
+  },
+  {
+    "id": "REGRA_ORDEM_EQUIPE_PARA_SADT_E_INTERNACAO",
+    "ativo": true,
+    "descricao": "Garante a ordem correta das tags em <equipe_Profissional> dentro de guias SADT e Internação.",
+    "condicoes": {
+      "tipo_elemento": "procedimentosExecutados",
+      "condicao_multipla": {
+        "tipo": "AND",
+        "sub_condicoes": [
+          {
+            "condicao_tag_valor": {
+              "xpath": "./ptu:equipe_Profissional",
+              "tipo_comparacao": "existe"
+            }
+          },
+          {
+            "condicao_tag_valor": {
+              "xpath": "ancestor::ptu:guiaSADT | ancestor::ptu:guiaInternacao",
+              "tipo_comparacao": "existe"
+            }
+          },
+          {
+            "condicao_tag_valor": {
+              "xpath": "ancestor::ptu:guiaHonorarios",
+              "tipo_comparacao": "nao_existe"
+            }
+          }
+        ]
+      }
+    },
+    "acao": {
+      "tipo_acao": "reordenar_elementos_filhos",
+      "tag_alvo": "./ptu:equipe_Profissional",
+      "ordem_correta": [
+        "tp_Participacao",
+        "Prestador",
+        "cdCnpjCpf",
+        "nm_Profissional",
+        "dadosConselho",
+        "CBO"
+      ]
+    }
+  },
+  {
+    "id": "REGRA_ORDEM_EQUIPE_PARA_CONSULTA",
+    "ativo": true,
+    "descricao": "Garante a ordem correta das tags em <equipe_Profissional> dentro de guias de Consulta.",
+    "condicoes": {
+      "tipo_elemento": "procedimentosExecutados",
+      "condicao_multipla": {
+        "tipo": "AND",
+        "sub_condicoes": [
+          {
+            "condicao_tag_valor": {
+              "xpath": "./ptu:equipe_Profissional",
+              "tipo_comparacao": "existe"
+            }
+          },
+          {
+            "condicao_tag_valor": {
+              "xpath": "ancestor::ptu:guiaConsulta",
+              "tipo_comparacao": "existe"
+            }
+          }
+        ]
+      }
+    },
+    "acao": {
+      "tipo_acao": "reordenar_elementos_filhos",
+      "tag_alvo": "./ptu:equipe_Profissional",
+      "ordem_correta": [
+        "tp_Participacao",
+        "Prestador",
+        "cdCnpjCpf",
+        "nm_Profissional",
+        "dadosConselho",
+        "CBO"
+      ]
+    }
+  },
+  {
+    "id": "REGRA_CORRIGIR_CONSELHO_OUT_PARA_CRM_SE_CBO_MEDICO_EQP",
+    "descricao": "Em <ptu:equipe_Profissional>, se sg_Conselho=OUT e CBO for médico, trocar para CRM.",
+    "ativo": true,
+    "condicoes": {
+      "tipo_elemento": "procedimentosExecutados",
+      "condicao_multipla": {
+        "tipo": "AND",
+        "sub_condicoes": [
+          {
+            "condicao_tag_valor": {
+              "xpath": "./ptu:equipe_Profissional",
+              "tipo_comparacao": "existe"
+            }
+          },
+          {
+            "condicao_tag_valor": {
+              "xpath": "./ptu:equipe_Profissional/ptu:dadosConselho/ptu:sg_Conselho",
+              "valor_permitido": [
+                "OUT"
+              ]
+            }
+          },
+          {
+            "condicao_tag_valor": {
+              "xpath": "./ptu:equipe_Profissional/ptu:CBO",
+              "id_lista": "codigos_cbo_medicos",
+              "tipo_comparacao": "in_lista"
+            }
+          }
+        ]
+      }
+    },
+    "acao": {
+      "tipo_acao": "substituir_conteudo_tag",
+      "tag_alvo": "./ptu:equipe_Profissional/ptu:dadosConselho/ptu:sg_Conselho",
+      "novo_conteudo": "CRM"
+    },
+    "log_sucesso": "Conselho ajustado para CRM em <equipe_Profissional> (CBO médico)."
+  },
+  {
+    "id": "REGRA_10104020_NORMALIZAR_EQUIPE_PF_DR_RODRIGO_FORCAR",
+    "descricao": "Para cd_Servico=10104020, força a normalização completa do bloco <equipe_Profissional> para o PF do Dr. Rodrigo (troca PJ 11039 por PF 11021).",
+    "ativo": true,
+    "condicoes": {
+      "tipo_elemento": "procedimentosExecutados",
+      "condicao_multipla": {
+        "tipo": "AND",
+        "sub_condicoes": [
+          {
+            "condicao_tag_valor": {
+              "xpath": "./ptu:procedimentos/ptu:cd_Servico",
+              "valor_permitido": [
+                "10104020"
+              ]
+            }
+          },
+          {
+            "condicao_tag_valor": {
+              "xpath": "./ptu:equipe_Profissional",
+              "tipo_comparacao": "existe"
+            }
+          }
+        ]
+      }
+    },
+    "acao": {
+      "tipo_acao": "multiplas_acoes",
+      "sub_acoes": [
+        {
+          "tipo_acao": "garantir_tag_com_conteudo",
+          "tag_alvo": "./ptu:equipe_Profissional/ptu:tp_Participacao",
+          "novo_conteudo": "12"
+        },
+        {
+          "tipo_acao": "garantir_tag_com_conteudo",
+          "tag_alvo": "./ptu:equipe_Profissional/ptu:Prestador/ptu:cd_Uni_Prest",
+          "novo_conteudo": "51"
+        },
+        {
+          "tipo_acao": "garantir_tag_com_conteudo",
+          "tag_alvo": "./ptu:equipe_Profissional/ptu:Prestador/ptu:cd_Prest",
+          "novo_conteudo": "11021"
+        },
+        {
+          "tipo_acao": "remover_tag_inteira",
+          "tag_alvo": "./ptu:equipe_Profissional/ptu:cdCnpjCpf/ptu:cd_cnpj"
+        },
+        {
+          "tipo_acao": "garantir_tag_com_conteudo",
+          "tag_alvo": "./ptu:equipe_Profissional/ptu:cdCnpjCpf/ptu:cd_cpf",
+          "novo_conteudo": "20034717153",
+          "posicao_insercao": "primeiro_filho",
+          "tag_pai_referencia": "./ptu:equipe_Profissional/ptu:cdCnpjCpf"
+        },
+        {
+          "tipo_acao": "garantir_tag_com_conteudo",
+          "tag_alvo": "./ptu:equipe_Profissional/ptu:nm_Profissional",
+          "novo_conteudo": "RODRIGO DOMINGUES LARAYA"
+        },
+        {
+          "tipo_acao": "garantir_tag_com_conteudo",
+          "tag_alvo": "./ptu:equipe_Profissional/ptu:dadosConselho/ptu:sg_Conselho",
+          "novo_conteudo": "CRM"
+        },
+        {
+          "tipo_acao": "garantir_tag_com_conteudo",
+          "tag_alvo": "./ptu:equipe_Profissional/ptu:dadosConselho/ptu:nr_Conselho",
+          "novo_conteudo": "5185"
+        },
+        {
+          "tipo_acao": "garantir_tag_com_conteudo",
+          "tag_alvo": "./ptu:equipe_Profissional/ptu:dadosConselho/ptu:UF",
+          "novo_conteudo": "50"
+        },
+        {
+          "tipo_acao": "garantir_tag_com_conteudo",
+          "tag_alvo": "./ptu:equipe_Profissional/ptu:CBO",
+          "novo_conteudo": "225125",
+          "posicao_insercao": "primeiro_filho",
+          "tag_pai_referencia": "./ptu:equipe_Profissional"
+        }
+      ]
+    },
+    "log_sucesso": "Equipe do 10104020 normalizada para PF (Prest 11021) com dados padronizados do Dr. Rodrigo."
+  },
+  {
+    "id": "REGRA_NORMALIZAR_EQUIPE_PLANTONISTA_PA_PARA_DR_RODRIGO",
+    "descricao": "Quando nm_Profissional = 'PLANTONISTA PA', normaliza toda a equipe_Profissional para o PF do Dr. Rodrigo.",
+    "ativo": true,
+    "condicoes": {
+      "tipo_elemento": "procedimentosExecutados",
+      "condicao_multipla": {
+        "tipo": "AND",
+        "sub_condicoes": [
+          {
+            "condicao_tag_valor": {
+              "xpath": "./ptu:equipe_Profissional",
+              "tipo_comparacao": "existe"
+            }
+          },
+          {
+            "condicao_tag_valor": {
+              "xpath": "./ptu:equipe_Profissional/ptu:nm_Profissional",
+              "valor_permitido": [
+                "PLANTONISTA PA"
+              ]
+            }
+          }
+        ]
+      }
+    },
+    "acao": {
+      "tipo_acao": "multiplas_acoes",
+      "sub_acoes": [
+        {
+          "tipo_acao": "garantir_tag_com_conteudo",
+          "tag_alvo": "./ptu:equipe_Profissional/ptu:tp_Participacao",
+          "novo_conteudo": "12"
+        },
+        {
+          "tipo_acao": "garantir_tag_com_conteudo",
+          "tag_alvo": "./ptu:equipe_Profissional/ptu:Prestador/ptu:cd_Uni_Prest",
+          "novo_conteudo": "51"
+        },
+        {
+          "tipo_acao": "garantir_tag_com_conteudo",
+          "tag_alvo": "./ptu:equipe_Profissional/ptu:Prestador/ptu:cd_Prest",
+          "novo_conteudo": "11021"
+        },
+        {
+          "tipo_acao": "remover_tag_inteira",
+          "tag_alvo": "./ptu:equipe_Profissional/ptu:cdCnpjCpf/ptu:cd_cnpj"
+        },
+        {
+          "tipo_acao": "garantir_tag_com_conteudo",
+          "tag_alvo": "./ptu:equipe_Profissional/ptu:cdCnpjCpf/ptu:cd_cpf",
+          "novo_conteudo": "20034717153",
+          "posicao_insercao": "primeiro_filho",
+          "tag_pai_referencia": "./ptu:equipe_Profissional/ptu:cdCnpjCpf"
+        },
+        {
+          "tipo_acao": "garantir_tag_com_conteudo",
+          "tag_alvo": "./ptu:equipe_Profissional/ptu:nm_Profissional",
+          "novo_conteudo": "RODRIGO DOMINGUES LARAYA"
+        },
+        {
+          "tipo_acao": "garantir_tag_com_conteudo",
+          "tag_alvo": "./ptu:equipe_Profissional/ptu:dadosConselho/ptu:sg_Conselho",
+          "novo_conteudo": "CRM"
+        },
+        {
+          "tipo_acao": "garantir_tag_com_conteudo",
+          "tag_alvo": "./ptu:equipe_Profissional/ptu:dadosConselho/ptu:nr_Conselho",
+          "novo_conteudo": "5185"
+        },
+        {
+          "tipo_acao": "garantir_tag_com_conteudo",
+          "tag_alvo": "./ptu:equipe_Profissional/ptu:dadosConselho/ptu:UF",
+          "novo_conteudo": "50"
+        },
+        {
+          "tipo_acao": "garantir_tag_com_conteudo",
+          "tag_alvo": "./ptu:equipe_Profissional/ptu:CBO",
+          "novo_conteudo": "225125",
+          "posicao_insercao": "primeiro_filho",
+          "tag_pai_referencia": "./ptu:equipe_Profissional"
+        }
+      ]
+    },
+    "log_sucesso": "Equipe com 'PLANTONISTA PA' normalizada para PF (Dr. Rodrigo)."
+  },
+  {
+    "id": "REGRA_CORRIGIR_EQUIPE_PJ_PARA_PF_PADRAO",
+    "descricao": "Quando um serviço que exige PF (ex: 10101039, 40401014) tiver a equipe preenchida com dados de PJ (identificado pela tag cnpj), converte todo o bloco para um profissional PF padrão (Dr. Rodrigo).",
+    "ativo": false,
+    "condicoes": {
+      "tipo_elemento": "procedimentosExecutados",
+      "condicao_multipla": {
+        "tipo": "AND",
+        "sub_condicoes": [
+          {
+            "condicao_tag_valor": {
+              "xpath": "./ptu:procedimentos/ptu:cd_Servico",
+              "valor_permitido": [
+                "10101039",
+                "40401014"
+              ]
+            }
+          },
+          {
+            "condicao_tag_valor": {
+              "xpath": "./ptu:equipe_Profissional/ptu:cdCnpjCpf/ptu:cd_cnpj",
+              "tipo_comparacao": "existe"
+            }
+          }
+        ]
+      }
+    },
+    "acao": {
+      "tipo_acao": "multiplas_acoes",
+      "sub_acoes": [
+        {
+          "tipo_acao": "remover_tag_inteira",
+          "tag_alvo": "./ptu:equipe_Profissional/ptu:cdCnpjCpf/ptu:cd_cnpj"
+        },
+        {
+          "tipo_acao": "garantir_tag_com_conteudo",
+          "tag_alvo": "./ptu:equipe_Profissional/ptu:tp_Participacao",
+          "novo_conteudo": "12"
+        },
+        {
+          "tipo_acao": "garantir_tag_com_conteudo",
+          "tag_alvo": "./ptu:equipe_Profissional/ptu:Prestador/ptu:cd_Uni_Prest",
+          "novo_conteudo": "51"
+        },
+        {
+          "tipo_acao": "garantir_tag_com_conteudo",
+          "tag_alvo": "./ptu:equipe_Profissional/ptu:Prestador/ptu:cd_Prest",
+          "novo_conteudo": "11021"
+        },
+        {
+          "tipo_acao": "garantir_tag_com_conteudo",
+          "tag_alvo": "./ptu:equipe_Profissional/ptu:cdCnpjCpf/ptu:cd_cpf",
+          "novo_conteudo": "20034717153",
+          "posicao_insercao": "primeiro_filho",
+          "tag_pai_referencia": "./ptu:equipe_Profissional/ptu:cdCnpjCpf"
+        },
+        {
+          "tipo_acao": "garantir_tag_com_conteudo",
+          "tag_alvo": "./ptu:equipe_Profissional/ptu:nm_Profissional",
+          "novo_conteudo": "RODRIGO DOMINGUES LARAYA"
+        },
+        {
+          "tipo_acao": "garantir_tag_com_conteudo",
+          "tag_alvo": "./ptu:equipe_Profissional/ptu:dadosConselho/ptu:sg_Conselho",
+          "novo_conteudo": "CRM"
+        },
+        {
+          "tipo_acao": "garantir_tag_com_conteudo",
+          "tag_alvo": "./ptu:equipe_Profissional/ptu:dadosConselho/ptu:nr_Conselho",
+          "novo_conteudo": "5185"
+        },
+        {
+          "tipo_acao": "garantir_tag_com_conteudo",
+          "tag_alvo": "./ptu:equipe_Profissional/ptu:dadosConselho/ptu:UF",
+          "novo_conteudo": "50"
+        },
+        {
+          "tipo_acao": "garantir_tag_com_conteudo",
+          "tag_alvo": "./ptu:equipe_Profissional/ptu:CBO",
+          "novo_conteudo": "225125"
+        }
+      ]
+    },
+    "log_sucesso": "Bloco <equipe_Profissional> com dados de PJ foi corrigido para o padrão PF."
+  },
+  {
+    "id": "REGRA_CORRIGIR_PJ_PARA_PF_COM_PARTICIPACAO",
+    "descricao": "Converte equipe PJ para PF padrão, garantindo a tag <tp_Participacao> para serviços que a exigem (ex: Transfusão).",
+    "ativo": true,
+    "condicoes": {
+      "tipo_elemento": "procedimentosExecutados",
+      "condicao_multipla": {
+        "tipo": "AND",
+        "sub_condicoes": [
+          {
+            "condicao_tag_valor": {
+              "xpath": "./ptu:procedimentos/ptu:cd_Servico",
+              "valor_permitido": [
+                "40401014"
+              ]
+            }
+          },
+          {
+            "condicao_tag_valor": {
+              "xpath": "./ptu:equipe_Profissional/ptu:cdCnpjCpf/ptu:cd_cnpj",
+              "tipo_comparacao": "existe"
+            }
+          }
+        ]
+      }
+    },
+    "acao": {
+      "tipo_acao": "multiplas_acoes",
+      "sub_acoes": [
+        {
+          "tipo_acao": "remover_tag_inteira",
+          "tag_alvo": "./ptu:equipe_Profissional/ptu:cdCnpjCpf/ptu:cd_cnpj"
+        },
+        {
+          "tipo_acao": "garantir_tag_com_conteudo",
+          "tag_alvo": "./ptu:equipe_Profissional/ptu:tp_Participacao",
+          "novo_conteudo": "12"
+        },
+        {
+          "tipo_acao": "garantir_tag_com_conteudo",
+          "tag_alvo": "./ptu:equipe_Profissional/ptu:Prestador/ptu:cd_Uni_Prest",
+          "novo_conteudo": "51"
+        },
+        {
+          "tipo_acao": "garantir_tag_com_conteudo",
+          "tag_alvo": "./ptu:equipe_Profissional/ptu:Prestador/ptu:cd_Prest",
+          "novo_conteudo": "11021"
+        },
+        {
+          "tipo_acao": "garantir_tag_com_conteudo",
+          "tag_alvo": "./ptu:equipe_Profissional/ptu:cdCnpjCpf/ptu:cd_cpf",
+          "novo_conteudo": "20034717153"
+        },
+        {
+          "tipo_acao": "garantir_tag_com_conteudo",
+          "tag_alvo": "./ptu:equipe_Profissional/ptu:nm_Profissional",
+          "novo_conteudo": "RODRIGO DOMINGUES LARAYA"
+        },
+        {
+          "tipo_acao": "garantir_tag_com_conteudo",
+          "tag_alvo": "./ptu:equipe_Profissional/ptu:dadosConselho/ptu:sg_Conselho",
+          "novo_conteudo": "CRM"
+        },
+        {
+          "tipo_acao": "garantir_tag_com_conteudo",
+          "tag_alvo": "./ptu:equipe_Profissional/ptu:dadosConselho/ptu:nr_Conselho",
+          "novo_conteudo": "5185"
+        },
+        {
+          "tipo_acao": "garantir_tag_com_conteudo",
+          "tag_alvo": "./ptu:equipe_Profissional/ptu:dadosConselho/ptu:UF",
+          "novo_conteudo": "50"
+        },
+        {
+          "tipo_acao": "garantir_tag_com_conteudo",
+          "tag_alvo": "./ptu:equipe_Profissional/ptu:CBO",
+          "novo_conteudo": "225125"
+        }
+      ]
+    }
+  },
+  {
+    "id": "REGRA_CORRIGIR_PRESTADOR_11101_PARA_PF_PADRAO",
+    "descricao": "Para o serviço 10101039, se o prestador for 11101, converte a equipe para o PF padrão.",
+    "ativo": false,
+    "condicoes": {
+      "tipo_elemento": "procedimentosExecutados",
+      "condicao_multipla": {
+        "tipo": "AND",
+        "sub_condicoes": [
+          {
+            "condicao_tag_valor": {
+              "xpath": "./ptu:procedimentos/ptu:cd_Servico",
+              "valor_permitido": [
+                "10101039"
+              ]
+            }
+          },
+          {
+            "condicao_tag_valor": {
+              "xpath": "./ptu:equipe_Profissional/ptu:Prestador/ptu:cd_Prest",
+              "valor_permitido": [
+                "11101"
+              ]
+            }
+          },
+          {
+            "condicao_tag_valor": {
+              "xpath": "./ptu:equipe_Profissional/ptu:Prestador/ptu:cd_Prest",
+              "tipo_comparacao": "existe"
+            }
+          }
+        ]
+      }
+    },
+    "acao": {
+      "tipo_acao": "multiplas_acoes",
+      "sub_acoes": [
+        {
+          "tipo_acao": "remover_tag_inteira",
+          "tag_alvo": "./ptu:equipe_Profissional/ptu:Prestador/ptu:cd_Prest"
+        },
+        {
+          "tipo_acao": "garantir_tag_com_conteudo",
+          "tag_alvo": "./ptu:equipe_Profissional/ptu:tp_Participacao",
+          "novo_conteudo": "12"
+        },
+        {
+          "tipo_acao": "garantir_tag_com_conteudo",
+          "tag_alvo": "./ptu:equipe_Profissional/ptu:Prestador/ptu:cd_Uni_Prest",
+          "novo_conteudo": "51"
+        },
+        {
+          "tipo_acao": "garantir_tag_com_conteudo",
+          "tag_alvo": "./ptu:equipe_Profissional/ptu:Prestador/ptu:cd_Prest",
+          "novo_conteudo": "11101"
+        },
+        {
+          "tipo_acao": "garantir_tag_com_conteudo",
+          "tag_alvo": "./ptu:equipe_Profissional/ptu:cdCnpjCpf/ptu:cd_cnpj",
+          "novo_conteudo": "07021665000120"
+        },
+        {
+          "tipo_acao": "garantir_tag_com_conteudo",
+          "tag_alvo": "./ptu:equipe_Profissional/ptu:nm_Profissional",
+          "novo_conteudo": "RODRIGO DOMINGUES LARAYA"
+        },
+        {
+          "tipo_acao": "garantir_tag_com_conteudo",
+          "tag_alvo": "./ptu:equipe_Profissional/ptu:dadosConselho/ptu:sg_Conselho",
+          "novo_conteudo": "CRM"
+        },
+        {
+          "tipo_acao": "garantir_tag_com_conteudo",
+          "tag_alvo": "./ptu:equipe_Profissional/ptu:dadosConselho/ptu:nr_Conselho",
+          "novo_conteudo": "5185"
+        },
+        {
+          "tipo_acao": "garantir_tag_com_conteudo",
+          "tag_alvo": "./ptu:equipe_Profissional/ptu:dadosConselho/ptu:UF",
+          "novo_conteudo": "50"
+        },
+        {
+          "tipo_acao": "garantir_tag_com_conteudo",
+          "tag_alvo": "./ptu:equipe_Profissional/ptu:CBO",
+          "novo_conteudo": "225125"
+        }
+      ]
+    }
+  }
+]

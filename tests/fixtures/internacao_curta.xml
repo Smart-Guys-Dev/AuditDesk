@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<ptu:mensagemTISS xmlns:ptu="http://ptu.unimed.coop.br/schemas/V3_0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <ptu:guiaInternacao>
+    <ptu:dadosGuia>
+      <ptu:numeroGuiaPrestador>TEST-12345</ptu:numeroGuiaPrestador>
+    </ptu:dadosGuia>
+    <ptu:dadosBeneficiario>
+      <ptu:nm_Beneficiario>PACIENTE TESTE INTERNACAO CURTA</ptu:nm_Beneficiario>
+    </ptu:dadosBeneficiario>
+    <ptu:dadosInternacao>
+      <ptu:cd_RegimeInternacao>1</ptu:cd_RegimeInternacao>
+      <ptu:dt_Entrada>20250115</ptu:dt_Entrada>
+      <ptu:hr_Entrada>1400</ptu:hr_Entrada>
+      <ptu:dt_Saida>20250115</ptu:dt_Saida>
+      <ptu:hr_Saida>2200</ptu:hr_Saida>
+    </ptu:dadosInternacao>
+    <ptu:procedimentosExecutados>
+      <ptu:procedimentoExecutado>
+        <ptu:cd_Servico>10101012</ptu:cd_Servico>
+        <ptu:valores>
+          <ptu:vl_ServCobrado>350.00</ptu:vl_ServCobrado>
+        </ptu:valores>
+      </ptu:procedimentoExecutado>
+      <ptu:procedimentoExecutado>
+        <ptu:cd_Servico>20104049</ptu:cd_Servico>
+        <ptu:valores>
+          <ptu:vl_ServCobrado>900.50</ptu:vl_ServCobrado>
+        </ptu:valores>
+      </ptu:procedimentoExecutado>
+    </ptu:procedimentosExecutados>
+    <ptu:valorTotal>
+      <ptu:valorTotalGeral>1250.50</ptu:valorTotalGeral>
+    </ptu:valorTotal>
+  </ptu:guiaInternacao>
+</ptu:mensagemTISS>

@@ -1,0 +1,62 @@
+[
+  {
+    "id": "REGRA_CORRIGIR_SOLICITANTE_GENERICO_UNIMED",
+    "descricao": "Corrige dados do profissional solicitante quando preenchido com valores genéricos da cooperativa.",
+    "ativo": true,
+    "condicoes": {
+      "tipo_elemento": "dadosSolicitante",
+      "condicao_multipla": {
+        "tipo": "AND",
+        "sub_condicoes": [
+          {
+            "condicao_tag_valor": {
+              "xpath": "./ptu:profissional/ptu:dadosConselho/ptu:sg_Conselho",
+              "valor_permitido": [
+                "OUT"
+              ]
+            }
+          },
+          {
+            "condicao_tag_valor": {
+              "xpath": "./ptu:profissional/ptu:dadosConselho/ptu:nr_Conselho",
+              "valor_permitido": [
+                "0"
+              ]
+            }
+          }
+        ]
+      }
+    },
+    "acao": {
+      "tipo_acao": "multiplas_acoes",
+      "sub_acoes": [
+        {
+          "tipo_acao": "substituir_conteudo_tag",
+          "tag_alvo": "./ptu:profissional/ptu:nm_Profissional",
+          "novo_conteudo": "RODRIGO DOMINGUES LARAYA"
+        },
+        {
+          "tipo_acao": "substituir_conteudo_tag",
+          "tag_alvo": "./ptu:profissional/ptu:dadosConselho/ptu:sg_Conselho",
+          "novo_conteudo": "CRM"
+        },
+        {
+          "tipo_acao": "substituir_conteudo_tag",
+          "tag_alvo": "./ptu:profissional/ptu:dadosConselho/ptu:nr_Conselho",
+          "novo_conteudo": "5185"
+        },
+        {
+          "tipo_acao": "substituir_conteudo_tag",
+          "tag_alvo": "./ptu:profissional/ptu:dadosConselho/ptu:UF",
+          "novo_conteudo": "50"
+        },
+        {
+          "tipo_acao": "substituir_conteudo_tag",
+          "tag_alvo": "./ptu:profissional/ptu:CBO",
+          "novo_conteudo": "225125"
+        }
+      ]
+    },
+    "log_sucesso": "Corrigido profissional solicitante genérico para o padrão (Dr. Rodrigo)."
+  }
+]

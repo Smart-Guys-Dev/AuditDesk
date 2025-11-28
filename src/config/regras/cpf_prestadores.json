@@ -1,0 +1,167 @@
+[
+  {
+    "id": "REGRA_GARANTIR_CPF_PRESTADOR_24018",
+    "descricao": "Garante que o bloco <cdCnpjCpf> com o CPF 39050408168 exista para o prestador 24018 (Alberto Luiz Leite da Silva) e corrige a ordem das tags.",
+    "ativo": true,
+    "condicoes": {
+      "tipo_elemento": "procedimentosExecutados",
+      "condicao_multipla": {
+        "tipo": "AND",
+        "sub_condicoes": [
+          {
+            "condicao_tag_valor": {
+              "xpath": "./ptu:equipe_Profissional/ptu:Prestador/ptu:cd_Prest",
+              "valor_permitido": [
+                "24018"
+              ]
+            }
+          },
+          {
+            "condicao_tag_valor": {
+              "xpath": "./ptu:equipe_Profissional/ptu:cdCnpjCpf",
+              "tipo_comparacao": "nao_existe"
+            }
+          }
+        ]
+      }
+    },
+    "acao": {
+      "tipo_acao": "multiplas_acoes",
+      "sub_acoes": [
+        {
+          "tipo_acao": "garantir_tag_com_conteudo",
+          "tag_alvo": "./ptu:equipe_Profissional/ptu:cdCnpjCpf",
+          "novo_conteudo": ""
+        },
+        {
+          "tipo_acao": "garantir_tag_com_conteudo",
+          "tag_alvo": "./ptu:equipe_Profissional/ptu:cdCnpjCpf/ptu:cd_cpf",
+          "novo_conteudo": "39050408168"
+        },
+        {
+          "tipo_acao": "reordenar_elementos_filhos",
+          "tag_alvo": "./ptu:equipe_Profissional",
+          "ordem_correta": [
+            "tp_Participacao",
+            "Prestador",
+            "nm_Profissional",
+            "cdCnpjCpf",
+            "dadosConselho",
+            "CBO"
+          ]
+        }
+      ]
+    },
+    "log_sucesso": "Bloco <cdCnpjCpf> inserido e reordenado para o prestador 24018."
+  },
+  {
+    "id": "REGRA_GARANTIR_CPF_PRESTADOR_24022",
+    "descricao": "Garante que o bloco <cdCnpjCpf> com o CPF 28200385817 exista para o prestador 24022 (Fernando Ruas Esgalha) e corrige a ordem das tags.",
+    "ativo": true,
+    "condicoes": {
+      "tipo_elemento": "procedimentosExecutados",
+      "condicao_multipla": {
+        "tipo": "AND",
+        "sub_condicoes": [
+          {
+            "condicao_tag_valor": {
+              "xpath": "./ptu:equipe_Profissional/ptu:Prestador/ptu:cd_Prest",
+              "valor_permitido": [
+                "24022"
+              ]
+            }
+          },
+          {
+            "condicao_tag_valor": {
+              "xpath": "./ptu:equipe_Profissional/ptu:cdCnpjCpf",
+              "tipo_comparacao": "nao_existe"
+            }
+          }
+        ]
+      }
+    },
+    "acao": {
+      "tipo_acao": "multiplas_acoes",
+      "sub_acoes": [
+        {
+          "tipo_acao": "garantir_tag_com_conteudo",
+          "tag_alvo": "./ptu:equipe_Profissional/ptu:cdCnpjCpf",
+          "novo_conteudo": ""
+        },
+        {
+          "tipo_acao": "garantir_tag_com_conteudo",
+          "tag_alvo": "./ptu:equipe_Profissional/ptu:cdCnpjCpf/ptu:cd_cpf",
+          "novo_conteudo": "28200385817"
+        },
+        {
+          "tipo_acao": "reordenar_elementos_filhos",
+          "tag_alvo": "./ptu:equipe_Profissional",
+          "ordem_correta": [
+            "tp_Participacao",
+            "Prestador",
+            "nm_Profissional",
+            "cdCnpjCpf",
+            "dadosConselho",
+            "CBO"
+          ]
+        }
+      ]
+    },
+    "log_sucesso": "Bloco <cdCnpjCpf> inserido e reordenado para o prestador 24022."
+  },
+  {
+    "id": "REGRA_GARANTIR_CPF_PRESTADOR_9131",
+    "descricao": "Garante que o bloco <cdCnpjCpf> com o CPF 01269501135 exista para o prestador 9131 (Lissa Nakazato) e corrige a ordem das tags.",
+    "ativo": true,
+    "condicoes": {
+      "tipo_elemento": "procedimentosExecutados",
+      "condicao_multipla": {
+        "tipo": "AND",
+        "sub_condicoes": [
+          {
+            "condicao_tag_valor": {
+              "xpath": "./ptu:equipe_Profissional/ptu:Prestador/ptu:cd_Prest",
+              "valor_permitido": [
+                "9131"
+              ]
+            }
+          },
+          {
+            "condicao_tag_valor": {
+              "xpath": "./ptu:equipe_Profissional/ptu:cdCnpjCpf",
+              "tipo_comparacao": "nao_existe"
+            }
+          }
+        ]
+      }
+    },
+    "acao": {
+      "tipo_acao": "multiplas_acoes",
+      "sub_acoes": [
+        {
+          "tipo_acao": "garantir_tag_com_conteudo",
+          "tag_alvo": "./ptu:equipe_Profissional/ptu:cdCnpjCpf",
+          "novo_conteudo": ""
+        },
+        {
+          "tipo_acao": "garantir_tag_com_conteudo",
+          "tag_alvo": "./ptu:equipe_Profissional/ptu:cdCnpjCpf/ptu:cd_cpf",
+          "novo_conteudo": "01269501135"
+        },
+        {
+          "tipo_acao": "reordenar_elementos_filhos",
+          "tag_alvo": "./ptu:equipe_Profissional",
+          "ordem_correta": [
+            "tp_Participacao",
+            "Prestador",
+            "nm_Profissional",
+            "cdCnpjCpf",
+            "dadosConselho",
+            "CBO"
+          ]
+        }
+      ]
+    },
+    "log_sucesso": "Bloco <cdCnpjCpf> inserido e reordenado para o prestador 9131."
+  }
+]

@@ -1,0 +1,6 @@
+BYTES: b'<GuiaCobrancaUtilizacao><Dados>Teste123</Dados><hash>IGNORE_ME</hash></GuiaCobrancaUtilizacao>'
+STR: <GuiaCobrancaUtilizacao><Dados>Teste123</Dados><hash>IGNORE_ME</hash></GuiaCobrancaUtilizacao>
+SEM HASH: <GuiaCobrancaUtilizacao><Dados>Teste123</Dados></GuiaCobrancaUtilizacao>
+PURO: 'Teste123'
+CALCULATED: 06afa6c8b54d3cc80d269379d8b6a078
+EXPECTED: 4607e782c4d86fd166f0b4d506925f38

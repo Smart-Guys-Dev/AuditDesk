@@ -213,3 +213,43 @@ def extrair_guias_internacao_curta_para_sinalizacao(caminho_xml: str) -> List[Di
             continue
             
     return guias_para_sinalizar
+
+def extrair_valor_total_guia(guia_element) -> float:
+    if guia_element is None:
+        logging.debug('extrair_valor_total_guia: elemento None recebido')
+        return 0.0
+    
+    try:
+        xpaths = [
+            './/ptu:valorTotal/ptu:valorTotalGeral',
+            './/ptu:valorTotalGeral',
+            './/ptu:vl_TotalGeral',
+            './/ptu:valorTotal'
+        ]
+        
+        for xpath in xpaths:
+            try:
+                elementos = guia_element.xpath(xpath, namespaces=NAMESPACES)
+                
+                if elementos and elementos[0].text:
+                    valor_str = elementos[0].text.strip()
+                    
+                    if not valor_str:
+                        continue
+                    
+                    valor_str = valor_str.replace(',', '.')
+                    valor_float = float(valor_str)
+                    
+                    logging.debug(f'Valor total extraído: R$ {valor_float:.2f}')
+                    return valor_float
+                    
+            except (ValueError, AttributeError) as e:
+                logging.debug(f'Valor inválido no XPath {xpath}: {e}')
+                continue
+        
+        logging.debug('Nenhum valor total encontrado na guia')
+        return 0.0
+        
+    except Exception as e:
+        logging.error(f'Erro inesperado ao extrair valor total da guia: {e}')
+        return 0.0

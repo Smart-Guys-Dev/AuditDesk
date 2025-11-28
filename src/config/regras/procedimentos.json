@@ -1,0 +1,100 @@
+[
+  {
+    "id": "REGRA_CORRIGIR_ACRESCIMO_PARA_PROCEDIMENTOS_ESPECIFICOS",
+    "descricao": "Corrige a tag <ptu:id_Acrescimo> de 'S' para 'N' para os códigos de serviço 40902064, 40202615 e 40202038.",
+    "ativo": true,
+    "condicoes": {
+      "tipo_elemento": "procedimentosExecutados",
+      "condicao_multipla": {
+        "tipo": "AND",
+        "sub_condicoes": [
+          {
+            "condicao_tag_valor": {
+              "xpath": "./ptu:procedimentos/ptu:cd_Servico",
+              "valor_permitido": [
+                "40902064",
+                "40202615",
+                "40202038",
+                "40202747"
+              ]
+            }
+          },
+          {
+            "condicao_tag_valor": {
+              "xpath": "./ptu:id_Acrescimo",
+              "valor_permitido": [
+                "S"
+              ]
+            }
+          }
+        ]
+      }
+    },
+    "acao": {
+      "tipo_acao": "substituir_conteudo_tag",
+      "tag_alvo": "./ptu:id_Acrescimo",
+      "novo_conteudo": "N"
+    },
+    "log_sucesso": "Acréscimo 'S' corrigido para 'N' para serviço específico."
+  },
+  {
+    "id": "REGRA_GARANTIR_ANVISA_ISENTO_PARA_PROC_ESPECIFICO",
+    "descricao": "Garante que a tag <ptu:nr_RegistroAnvisa> com valor 'ISENTO' exista para o serviço 1999999943.",
+    "ativo": true,
+    "condicoes": {
+      "tipo_elemento": "procedimentosExecutados",
+      "condicao_multipla": {
+        "tipo": "AND",
+        "sub_condicoes": [
+          {
+            "condicao_tag_valor": {
+              "xpath": "./ptu:procedimentos/ptu:cd_Servico",
+              "valor_permitido": [
+                "1999999943"
+              ]
+            }
+          },
+          {
+            "condicao_tag_valor": {
+              "xpath": "./ptu:nr_RegistroAnvisa",
+              "tipo_comparacao": "nao_existe"
+            }
+          }
+        ]
+      }
+    },
+    "acao": {
+      "tipo_acao": "garantir_tag_com_conteudo",
+      "tag_alvo": "./ptu:nr_RegistroAnvisa",
+      "novo_conteudo": "ISENTO",
+      "tag_referencia_posicao": "./ptu:id_Pacote"
+    },
+    "log_sucesso": "Tag <ptu:nr_RegistroAnvisa> com valor 'ISENTO' inserida para o serviço 1999999943."
+  },
+  {
+    "id": "REGRA_GARANTIR_INDICACAO_CLINICA_CIDJ069",
+    "descricao": "Garante a indicação clínica 'CIDJ069...' para um grupo específico de serviços.",
+    "ativo": true,
+    "condicoes": {
+      "tipo_elemento": "procedimentosExecutados",
+      "condicao_tag_valor": {
+        "xpath": "./ptu:procedimentos/ptu:cd_Servico",
+        "valor_permitido": [
+          "40314618",
+          "40324796",
+          "40324798",
+          "40324788",
+          "40325024",
+          "40323676"
+        ]
+      }
+    },
+    "acao": {
+      "tipo_acao": "garantir_tag_com_conteudo",
+      "tag_alvo": "../ptu:complemento/ptu:nm_DescComplemento",
+      "novo_conteudo": "CIDJ069 INFECCAO AGUDA DAS VIAS AEREAS SUPERIORES NAO ESPECIFICADA",
+      "tag_referencia_posicao": "../ptu:complemento/ptu:tp_RegCPL"
+    },
+    "log_sucesso": "Indicação clínica padrão inserida para serviço específico."
+  }
+]

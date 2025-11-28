@@ -1,8 +1,48 @@
 {
   "grupos_para_carregar": [
     {
-      "nome_grupo": "Regras Equipe Profissional SADT",
-      "arquivo_regras": "regras_grupo_1200.json",
+      "nome_grupo": "Equipe Profissional",
+      "arquivo_regras": "regras/equipe_profissional.json",
+      "ativo": true
+    },
+    {
+      "nome_grupo": "CNES Prestadores",
+      "arquivo_regras": "regras/cnes.json",
+      "ativo": true
+    },
+    {
+      "nome_grupo": "CPF/CNPJ Prestadores",
+      "arquivo_regras": "regras/cpf_prestadores.json",
+      "ativo": true
+    },
+    {
+      "nome_grupo": "Dados de Auditoria",
+      "arquivo_regras": "regras/auditoria.json",
+      "ativo": true
+    },
+    {
+      "nome_grupo": "Conselho Profissional",
+      "arquivo_regras": "regras/conselho.json",
+      "ativo": true
+    },
+    {
+      "nome_grupo": "Procedimentos e Serviços",
+      "arquivo_regras": "regras/procedimentos.json",
+      "ativo": true
+    },
+    {
+      "nome_grupo": "Internação",
+      "arquivo_regras": "regras/internacao.json",
+      "ativo": true
+    },
+    {
+      "nome_grupo": "Conversão PJ para PF",
+      "arquivo_regras": "regras/pj_para_pf.json",
+      "ativo": true
+    },
+    {
+      "nome_grupo": "Outras Regras",
+      "arquivo_regras": "regras/outros.json",
       "ativo": true
     },
     {

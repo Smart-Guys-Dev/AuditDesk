@@ -186,6 +186,12 @@
               "xpath": "ancestor::ptu:guiaSADT | ancestor::ptu:guiaInternacao",
               "tipo_comparacao": "existe"
             }
+          },
+          {
+            "condicao_tag_valor": {
+              "xpath": "ancestor::ptu:guiaHonorarios",
+              "tipo_comparacao": "nao_existe"
+            }
           }
         ]
       }

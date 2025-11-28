@@ -1,15 +1,17 @@
-# src/main_window.py
 
 import sys, os
 from PyQt6.QtWidgets import (QApplication, QMainWindow, QPushButton, QVBoxLayout, QHBoxLayout,
                              QWidget, QLabel, QStackedWidget, QLineEdit, QTextEdit,
-                             QFileDialog, QInputDialog, QMessageBox, QProgressBar, QFrame)
-from PyQt6.QtGui import QIcon
-from PyQt6.QtCore import Qt, QThread, QSize, QTimer
+                             QFileDialog, QInputDialog, QMessageBox, QProgressBar, QFrame,
+                             QTableWidget, QTableWidgetItem, QHeaderView, QCheckBox, QScrollArea)
+from PyQt6.QtGui import QIcon, QColor
+from PyQt6.QtCore import Qt, QThread, QSize, QTimer, pyqtSignal
 
-# --- IMPORTAÇÕES CORRIGIDAS ---
 from .workflow_controller import WorkflowController
 from .worker import Worker
+from .history_page import PaginaHistorico
+from .dashboard_page import PaginaDashboard
+from src.utils import resource_path
 
 def load_stylesheet():
     """Carrega o arquivo de estilos QSS externo."""
@@ -27,115 +29,129 @@ def load_stylesheet():
 class PaginaBoasVindas(QWidget):
     def __init__(self):
         super().__init__()
+        self.setup_ui()
+
+    def setup_ui(self):
         main_layout = QVBoxLayout(self)
         main_layout.setContentsMargins(40, 40, 40, 40)
-        main_layout.setSpacing(30)
+        main_layout.setSpacing(25)
         
-        # Header Section
+        # --- Header ---
         header_layout = QVBoxLayout()
-        header_layout.setSpacing(10)
+        header_layout.setSpacing(5)
         
-        # Logo e título
-        logo_titulo = QLabel("Audit+")
-        logo_titulo.setObjectName("main_logo")
-        logo_titulo.setAlignment(Qt.AlignmentFlag.AlignLeft)
+        logo = QLabel("Audit+")
+        logo.setObjectName("main_logo")
+        subtitulo = QLabel("Enterprise Edition • v3.0")
+        subtitulo.setObjectName("subtitulo")
         
-        subtitulo = QLabel("Automação e validação de arquivos PTU")
-        subtitulo.setObjectName("main_subtitle")
-        subtitulo.setAlignment(Qt.AlignmentFlag.AlignLeft)
-        
-        header_layout.addWidget(logo_titulo)
+        header_layout.addWidget(logo)
         header_layout.addWidget(subtitulo)
-        
-        # Cards de funcionalidades em grid 2x2
-        cards_container = QWidget()
-        cards_layout = QVBoxLayout(cards_container)
-        cards_layout.setSpacing(20)
-        
-        # Primeira linha de cards
-        row1 = QHBoxLayout()
-        row1.setSpacing(20)
-        
-        card1 = self._create_feature_card(
-            "📄", "Processador XML",
-            "Importe e processe faturas automaticamente"
-        )
-        card2 = self._create_feature_card(
-            "👥", "Distribuição",
-            "Distribua faturas entre auditores de forma inteligente"
-        )
-        
-        row1.addWidget(card1)
-        row1.addWidget(card2)
-        
-        # Segunda linha de cards
-        row2 = QHBoxLayout()
-        row2.setSpacing(20)
-        
-        card3 = self._create_feature_card(
-            "✓", "Validação TISS",
-            "Valide regras de negócio e estrutura XSD"
-        )
-        card4 = self._create_feature_card(
-            "#", "Hash & Empacotamento",
-            "Atualize hash e recrie arquivos ZIP finais"
-        )
-        
-        row2.addWidget(card3)
-        row2.addWidget(card4)
-        
-        cards_layout.addLayout(row1)
-        cards_layout.addLayout(row2)
-        
-        # Quick Stats (opcional - pode ser expandido futuramente)
-        stats_label = QLabel("Selecione uma opção no menu lateral para começar →")
-        stats_label.setObjectName("quick_stats")
-        stats_label.setAlignment(Qt.AlignmentFlag.AlignCenter)
-        
-        # Adicionar tudo ao layout principal
         main_layout.addLayout(header_layout)
-        main_layout.addWidget(cards_container)
-        main_layout.addStretch()
-        main_layout.addWidget(stats_label)
         
-        # Marca d'água no canto inferior
-        watermark = QLabel("Audit+ v2.0  •  Powered by BisonCode")
+        # --- KPI Cards (Estatísticas) ---
+        from src.database import db_manager
+        stats = db_manager.get_dashboard_stats()
+        
+        kpi_layout = QHBoxLayout()
+        kpi_layout.setSpacing(20)
+        
+        self._add_kpi_card(kpi_layout, "Execuções", str(stats['total_executions']))
+        self._add_kpi_card(kpi_layout, "Arquivos", str(stats['total_files']))
+        self._add_kpi_card(kpi_layout, "Sucesso", f"{stats['success_rate']:.1f}%")
+        self._add_kpi_card(kpi_layout, "Erros", str(stats['error_count']))
+        
+        main_layout.addLayout(kpi_layout)
+        
+        # --- Funcionalidades (Grid) ---
+        grid_layout = QHBoxLayout()
+        grid_layout.setSpacing(20)
+        
+        card1 = self._create_feature_card("📄", "Processador XML", "Importação e processamento em lote")
+        card2 = self._create_feature_card("👥", "Distribuição", "Divisão inteligente de carga de trabalho")
+        card3 = self._create_feature_card("✓", "Validação TISS", "Verificação de regras e estrutura XSD")
+        
+        grid_layout.addWidget(card1)
+        grid_layout.addWidget(card2)
+        grid_layout.addWidget(card3)
+        
+        main_layout.addLayout(grid_layout)
+        
+        # --- Atividade Recente (Tabela) ---
+        lbl_activity = QLabel("Atividade Recente")
+        lbl_activity.setStyleSheet("font-size: 18px; font-weight: 700; color: #ECEFF4; margin-top: 10px;")
+        main_layout.addWidget(lbl_activity)
+        
+        self.table = QTableWidget()
+        self.table.setColumnCount(5)
+        self.table.setHorizontalHeaderLabels(["ID", "Tipo", "Usuário", "Data", "Status"])
+        self.table.horizontalHeader().setSectionResizeMode(QHeaderView.ResizeMode.Stretch)
+        self.table.verticalHeader().setVisible(False)
+        self.table.setEditTriggers(QTableWidget.EditTrigger.NoEditTriggers)
+        self.table.setSelectionBehavior(QTableWidget.SelectionBehavior.SelectRows)
+        self.table.setFixedHeight(200) # Altura fixa para não ocupar tudo
+        
+        self._load_recent_activity()
+        main_layout.addWidget(self.table)
+        
+        # --- Footer ---
+        main_layout.addStretch()
+        watermark = QLabel("Audit+ Enterprise • Powered by BisonCode")
         watermark.setObjectName("watermark")
-        watermark.setAlignment(Qt.AlignmentFlag.AlignRight | Qt.AlignmentFlag.AlignBottom)
+        watermark.setAlignment(Qt.AlignmentFlag.AlignRight)
         main_layout.addWidget(watermark)
-    
+
+    def _add_kpi_card(self, layout, label, value):
+        card = QFrame()
+        card.setObjectName("kpi_card")
+        card_layout = QVBoxLayout(card)
+        card_layout.setContentsMargins(20, 15, 20, 15)
+        
+        lbl_val = QLabel(value)
+        lbl_val.setObjectName("kpi_value")
+        lbl_val.setAlignment(Qt.AlignmentFlag.AlignCenter)
+        
+        lbl_lbl = QLabel(label)
+        lbl_lbl.setObjectName("kpi_label")
+        lbl_lbl.setAlignment(Qt.AlignmentFlag.AlignCenter)
+        
+        card_layout.addWidget(lbl_val)
+        card_layout.addWidget(lbl_lbl)
+        layout.addWidget(card)
+
     def _create_feature_card(self, icon, title, description):
-        """Cria um card de funcionalidade com ícone, título e descrição."""
         card = QFrame()
         card.setObjectName("feature_card")
-        card.setCursor(Qt.CursorShape.PointingHandCursor)
-        
         card_layout = QVBoxLayout(card)
-        card_layout.setSpacing(12)
-        card_layout.setContentsMargins(24, 24, 24, 24)
+        card_layout.setContentsMargins(20, 20, 20, 20)
         
-        # Ícone
-        icon_label = QLabel(icon)
-        icon_label.setObjectName("card_icon")
-        icon_label.setAlignment(Qt.AlignmentFlag.AlignLeft)
+        lbl_icon = QLabel(icon)
+        lbl_icon.setStyleSheet("font-size: 32px;")
         
-        # Título
-        title_label = QLabel(title)
-        title_label.setObjectName("card_title")
-        title_label.setAlignment(Qt.AlignmentFlag.AlignLeft)
+        lbl_title = QLabel(title)
+        lbl_title.setObjectName("card_title")
         
-        # Descrição
-        desc_label = QLabel(description)
-        desc_label.setObjectName("card_description")
-        desc_label.setAlignment(Qt.AlignmentFlag.AlignLeft)
-        desc_label.setWordWrap(True)
+        lbl_desc = QLabel(description)
+        lbl_desc.setObjectName("card_description")
+        lbl_desc.setWordWrap(True)
         
-        card_layout.addWidget(icon_label)
-        card_layout.addWidget(title_label)
-        card_layout.addWidget(desc_label)
+        card_layout.addWidget(lbl_icon)
+        card_layout.addWidget(lbl_title)
+        card_layout.addWidget(lbl_desc)
         card_layout.addStretch()
-        
         return card
+
+    def _load_recent_activity(self):
+        from src.database import db_manager
+        activities = db_manager.get_recent_activity(5)
+        self.table.setRowCount(len(activities))
+        
+        for row, act in enumerate(activities):
+            self.table.setItem(row, 0, QTableWidgetItem(str(act['id'])))
+            self.table.setItem(row, 1, QTableWidgetItem(act['tipo']))
+            self.table.setItem(row, 2, QTableWidgetItem(act['usuario']))
+            self.table.setItem(row, 3, QTableWidgetItem(act['data']))
+            self.table.setItem(row, 4, QTableWidgetItem(act['status']))
 
 class PaginaProcessador(QWidget):
     def __init__(self, controller):
@@ -538,17 +554,41 @@ class PaginaHash(QWidget):
         files_label.setStyleSheet("font-weight: 600; font-size: 15px; margin-top: 10px;")
         
         # Container com scroll para checkboxes
-        self.files_scroll = QTextEdit()
-        self.files_scroll.setReadOnly(True)
-        self.files_scroll.setMaximumHeight(200)
-        self.files_scroll.setPlaceholderText("Selecione um auditor para ver os arquivos disponíveis...")
+        self.scroll_area = QScrollArea()
+        self.scroll_area.setWidgetResizable(True)
+        self.scroll_area.setMaximumHeight(250)
+        self.scroll_area.setStyleSheet("""
+            QScrollArea {
+                border: 1px solid #4C566A;
+                border-radius: 4px;
+                background-color: #2E3440;
+            }
+            QScrollBar:vertical {
+                border: none;
+                background: #2E3440;
+                width: 10px;
+                margin: 0px 0px 0px 0px;
+            }
+            QScrollBar::handle:vertical {
+                background: #4C566A;
+                min-height: 20px;
+                border-radius: 5px;
+            }
+            QScrollBar::add-line:vertical, QScrollBar::sub-line:vertical {
+                border: none;
+                background: none;
+            }
+        """)
         
         # Container para checkboxes (será populado dinamicamente)
         self.files_container = QWidget()
         self.files_layout = QVBoxLayout(self.files_container)
-        self.files_layout.setSpacing(8)
+        self.files_layout.setSpacing(5)
         self.files_layout.setContentsMargins(10, 10, 10, 10)
+        self.files_layout.setAlignment(Qt.AlignmentFlag.AlignTop)
         
+        self.scroll_area.setWidget(self.files_container)
+
         # Botões de seleção
         selection_buttons_layout = QHBoxLayout()
         
@@ -586,7 +626,7 @@ class PaginaHash(QWidget):
         # Adicionar tudo ao layout
         layout.addLayout(auditor_layout)
         layout.addWidget(files_label)
-        layout.addWidget(self.files_container)
+        layout.addWidget(self.scroll_area)
         layout.addLayout(selection_buttons_layout)
         layout.addWidget(self.selection_counter)
         layout.addWidget(self.btn_atualizar_hash)
@@ -635,15 +675,15 @@ class PaginaHash(QWidget):
             self.log_area.append(f"⚠ AVISO: Pasta não encontrada: {pasta_auditor}")
             return
         
-        # Listar arquivos ZIP
-        arquivos_zip = glob.glob(os.path.join(pasta_auditor, "*.zip"))
+        # Listar arquivos XML (.051)
+        arquivos_xml = glob.glob(os.path.join(pasta_auditor, "*.051"))
         
-        if not arquivos_zip:
-            self.log_area.append(f"⚠ AVISO: Nenhum arquivo ZIP encontrado para {nome_auditor}")
+        if not arquivos_xml:
+            self.log_area.append(f"⚠ AVISO: Nenhum arquivo XML (.051) encontrado para {nome_auditor}")
             return
         
         # Criar checkboxes
-        for arquivo_path in sorted(arquivos_zip):
+        for arquivo_path in sorted(arquivos_xml):
             arquivo_nome = os.path.basename(arquivo_path)
             cb = QCheckBox(arquivo_nome)
             cb.setChecked(True)  # Todos selecionados por padrão
@@ -652,7 +692,7 @@ class PaginaHash(QWidget):
             self.files_layout.addWidget(cb)
         
         self.update_counter()
-        self.log_area.append(f"✓ INFO: {len(arquivos_zip)} arquivos encontrados para {nome_auditor}")
+        self.log_area.append(f"✓ INFO: {len(arquivos_xml)} arquivos encontrados para {nome_auditor}")
 
     def get_selected_files(self):
         """Retorna lista de arquivos selecionados."""
@@ -743,31 +783,35 @@ class PaginaHash(QWidget):
         self.worker.progress.connect(self.log_area.append)
         self.worker_thread.start()
 
+from src.utils import resource_path
+
 class MainWindow(QMainWindow):
-    def __init__(self):
+    logout_requested = pyqtSignal() # Sinal para solicitar logout
+
+    def __init__(self, user=None):
         super().__init__()
         self.controller = WorkflowController()
+        self.user = user
         self.setWindowTitle("Audit+ v2.0")
         
         # Definir ícone da aplicação
-        icon_path = os.path.join(os.path.dirname(__file__), 'assets', 'icon.png')
+        # Usando resource_path para funcionar no executável
+        icon_path = resource_path(os.path.join('src', 'assets', 'icon.png'))
         if os.path.exists(icon_path):
             self.setWindowIcon(QIcon(icon_path))
         
         self.setGeometry(200, 200, 1200, 800)
         
         # Carregar estilos do arquivo externo
-        stylesheet = load_stylesheet()
-        if stylesheet:
-            self.setStyleSheet(stylesheet)
+        self.load_styles()
 
-        main_widget = QWidget()
-        self.setCentralWidget(main_widget)
-
-        main_layout = QHBoxLayout(main_widget)
+        # Layout Principal
+        central_widget = QWidget()
+        self.setCentralWidget(central_widget)
+        main_layout = QHBoxLayout(central_widget)
         main_layout.setContentsMargins(0, 0, 0, 0)
         main_layout.setSpacing(0)
-
+        
         # Sidebar
         sidebar_widget = QWidget()
         sidebar_widget.setObjectName("sidebar")
@@ -790,34 +834,104 @@ class MainWindow(QMainWindow):
         btn_atualizar_hash = QPushButton("  # Atualizar HASH")
         btn_atualizar_hash.setCheckable(True)
 
+        btn_historico = QPushButton("  📜 Histórico")
+        btn_historico.setCheckable(True)
+
+        btn_relatorios = QPushButton("  📊 Relatórios")
+        btn_relatorios.setCheckable(True)
+
         sidebar_layout.addWidget(btn_painel_principal)
         sidebar_layout.addWidget(btn_processador_xml)
         sidebar_layout.addWidget(btn_validador_tiss)
         sidebar_layout.addWidget(btn_atualizar_hash)
+        sidebar_layout.addWidget(btn_historico)
+        sidebar_layout.addWidget(btn_relatorios)
+        
+        # Botão de Gestão de Usuários (Apenas Admin)
+        self.btn_gestao_usuarios = None
+        if self.user and self.user.role == 'ADMIN':
+            self.btn_gestao_usuarios = QPushButton("  👥 Gestão de Usuários")
+            self.btn_gestao_usuarios.setCheckable(False) # Abre modal, não muda página
+            self.btn_gestao_usuarios.clicked.connect(self.abrir_gestao_usuarios)
+            sidebar_layout.addWidget(self.btn_gestao_usuarios)
+
         sidebar_layout.addStretch()
+        
+        # Rodapé da Sidebar com info do usuário e Logout
+        if self.user:
+            user_container = QWidget()
+            user_layout = QVBoxLayout(user_container)
+            user_layout.setSpacing(5)
+            
+            user_info = QLabel(f"👤 {self.user.username}\n({self.user.role})")
+            user_info.setStyleSheet("color: #D8DEE9; font-size: 12px; font-weight: bold;")
+            user_info.setAlignment(Qt.AlignmentFlag.AlignCenter)
+            
+            btn_logout = QPushButton("Sair / Logoff")
+            btn_logout.setCursor(Qt.CursorShape.PointingHandCursor)
+            btn_logout.setStyleSheet("""
+                QPushButton {
+                    background-color: #BF616A;
+                    color: white;
+                    border: none;
+                    padding: 8px;
+                    border-radius: 4px;
+                    font-size: 12px;
+                    margin-top: 5px;
+                }
+                QPushButton:hover { background-color: #D08770; }
+            """)
+            btn_logout.clicked.connect(self.logout_requested.emit)
+            
+            user_layout.addWidget(user_info)
+            user_layout.addWidget(btn_logout)
+            sidebar_layout.addWidget(user_container)
 
         # Páginas
         self.pages_widget = QStackedWidget()
-        self.page_painel_principal = PaginaBoasVindas()
+        self.page_painel_principal = PaginaDashboard()
         self.page_processador = PaginaProcessador(self.controller)
         self.page_validador = PaginaValidador(self.controller)
         self.page_hash = PaginaHash(self.controller)
+        self.page_historico = PaginaHistorico()
+        
+        from src.reports_page import PaginaRelatorios
+        self.page_relatorios = PaginaRelatorios()
 
         self.pages_widget.addWidget(self.page_painel_principal)
         self.pages_widget.addWidget(self.page_processador)
         self.pages_widget.addWidget(self.page_validador)
         self.pages_widget.addWidget(self.page_hash)
+        self.pages_widget.addWidget(self.page_historico)
+        self.pages_widget.addWidget(self.page_relatorios)
 
         main_layout.addWidget(sidebar_widget)
         main_layout.addWidget(self.pages_widget)
 
         # Conectar botões
-        btn_painel_principal.clicked.connect(lambda: self.mudar_pagina(0, [btn_painel_principal, btn_processador_xml, btn_validador_tiss, btn_atualizar_hash]))
-        btn_processador_xml.clicked.connect(lambda: self.mudar_pagina(1, [btn_painel_principal, btn_processador_xml, btn_validador_tiss, btn_atualizar_hash]))
-        btn_validador_tiss.clicked.connect(lambda: self.mudar_pagina(2, [btn_painel_principal, btn_processador_xml, btn_validador_tiss, btn_atualizar_hash]))
-        btn_atualizar_hash.clicked.connect(lambda: self.mudar_pagina(3, [btn_painel_principal, btn_processador_xml, btn_validador_tiss, btn_atualizar_hash]))
+        botoes = [btn_painel_principal, btn_processador_xml, btn_validador_tiss, btn_atualizar_hash, btn_historico, btn_relatorios]
+        btn_painel_principal.clicked.connect(lambda: self.mudar_pagina(0, botoes))
+        btn_processador_xml.clicked.connect(lambda: self.mudar_pagina(1, botoes))
+        btn_validador_tiss.clicked.connect(lambda: self.mudar_pagina(2, botoes))
+        btn_atualizar_hash.clicked.connect(lambda: self.mudar_pagina(3, botoes))
+        btn_historico.clicked.connect(lambda: self.mudar_pagina(4, botoes))
+        btn_relatorios.clicked.connect(lambda: self.mudar_pagina(5, botoes))
+
+    def load_styles(self):
+        """Carrega e aplica os estilos QSS."""
+        try:
+            style_path = resource_path(os.path.join('src', 'assets', 'styles.qss'))
+            with open(style_path, 'r', encoding='utf-8') as f:
+                self.setStyleSheet(f.read())
+        except Exception as e:
+            print(f"Erro ao carregar estilos: {e}")
 
     def mudar_pagina(self, index, botoes):
         self.pages_widget.setCurrentIndex(index)
         for i, btn in enumerate(botoes):
             btn.setChecked(i == index)
+            
+    def abrir_gestao_usuarios(self):
+        from src.user_management import UserManagementWindow
+        self.gestao_window = UserManagementWindow()
+        self.gestao_window.show()

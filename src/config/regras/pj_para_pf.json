@@ -1,0 +1,103 @@
+[
+  {
+    "id": "REGRA_CORRIGIR_PJ_PARA_PF_PRESTADOR_11039_SERV_30203015",
+    "descricao": "Corrige os dados de PJ para PF do prestador 11039 no serviço 30203015, inserindo os dados do Dr. Rodrigo Domingues Laraya.",
+    "ativo": true,
+    "condicoes": {
+      "tipo_elemento": "procedimentosExecutados",
+      "condicao_multipla": {
+        "tipo": "AND",
+        "sub_condicoes": [
+          {
+            "condicao_tag_valor": {
+              "xpath": "./ptu:procedimentos/ptu:cd_Servico",
+              "valor_permitido": [
+                "30203015"
+              ]
+            }
+          },
+          {
+            "condicao_tag_valor": {
+              "xpath": "./ptu:equipe_Profissional/ptu:Prestador/ptu:cd_Prest",
+              "valor_permitido": [
+                "11039"
+              ]
+            }
+          },
+          {
+            "condicao_tag_valor": {
+              "xpath": "./ptu:equipe_Profissional/ptu:cdCnpjCpf/ptu:cd_cnpj",
+              "tipo_comparacao": "existe"
+            }
+          }
+        ]
+      }
+    },
+    "acao": {
+      "tipo_acao": "multiplas_acoes",
+      "sub_acoes": [
+        {
+          "tipo_acao": "remover_tag_inteira",
+          "tag_alvo": "./ptu:equipe_Profissional/ptu:cdCnpjCpf/ptu:cd_cnpj"
+        },
+        {
+          "tipo_acao": "garantir_tag_com_conteudo",
+          "tag_alvo": "./ptu:equipe_Profissional/ptu:tp_Participacao",
+          "novo_conteudo": "00"
+        },
+        {
+          "tipo_acao": "garantir_tag_com_conteudo",
+          "tag_alvo": "./ptu:equipe_Profissional/ptu:Prestador/ptu:cd_Uni_Prest",
+          "novo_conteudo": "51"
+        },
+        {
+          "tipo_acao": "garantir_tag_com_conteudo",
+          "tag_alvo": "./ptu:equipe_Profissional/ptu:Prestador/ptu:cd_Prest",
+          "novo_conteudo": "11021"
+        },
+        {
+          "tipo_acao": "garantir_tag_com_conteudo",
+          "tag_alvo": "./ptu:equipe_Profissional/ptu:cdCnpjCpf/ptu:cd_cpf",
+          "novo_conteudo": "20034717153"
+        },
+        {
+          "tipo_acao": "garantir_tag_com_conteudo",
+          "tag_alvo": "./ptu:equipe_Profissional/ptu:nm_Profissional",
+          "novo_conteudo": "RODRIGO DOMINGUES LARAYA"
+        },
+        {
+          "tipo_acao": "garantir_tag_com_conteudo",
+          "tag_alvo": "./ptu:equipe_Profissional/ptu:dadosConselho/ptu:sg_Conselho",
+          "novo_conteudo": "CRM"
+        },
+        {
+          "tipo_acao": "garantir_tag_com_conteudo",
+          "tag_alvo": "./ptu:equipe_Profissional/ptu:dadosConselho/ptu:nr_Conselho",
+          "novo_conteudo": "5185"
+        },
+        {
+          "tipo_acao": "garantir_tag_com_conteudo",
+          "tag_alvo": "./ptu:equipe_Profissional/ptu:dadosConselho/ptu:UF",
+          "novo_conteudo": "50"
+        },
+        {
+          "tipo_acao": "garantir_tag_com_conteudo",
+          "tag_alvo": "./ptu:equipe_Profissional/ptu:CBO",
+          "novo_conteudo": "225125"
+        },
+        {
+          "tipo_acao": "reordenar_elementos_filhos",
+          "ordem_correta": [
+            "tp_Participacao",
+            "Prestador",
+            "cdCnpjCpf",
+            "nm_Profissional",
+            "dadosConselho",
+            "CBO"
+          ]
+        }
+      ]
+    },
+    "log_sucesso": "Corrigido PJ para PF para o prestador 11039 no serviço 30203015."
+  }
+]

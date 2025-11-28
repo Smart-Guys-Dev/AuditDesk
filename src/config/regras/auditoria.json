@@ -1,0 +1,80 @@
+[
+  {
+    "id": "REGRA_ORDEM_DADOS_AUDITORIA",
+    "descricao": "Garante a ordem correta das tags dentro do bloco <dadosAuditoria> conforme o schema XSD.",
+    "ativo": true,
+    "condicoes": {
+      "tipo_elemento": "dadosAuditoria"
+    },
+    "acao": {
+      "tipo_acao": "reordenar_elementos_filhos",
+      "ordem_correta": [
+        "nm_MedicoAuditor",
+        "nr_CrmAuditor",
+        "cd_UFCRM",
+        "nm_EnfAuditor",
+        "nr_CorenAuditor",
+        "cd_UFCoren"
+      ]
+    },
+    "log_sucesso": "Tags reordenadas com sucesso no bloco <dadosAuditoria>."
+  },
+  {
+    "id": "REGRA_GARANTIR_NOME_MEDICO_AUDITOR",
+    "descricao": "Passo 1: Garante que a tag <nm_MedicoAuditor> exista em <dadosAuditoria> se estiver ausente.",
+    "ativo": true,
+    "condicoes": {
+      "tipo_elemento": "dadosAuditoria",
+      "condicao_tag_valor": {
+        "xpath": "./ptu:nm_MedicoAuditor",
+        "tipo_comparacao": "nao_existe"
+      }
+    },
+    "acao": {
+      "tipo_acao": "garantir_tag_com_conteudo",
+      "tag_alvo": "./ptu:nm_MedicoAuditor",
+      "novo_conteudo": "DENISE APARECIDA DE ALMEIDA TAMAZATO",
+      "posicao_insercao": "primeiro_filho",
+      "tag_pai_referencia": "."
+    },
+    "log_sucesso": "Tag <nm_MedicoAuditor> inserida pois estava ausente."
+  },
+  {
+    "id": "REGRA_GARANTIR_CRM_MEDICO_AUDITOR",
+    "descricao": "Passo 2: Garante que a tag <nr_CrmAuditor> exista em <dadosAuditoria> se estiver ausente.",
+    "ativo": true,
+    "condicoes": {
+      "tipo_elemento": "dadosAuditoria",
+      "condicao_tag_valor": {
+        "xpath": "./ptu:nr_CrmAuditor",
+        "tipo_comparacao": "nao_existe"
+      }
+    },
+    "acao": {
+      "tipo_acao": "garantir_tag_com_conteudo",
+      "tag_alvo": "./ptu:nr_CrmAuditor",
+      "novo_conteudo": "21868",
+      "tag_referencia_posicao": "./ptu:nm_MedicoAuditor"
+    },
+    "log_sucesso": "Tag <nr_CrmAuditor> inserida pois estava ausente."
+  },
+  {
+    "id": "REGRA_GARANTIR_UF_MEDICO_AUDITOR",
+    "descricao": "Passo 3: Garante que a tag <cd_UFCRM> exista em <dadosAuditoria> se estiver ausente.",
+    "ativo": true,
+    "condicoes": {
+      "tipo_elemento": "dadosAuditoria",
+      "condicao_tag_valor": {
+        "xpath": "./ptu:cd_UFCRM",
+        "tipo_comparacao": "nao_existe"
+      }
+    },
+    "acao": {
+      "tipo_acao": "garantir_tag_com_conteudo",
+      "tag_alvo": "./ptu:cd_UFCRM",
+      "novo_conteudo": "50",
+      "tag_referencia_posicao": "./ptu:nr_CrmAuditor"
+    },
+    "log_sucesso": "Tag <cd_UFCRM> inserida pois estava ausente."
+  }
+]

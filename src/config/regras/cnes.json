@@ -1,0 +1,282 @@
+[
+  {
+    "id": "REGRA_GARANTIR_CNES_RESGATARE_52838800000180",
+    "descricao": "Garante que o CNES (4892402) esteja correto para o prestador RESGATARE (CNPJ 52838800000180), corrigindo valores incorretos como '9999999'.",
+    "ativo": true,
+    "condicoes": {
+      "tipo_elemento": "dadosExecutante",
+      "condicao_multipla": {
+        "tipo": "AND",
+        "sub_condicoes": [
+          {
+            "condicao_tag_valor": {
+              "xpath": "./ptu:CPF_CNPJ/ptu:cd_cnpj",
+              "valor_permitido": [
+                "52838800000180"
+              ]
+            }
+          },
+          {
+            "condicao_tag_valor": {
+              "xpath": "./ptu:CNES",
+              "tipo_comparacao": "valor_atual_diferente",
+              "valor_atual": "4892402"
+            }
+          }
+        ]
+      }
+    },
+    "acao": {
+      "tipo_acao": "garantir_tag_com_conteudo",
+      "tag_alvo": "./ptu:CNES",
+      "novo_conteudo": "4892402",
+      "tag_referencia_posicao": "./ptu:CPF_CNPJ"
+    },
+    "log_sucesso": "CNES do prestador 52838800000180 corrigido/inserido para 4892402."
+  },
+  {
+    "id": "REGRA_GARANTIR_CNES_LAZARI_40659789000101",
+    "descricao": "Garante que o CNES (4611004) esteja correto para o prestador LAZARI E OGUCHI (CNPJ 40659789000101).",
+    "ativo": true,
+    "condicoes": {
+      "tipo_elemento": "dadosExecutante",
+      "condicao_multipla": {
+        "tipo": "AND",
+        "sub_condicoes": [
+          {
+            "condicao_tag_valor": {
+              "xpath": "./ptu:CPF_CNPJ/ptu:cd_cnpj",
+              "valor_permitido": [
+                "40659789000101"
+              ]
+            }
+          },
+          {
+            "condicao_tag_valor": {
+              "xpath": "./ptu:CNES",
+              "tipo_comparacao": "valor_atual_diferente",
+              "valor_atual": "4611004"
+            }
+          }
+        ]
+      }
+    },
+    "acao": {
+      "tipo_acao": "garantir_tag_com_conteudo",
+      "tag_alvo": "./ptu:CNES",
+      "novo_conteudo": "4611004",
+      "tag_referencia_posicao": "./ptu:CPF_CNPJ"
+    },
+    "log_sucesso": "CNES do prestador 40659789000101 corrigido/inserido para 4611004."
+  },
+  {
+    "id": "REGRA_GARANTIR_CNES_LILIANE_51804254000101",
+    "descricao": "Garante que o CNES (4519884) esteja correto para o prestador LILIANE PINHO DE ALMEIDA LTDA (CNPJ 51804254000101).",
+    "ativo": true,
+    "condicoes": {
+      "tipo_elemento": "dadosExecutante",
+      "condicao_multipla": {
+        "tipo": "AND",
+        "sub_condicoes": [
+          {
+            "condicao_tag_valor": {
+              "xpath": "./ptu:CPF_CNPJ/ptu:cd_cnpj",
+              "valor_permitido": [
+                "51804254000101"
+              ]
+            }
+          },
+          {
+            "condicao_tag_valor": {
+              "xpath": "./ptu:CNES",
+              "tipo_comparacao": "valor_atual_diferente",
+              "valor_atual": "4519884"
+            }
+          }
+        ]
+      }
+    },
+    "acao": {
+      "tipo_acao": "garantir_tag_com_conteudo",
+      "tag_alvo": "./ptu:CNES",
+      "novo_conteudo": "4519884",
+      "tag_referencia_posicao": "./ptu:CPF_CNPJ"
+    },
+    "log_sucesso": "CNES do prestador 51804254000101 corrigido/inserido para 4519884."
+  },
+  {
+    "id": "REGRA_GARANTIR_CNES_CARLIFE_37918606000110",
+    "descricao": "Garante que o CNES (0644439) esteja correto para o prestador CARLIFE REMOCOES MEDICAS LTDA (CNPJ 37918606000110).",
+    "ativo": true,
+    "condicoes": {
+      "tipo_elemento": "dadosExecutante",
+      "condicao_multipla": {
+        "tipo": "AND",
+        "sub_condicoes": [
+          {
+            "condicao_tag_valor": {
+              "xpath": "./ptu:CPF_CNPJ/ptu:cd_cnpj",
+              "valor_permitido": [
+                "37918606000110"
+              ]
+            }
+          },
+          {
+            "condicao_tag_valor": {
+              "xpath": "./ptu:CNES",
+              "tipo_comparacao": "valor_atual_diferente",
+              "valor_atual": "0644439"
+            }
+          }
+        ]
+      }
+    },
+    "acao": {
+      "tipo_acao": "garantir_tag_com_conteudo",
+      "tag_alvo": "./ptu:CNES",
+      "novo_conteudo": "0644439",
+      "tag_referencia_posicao": "./ptu:CPF_CNPJ"
+    },
+    "log_sucesso": "CNES do prestador 37918606000110 corrigido/inserido para 0644439."
+  },
+  {
+    "id": "REGRA_GARANTIR_CNES_KATO_NAKAZATO_03761500000134",
+    "descricao": "Garante que o CNES (5571774) esteja correto para o prestador CLINICA GINECOLOGICA KATO E NAKAZATO LTDA (CNPJ 03761500000134).",
+    "ativo": true,
+    "condicoes": {
+      "tipo_elemento": "dadosExecutante",
+      "condicao_multipla": {
+        "tipo": "AND",
+        "sub_condicoes": [
+          {
+            "condicao_tag_valor": {
+              "xpath": "./ptu:CPF_CNPJ/ptu:cd_cnpj",
+              "valor_permitido": [
+                "03761500000134"
+              ]
+            }
+          },
+          {
+            "condicao_tag_valor": {
+              "xpath": "./ptu:CNES",
+              "tipo_comparacao": "valor_atual_diferente",
+              "valor_atual": "5571774"
+            }
+          }
+        ]
+      }
+    },
+    "acao": {
+      "tipo_acao": "garantir_tag_com_conteudo",
+      "tag_alvo": "./ptu:CNES",
+      "novo_conteudo": "5571774",
+      "tag_referencia_posicao": "./ptu:CPF_CNPJ"
+    },
+    "log_sucesso": "CNES do prestador 03761500000134 corrigido/inserido para 5571774."
+  },
+  {
+    "id": "REGRA_GARANTIR_CNES_ESPACO_INTERVENCAO_23072687000176",
+    "descricao": "Garante que o CNES (0480363) esteja correto para o prestador ESPACO INTERVENCAO FONOAUDIOLOGIA LTDA (CNPJ 23072687000176).",
+    "ativo": true,
+    "condicoes": {
+      "tipo_elemento": "dadosExecutante",
+      "condicao_multipla": {
+        "tipo": "AND",
+        "sub_condicoes": [
+          {
+            "condicao_tag_valor": {
+              "xpath": "./ptu:CPF_CNPJ/ptu:cd_cnpj",
+              "valor_permitido": [
+                "23072687000176"
+              ]
+            }
+          },
+          {
+            "condicao_tag_valor": {
+              "xpath": "./ptu:CNES",
+              "tipo_comparacao": "valor_atual_diferente",
+              "valor_atual": "0480363"
+            }
+          }
+        ]
+      }
+    },
+    "acao": {
+      "tipo_acao": "garantir_tag_com_conteudo",
+      "tag_alvo": "./ptu:CNES",
+      "novo_conteudo": "0480363",
+      "tag_referencia_posicao": "./ptu:CPF_CNPJ"
+    },
+    "log_sucesso": "CNES do prestador 23072687000176 corrigido/inserido para 0480363."
+  },
+  {
+    "id": "REGRA_GARANTIR_CNES_CLINICA_INTEGRACAO_37812515000104",
+    "descricao": "Garante que o CNES (0724882) esteja correto para o prestador CLINICA DE INTEGRACAO SENSORIAL E MULTIPROFISSIONAL LTDA (CNPJ 37812515000104).",
+    "ativo": true,
+    "condicoes": {
+      "tipo_elemento": "dadosExecutante",
+      "condicao_multipla": {
+        "tipo": "AND",
+        "sub_condicoes": [
+          {
+            "condicao_tag_valor": {
+              "xpath": "./ptu:CPF_CNPJ/ptu:cd_cnpj",
+              "valor_permitido": [
+                "37812515000104"
+              ]
+            }
+          },
+          {
+            "condicao_tag_valor": {
+              "xpath": "./ptu:CNES",
+              "tipo_comparacao": "valor_atual_diferente",
+              "valor_atual": "0724882"
+            }
+          }
+        ]
+      }
+    },
+    "acao": {
+      "tipo_acao": "garantir_tag_com_conteudo",
+      "tag_alvo": "./ptu:CNES",
+      "novo_conteudo": "0724882",
+      "tag_referencia_posicao": "./ptu:CPF_CNPJ"
+    },
+    "log_sucesso": "CNES do prestador 37812515000104 corrigido/inserido para 0724882."
+  },
+  {
+    "id": "REGRA_GARANTIR_CNES_REGIS_ALBERTINI_12412317000114",
+    "descricao": "Garante que o CNES (5566754) esteja correto para o prestador REGIS ALBERTINI EIRELI (CNPJ 12412317000114).",
+    "ativo": true,
+    "condicoes": {
+      "tipo_elemento": "dadosExecutante",
+      "condicao_multipla": {
+        "tipo": "AND",
+        "sub_condicoes": [
+          {
+            "condicao_tag_valor": {
+              "xpath": "./ptu:CPF_CNPJ/ptu:cd_cnpj",
+              "valor_permitido": [
+                "12412317000114"
+              ]
+            }
+          },
+          {
+            "condicao_tag_valor": {
+              "xpath": "./ptu:CNES",
+              "tipo_comparacao": "valor_atual_diferente",
+              "valor_atual": "5566754"
+            }
+          }
+        ]
+      }
+    },
+    "acao": {
+      "tipo_acao": "garantir_tag_com_conteudo",
+      "tag_alvo": "./ptu:CNES",
+      "novo_conteudo": "5566754",
+      "tag_referencia_posicao": "./ptu:CPF_CNPJ"
+    },
+    "log_sucesso": "CNES do prestador 12412317000114 corrigido/inserido para 5566754."
+  }
+]

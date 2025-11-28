@@ -1,0 +1,219 @@
+[
+  {
+    "id": "REGRA_PROF_CORRIGIR_CBO_GENERICO",
+    "descricao": "Corrige o CBO genérico '999999' para o CBO de Médico Clínico '225125' no bloco <ptu:profissional>.",
+    "ativo": true,
+    "condicoes": {
+      "tipo_elemento": "profissional",
+      "condicao_tag_valor": {
+        "xpath": "./ptu:CBO",
+        "tipo_comparacao": "valor_atual_igual",
+        "valor_atual": "999999"
+      }
+    },
+    "acao": {
+      "tipo_acao": "substituir_conteudo_tag",
+      "tag_alvo": "./ptu:CBO",
+      "novo_conteudo": "225125"
+    },
+    "log_sucesso": "CBO genérico '999999' corrigido para '225125' no bloco do profissional.",
+    "log_falha": "Nenhum CBO genérico '999999' encontrado para correção."
+  },
+  {
+    "id": "REGRA_CORRIGIR_CONSELHO_OUT_PARA_CRM_SE_CBO_MEDICO",
+    "descricao": "Se o conselho for 'OUT' e o CBO for de uma especialidade médica, corrige o conselho para 'CRM'.",
+    "ativo": true,
+    "condicoes": {
+      "tipo_elemento": "profissional",
+      "condicao_multipla": {
+        "tipo": "AND",
+        "sub_condicoes": [
+          {
+            "condicao_tag_valor": {
+              "xpath": "./ptu:dadosConselho/ptu:sg_Conselho",
+              "valor_permitido": [
+                "OUT"
+              ]
+            }
+          },
+          {
+            "condicao_tag_valor": {
+              "xpath": "./ptu:CBO",
+              "tipo_comparacao": "in_lista",
+              "id_lista": "codigos_cbo_medicos"
+            }
+          }
+        ]
+      }
+    },
+    "acao": {
+      "tipo_acao": "substituir_conteudo_tag",
+      "tag_alvo": "./ptu:dadosConselho/ptu:sg_Conselho",
+      "novo_conteudo": "CRM"
+    },
+    "log_sucesso": "Conselho 'OUT' corrigido para 'CRM' com base no CBO do profissional."
+  },
+  {
+    "id": "REGRA_CORRIGIR_CONSELHO_MEDICO_OUT_PARA_CRM",
+    "descricao": "Corrige a sigla do conselho para 'CRM' quando o CBO é de um médico e a sigla está como 'OUT'.",
+    "ativo": true,
+    "condicoes": {
+      "tipo_elemento": "profissional",
+      "condicao_multipla": {
+        "tipo": "AND",
+        "sub_condicoes": [
+          {
+            "condicao_tag_valor": {
+              "xpath": "./ptu:CBO",
+              "tipo_comparacao": "in_lista",
+              "id_lista": "codigos_cbo_medicos"
+            }
+          },
+          {
+            "condicao_tag_valor": {
+              "xpath": "./ptu:dadosConselho/ptu:sg_Conselho",
+              "valor_permitido": [
+                "OUT"
+              ]
+            }
+          }
+        ]
+      }
+    },
+    "acao": {
+      "tipo_acao": "substituir_conteudo_tag",
+      "tag_alvo": "./ptu:dadosConselho/ptu:sg_Conselho",
+      "novo_conteudo": "CRM"
+    },
+    "log_sucesso": "Sigla do conselho 'OUT' corrigida para 'CRM' para profissional médico."
+  },
+  {
+    "id": "REGRA_CORRIGIR_CONSELHO_OUT_PARA_CRM_SE_CBO_MEDICO_PROF",
+    "descricao": "Em <ptu:profissional>, se sg_Conselho=OUT e CBO for médico, trocar para CRM.",
+    "ativo": true,
+    "condicoes": {
+      "tipo_elemento": "profissional",
+      "condicao_multipla": {
+        "tipo": "AND",
+        "sub_condicoes": [
+          {
+            "condicao_tag_valor": {
+              "xpath": "./ptu:dadosConselho/ptu:sg_Conselho",
+              "valor_permitido": [
+                "OUT"
+              ]
+            }
+          },
+          {
+            "condicao_tag_valor": {
+              "xpath": "./ptu:CBO",
+              "id_lista": "codigos_cbo_medicos",
+              "tipo_comparacao": "in_lista"
+            }
+          }
+        ]
+      }
+    },
+    "acao": {
+      "tipo_acao": "substituir_conteudo_tag",
+      "tag_alvo": "./ptu:dadosConselho/ptu:sg_Conselho",
+      "novo_conteudo": "CRM"
+    },
+    "log_sucesso": "Conselho ajustado para CRM em <profissional> (CBO médico)."
+  },
+  {
+    "id": "REGRA_PROFISSIONAL_PADRAO_DR_RODRIGO_FORCAR",
+    "descricao": "Força o bloco <ptu:profissional> a conter os dados PF do Dr. Rodrigo (nome, conselho, UF e CBO), independentemente do que veio.",
+    "ativo": true,
+    "condicoes": {
+      "tipo_elemento": "profissional",
+      "condicao_multipla": {
+        "tipo": "OR",
+        "sub_condicoes": [
+          {
+            "condicao_tag_valor": {
+              "xpath": "./ptu:nm_Profissional",
+              "tipo_comparacao": "valor_atual_diferente",
+              "valor_atual": "RODRIGO DOMINGUES LARAYA"
+            }
+          },
+          {
+            "condicao_tag_valor": {
+              "xpath": "./ptu:dadosConselho/ptu:sg_Conselho",
+              "tipo_comparacao": "valor_atual_diferente",
+              "valor_atual": "CRM"
+            }
+          },
+          {
+            "condicao_tag_valor": {
+              "xpath": "./ptu:dadosConselho/ptu:nr_Conselho",
+              "tipo_comparacao": "valor_atual_diferente",
+              "valor_atual": "5185"
+            }
+          },
+          {
+            "condicao_tag_valor": {
+              "xpath": "./ptu:dadosConselho/ptu:UF",
+              "tipo_comparacao": "valor_atual_diferente",
+              "valor_atual": "50"
+            }
+          },
+          {
+            "condicao_tag_valor": {
+              "xpath": "./ptu:CBO",
+              "tipo_comparacao": "valor_atual_diferente",
+              "valor_atual": "225125"
+            }
+          },
+          {
+            "condicao_tag_valor": {
+              "xpath": "./ptu:dadosConselho/ptu:sg_Conselho",
+              "valor_permitido": [
+                "OUT"
+              ]
+            }
+          },
+          {
+            "condicao_tag_valor": {
+              "xpath": "./ptu:nm_Profissional",
+              "tipo_comparacao": "existe"
+            }
+          }
+        ]
+      }
+    },
+    "acao": {
+      "tipo_acao": "multiplas_acoes",
+      "sub_acoes": [
+        {
+          "tipo_acao": "garantir_tag_com_conteudo",
+          "tag_alvo": "./ptu:nm_Profissional",
+          "novo_conteudo": "RODRIGO DOMINGUES LARAYA"
+        },
+        {
+          "tipo_acao": "garantir_tag_com_conteudo",
+          "tag_alvo": "./ptu:dadosConselho/ptu:sg_Conselho",
+          "novo_conteudo": "CRM"
+        },
+        {
+          "tipo_acao": "garantir_tag_com_conteudo",
+          "tag_alvo": "./ptu:dadosConselho/ptu:nr_Conselho",
+          "novo_conteudo": "5185"
+        },
+        {
+          "tipo_acao": "garantir_tag_com_conteudo",
+          "tag_alvo": "./ptu:dadosConselho/ptu:UF",
+          "novo_conteudo": "50"
+        },
+        {
+          "tipo_acao": "garantir_tag_com_conteudo",
+          "tag_alvo": "./ptu:CBO",
+          "novo_conteudo": "225125",
+          "posicao_insercao": "primeiro_filho",
+          "tag_pai_referencia": "."
+        }
+      ]
+    },
+    "log_sucesso": "Bloco <profissional> normalizado para PF do Dr. Rodrigo."
+  }
+]
