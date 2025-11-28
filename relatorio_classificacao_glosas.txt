@@ -1,0 +1,228 @@
+RELATÓRIO DE CLASSIFICAÇÃO DE GLOSAS - Audit+ v2.0
+================================================================================
+
+
+VALIDACAO
+--------------------------------------------------------------------------------
+ID: REGRA_ORDEM_DADOS_AUDITORIA
+Arquivo: auditoria.json
+Impacto: MEDIO
+Razão: Ordem incorreta pode causar erro de validação XSD, impedindo aceite da fatura
+Descrição: Garante a ordem correta das tags dentro do bloco <dadosAuditoria> conforme o schema XSD.
+
+ID: REGRA_GARANTIR_CNES_RESGATARE_52838800000180
+Arquivo: cnes.json
+Impacto: ALTO
+Razão: CNES incorreto ou ausente impede postagem da fatura (validação obrigatória)
+Descrição: Garante que o CNES (4892402) esteja correto para o prestador RESGATARE (CNPJ 52838800000180), corrigindo valores incorretos como '9999999'.
+
+ID: REGRA_GARANTIR_CNES_LAZARI_40659789000101
+Arquivo: cnes.json
+Impacto: ALTO
+Razão: CNES incorreto ou ausente impede postagem da fatura (validação obrigatória)
+Descrição: Garante que o CNES (4611004) esteja correto para o prestador LAZARI E OGUCHI (CNPJ 40659789000101).
+
+ID: REGRA_GARANTIR_CNES_LILIANE_51804254000101
+Arquivo: cnes.json
+Impacto: ALTO
+Razão: CNES incorreto ou ausente impede postagem da fatura (validação obrigatória)
+Descrição: Garante que o CNES (4519884) esteja correto para o prestador LILIANE PINHO DE ALMEIDA LTDA (CNPJ 51804254000101).
+
+ID: REGRA_GARANTIR_CNES_CARLIFE_37918606000110
+Arquivo: cnes.json
+Impacto: ALTO
+Razão: CNES incorreto ou ausente impede postagem da fatura (validação obrigatória)
+Descrição: Garante que o CNES (0644439) esteja correto para o prestador CARLIFE REMOCOES MEDICAS LTDA (CNPJ 37918606000110).
+
+ID: REGRA_GARANTIR_CNES_KATO_NAKAZATO_03761500000134
+Arquivo: cnes.json
+Impacto: ALTO
+Razão: CNES incorreto ou ausente impede postagem da fatura (validação obrigatória)
+Descrição: Garante que o CNES (5571774) esteja correto para o prestador CLINICA GINECOLOGICA KATO E NAKAZATO LTDA (CNPJ 03761500000134).
+
+ID: REGRA_GARANTIR_CNES_ESPACO_INTERVENCAO_23072687000176
+Arquivo: cnes.json
+Impacto: ALTO
+Razão: CNES incorreto ou ausente impede postagem da fatura (validação obrigatória)
+Descrição: Garante que o CNES (0480363) esteja correto para o prestador ESPACO INTERVENCAO FONOAUDIOLOGIA LTDA (CNPJ 23072687000176).
+
+ID: REGRA_GARANTIR_CNES_CLINICA_INTEGRACAO_37812515000104
+Arquivo: cnes.json
+Impacto: ALTO
+Razão: CNES incorreto ou ausente impede postagem da fatura (validação obrigatória)
+Descrição: Garante que o CNES (0724882) esteja correto para o prestador CLINICA DE INTEGRACAO SENSORIAL E MULTIPROFISSIONAL LTDA (CNPJ 37812515000104).
+
+ID: REGRA_GARANTIR_CNES_REGIS_ALBERTINI_12412317000114
+Arquivo: cnes.json
+Impacto: ALTO
+Razão: CNES incorreto ou ausente impede postagem da fatura (validação obrigatória)
+Descrição: Garante que o CNES (5566754) esteja correto para o prestador REGIS ALBERTINI EIRELI (CNPJ 12412317000114).
+
+ID: REGRA_GARANTIR_CPF_PRESTADOR_24018
+Arquivo: cpf_prestadores.json
+Impacto: ALTO
+Razão: Erro de validação impede postagem da fatura
+Descrição: Garante que o bloco <cdCnpjCpf> com o CPF 39050408168 exista para o prestador 24018 (Alberto Luiz Leite da Silva) e corrige a ordem das tags.
+
+ID: REGRA_GARANTIR_CPF_PRESTADOR_24022
+Arquivo: cpf_prestadores.json
+Impacto: ALTO
+Razão: Erro de validação impede postagem da fatura
+Descrição: Garante que o bloco <cdCnpjCpf> com o CPF 28200385817 exista para o prestador 24022 (Fernando Ruas Esgalha) e corrige a ordem das tags.
+
+ID: REGRA_GARANTIR_CPF_PRESTADOR_9131
+Arquivo: cpf_prestadores.json
+Impacto: ALTO
+Razão: Erro de validação impede postagem da fatura
+Descrição: Garante que o bloco <cdCnpjCpf> com o CPF 01269501135 exista para o prestador 9131 (Lissa Nakazato) e corrige a ordem das tags.
+
+ID: REGRA_ORDEM_EQUIPE_PARA_HONORARIOS
+Arquivo: equipe_profissional.json
+Impacto: ALTO
+Razão: Erro de validação impede postagem da fatura
+Descrição: Garante a ordem correta das tags em <equipe_Profissional> dentro de guias de Honorários.
+
+ID: REGRA_ORDEM_EQUIPE_PARA_SADT_E_INTERNACAO
+Arquivo: equipe_profissional.json
+Impacto: ALTO
+Razão: Erro de validação impede postagem da fatura
+Descrição: Garante a ordem correta das tags em <equipe_Profissional> dentro de guias SADT e Internação.
+
+ID: REGRA_ORDEM_EQUIPE_PARA_CONSULTA
+Arquivo: equipe_profissional.json
+Impacto: ALTO
+Razão: Erro de validação impede postagem da fatura
+Descrição: Garante a ordem correta das tags em <equipe_Profissional> dentro de guias de Consulta.
+
+
+GLOSA_GUIA
+--------------------------------------------------------------------------------
+ID: REGRA_GARANTIR_NOME_MEDICO_AUDITOR
+Arquivo: auditoria.json
+Impacto: ALTO
+Razão: Ausência de médico auditor resulta em glosa total da guia pela operadora
+Descrição: Passo 1: Garante que a tag <nm_MedicoAuditor> exista em <dadosAuditoria> se estiver ausente.
+
+ID: REGRA_GARANTIR_CRM_MEDICO_AUDITOR
+Arquivo: auditoria.json
+Impacto: ALTO
+Razão: Ausência de CRM do auditor resulta em glosa total da guia pela operadora
+Descrição: Passo 2: Garante que a tag <nr_CrmAuditor> exista em <dadosAuditoria> se estiver ausente.
+
+ID: REGRA_GARANTIR_UF_MEDICO_AUDITOR
+Arquivo: auditoria.json
+Impacto: ALTO
+Razão: Ausência de UF do CRM do auditor resulta em glosa total da guia pela operadora
+Descrição: Passo 3: Garante que a tag <cd_UFCRM> exista em <dadosAuditoria> se estiver ausente.
+
+ID: REGRA_CORRIGIR_MULTIPLICADOR_ACOMODACAO_B
+Arquivo: internacao.json
+Impacto: ALTO
+Razão: Operadora glosa a guia inteira se informação estiver incorreta
+Descrição: Se a acomodação for 'B' (Individual), garante que o fator multiplicador AMB seja 2.00.
+
+
+GLOSA_ITEM
+--------------------------------------------------------------------------------
+ID: REGRA_PROF_CORRIGIR_CBO_GENERICO
+Arquivo: conselho.json
+Impacto: MEDIO
+Razão: Operadora glosa apenas o procedimento específico
+Descrição: Corrige o CBO genérico '999999' para o CBO de Médico Clínico '225125' no bloco <ptu:profissional>.
+
+ID: REGRA_CORRIGIR_CONSELHO_OUT_PARA_CRM_SE_CBO_MEDICO
+Arquivo: conselho.json
+Impacto: MEDIO
+Razão: Operadora glosa apenas o procedimento específico
+Descrição: Se o conselho for 'OUT' e o CBO for de uma especialidade médica, corrige o conselho para 'CRM'.
+
+ID: REGRA_CORRIGIR_CONSELHO_MEDICO_OUT_PARA_CRM
+Arquivo: conselho.json
+Impacto: MEDIO
+Razão: Operadora glosa apenas o procedimento específico
+Descrição: Corrige a sigla do conselho para 'CRM' quando o CBO é de um médico e a sigla está como 'OUT'.
+
+ID: REGRA_CORRIGIR_CONSELHO_OUT_PARA_CRM_SE_CBO_MEDICO_PROF
+Arquivo: conselho.json
+Impacto: MEDIO
+Razão: Operadora glosa apenas o procedimento específico
+Descrição: Em <ptu:profissional>, se sg_Conselho=OUT e CBO for médico, trocar para CRM.
+
+ID: REGRA_PROFISSIONAL_PADRAO_DR_RODRIGO_FORCAR
+Arquivo: conselho.json
+Impacto: MEDIO
+Razão: Operadora glosa apenas o procedimento específico
+Descrição: Força o bloco <ptu:profissional> a conter os dados PF do Dr. Rodrigo (nome, conselho, UF e CBO), independentemente do que veio.
+
+ID: REGRA_REMOVER_EQUIPE_SADT_SE_NAO_OBRIGATORIO
+Arquivo: equipe_profissional.json
+Impacto: MEDIO
+Razão: Operadora glosa apenas o procedimento específico
+Descrição: 
+
+ID: REGRA_CORRIGIR_CONSELHO_OUT_PARA_CRM_SE_CBO_MEDICO_EQP
+Arquivo: equipe_profissional.json
+Impacto: MEDIO
+Razão: Operadora glosa apenas o procedimento específico
+Descrição: Em <ptu:equipe_Profissional>, se sg_Conselho=OUT e CBO for médico, trocar para CRM.
+
+ID: REGRA_10104020_NORMALIZAR_EQUIPE_PF_DR_RODRIGO_FORCAR
+Arquivo: equipe_profissional.json
+Impacto: MEDIO
+Razão: Operadora glosa apenas o procedimento específico
+Descrição: Para cd_Servico=10104020, força a normalização completa do bloco <equipe_Profissional> para o PF do Dr. Rodrigo (troca PJ 11039 por PF 11021).
+
+ID: REGRA_NORMALIZAR_EQUIPE_PLANTONISTA_PA_PARA_DR_RODRIGO
+Arquivo: equipe_profissional.json
+Impacto: MEDIO
+Razão: Operadora glosa apenas o procedimento específico
+Descrição: Quando nm_Profissional = 'PLANTONISTA PA', normaliza toda a equipe_Profissional para o PF do Dr. Rodrigo.
+
+ID: REGRA_CORRIGIR_EQUIPE_PJ_PARA_PF_PADRAO
+Arquivo: equipe_profissional.json
+Impacto: MEDIO
+Razão: Operadora glosa apenas o procedimento específico
+Descrição: Quando um serviço que exige PF (ex: 10101039, 40401014) tiver a equipe preenchida com dados de PJ (identificado pela tag cnpj), converte todo o bloco para um profissional PF padrão (Dr. Rodrigo).
+
+ID: REGRA_CORRIGIR_PJ_PARA_PF_COM_PARTICIPACAO
+Arquivo: equipe_profissional.json
+Impacto: MEDIO
+Razão: Operadora glosa apenas o procedimento específico
+Descrição: Converte equipe PJ para PF padrão, garantindo a tag <tp_Participacao> para serviços que a exigem (ex: Transfusão).
+
+ID: REGRA_CORRIGIR_PRESTADOR_11101_PARA_PF_PADRAO
+Arquivo: equipe_profissional.json
+Impacto: MEDIO
+Razão: Operadora glosa apenas o procedimento específico
+Descrição: Para o serviço 10101039, se o prestador for 11101, converte a equipe para o PF padrão.
+
+ID: REGRA_CORRIGIR_SOLICITANTE_GENERICO_UNIMED
+Arquivo: outros.json
+Impacto: MEDIO
+Razão: Operadora glosa apenas o procedimento específico
+Descrição: Corrige dados do profissional solicitante quando preenchido com valores genéricos da cooperativa.
+
+ID: REGRA_CORRIGIR_PJ_PARA_PF_PRESTADOR_11039_SERV_30203015
+Arquivo: pj_para_pf.json
+Impacto: MEDIO
+Razão: Operadora glosa apenas o procedimento específico
+Descrição: Corrige os dados de PJ para PF do prestador 11039 no serviço 30203015, inserindo os dados do Dr. Rodrigo Domingues Laraya.
+
+ID: REGRA_CORRIGIR_ACRESCIMO_PARA_PROCEDIMENTOS_ESPECIFICOS
+Arquivo: procedimentos.json
+Impacto: MEDIO
+Razão: Operadora glosa apenas o procedimento específico
+Descrição: Corrige a tag <ptu:id_Acrescimo> de 'S' para 'N' para os códigos de serviço 40902064, 40202615 e 40202038.
+
+ID: REGRA_GARANTIR_ANVISA_ISENTO_PARA_PROC_ESPECIFICO
+Arquivo: procedimentos.json
+Impacto: MEDIO
+Razão: Operadora glosa apenas o procedimento específico
+Descrição: Garante que a tag <ptu:nr_RegistroAnvisa> com valor 'ISENTO' exista para o serviço 1999999943.
+
+ID: REGRA_GARANTIR_INDICACAO_CLINICA_CIDJ069
+Arquivo: procedimentos.json
+Impacto: MEDIO
+Razão: Operadora glosa apenas o procedimento específico
+Descrição: Garante a indicação clínica 'CIDJ069...' para um grupo específico de serviços.
+

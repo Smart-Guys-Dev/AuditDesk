@@ -17,7 +17,12 @@
       "novo_conteudo": "225125"
     },
     "log_sucesso": "CBO genérico '999999' corrigido para '225125' no bloco do profissional.",
-    "log_falha": "Nenhum CBO genérico '999999' encontrado para correção."
+    "log_falha": "Nenhum CBO genérico '999999' encontrado para correção.",
+    "metadata_glosa": {
+      "categoria": "GLOSA_ITEM",
+      "impacto": "MEDIO",
+      "razao": "Operadora glosa apenas o procedimento específico"
+    }
   },
   {
     "id": "REGRA_CORRIGIR_CONSELHO_OUT_PARA_CRM_SE_CBO_MEDICO",
@@ -51,7 +56,12 @@
       "tag_alvo": "./ptu:dadosConselho/ptu:sg_Conselho",
       "novo_conteudo": "CRM"
     },
-    "log_sucesso": "Conselho 'OUT' corrigido para 'CRM' com base no CBO do profissional."
+    "log_sucesso": "Conselho 'OUT' corrigido para 'CRM' com base no CBO do profissional.",
+    "metadata_glosa": {
+      "categoria": "GLOSA_ITEM",
+      "impacto": "MEDIO",
+      "razao": "Operadora glosa apenas o procedimento específico"
+    }
   },
   {
     "id": "REGRA_CORRIGIR_CONSELHO_MEDICO_OUT_PARA_CRM",
@@ -85,7 +95,12 @@
       "tag_alvo": "./ptu:dadosConselho/ptu:sg_Conselho",
       "novo_conteudo": "CRM"
     },
-    "log_sucesso": "Sigla do conselho 'OUT' corrigida para 'CRM' para profissional médico."
+    "log_sucesso": "Sigla do conselho 'OUT' corrigida para 'CRM' para profissional médico.",
+    "metadata_glosa": {
+      "categoria": "GLOSA_ITEM",
+      "impacto": "MEDIO",
+      "razao": "Operadora glosa apenas o procedimento específico"
+    }
   },
   {
     "id": "REGRA_CORRIGIR_CONSELHO_OUT_PARA_CRM_SE_CBO_MEDICO_PROF",
@@ -119,7 +134,12 @@
       "tag_alvo": "./ptu:dadosConselho/ptu:sg_Conselho",
       "novo_conteudo": "CRM"
     },
-    "log_sucesso": "Conselho ajustado para CRM em <profissional> (CBO médico)."
+    "log_sucesso": "Conselho ajustado para CRM em <profissional> (CBO médico).",
+    "metadata_glosa": {
+      "categoria": "GLOSA_ITEM",
+      "impacto": "MEDIO",
+      "razao": "Operadora glosa apenas o procedimento específico"
+    }
   },
   {
     "id": "REGRA_PROFISSIONAL_PADRAO_DR_RODRIGO_FORCAR",
@@ -214,6 +234,11 @@
         }
       ]
     },
-    "log_sucesso": "Bloco <profissional> normalizado para PF do Dr. Rodrigo."
+    "log_sucesso": "Bloco <profissional> normalizado para PF do Dr. Rodrigo.",
+    "metadata_glosa": {
+      "categoria": "GLOSA_ITEM",
+      "impacto": "MEDIO",
+      "razao": "Operadora glosa apenas o procedimento específico"
+    }
   }
 ]

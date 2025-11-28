@@ -35,7 +35,12 @@
       "tag_alvo": "./ptu:id_Acrescimo",
       "novo_conteudo": "N"
     },
-    "log_sucesso": "Acréscimo 'S' corrigido para 'N' para serviço específico."
+    "log_sucesso": "Acréscimo 'S' corrigido para 'N' para serviço específico.",
+    "metadata_glosa": {
+      "categoria": "GLOSA_ITEM",
+      "impacto": "MEDIO",
+      "razao": "Operadora glosa apenas o procedimento específico"
+    }
   },
   {
     "id": "REGRA_GARANTIR_ANVISA_ISENTO_PARA_PROC_ESPECIFICO",
@@ -69,7 +74,12 @@
       "novo_conteudo": "ISENTO",
       "tag_referencia_posicao": "./ptu:id_Pacote"
     },
-    "log_sucesso": "Tag <ptu:nr_RegistroAnvisa> com valor 'ISENTO' inserida para o serviço 1999999943."
+    "log_sucesso": "Tag <ptu:nr_RegistroAnvisa> com valor 'ISENTO' inserida para o serviço 1999999943.",
+    "metadata_glosa": {
+      "categoria": "GLOSA_ITEM",
+      "impacto": "MEDIO",
+      "razao": "Operadora glosa apenas o procedimento específico"
+    }
   },
   {
     "id": "REGRA_GARANTIR_INDICACAO_CLINICA_CIDJ069",
@@ -95,6 +105,11 @@
       "novo_conteudo": "CIDJ069 INFECCAO AGUDA DAS VIAS AEREAS SUPERIORES NAO ESPECIFICADA",
       "tag_referencia_posicao": "../ptu:complemento/ptu:tp_RegCPL"
     },
-    "log_sucesso": "Indicação clínica padrão inserida para serviço específico."
+    "log_sucesso": "Indicação clínica padrão inserida para serviço específico.",
+    "metadata_glosa": {
+      "categoria": "GLOSA_ITEM",
+      "impacto": "MEDIO",
+      "razao": "Operadora glosa apenas o procedimento específico"
+    }
   }
 ]

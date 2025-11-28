@@ -52,7 +52,12 @@
         }
       ]
     },
-    "log_sucesso": "Bloco <cdCnpjCpf> inserido e reordenado para o prestador 24018."
+    "log_sucesso": "Bloco <cdCnpjCpf> inserido e reordenado para o prestador 24018.",
+    "metadata_glosa": {
+      "categoria": "VALIDACAO",
+      "impacto": "ALTO",
+      "razao": "Erro de validação impede postagem da fatura"
+    }
   },
   {
     "id": "REGRA_GARANTIR_CPF_PRESTADOR_24022",
@@ -107,7 +112,12 @@
         }
       ]
     },
-    "log_sucesso": "Bloco <cdCnpjCpf> inserido e reordenado para o prestador 24022."
+    "log_sucesso": "Bloco <cdCnpjCpf> inserido e reordenado para o prestador 24022.",
+    "metadata_glosa": {
+      "categoria": "VALIDACAO",
+      "impacto": "ALTO",
+      "razao": "Erro de validação impede postagem da fatura"
+    }
   },
   {
     "id": "REGRA_GARANTIR_CPF_PRESTADOR_9131",
@@ -162,6 +172,11 @@
         }
       ]
     },
-    "log_sucesso": "Bloco <cdCnpjCpf> inserido e reordenado para o prestador 9131."
+    "log_sucesso": "Bloco <cdCnpjCpf> inserido e reordenado para o prestador 9131.",
+    "metadata_glosa": {
+      "categoria": "VALIDACAO",
+      "impacto": "ALTO",
+      "razao": "Erro de validação impede postagem da fatura"
+    }
   }
 ]

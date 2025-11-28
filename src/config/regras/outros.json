@@ -3,6 +3,11 @@
     "id": "REGRA_CORRIGIR_SOLICITANTE_GENERICO_UNIMED",
     "descricao": "Corrige dados do profissional solicitante quando preenchido com valores genéricos da cooperativa.",
     "ativo": true,
+    "metadata_glosa": {
+      "categoria": "GLOSA_GUIA",
+      "impacto": "ALTO",
+      "razao": "Dados do solicitante incorretos resultam em glosa total da guia pela operadora"
+    },
     "condicoes": {
       "tipo_elemento": "dadosSolicitante",
       "condicao_multipla": {

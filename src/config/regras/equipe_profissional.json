@@ -35,6 +35,11 @@
     "acao": {
       "tipo_acao": "remover_tag_inteira",
       "tag_alvo": "./ptu:equipe_Profissional"
+    },
+    "metadata_glosa": {
+      "categoria": "GLOSA_ITEM",
+      "impacto": "MEDIO",
+      "razao": "Operadora glosa apenas o procedimento específico"
     }
   },
   {
@@ -72,6 +77,11 @@
         "dadosConselho",
         "CBO"
       ]
+    },
+    "metadata_glosa": {
+      "categoria": "VALIDACAO",
+      "impacto": "ALTO",
+      "razao": "Erro de validação impede postagem da fatura"
     }
   },
   {
@@ -115,6 +125,11 @@
         "dadosConselho",
         "CBO"
       ]
+    },
+    "metadata_glosa": {
+      "categoria": "VALIDACAO",
+      "impacto": "ALTO",
+      "razao": "Erro de validação impede postagem da fatura"
     }
   },
   {
@@ -152,6 +167,11 @@
         "dadosConselho",
         "CBO"
       ]
+    },
+    "metadata_glosa": {
+      "categoria": "VALIDACAO",
+      "impacto": "ALTO",
+      "razao": "Erro de validação impede postagem da fatura"
     }
   },
   {
@@ -192,7 +212,12 @@
       "tag_alvo": "./ptu:equipe_Profissional/ptu:dadosConselho/ptu:sg_Conselho",
       "novo_conteudo": "CRM"
     },
-    "log_sucesso": "Conselho ajustado para CRM em <equipe_Profissional> (CBO médico)."
+    "log_sucesso": "Conselho ajustado para CRM em <equipe_Profissional> (CBO médico).",
+    "metadata_glosa": {
+      "categoria": "GLOSA_ITEM",
+      "impacto": "MEDIO",
+      "razao": "Operadora glosa apenas o procedimento específico"
+    }
   },
   {
     "id": "REGRA_10104020_NORMALIZAR_EQUIPE_PF_DR_RODRIGO_FORCAR",
@@ -278,7 +303,12 @@
         }
       ]
     },
-    "log_sucesso": "Equipe do 10104020 normalizada para PF (Prest 11021) com dados padronizados do Dr. Rodrigo."
+    "log_sucesso": "Equipe do 10104020 normalizada para PF (Prest 11021) com dados padronizados do Dr. Rodrigo.",
+    "metadata_glosa": {
+      "categoria": "GLOSA_ITEM",
+      "impacto": "MEDIO",
+      "razao": "Operadora glosa apenas o procedimento específico"
+    }
   },
   {
     "id": "REGRA_NORMALIZAR_EQUIPE_PLANTONISTA_PA_PARA_DR_RODRIGO",
@@ -364,7 +394,12 @@
         }
       ]
     },
-    "log_sucesso": "Equipe com 'PLANTONISTA PA' normalizada para PF (Dr. Rodrigo)."
+    "log_sucesso": "Equipe com 'PLANTONISTA PA' normalizada para PF (Dr. Rodrigo).",
+    "metadata_glosa": {
+      "categoria": "GLOSA_ITEM",
+      "impacto": "MEDIO",
+      "razao": "Operadora glosa apenas o procedimento específico"
+    }
   },
   {
     "id": "REGRA_CORRIGIR_EQUIPE_PJ_PARA_PF_PADRAO",
@@ -449,7 +484,12 @@
         }
       ]
     },
-    "log_sucesso": "Bloco <equipe_Profissional> com dados de PJ foi corrigido para o padrão PF."
+    "log_sucesso": "Bloco <equipe_Profissional> com dados de PJ foi corrigido para o padrão PF.",
+    "metadata_glosa": {
+      "categoria": "GLOSA_ITEM",
+      "impacto": "MEDIO",
+      "razao": "Operadora glosa apenas o procedimento específico"
+    }
   },
   {
     "id": "REGRA_CORRIGIR_PJ_PARA_PF_COM_PARTICIPACAO",
@@ -530,6 +570,11 @@
           "novo_conteudo": "225125"
         }
       ]
+    },
+    "metadata_glosa": {
+      "categoria": "GLOSA_ITEM",
+      "impacto": "MEDIO",
+      "razao": "Operadora glosa apenas o procedimento específico"
     }
   },
   {
@@ -619,6 +664,11 @@
           "novo_conteudo": "225125"
         }
       ]
+    },
+    "metadata_glosa": {
+      "categoria": "GLOSA_ITEM",
+      "impacto": "MEDIO",
+      "razao": "Operadora glosa apenas o procedimento específico"
     }
   }
 ]

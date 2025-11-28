@@ -32,7 +32,12 @@
       "novo_conteudo": "4892402",
       "tag_referencia_posicao": "./ptu:CPF_CNPJ"
     },
-    "log_sucesso": "CNES do prestador 52838800000180 corrigido/inserido para 4892402."
+    "log_sucesso": "CNES do prestador 52838800000180 corrigido/inserido para 4892402.",
+    "metadata_glosa": {
+      "categoria": "VALIDACAO",
+      "impacto": "ALTO",
+      "razao": "CNES incorreto ou ausente impede postagem da fatura (validação obrigatória)"
+    }
   },
   {
     "id": "REGRA_GARANTIR_CNES_LAZARI_40659789000101",
@@ -67,7 +72,12 @@
       "novo_conteudo": "4611004",
       "tag_referencia_posicao": "./ptu:CPF_CNPJ"
     },
-    "log_sucesso": "CNES do prestador 40659789000101 corrigido/inserido para 4611004."
+    "log_sucesso": "CNES do prestador 40659789000101 corrigido/inserido para 4611004.",
+    "metadata_glosa": {
+      "categoria": "VALIDACAO",
+      "impacto": "ALTO",
+      "razao": "CNES incorreto ou ausente impede postagem da fatura (validação obrigatória)"
+    }
   },
   {
     "id": "REGRA_GARANTIR_CNES_LILIANE_51804254000101",
@@ -102,7 +112,12 @@
       "novo_conteudo": "4519884",
       "tag_referencia_posicao": "./ptu:CPF_CNPJ"
     },
-    "log_sucesso": "CNES do prestador 51804254000101 corrigido/inserido para 4519884."
+    "log_sucesso": "CNES do prestador 51804254000101 corrigido/inserido para 4519884.",
+    "metadata_glosa": {
+      "categoria": "VALIDACAO",
+      "impacto": "ALTO",
+      "razao": "CNES incorreto ou ausente impede postagem da fatura (validação obrigatória)"
+    }
   },
   {
     "id": "REGRA_GARANTIR_CNES_CARLIFE_37918606000110",
@@ -137,7 +152,12 @@
       "novo_conteudo": "0644439",
       "tag_referencia_posicao": "./ptu:CPF_CNPJ"
     },
-    "log_sucesso": "CNES do prestador 37918606000110 corrigido/inserido para 0644439."
+    "log_sucesso": "CNES do prestador 37918606000110 corrigido/inserido para 0644439.",
+    "metadata_glosa": {
+      "categoria": "VALIDACAO",
+      "impacto": "ALTO",
+      "razao": "CNES incorreto ou ausente impede postagem da fatura (validação obrigatória)"
+    }
   },
   {
     "id": "REGRA_GARANTIR_CNES_KATO_NAKAZATO_03761500000134",
@@ -172,7 +192,12 @@
       "novo_conteudo": "5571774",
       "tag_referencia_posicao": "./ptu:CPF_CNPJ"
     },
-    "log_sucesso": "CNES do prestador 03761500000134 corrigido/inserido para 5571774."
+    "log_sucesso": "CNES do prestador 03761500000134 corrigido/inserido para 5571774.",
+    "metadata_glosa": {
+      "categoria": "VALIDACAO",
+      "impacto": "ALTO",
+      "razao": "CNES incorreto ou ausente impede postagem da fatura (validação obrigatória)"
+    }
   },
   {
     "id": "REGRA_GARANTIR_CNES_ESPACO_INTERVENCAO_23072687000176",
@@ -207,7 +232,12 @@
       "novo_conteudo": "0480363",
       "tag_referencia_posicao": "./ptu:CPF_CNPJ"
     },
-    "log_sucesso": "CNES do prestador 23072687000176 corrigido/inserido para 0480363."
+    "log_sucesso": "CNES do prestador 23072687000176 corrigido/inserido para 0480363.",
+    "metadata_glosa": {
+      "categoria": "VALIDACAO",
+      "impacto": "ALTO",
+      "razao": "CNES incorreto ou ausente impede postagem da fatura (validação obrigatória)"
+    }
   },
   {
     "id": "REGRA_GARANTIR_CNES_CLINICA_INTEGRACAO_37812515000104",
@@ -242,7 +272,12 @@
       "novo_conteudo": "0724882",
       "tag_referencia_posicao": "./ptu:CPF_CNPJ"
     },
-    "log_sucesso": "CNES do prestador 37812515000104 corrigido/inserido para 0724882."
+    "log_sucesso": "CNES do prestador 37812515000104 corrigido/inserido para 0724882.",
+    "metadata_glosa": {
+      "categoria": "VALIDACAO",
+      "impacto": "ALTO",
+      "razao": "CNES incorreto ou ausente impede postagem da fatura (validação obrigatória)"
+    }
   },
   {
     "id": "REGRA_GARANTIR_CNES_REGIS_ALBERTINI_12412317000114",
@@ -277,6 +312,11 @@
       "novo_conteudo": "5566754",
       "tag_referencia_posicao": "./ptu:CPF_CNPJ"
     },
-    "log_sucesso": "CNES do prestador 12412317000114 corrigido/inserido para 5566754."
+    "log_sucesso": "CNES do prestador 12412317000114 corrigido/inserido para 5566754.",
+    "metadata_glosa": {
+      "categoria": "VALIDACAO",
+      "impacto": "ALTO",
+      "razao": "CNES incorreto ou ausente impede postagem da fatura (validação obrigatória)"
+    }
   }
 ]

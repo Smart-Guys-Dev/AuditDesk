@@ -17,6 +17,11 @@
       "novo_conteudo": "2.00",
       "tag_referencia_posicao": "./ptu:tp_Acomodacao"
     },
-    "log_sucesso": "Fator multiplicador AMB corrigido para 2.00 para acomodação tipo 'B'."
+    "log_sucesso": "Fator multiplicador AMB corrigido para 2.00 para acomodação tipo 'B'.",
+    "metadata_glosa": {
+      "categoria": "GLOSA_GUIA",
+      "impacto": "ALTO",
+      "razao": "Operadora glosa a guia inteira se informação estiver incorreta"
+    }
   }
 ]

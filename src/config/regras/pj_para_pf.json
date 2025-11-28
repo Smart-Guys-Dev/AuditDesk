@@ -98,6 +98,11 @@
         }
       ]
     },
-    "log_sucesso": "Corrigido PJ para PF para o prestador 11039 no serviço 30203015."
+    "log_sucesso": "Corrigido PJ para PF para o prestador 11039 no serviço 30203015.",
+    "metadata_glosa": {
+      "categoria": "GLOSA_ITEM",
+      "impacto": "MEDIO",
+      "razao": "Operadora glosa apenas o procedimento específico"
+    }
   }
 ]

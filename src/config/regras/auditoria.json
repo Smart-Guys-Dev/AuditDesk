@@ -3,6 +3,11 @@
     "id": "REGRA_ORDEM_DADOS_AUDITORIA",
     "descricao": "Garante a ordem correta das tags dentro do bloco <dadosAuditoria> conforme o schema XSD.",
     "ativo": true,
+    "metadata_glosa": {
+      "categoria": "VALIDACAO",
+      "impacto": "MEDIO",
+      "razao": "Ordem incorreta pode causar erro de validação XSD, impedindo aceite da fatura"
+    },
     "condicoes": {
       "tipo_elemento": "dadosAuditoria"
     },
@@ -23,6 +28,11 @@
     "id": "REGRA_GARANTIR_NOME_MEDICO_AUDITOR",
     "descricao": "Passo 1: Garante que a tag <nm_MedicoAuditor> exista em <dadosAuditoria> se estiver ausente.",
     "ativo": true,
+    "metadata_glosa": {
+      "categoria": "GLOSA_GUIA",
+      "impacto": "ALTO",
+      "razao": "Ausência de médico auditor resulta em glosa total da guia pela operadora"
+    },
     "condicoes": {
       "tipo_elemento": "dadosAuditoria",
       "condicao_tag_valor": {
@@ -43,6 +53,11 @@
     "id": "REGRA_GARANTIR_CRM_MEDICO_AUDITOR",
     "descricao": "Passo 2: Garante que a tag <nr_CrmAuditor> exista em <dadosAuditoria> se estiver ausente.",
     "ativo": true,
+    "metadata_glosa": {
+      "categoria": "GLOSA_GUIA",
+      "impacto": "ALTO",
+      "razao": "Ausência de CRM do auditor resulta em glosa total da guia pela operadora"
+    },
     "condicoes": {
       "tipo_elemento": "dadosAuditoria",
       "condicao_tag_valor": {
@@ -62,6 +77,11 @@
     "id": "REGRA_GARANTIR_UF_MEDICO_AUDITOR",
     "descricao": "Passo 3: Garante que a tag <cd_UFCRM> exista em <dadosAuditoria> se estiver ausente.",
     "ativo": true,
+    "metadata_glosa": {
+      "categoria": "GLOSA_GUIA",
+      "impacto": "ALTO",
+      "razao": "Ausência de UF do CRM do auditor resulta em glosa total da guia pela operadora"
+    },
     "condicoes": {
       "tipo_elemento": "dadosAuditoria",
       "condicao_tag_valor": {
