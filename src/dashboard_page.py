@@ -81,15 +81,15 @@ class PaginaDashboard(QWidget):
 
         # KPIs
         self.kpi_layout = QHBoxLayout()
-        self.card_total_saved = KPICard("Valor Recuperado", "R$ 0,00", "💰", "#A3BE8C") # Verde
-        self.card_corrections = KPICard("Correções Aplicadas", "0", "🔧", "#EBCB8B") # Amarelo
-        self.card_files = KPICard("Arquivos Processados", "0", "📄", "#88C0D0") # Azul
-        self.card_roi = KPICard("ROI Estimado", "0%", "📈", "#B48EAD") # Roxo
+        self.card_roi_realizado = KPICard("ROI Realizado", "R$ 0,00", "✅", "#A3BE8C") # Verde
+        self.card_roi_potencial = KPICard("ROI Potencial", "R$ 0,00", "⚠️", "#EBCB8B") # Amarelo
+        self.card_roi_total = KPICard("ROI Total", "R$ 0,00", "💰", "#88C0D0") # Azul
+        self.card_alertas = KPICard("Alertas Pendentes", "0", "🔔", "#B48EAD") # Roxo
 
-        self.kpi_layout.addWidget(self.card_total_saved)
-        self.kpi_layout.addWidget(self.card_corrections)
-        self.kpi_layout.addWidget(self.card_files)
-        self.kpi_layout.addWidget(self.card_roi)
+        self.kpi_layout.addWidget(self.card_roi_realizado)
+        self.kpi_layout.addWidget(self.card_roi_potencial)
+        self.kpi_layout.addWidget(self.card_roi_total)
+        self.kpi_layout.addWidget(self.card_alertas)
         
         layout.addLayout(self.kpi_layout)
 
@@ -150,15 +150,11 @@ class PaginaDashboard(QWidget):
         roi_stats = db_manager.get_roi_stats()
         general_stats = db_manager.get_dashboard_stats()
 
-        # Atualizar KPIs
-        total_saved = roi_stats['total_saved']
-        self.card_total_saved.update_value(f"R$ {total_saved:,.2f}")
-        self.card_corrections.update_value(str(roi_stats['total_corrections']))
-        self.card_files.update_value(str(general_stats['total_files']))
-        
-        # ROI Simulado (Exemplo: Custo da ferramenta vs Economia)
-        # Se não houver custo definido, ROI é infinito ou baseado apenas no valor
-        self.card_roi.update_value("∞") 
+        # Atualizar KPIs com ROI Realizado vs Potencial
+        self.card_roi_realizado.update_value(f"R$ {roi_stats['total_saved']:,.2f}")
+        self.card_roi_potencial.update_value(f"R$ {roi_stats['roi_potencial']:,.2f}")
+        self.card_roi_total.update_value(f"R$ {roi_stats['roi_total']:,.2f}")
+        self.card_alertas.update_value(str(roi_stats['total_alertas'])) 
 
         # Atualizar Tabela
         self.rules_table.setRowCount(0)

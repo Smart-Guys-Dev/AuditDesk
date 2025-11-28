@@ -364,21 +364,35 @@ def log_roi_metric(execution_id: int, file_name: str, rule_id: str,
 
 def get_roi_stats():
     """
-    Retorna estatísticas consolidadas de ROI.
+    Retorna estatísticas consolidadas de ROI (Realizado + Potencial).
     """
     session = get_session()
     stats = {
-        'total_saved': 0.0,
+        'total_saved': 0.0,  # ROI Realizado (correções)
         'total_corrections': 0,
+        'roi_potencial': 0.0,  # ROI Potencial (alertas)
+        'total_alertas': 0,
+        'roi_total': 0.0,  # Soma total
         'top_rules': []
     }
     try:
+        from sqlalchemy import func
+        from .models import AlertMetrics
+        
+        # ROI REALIZADO (Correções automáticas)
         metrics = session.query(ROIMetrics).all()
         stats['total_corrections'] = len(metrics)
         stats['total_saved'] = sum(m.financial_impact for m in metrics)
         
-        # Top regras
-        from sqlalchemy import func
+        # ROI POTENCIAL (Alertas pendentes)
+        alertas = session.query(AlertMetrics).filter_by(status='POTENCIAL').all()
+        stats['total_alertas'] = len(alertas)
+        stats['roi_potencial'] = sum(a.financial_impact for a in alertas)
+        
+        # ROI TOTAL
+        stats['roi_total'] = stats['total_saved'] + stats['roi_potencial']
+        
+        # Top regras (mantém lógica existente)
         top_rules_query = session.query(
             ROIMetrics.rule_id,
             ROIMetrics.rule_description,
