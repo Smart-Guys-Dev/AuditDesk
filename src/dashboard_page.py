@@ -47,7 +47,6 @@ class PaginaDashboard(QWidget):
     def __init__(self):
         super().__init__()
         self.init_ui()
-        self.load_data()
 
     def init_ui(self):
         layout = QVBoxLayout(self)
@@ -153,6 +152,9 @@ class PaginaDashboard(QWidget):
         content_layout.addWidget(chart_container, 2) # Peso 2
 
         layout.addLayout(content_layout)
+        
+        # Carregar dados APÓS todos os widgets estarem criados
+        self.load_data()
 
     def load_data(self):
         # Carregar dados do banco

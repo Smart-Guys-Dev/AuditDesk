@@ -293,13 +293,13 @@ class RuleEngine:
                                     # Calcular impacto financeiro
                                     if categoria == "GLOSA_GUIA":
                                         # Valor médio de uma guia: R$ 5000
-                                        financial_impact = 5000.0
+                                        financial_impact = 15.0
                                     elif categoria == "GLOSA_ITEM":
                                         # Valor médio de um item/procedimento: R$ 300
-                                        financial_impact = 300.0
+                                        financial_impact = 7.9
                                     else:
                                         # Validação: impacto indireto (evita retrabalho)
-                                        financial_impact = 100.0
+                                        financial_impact = 5.5
                                     
                                     # Salvar no banco
                                     db_manager.log_roi_metric(
