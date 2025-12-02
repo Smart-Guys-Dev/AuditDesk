@@ -18,6 +18,12 @@
       "novo_conteudo": "12",
       "posicao_insercao": "primeiro_filho",
       "tag_pai_referencia": "./ptu:equipe_Profissional"
+    },
+    "metadata_glosa": {
+      "categoria": "GLOSA_ITEM",
+      "impacto": "MEDIO",
+      "razao": "Participação incorreta causa glosa do item pela operadora",
+      "contabilizar": true
     }
   },
   {
@@ -39,6 +45,12 @@
       "novo_conteudo": "12",
       "posicao_insercao": "primeiro_filho",
       "tag_pai_referencia": "./ptu:equipe_Profissional"
+    },
+    "metadata_glosa": {
+      "categoria": "GLOSA_ITEM",
+      "impacto": "MEDIO",
+      "razao": "Participação incorreta causa glosa do item pela operadora",
+      "contabilizar": true
     }
   },
   {
@@ -60,6 +72,12 @@
       "novo_conteudo": "12",
       "posicao_insercao": "primeiro_filho",
       "tag_pai_referencia": "./ptu:equipe_Profissional"
+    },
+    "metadata_glosa": {
+      "categoria": "GLOSA_ITEM",
+      "impacto": "MEDIO",
+      "razao": "Participação incorreta causa glosa do item pela operadora",
+      "contabilizar": true
     }
   },
   {
@@ -81,6 +99,12 @@
       "novo_conteudo": "00",
       "posicao_insercao": "primeiro_filho",
       "tag_pai_referencia": "./ptu:equipe_Profissional"
+    },
+    "metadata_glosa": {
+      "categoria": "GLOSA_ITEM",
+      "impacto": "MEDIO",
+      "razao": "Participação incorreta causa glosa do item pela operadora",
+      "contabilizar": true
     }
   },
   {
@@ -102,6 +126,12 @@
       "novo_conteudo": "12",
       "posicao_insercao": "primeiro_filho",
       "tag_pai_referencia": "./ptu:equipe_Profissional"
+    },
+    "metadata_glosa": {
+      "categoria": "GLOSA_ITEM",
+      "impacto": "MEDIO",
+      "razao": "Participação incorreta causa glosa do item pela operadora",
+      "contabilizar": true
     }
   },
   {
@@ -136,6 +166,12 @@
       "novo_conteudo": "06",
       "posicao_insercao": "primeiro_filho",
       "tag_pai_referencia": "./ptu:equipe_Profissional"
+    },
+    "metadata_glosa": {
+      "categoria": "GLOSA_ITEM",
+      "impacto": "MEDIO",
+      "razao": "Participação incorreta causa glosa do item pela operadora",
+      "contabilizar": true
     }
   },
   {
@@ -170,6 +206,12 @@
       "novo_conteudo": "00",
       "posicao_insercao": "primeiro_filho",
       "tag_pai_referencia": "./ptu:equipe_Profissional"
+    },
+    "metadata_glosa": {
+      "categoria": "GLOSA_ITEM",
+      "impacto": "MEDIO",
+      "razao": "Participação incorreta causa glosa do item pela operadora",
+      "contabilizar": true
     }
   },
   {
@@ -191,6 +233,12 @@
       "novo_conteudo": "06",
       "posicao_insercao": "primeiro_filho",
       "tag_pai_referencia": "./ptu:equipe_Profissional"
+    },
+    "metadata_glosa": {
+      "categoria": "GLOSA_ITEM",
+      "impacto": "MEDIO",
+      "razao": "Participação incorreta causa glosa do item pela operadora",
+      "contabilizar": true
     }
   },
   {
@@ -212,6 +260,12 @@
       "novo_conteudo": "00",
       "posicao_insercao": "primeiro_filho",
       "tag_pai_referencia": "./ptu:equipe_Profissional"
+    },
+    "metadata_glosa": {
+      "categoria": "GLOSA_ITEM",
+      "impacto": "MEDIO",
+      "razao": "Participação incorreta causa glosa do item pela operadora",
+      "contabilizar": true
     }
   },
   {
@@ -238,6 +292,12 @@
       "novo_conteudo": "00",
       "posicao_insercao": "primeiro_filho",
       "tag_pai_referencia": "./ptu:equipe_Profissional"
+    },
+    "metadata_glosa": {
+      "categoria": "GLOSA_ITEM",
+      "impacto": "MEDIO",
+      "razao": "Participação incorreta causa glosa do item pela operadora",
+      "contabilizar": true
     }
   },
   {
@@ -259,6 +319,12 @@
       "novo_conteudo": "00",
       "posicao_insercao": "primeiro_filho",
       "tag_pai_referencia": "./ptu:equipe_Profissional"
+    },
+    "metadata_glosa": {
+      "categoria": "GLOSA_ITEM",
+      "impacto": "MEDIO",
+      "razao": "Participação incorreta causa glosa do item pela operadora",
+      "contabilizar": true
     }
   },
   {
@@ -280,6 +346,12 @@
       "novo_conteudo": "00",
       "posicao_insercao": "primeiro_filho",
       "tag_pai_referencia": "./ptu:equipe_Profissional"
+    },
+    "metadata_glosa": {
+      "categoria": "GLOSA_ITEM",
+      "impacto": "MEDIO",
+      "razao": "Participação incorreta causa glosa do item pela operadora",
+      "contabilizar": true
     }
   },
   {
@@ -302,6 +374,12 @@
       "novo_conteudo": "12",
       "posicao_insercao": "primeiro_filho",
       "tag_pai_referencia": "./ptu:equipe_Profissional"
+    },
+    "metadata_glosa": {
+      "categoria": "GLOSA_ITEM",
+      "impacto": "MEDIO",
+      "razao": "Participação incorreta causa glosa do item pela operadora",
+      "contabilizar": true
     }
   },
   {
@@ -323,6 +401,12 @@
       "novo_conteudo": "00",
       "posicao_insercao": "primeiro_filho",
       "tag_pai_referencia": "./ptu:equipe_Profissional"
+    },
+    "metadata_glosa": {
+      "categoria": "GLOSA_ITEM",
+      "impacto": "MEDIO",
+      "razao": "Participação incorreta causa glosa do item pela operadora",
+      "contabilizar": true
     }
   },
   {
@@ -344,6 +428,12 @@
       "novo_conteudo": "00",
       "posicao_insercao": "primeiro_filho",
       "tag_pai_referencia": "./ptu:equipe_Profissional"
+    },
+    "metadata_glosa": {
+      "categoria": "GLOSA_ITEM",
+      "impacto": "MEDIO",
+      "razao": "Participação incorreta causa glosa do item pela operadora",
+      "contabilizar": true
     }
   },
   {
@@ -365,6 +455,12 @@
       "novo_conteudo": "00",
       "posicao_insercao": "primeiro_filho",
       "tag_pai_referencia": "./ptu:equipe_Profissional"
+    },
+    "metadata_glosa": {
+      "categoria": "GLOSA_ITEM",
+      "impacto": "MEDIO",
+      "razao": "Participação incorreta causa glosa do item pela operadora",
+      "contabilizar": true
     }
   },
   {
@@ -386,6 +482,12 @@
       "novo_conteudo": "12",
       "posicao_insercao": "primeiro_filho",
       "tag_pai_referencia": "./ptu:equipe_Profissional"
+    },
+    "metadata_glosa": {
+      "categoria": "GLOSA_ITEM",
+      "impacto": "MEDIO",
+      "razao": "Participação incorreta causa glosa do item pela operadora",
+      "contabilizar": true
     }
   },
   {
@@ -407,6 +509,12 @@
       "novo_conteudo": "12",
       "posicao_insercao": "primeiro_filho",
       "tag_pai_referencia": "./ptu:equipe_Profissional"
+    },
+    "metadata_glosa": {
+      "categoria": "GLOSA_ITEM",
+      "impacto": "MEDIO",
+      "razao": "Participação incorreta causa glosa do item pela operadora",
+      "contabilizar": true
     }
   },
   {
@@ -428,6 +536,12 @@
       "novo_conteudo": "12",
       "posicao_insercao": "primeiro_filho",
       "tag_pai_referencia": "./ptu:equipe_Profissional"
+    },
+    "metadata_glosa": {
+      "categoria": "GLOSA_ITEM",
+      "impacto": "MEDIO",
+      "razao": "Participação incorreta causa glosa do item pela operadora",
+      "contabilizar": true
     }
   },
   {
@@ -449,6 +563,12 @@
       "novo_conteudo": "12",
       "posicao_insercao": "primeiro_filho",
       "tag_pai_referencia": "./ptu:equipe_Profissional"
+    },
+    "metadata_glosa": {
+      "categoria": "GLOSA_ITEM",
+      "impacto": "MEDIO",
+      "razao": "Participação incorreta causa glosa do item pela operadora",
+      "contabilizar": true
     }
   },
   {
@@ -470,6 +590,12 @@
       "novo_conteudo": "00",
       "posicao_insercao": "primeiro_filho",
       "tag_pai_referencia": "./ptu:equipe_Profissional"
+    },
+    "metadata_glosa": {
+      "categoria": "GLOSA_ITEM",
+      "impacto": "MEDIO",
+      "razao": "Participação incorreta causa glosa do item pela operadora",
+      "contabilizar": true
     }
   },
   {
@@ -491,6 +617,12 @@
       "novo_conteudo": "00",
       "posicao_insercao": "primeiro_filho",
       "tag_pai_referencia": "./ptu:equipe_Profissional"
+    },
+    "metadata_glosa": {
+      "categoria": "GLOSA_ITEM",
+      "impacto": "MEDIO",
+      "razao": "Participação incorreta causa glosa do item pela operadora",
+      "contabilizar": true
     }
   },
   {
@@ -523,7 +655,13 @@
       "tipo_acao": "remover_tag_inteira",
       "tag_alvo": "./ptu:equipe_Profissional/ptu:tp_Participacao"
     },
-    "log_sucesso": "tp_Participacao removido para o serviço 30712092."
+    "log_sucesso": "tp_Participacao removido para o serviço 30712092.",
+    "metadata_glosa": {
+      "categoria": "GLOSA_ITEM",
+      "impacto": "MEDIO",
+      "razao": "Participação incorreta causa glosa do item pela operadora",
+      "contabilizar": true
+    }
   },
   {
     "id": "REGRA_REMOVER_TP_PARTICIPACAO_TERAPIAS_SERIADAS",
@@ -554,7 +692,13 @@
       "tipo_acao": "remover_tag_inteira",
       "tag_alvo": "./ptu:equipe_Profissional/ptu:tp_Participacao"
     },
-    "log_sucesso": "tp_Participacao removido para serviço de terapia seriada."
+    "log_sucesso": "tp_Participacao removido para serviço de terapia seriada.",
+    "metadata_glosa": {
+      "categoria": "GLOSA_ITEM",
+      "impacto": "MEDIO",
+      "razao": "Participação incorreta causa glosa do item pela operadora",
+      "contabilizar": true
+    }
   },
   {
     "id": "REGRA_TP_PARTICIPACAO_REMOVER_SE_11_FORA_TERAPIA",
@@ -587,6 +731,12 @@
       "tipo_acao": "remover_tag_inteira",
       "tag_alvo": "./ptu:equipe_Profissional/ptu:tp_Participacao"
     },
-    "log_sucesso": "tp_Participacao removido (valor '11' fora de terapia seriada)."
+    "log_sucesso": "tp_Participacao removido (valor '11' fora de terapia seriada).",
+    "metadata_glosa": {
+      "categoria": "GLOSA_ITEM",
+      "impacto": "MEDIO",
+      "razao": "Participação incorreta causa glosa do item pela operadora",
+      "contabilizar": true
+    }
   }
 ]
