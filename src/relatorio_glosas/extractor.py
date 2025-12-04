@@ -60,8 +60,8 @@ def extrair_valor_total_guia(elemento):
     
     guia_element = guia[0]
     
-    # Tentar nr_GuiaIsPrestador (valor total informado)
-    valor_total_tag = guia_element.find('.//ptu:nr_GuiaI sPrestador', namespaces=NAMESPACES)
+    # Tentar nr_GuiaPrestador (valor total informado)
+    valor_total_tag = guia_element.find('.//ptu:nr_GuiaPrestador', namespaces=NAMESPACES)
     if valor_total_tag is not None and valor_total_tag.text:
         try:
             return float(valor_total_tag.text)
