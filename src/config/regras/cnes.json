@@ -367,5 +367,87 @@
       "razao": "CNES incorreto causa glosa total da guia pela operadora",
       "contabilizar": true
     }
+  },
+  {
+    "id": "REGRA_GARANTIR_CNES_NEO_MEDICAL_34281088000189",
+    "descricao": "Garante que o CNES (0273082) esteja correto para o prestador NEO MEDICAL SOLUCOES MEDICAS HOSPITALARES LTDA (CNPJ 34281088000189).",
+    "ativo": true,
+    "condicoes": {
+      "tipo_elemento": "dadosExecutante",
+      "condicao_multipla": {
+        "tipo": "AND",
+        "sub_condicoes": [
+          {
+            "condicao_tag_valor": {
+              "xpath": "./ptu:CPF_CNPJ/ptu:cd_cnpj",
+              "valor_permitido": [
+                "34281088000189"
+              ]
+            }
+          },
+          {
+            "condicao_tag_valor": {
+              "xpath": "./ptu:CNES",
+              "tipo_comparacao": "valor_atual_diferente",
+              "valor_atual": "0273082"
+            }
+          }
+        ]
+      }
+    },
+    "acao": {
+      "tipo_acao": "garantir_tag_com_conteudo",
+      "tag_alvo": "./ptu:CNES",
+      "novo_conteudo": "0273082",
+      "tag_referencia_posicao": "./ptu:CPF_CNPJ"
+    },
+    "log_sucesso": "CNES do prestador 34281088000189 corrigido/inserido para 0273082.",
+    "metadata_glosa": {
+      "categoria": "GLOSA_GUIA",
+      "impacto": "ALTO",
+      "razao": "CNES incorreto causa glosa total da guia pela operadora",
+      "contabilizar": true
+    }
+  },
+  {
+    "id": "REGRA_GARANTIR_CNES_SECIPE_09046397000127",
+    "descricao": "Garante que o CNES (6118135) esteja correto para o prestador SECIPE SERVICO DE CIRURGIA PEDIATRICA S S (CNPJ 09046397000127), corrigindo valor genérico.",
+    "ativo": true,
+    "condicoes": {
+      "tipo_elemento": "dadosExecutante",
+      "condicao_multipla": {
+        "tipo": "AND",
+        "sub_condicoes": [
+          {
+            "condicao_tag_valor": {
+              "xpath": "./ptu:CPF_CNPJ/ptu:cd_cnpj",
+              "valor_permitido": [
+                "09046397000127"
+              ]
+            }
+          },
+          {
+            "condicao_tag_valor": {
+              "xpath": "./ptu:CNES",
+              "tipo_comparacao": "valor_atual_diferente",
+              "valor_atual": "6118135"
+            }
+          }
+        ]
+      }
+    },
+    "acao": {
+      "tipo_acao": "garantir_tag_com_conteudo",
+      "tag_alvo": "./ptu:CNES",
+      "novo_conteudo": "6118135",
+      "tag_referencia_posicao": "./ptu:CPF_CNPJ"
+    },
+    "log_sucesso": "CNES do prestador 09046397000127 corrigido/inserido para 6118135.",
+    "metadata_glosa": {
+      "categoria": "GLOSA_GUIA",
+      "impacto": "ALTO",
+      "razao": "CNES incorreto causa glosa total da guia pela operadora",
+      "contabilizar": true
+    }
   }
 ]
