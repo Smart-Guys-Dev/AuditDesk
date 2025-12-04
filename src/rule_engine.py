@@ -10,6 +10,12 @@ from .xml_reader import XMLReader, NAMESPACES
 from .file_handler import FileHandler
 from .database import db_manager
 
+# Tracker de glosas evitadas (valores REAIS do XML)
+try:
+    from .relatorio_glosas import tracker
+except ImportError:
+    tracker = None
+
 logger = logging.getLogger(__name__)
 
 # Centraliza as configurações das listas para evitar erros de digitação e facilitar a manutenção.
@@ -282,6 +288,19 @@ class RuleEngine:
                         if self._apply_action(element, rule.get("acao", {})):
                             logger.info(f"Regra '{rule.get('id')}' aplicada com sucesso.")
                             alterations_made = True
+                            
+                            # Tracking de glosas evitadas (valores REAIS do XML)
+                            if execution_id != -1 and tracker is not None:
+                                try:
+                                    tracker.processar_correcao(
+                                        execution_id=execution_id,
+                                        file_name=file_name,
+                                        xml_tree=xml_tree,
+                                        rule=rule,
+                                        elemento_afetado=element
+                                    )
+                                except Exception as tracking_error:
+                                    logger.warning(f"Erro ao tracking glosa: {tracking_error}")
                             
                             # Tracking de ROI Realizado
                             if execution_id != -1:
