@@ -13,6 +13,8 @@ from .history_page import PaginaHistorico
 from .dashboard_page import PaginaDashboard
 from src.utils import resource_path
 from src.ui_helpers import show_friendly_error, show_toast, show_warning
+from src.app_settings import app_settings
+from src.drag_drop_widgets import DragDropLineEdit
 
 def load_stylesheet():
     """Carrega o arquivo de estilos QSS externo."""
@@ -182,10 +184,11 @@ class PaginaProcessador(QWidget):
         label_pasta = QLabel("Pasta das Faturas:")
         label_pasta.setMinimumWidth(120)
         
-        self.caminho_pasta_edit = QLineEdit()
+        self.caminho_pasta_edit = DragDropLineEdit(accept_folders=True, accept_files=False)
         self.caminho_pasta_edit.setReadOnly(True)
-        self.caminho_pasta_edit.setPlaceholderText("Selecione a pasta contendo os arquivos ZIP...")
-        self.caminho_pasta_edit.setToolTip("Pasta contendo os arquivos ZIP das faturas a serem processadas")
+        self.caminho_pasta_edit.setPlaceholderText("Selecione a pasta ou arraste aqui...")
+        self.caminho_pasta_edit.setToolTip("Pasta contendo os arquivos ZIP das faturas (ou arraste aqui)")
+        self.caminho_pasta_edit.folder_dropped.connect(self._on_folder_dropped)
         
         btn_procurar = QPushButton("📁 Procurar...")
         btn_procurar.setToolTip("Selecionar pasta com arquivos ZIP")
@@ -247,10 +250,19 @@ class PaginaProcessador(QWidget):
         self.progress_bar.setVisible(not enabled)
         
     def selecionar_pasta(self):
-        caminho_pasta = QFileDialog.getExistingDirectory(self, "Selecionar Pasta com Faturas ZIP")
+        # Tentar carregar última pasta usada
+        last_folder = app_settings.get_last_folder("processador_faturas", "")
+        caminho_pasta = QFileDialog.getExistingDirectory(self, "Selecionar Pasta com Faturas ZIP", last_folder)
         if caminho_pasta:
             self.caminho_pasta_edit.setText(caminho_pasta)
             self.log_message(f"✓ INFO: Pasta selecionada: {caminho_pasta}")
+            # Salvar para próxima vez
+            app_settings.save_last_folder("processador_faturas", caminho_pasta)
+    
+    def _on_folder_dropped(self, folder_path):
+        """Callback quando pasta é arrastada"""
+        self.log_message(f"✓ INFO: Pasta selecionada via drag & drop: {folder_path}")
+        app_settings.save_last_folder("processador_faturas", folder_path)
             
     def iniciar_importacao(self):
         caminho_pasta = self.caminho_pasta_edit.text()
@@ -387,10 +399,11 @@ class PaginaValidador(QWidget):
         label_pasta = QLabel("Pasta dos XMLs:")
         label_pasta.setMinimumWidth(120)
         
-        self.caminho_pasta_edit = QLineEdit()
+        self.caminho_pasta_edit = DragDropLineEdit(accept_folders=True, accept_files=False)
         self.caminho_pasta_edit.setReadOnly(True)
-        self.caminho_pasta_edit.setPlaceholderText("Selecione a pasta com arquivos XML...")
-        self.caminho_pasta_edit.setToolTip("Pasta contendo os arquivos .051 para validação")
+        self.caminho_pasta_edit.setPlaceholderText("Selecione a pasta ou arraste aqui...")
+        self.caminho_pasta_edit.setToolTip("Pasta contendo os arquivos .051 para validação (ou arraste aqui)")
+        self.caminho_pasta_edit.folder_dropped.connect(self._on_folder_dropped_validador)
         
         btn_procurar = QPushButton("📁 Procurar...")
         btn_procurar.setToolTip("Selecionar pasta com arquivos XML")
@@ -438,12 +451,20 @@ class PaginaValidador(QWidget):
 
     def selecionar_pasta(self):
         pasta_sugerida = os.path.join(self.controller.pasta_faturas_importadas_atual or "", "Correção XML")
+        # Tentar última pasta ou sugestão
+        last_folder = app_settings.get_last_folder("validador_xmls", pasta_sugerida)
         caminho_pasta = QFileDialog.getExistingDirectory(
-            self, "Selecionar Pasta com XMLs para Validar", pasta_sugerida
+            self, "Selecionar Pasta com XMLs para Validar", last_folder
         )
         if caminho_pasta:
             self.caminho_pasta_edit.setText(caminho_pasta)
             self.log_area.append(f"✓ INFO: Pasta para validação selecionada: {caminho_pasta}")
+            app_settings.save_last_folder("validador_xmls", caminho_pasta)
+    
+    def _on_folder_dropped_validador(self, folder_path):
+        """Callback quando pasta é arrastada no validador"""
+        self.log_area.append(f"✓ INFO: Pasta selecionada via drag & drop: {folder_path}")
+        app_settings.save_last_folder("validador_xmls", folder_path)
 
     def iniciar_validacao(self):
         caminho_pasta = self.caminho_pasta_edit.text()
@@ -852,7 +873,17 @@ class MainWindow(QMainWindow):
         if os.path.exists(icon_path):
             self.setWindowIcon(QIcon(icon_path))
         
-        self.setGeometry(200, 200, 1200, 800)
+        # Restaurar geometria e estado da janela
+        saved_geometry = app_settings.get_window_geometry()
+        saved_state = app_settings.get_window_state()
+        
+        if saved_geometry:
+            self.restoreGeometry(saved_geometry)
+        else:
+            self.setGeometry(200, 200, 1200, 800)
+        
+        if saved_state:
+            self.restoreState(saved_state)
         
         # Carregar estilos do arquivo externo
         self.load_styles()
@@ -879,9 +910,11 @@ class MainWindow(QMainWindow):
 
         btn_processador_xml = QPushButton("  📄 Processador")
         btn_processador_xml.setCheckable(True)
+        btn_processador_xml.setToolTip("Processar faturas (Ctrl+P)")
 
         btn_validador_tiss = QPushButton("  ✓ Validador PTU XML")
         btn_validador_tiss.setCheckable(True)
+        btn_validador_tiss.setToolTip("Validar arquivos XML (Ctrl+V)")
 
         btn_atualizar_hash = QPushButton("  # Atualizar HASH")
         btn_atualizar_hash.setCheckable(True)
@@ -968,6 +1001,9 @@ class MainWindow(QMainWindow):
         btn_atualizar_hash.clicked.connect(lambda: self.mudar_pagina(3, botoes))
         btn_historico.clicked.connect(lambda: self.mudar_pagina(4, botoes))
         btn_relatorios.clicked.connect(lambda: self.mudar_pagina(5, botoes))
+        
+        # Configurar atalhos de teclado
+        self.setup_keyboard_shortcuts()
 
     def load_styles(self):
         """Carrega e aplica os estilos QSS."""
@@ -987,3 +1023,77 @@ class MainWindow(QMainWindow):
         from src.user_management import UserManagementWindow
         self.gestao_window = UserManagementWindow()
         self.gestao_window.show()
+    
+    def setup_keyboard_shortcuts(self):
+        """Configura atalhos de teclado globais"""
+        from PyQt6.QtGui import QAction, QKeySequence
+        
+        # Ctrl+P: Ir para Processador
+        action_processador = QAction("Processador", self)
+        action_processador.setStatusTip("Ir para página do Processador")
+        action_processador.setShortcut(QKeySequence("Ctrl+P"))
+        action_processador.triggered.connect(lambda: self.pages_widget.setCurrentIndex(1))
+        self.addAction(action_processador)
+        
+        # Ctrl+Shift+V: Ir para Validador
+        action_validador = QAction("Validador", self)
+        action_validador.setStatusTip("Ir para página do Validador")
+        action_validador.setShortcut(QKeySequence("Ctrl+Shift+V"))
+        action_validador.triggered.connect(lambda: self.pages_widget.setCurrentIndex(2))
+        self.addAction(action_validador)
+        
+        # Ctrl+H: Ir para Histórico
+        action_historico = QAction("Histórico", self)
+        action_historico.setStatusTip("Ir para página de Histórico")
+        action_historico.setShortcut(QKeySequence("Ctrl+H"))
+        action_historico.triggered.connect(lambda: self.pages_widget.setCurrentIndex(4))
+        self.addAction(action_historico)
+        
+        # Ctrl+D: Ir para Dashboard/Relatórios
+        action_relatorios = QAction("Relatórios", self)
+        action_relatorios.setStatusTip("Ir para Relatórios")
+        action_relatorios.setShortcut(QKeySequence("Ctrl+D"))
+        action_relatorios.triggered.connect(lambda: self.pages_widget.setCurrentIndex(5))
+        self.addAction(action_relatorios)
+        
+        # Ctrl+Home: Ir para Painel Principal
+        action_home = QAction("Painel Principal", self)
+        action_home.setStatusTip("Ir para Painel Principal")
+        action_home.setShortcut(QKeySequence("Ctrl+Home"))
+        action_home.triggered.connect(lambda: self.pages_widget.setCurrentIndex(0))
+        self.addAction(action_home)
+        
+        # F5: Atualizar estatísticas
+        action_refresh = QAction("Atualizar", self)
+        action_refresh.setStatusTip("Atualizar estatísticas")
+        action_refresh.setShortcut(QKeySequence("F5"))
+        action_refresh.triggered.connect(self._refresh_stats)
+        self.addAction(action_refresh)
+        
+        # Atualizar status bar com dica
+        self.statusBar().showMessage(
+            "Atalhos: Ctrl+P (Processador) | Ctrl+Shift+V (Validador) | Ctrl+H (Histórico) | Ctrl+D (Relatórios) | F5 (Atualizar)",
+            10000
+        )
+    
+    def _refresh_stats(self):
+        """Atualiza estatísticas (chamado por F5)"""
+        current = self.pages_widget.currentIndex()
+        if current == 0:  # Painel Principal
+            # Recriar página de boas-vindas para atualizar stats
+            old_widget = self.pages_widget.widget(0)
+            self.page_painel_principal = PaginaBoasVindas()
+            self.pages_widget.removeWidget(old_widget)
+            self.pages_widget.insertWidget(0, self.page_painel_principal)
+            self.pages_widget.setCurrentIndex(0)
+            old_widget.deleteLater()
+            show_toast(self, "Estatísticas atualizadas!", "success", 2000)
+    
+    def closeEvent(self, event):
+        """Salva estado da janela ao fechar"""
+        # Salvar geometria e estado
+        app_settings.save_window_geometry(self.saveGeometry())
+        app_settings.save_window_state(self.saveState())
+        
+        # Permitir fechar
+        event.accept()
