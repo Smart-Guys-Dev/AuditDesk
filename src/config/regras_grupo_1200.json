@@ -1645,7 +1645,7 @@
     "descricao": "Altera tipoAtendimento de 04 para 23 em guias SADT que não possuem código de serviço de consulta (Rol 10xxxxxx), conforme novo boletim.",
     "ativo": true,
     "condicoes": {
-      "tipo_elemento": "guiaSadt",
+      "tipo_elemento": "guiaSADT",
       "condicao_multipla": {
         "tipo": "AND",
         "sub_condicoes": [
