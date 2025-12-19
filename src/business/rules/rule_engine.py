@@ -201,8 +201,20 @@ class RuleEngine:
 
             all_children = list(target_node_for_reorder)
             children_map = {etree.QName(child).localname: child for child in all_children}
-            order_set = set(ordem_correta)
             
+            # ✅ FIX: Verificar se a ordem atual JÁ está correta (idempotência)
+            current_order = [etree.QName(child).localname for child in all_children]
+            # Filtrar apenas os elementos que estão na ordem_correta
+            relevant_current_order = [tag for tag in current_order if tag in ordem_correta]
+            # Filtrar apenas os elementos que existem no XML
+            relevant_expected_order = [tag for tag in ordem_correta if tag in children_map]
+            
+            # Se a ordem atual já está correta, não fazer nada
+            if relevant_current_order == relevant_expected_order:
+                return False  # ✅ Não houve mudança
+            
+            # Ordem está incorreta, precisa reordenar
+            order_set = set(ordem_correta)
             new_children_sequence = [children_map[tag_name] for tag_name in ordem_correta if tag_name in children_map]
             new_children_sequence.extend(child for child in all_children if etree.QName(child).localname not in order_set)
             
@@ -210,7 +222,7 @@ class RuleEngine:
             for child in new_children_sequence:
                 target_node_for_reorder.append(child)
             
-            return True
+            return True  # ✅ Houve mudança
 
         if not tag_alvo_xpath: return False
 
