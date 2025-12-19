@@ -39,7 +39,9 @@
     "metadata_glosa": {
       "categoria": "GLOSA_ITEM",
       "impacto": "MEDIO",
-      "razao": "Operadora glosa apenas o procedimento específico"
+      "razao": "Operadora glosa apenas o procedimento específico",
+      "contabilizar": true,
+      "nota": "TODO: Implementar lógica condicional para diferenciar PJ (glosa) vs PF (otimização)"
     }
   },
   {

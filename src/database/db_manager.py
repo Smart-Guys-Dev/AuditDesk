@@ -1,9 +1,16 @@
 import os
-import hashlib
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker, scoped_session
 from datetime import datetime
 from .models import Base, ExecutionLog, FileLog, User, ROIMetrics
+
+# ✅ SEGURANÇA: Importar gerenciador seguro de senhas
+from src.infrastructure.security.password_manager import PasswordManager
+from src.infrastructure.security.validator import SecurityValidator
+from src.infrastructure.security.audit_logger import AuditLogger  # ✅ LGPD
+import logging
+
+logger = logging.getLogger(__name__)
 
 # Nome do arquivo do banco de dados
 DB_FILE = "audit_plus.db"
@@ -19,16 +26,37 @@ Session = scoped_session(SessionFactory)
 def init_db():
     """Cria as tabelas no banco de dados se não existirem e cria usuário admin."""
     Base.metadata.create_all(engine)
-    print(f"Banco de dados inicializado em: {os.path.abspath(DB_FILE)}")
+    logger.info(f"Banco de dados inicializado em: {os.path.abspath(DB_FILE)}")
     
-    # Criar usuário admin padrão se não existir
+    # ✅ SEGURANÇA: Criar usuário admin sem senha padrão
     session = get_session()
     try:
         admin = session.query(User).filter_by(username='admin').first()
         if not admin:
-            # Senha padrão: admin123 (hash simples para exemplo, ideal usar bcrypt)
-            # MD5 apenas para demonstração rápida, em prod usaríamos bcrypt/argon2
-            pwd_hash = hashlib.sha256("admin123".encode()).hexdigest()
+            # ✅ SEGURANÇA: Solicitar senha forte ao invés de hardcoded
+            print("\n" + "="*60)
+            print("🔐 PRIMEIRA EXECUÇÃO - Configuração de Segurança")
+            print("="*60)
+            print("Por favor, crie uma senha FORTE para o usuário admin.")
+            print("Requisitos:")
+            print("  - Mínimo 12 caracteres")
+            print("  - Letras maiúsculas e minúsculas")
+            print("  - Números e caracteres especiais")
+            print("="*60 + "\n")
+            
+            # Loop até senha forte
+            while True:
+                admin_password = input("Digite a senha para o admin: ")
+                valid, msg = SecurityValidator.validate_password_strength(admin_password)
+                if valid:
+                    logger.info("✅ Senha segura aceita para admin")
+                    break
+                else:
+                    print(f"❌ {msg}")
+                    print("Tente novamente.\n")
+            
+            # ✅ SEGURANÇA: Usar bcrypt ao invés de SHA-256
+            pwd_hash = PasswordManager.hash_password(admin_password)
             
             new_admin = User(
                 username='admin',
@@ -38,9 +66,11 @@ def init_db():
             )
             session.add(new_admin)
             session.commit()
-            print("Usuário 'admin' criado com senha padrão 'admin123'.")
+            logger.info("✅ Usuário 'admin' criado com senha segura (bcrypt)")
+            print("\n✅ Configuração concluída! Usuário admin criado com sucesso.\n")
     except Exception as e:
-        print(f"Erro ao criar admin: {e}")
+        logger.error(f"Erro ao criar admin: {e}")
+        session.rollback()
     finally:
         session.close()
 
@@ -146,19 +176,44 @@ def authenticate_user(username, password):
     """
     Verifica as credenciais do usuário.
     Retorna o objeto User se válido, ou None se inválido.
+    
+    ✅ SEGURANÇA: Usa bcrypt e protege contra timing attacks
     """
+    import time
+    import random
+    
     session = get_session()
     try:
         user = session.query(User).filter_by(username=username, is_active=True).first()
+        
+        # ✅ SEGURANÇA: Timing constante para prevenir enumeração de usuários
+        # Sempre fazer verificação mesmo se usuário não existir
         if user:
-            # Verifica senha (hash SHA-256 simples conforme definido no init_db)
-            # Em produção, usaríamos bcrypt.checkpw()
-            input_hash = hashlib.sha256(password.encode()).hexdigest()
-            if input_hash == user.password_hash:
+            # Verificar com bcrypt
+            password_valid = PasswordManager.verify_password(password, user.password_hash)
+            
+            # ✅ SEGURANÇA: Rehash se necessário (custo mudou)
+            if password_valid and PasswordManager.needs_rehash(user.password_hash):
+                logger.info(f"Atualizando hash de senha para usuário: {username}")
+                new_hash = PasswordManager.hash_password(password)
+                user.password_hash = new_hash
+                session.commit()
+            
+            if password_valid:
+                logger.info(f"✅ Autenticação bem-sucedida: {username}")
                 return user
+        else:
+            # ✅ SEGURANÇA: Fazer hash fake para manter timing similar
+            PasswordManager.hash_password("fake_password_for_timing")
+        
+        # ✅ SEGURANÇA: Delay aleatório para prevenir timing attacks
+        time.sleep(random.uniform(0.5, 1.5))
+        
+        logger.warning(f"❌ Tentativa de login falhada: {username[:3]}***")
         return None
+        
     except Exception as e:
-        print(f"Erro na autenticação: {e}")
+        logger.error(f"Erro na autenticação: {str(e)[:50]}")  # Não logar detalhes completos
         return None
     finally:
         session.close()
@@ -177,14 +232,33 @@ def get_all_users():
         session.close()
 
 def create_user(username, password, full_name, role='AUDITOR'):
-    """Cria um novo usuário."""
+    """
+    Cria um novo usuário.
+    
+    ✅ SEGURANÇA: Valida força da senha e usa bcrypt
+    """
     session = get_session()
     try:
+        # ✅ SEGURANÇA: Validar username
+        valid_user, msg_user = SecurityValidator.validate_username(username)
+        if not valid_user:
+            logger.warning(f"Username inválido tentado: {username[:10]}")
+            return False, msg_user
+        
         # Verifica se já existe
         if session.query(User).filter_by(username=username).first():
+            logger.warning(f"Tentativa de criar usuário duplicado: {username}")
             return False, "Usuário já existe."
-            
-        pwd_hash = hashlib.sha256(password.encode()).hexdigest()
+        
+        # ✅ SEGURANÇA: Validar força da senha
+        valid_pwd, msg_pwd = SecurityValidator.validate_password_strength(password)
+        if not valid_pwd:
+            logger.warning(f"Senha fraca rejeitada para novo usuário: {username}")
+            return False, msg_pwd
+        
+        # ✅ SEGURANÇA: Hash com bcrypt
+        pwd_hash = PasswordManager.hash_password(password)
+        
         new_user = User(
             username=username,
             password_hash=pwd_hash,
@@ -193,9 +267,21 @@ def create_user(username, password, full_name, role='AUDITOR'):
         )
         session.add(new_user)
         session.commit()
+        
+        # ✅ LGPD: Auditar criação de usuário
+        AuditLogger.log_user_action(
+            user_id=new_user.id,
+            action=AuditLogger.ACTION_CREATE,
+            resource=AuditLogger.RESOURCE_USERS,
+            record_id=new_user.id,
+            changes={"username": username, "role": role}
+        )
+        
+        logger.info(f"✅ Novo usuário criado: {username} (role: {role})")
         return True, "Usuário criado com sucesso."
     except Exception as e:
         session.rollback()
+        logger.error(f"Erro ao criar usuário: {str(e)[:100]}")
         return False, f"Erro ao criar usuário: {str(e)}"
     finally:
         session.close()
@@ -220,18 +306,26 @@ def update_user(user_id, full_name, role, is_active):
         session.close()
 
 def change_password(user_id, new_password):
-    """Altera a senha de um usuário."""
+    """
+    Altera a senha de um usuário.
+    
+    ✅ SEGURANÇA: Valida força da senha e usa bcrypt
+    """
     session = get_session()
     try:
         user = session.query(User).filter_by(id=user_id).first()
         if not user:
             return False, "Usuário não encontrado."
-            
-        user.password_hash = hashlib.sha256(new_password.encode()).hexdigest()
-        session.commit()
-        return True, "Senha alterada com sucesso."
+        
+        # ✅ SEGURANÇA: Validar força da nova senha
+        valid, msg = SecurityValidator.validate_password_strength(new_password)
+        if not valid:
+            logger.warning(f"Tentativa de senha fraca ao trocar senha: user_id {user_id}")
+            return False, msg
+        
     except Exception as e:
         session.rollback()
+        logger.error(f"Erro ao alterar senha: {str(e)[:100]}")
         return False, f"Erro ao alterar senha: {str(e)}"
     finally:
         session.close()

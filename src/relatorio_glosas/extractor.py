@@ -39,7 +39,7 @@ def extrair_valor_total_guia(elemento):
     """
     Extrai o valor TOTAL da guia
     
-    Tenta primeiro o campo nr_GuiaIsPrestador (se existir).
+    Tenta primeiro o campo nr_GuiaPrestador (se existir).
     Se não existir, soma TODOS os procedimentos da guia.
     
     Args:

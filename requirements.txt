@@ -1,6 +1,20 @@
-PyQt6
-lxml
-openpyxl
-SQLAlchemy
-pytest
-pytest-qt
+# Requirements - AuditPlus v2.0
+# Core dependencies
+PyQt6==6.6.1
+SQLAlchemy==2.0.23
+pandas==2.1.4
+openpyxl==3.1.2
+
+# Security dependencies
+bcrypt==4.1.2
+defusedxml==0.7.1
+ratelimit==2.2.1
+pydantic==2.5.3
+cryptography==42.0.0
+pyotp==2.9.0
+qrcode[pil]==7.4.2
+
+# Development/Security scanning
+safety==3.0.1
+bandit==1.7.6
+pip-audit==2.6.1
