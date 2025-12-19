@@ -825,10 +825,10 @@ class MainWindow(QMainWindow):
         btn_painel_principal.setCheckable(True)
         btn_painel_principal.setChecked(True)
 
-        btn_processador_xml = QPushButton("  📄 Processador XML")
+        btn_processador_xml = QPushButton("  📄 Processador")
         btn_processador_xml.setCheckable(True)
 
-        btn_validador_tiss = QPushButton("  ✓ Validador TISS")
+        btn_validador_tiss = QPushButton("  ✓ Validador PTU XML")
         btn_validador_tiss.setCheckable(True)
 
         btn_atualizar_hash = QPushButton("  # Atualizar HASH")
