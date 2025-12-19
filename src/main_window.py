@@ -358,7 +358,7 @@ class PaginaValidador(QWidget):
         layout.setSpacing(15)
         layout.setAlignment(Qt.AlignmentFlag.AlignTop)
 
-        titulo = QLabel("Validador TISS")
+        titulo = QLabel("Validador PTU XML")
         titulo.setObjectName("titulo_pagina")
         layout.addWidget(titulo)
 
