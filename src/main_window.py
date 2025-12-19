@@ -12,6 +12,7 @@ from .worker import Worker
 from .history_page import PaginaHistorico
 from .dashboard_page import PaginaDashboard
 from src.utils import resource_path
+from src.ui_helpers import show_friendly_error, show_toast, show_warning
 
 def load_stylesheet():
     """Carrega o arquivo de estilos QSS externo."""
@@ -254,7 +255,8 @@ class PaginaProcessador(QWidget):
     def iniciar_importacao(self):
         caminho_pasta = self.caminho_pasta_edit.text()
         if not caminho_pasta:
-            QMessageBox.warning(self, "Aviso", "Por favor, selecione uma pasta primeiro.")
+            show_warning(self, "Pasta não selecionada",
+                        "Por favor, selecione a pasta contendo os arquivos ZIP das faturas.")
             return
             
         self.log_area.clear()
@@ -301,7 +303,8 @@ class PaginaProcessador(QWidget):
     def iniciar_preparacao_correcao(self):
         auditores = list(self.controller.plano_ultima_distribuicao.keys())
         if not auditores:
-            QMessageBox.warning(self, "Aviso", "Nenhuma distribuição foi realizada ainda.")
+            show_warning(self, "Distribuição necessária",
+                        "É necessário fazer a distribuição de faturas antes de preparar os arquivos para correção.")
             return
             
         nome_auditor, ok = QInputDialog.getItem(
@@ -330,8 +333,15 @@ class PaginaProcessador(QWidget):
             icon = "✓" if sucesso else "✗"
             log_level = "SUCESSO" if sucesso else "ERRO"
             self.log_message(f"{icon} {log_level}: {mensagem}")
+            
+            # Toast notification
+            if sucesso:
+                show_toast(self, "Processamento concluído com sucesso!", "success", 3000)
+            else:
+                show_toast(self, "Processamento concluído com erros", "warning", 3000)
         else:
             self.log_message("✓ SUCESSO: Tarefa concluída.")
+            show_toast(self, "Tarefa concluída!", "success", 3000)
             
         self.set_ui_enabled(True)
         if self.worker_thread is not None:
@@ -340,7 +350,16 @@ class PaginaProcessador(QWidget):
             
     def on_task_error(self, error_str):
         self.log_message(f"✗ ERRO CRÍTICO: {error_str}")
-        QMessageBox.critical(self, "Erro na Execução", error_str)
+        
+        # Erro amigável
+        show_friendly_error(
+            self,
+            "Erro no Processamento",
+            "Ocorreu um erro ao processar as faturas.\n\n"
+            "Verifique se os arquivos ZIP estão corretos e tente novamente.",
+            error_str
+        )
+        
         self.set_ui_enabled(True)
         if self.worker_thread is not None:
             self.worker_thread.quit()
@@ -429,7 +448,8 @@ class PaginaValidador(QWidget):
     def iniciar_validacao(self):
         caminho_pasta = self.caminho_pasta_edit.text()
         if not caminho_pasta:
-            QMessageBox.warning(self, "Aviso", "Por favor, selecione uma pasta para validar.")
+            show_warning(self, "Pasta não selecionada", 
+                        "Por favor, selecione uma pasta contendo os arquivos XML para validar.")
             return
             
         self.log_area.clear()
@@ -451,7 +471,8 @@ class PaginaValidador(QWidget):
     def iniciar_validacao_xsd(self):
         caminho_pasta = self.caminho_pasta_edit.text()
         if not caminho_pasta:
-            QMessageBox.warning(self, "Aviso", "Por favor, selecione uma pasta para validar.")
+            show_warning(self, "Pasta não selecionada",
+                        "Por favor, selecione uma pasta contendo os arquivos XML para validar.")
             return
             
         self.log_area.clear()
@@ -473,7 +494,8 @@ class PaginaValidador(QWidget):
     def iniciar_verificacao_internacao_curta(self):
         caminho_pasta = self.caminho_pasta_edit.text()
         if not caminho_pasta:
-            QMessageBox.warning(self, "Aviso", "Por favor, selecione uma pasta para verificar.")
+            show_warning(self, "Pasta não selecionada",
+                        "Por favor, selecione uma pasta contendo os arquivos XML para verificar.")
             return
 
         self.log_area.clear()
@@ -497,6 +519,12 @@ class PaginaValidador(QWidget):
         icon = "✓" if sucesso else "✗"
         self.log_area.append(f"{icon} {mensagem}")
         
+        # Mostrar toast de sucesso ou erro
+        if sucesso:
+            show_toast(self, mensagem, "success", 3000)
+        else:
+            show_toast(self, "Validação concluída com erros", "warning", 3000)
+        
         self.btn_iniciar_validacao.setEnabled(True)
         self.btn_validar_xsd.setEnabled(True)
         self.btn_verificar_internacao.setEnabled(True)
@@ -507,7 +535,15 @@ class PaginaValidador(QWidget):
 
     def on_task_error(self, error_str):
         self.log_area.append(f"✗ ERRO CRÍTICO: {error_str}")
-        QMessageBox.critical(self, "Erro na Validação", error_str)
+        
+        # Erro amigável
+        show_friendly_error(
+            self,
+            "Erro na Validação",
+            "Ocorreu um erro ao processar os arquivos XML.\n\n"
+            "Verifique se os arquivos estão corretos e tente novamente.",
+            error_str
+        )
         
         self.btn_iniciar_validacao.setEnabled(True)
         self.btn_validar_xsd.setEnabled(True)
@@ -704,6 +740,12 @@ class PaginaHash(QWidget):
             icon = "✓" if sucesso else "✗"
             self.log_area.append(f"{icon} {mensagem}")
             
+            # Toast notification
+            if sucesso:
+                show_toast(self, "Hash atualizado com sucesso!", "success", 3000)
+            else:
+                show_toast(self, "Atualização concluída com erros", "warning", 3000)
+            
         self.btn_atualizar_hash.setEnabled(True)
         self.btn_select_all.setEnabled(True)
         self.btn_clear_all.setEnabled(True)
@@ -714,7 +756,15 @@ class PaginaHash(QWidget):
 
     def on_task_error(self, error_str):
         self.log_area.append(f"✗ ERRO CRÍTICO: {error_str}")
-        QMessageBox.critical(self, "Erro na Atualização de Hash", error_str)
+        
+        # Erro amigável
+        show_friendly_error(
+            self,
+            "Erro na Atualização de Hash",
+            "Ocorreu um erro ao atualizar o hash dos arquivos.\n\n"
+            "Verifique se os arquivos XML estão acessíveis e tente novamente.",
+            error_str
+        )
         
         self.btn_atualizar_hash.setEnabled(True)
         self.btn_select_all.setEnabled(True)
@@ -726,7 +776,8 @@ class PaginaHash(QWidget):
 
     def iniciar_atualizacao_hash(self):
         if not self.controller.plano_ultima_distribuicao:
-            QMessageBox.warning(self, "Aviso", "Nenhuma distribuição foi realizada.")
+            show_warning(self, "Distribuição necessária",
+                        "É necessário fazer a distribuição de faturas antes de atualizar o hash.")
             return
             
         auditores = list(self.controller.plano_ultima_distribuicao.keys())
@@ -757,7 +808,8 @@ class PaginaHash(QWidget):
         arquivos_selecionados = self.get_selected_files()
         
         if not arquivos_selecionados:
-            QMessageBox.warning(self, "Aviso", "Nenhum arquivo selecionado.")
+            show_warning(self, "Seleção vazia",
+                        "Por favor, selecione pelo menos um arquivo para atualizar o hash.")
             return
         
         self.log_area.clear()
