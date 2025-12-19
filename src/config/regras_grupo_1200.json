@@ -1651,7 +1651,7 @@
         "sub_condicoes": [
           {
             "condicao_tag_valor": {
-              "xpath": "./ptu:tp_Atendimento",
+              "xpath": ".//ptu:tp_Atendimento",
               "valor_permitido": [
                 "04"
               ]
@@ -1669,7 +1669,7 @@
     },
     "acao": {
       "tipo_acao": "garantir_tag_com_conteudo",
-      "tag_alvo": "./ptu:tp_Atendimento",
+      "tag_alvo": ".//ptu:tp_Atendimento",
       "novo_conteudo": "23"
     },
     "log_sucesso": "Tipo de atendimento alterado de 04 para 23 para evitar rejeição ANS conforme boletim."
