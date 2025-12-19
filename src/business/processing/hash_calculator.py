@@ -5,7 +5,8 @@ import logging
 import re
 import lxml.etree as etree
 
-logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - (hash_calculator) - %(message)s')
+# ✅ FIX: Usar logger adequado ao invés de basicConfig hardcoded
+logger = logging.getLogger(__name__)
 
 def _extrair_conteudo_puro_de_bloco(bloco_xml_str: str) -> str:
     """
@@ -31,13 +32,13 @@ def calcular_hash_bloco_guia_cobranca(raiz_xml_completo):
         str: O hash MD5 hexadecimal, ou None se o bloco não for encontrado ou ocorrer erro.
     """
     if raiz_xml_completo is None:
-        logging.error("A raiz do XML fornecida é nula. Não é possível calcular o hash.")
+        logger.error("A raiz do XML fornecida é nula. Não é possível calcular o hash.")
         return None
 
     try:
         guia_node_list = raiz_xml_completo.xpath("//*[local-name()='GuiaCobrancaUtilizacao']")
         if not guia_node_list:
-            logging.error("Bloco <GuiaCobrancaUtilizacao> não encontrado no XML para cálculo do hash.")
+            logger.error("Bloco <GuiaCobrancaUtilizacao> não encontrado no XML para cálculo do hash.")
             return None
         
         guia_node = guia_node_list[0]
@@ -51,9 +52,9 @@ def calcular_hash_bloco_guia_cobranca(raiz_xml_completo):
         
         novo_hash = hashlib.md5(conteudo_puro_do_bloco.encode("ISO-8859-1")).hexdigest()
         
-        logging.info(f"Hash do bloco GuiaCobrancaUtilizacao calculado com sucesso: {novo_hash}")
+        logger.info(f"Hash do bloco GuiaCobrancaUtilizacao calculado com sucesso: {novo_hash}")
         return novo_hash
 
     except Exception as e:
-        logging.exception(f"Erro inesperado durante o cálculo do hash do bloco GuiaCobrancaUtilizacao: {e}")
+        logger.exception(f"Erro inesperado durante o cálculo do hash do bloco GuiaCobrancaUtilizacao: {e}")
         return None
