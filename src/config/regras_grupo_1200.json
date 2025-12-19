@@ -1644,6 +1644,7 @@
     "id": "REGRA_CORRIGIR_TIPO_ATENDIMENTO_SADT_PARA_23",
     "descricao": "Altera tipoAtendimento de 04 para 23 em guias SADT que não possuem código de serviço de consulta (Rol 10xxxxxx), conforme novo boletim.",
     "ativo": true,
+    "categoria_glosa": "GLOSA_GUIA",
     "condicoes": {
       "tipo_elemento": "guiaSADT",
       "condicao_multipla": {
