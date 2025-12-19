@@ -46,6 +46,11 @@
       "ativo": true
     },
     {
+      "nome_grupo": "Regras Gerais Grupo 1200",
+      "arquivo_regras": "regras_grupo_1200.json",
+      "ativo": true
+    },
+    {
       "nome_grupo": "Regras para Terapias Seriadas",
       "arquivo_regras": "regras_grupo_1201.json",
       "ativo": true
