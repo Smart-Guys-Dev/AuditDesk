@@ -172,6 +172,14 @@ class RuleEngine:
                 return str(node_text) != str(tag_cond.get("valor_atual"))
             elif compare_type == "valor_atual_igual":
                 return str(node_text) == str(tag_cond.get("valor_atual"))
+            elif compare_type == "contem_inicio":
+                # Verifica se o texto começa com o valor especificado
+                valor_inicio = str(tag_cond.get("valor_atual", ""))
+                return str(node_text).startswith(valor_inicio)
+            elif compare_type == "nao_contem_inicio":
+                # Verifica se o texto NÃO começa com o valor especificado
+                valor_inicio = str(tag_cond.get("valor_atual", ""))
+                return not str(node_text).startswith(valor_inicio)
             elif "valor_permitido" in tag_cond:
                 return node_text in tag_cond["valor_permitido"]
         
