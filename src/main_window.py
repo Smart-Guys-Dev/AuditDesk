@@ -67,7 +67,7 @@ class PaginaBoasVindas(QWidget):
         grid_layout = QHBoxLayout()
         grid_layout.setSpacing(20)
         
-        card1 = self._create_feature_card("📄", "Processador XML", "Importação e processamento em lote")
+        card1 = self._create_feature_card("📄", "Processador", "Importação e processamento em lote")
         card2 = self._create_feature_card("👥", "Distribuição", "Divisão inteligente de carga de trabalho")
         card3 = self._create_feature_card("✓", "Validação TISS", "Verificação de regras e estrutura XSD")
         
