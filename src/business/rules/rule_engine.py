@@ -101,32 +101,62 @@ class RuleEngine:
         logger.info(f"Lista '{list_id}' carregada com {len(self.external_lists[list_id])} itens.")
         return True
 
-    def load_all_rules(self):
+    def load_all_rules(self, use_database: bool = True):
         """
-        Carrega a configuração mestre, todas as listas de dados e todas as regras ativas
-        dos arquivos JSON especificados.
+        Carrega todas as regras ativas.
+        
+        Args:
+            use_database: Se True, carrega do SQLite. Se False, carrega dos JSONs.
+        
+        Returns:
+            bool: True se carregou com sucesso
         """
+        # Carregar configuração mestre (sempre do JSON para listas e config)
         master_config_path = os.path.join(self.config_dir, "rules_config.json")
         self.rules_config_master = self._load_json_file(master_config_path)
-        if not self.rules_config_master: return False
+        if not self.rules_config_master: 
+            return False
         
+        # Carregar listas de dados (ainda do JSON por enquanto)
         for list_id, file_name in self.rules_config_master.get("listas_comuns", {}).items():
-            if not self._load_list_from_json(list_id, file_name): return False
+            if not self._load_list_from_json(list_id, file_name): 
+                return False
         
+        # Tentar carregar regras do SQLite primeiro
+        if use_database:
+            try:
+                from src.database.rule_repository import get_active_rules
+                self.loaded_rules = get_active_rules()
+                
+                if self.loaded_rules:
+                    logger.info(f"✅ {len(self.loaded_rules)} regras carregadas do banco de dados.")
+                    return True
+                else:
+                    logger.warning("Banco de regras vazio, tentando carregar do JSON...")
+            except Exception as e:
+                logger.warning(f"Erro ao carregar regras do banco: {e}. Usando JSON como fallback.")
+        
+        # Fallback: Carregar dos arquivos JSON
+        return self._load_rules_from_json()
+    
+    def _load_rules_from_json(self):
+        """Carrega regras dos arquivos JSON (fallback)."""
         self.loaded_rules = []
+        
         for group in self.rules_config_master.get("grupos_para_carregar", []):
             if group.get("ativo", False):
                 rules_file = group.get("arquivo_regras")
-                if not rules_file: continue
+                if not rules_file: 
+                    continue
                 
                 rules_path = os.path.join(self.config_dir, rules_file)
                 group_rules = self._load_json_file(rules_path)
                 
                 if group_rules and isinstance(group_rules, list):
                     self.loaded_rules.extend(rule for rule in group_rules if rule.get("ativo", False))
-                    logger.info(f"Grupo '{group.get('nome_grupo')}' carregado.")
+                    logger.info(f"Grupo '{group.get('nome_grupo')}' carregado do JSON.")
         
-        logger.info(f"Total de {len(self.loaded_rules)} regras ativas carregadas.")
+        logger.info(f"Total de {len(self.loaded_rules)} regras ativas carregadas do JSON.")
         return True
 
     def _evaluate_condition(self, element, condition):
