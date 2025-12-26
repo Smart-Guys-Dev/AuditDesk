@@ -1,0 +1,72 @@
+# ==============================================
+# AuditPlus v2.0 - Docker Ignore
+# ==============================================
+# Arquivos a ignorar durante build Docker
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+*.egg
+*.egg-info/
+dist/
+build/
+eggs/
+.eggs/
+
+# Virtual Environment
+venv/
+ENV/
+env/
+.venv/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Git
+.git/
+.gitignore
+.gitattributes
+
+# Logs e dados locais
+*.log
+logs/
+*.db
+*.sqlite
+*.sqlite3
+
+# Backups
+backups/
+*.bak
+
+# Testes
+tests/
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Arquivos de desenvolvimento
+scripts/
+tools/
+docs/
+*.md
+!README.md
+
+# Configurações locais
+.env
+.env.local
+*.local
+
+# Gemini/AI
+.gemini/
+
+# Outros
+*.tmp
+*.temp
+Thumbs.db
+.DS_Store

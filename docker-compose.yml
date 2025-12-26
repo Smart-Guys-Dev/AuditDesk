@@ -1,0 +1,80 @@
+# ==============================================
+# AuditPlus v2.0 - Docker Compose
+# ==============================================
+# Orquestração de containers para desenvolvimento e produção
+
+version: '3.8'
+
+services:
+  # ==============================================
+  # Aplicação Principal (modo batch/CLI)
+  # ==============================================
+  auditplus:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: auditplus-app
+    restart: unless-stopped
+    environment:
+      - DATABASE_PATH=/app/data/audit_plus.db
+      - LOG_LEVEL=INFO
+      - DEBUG_MODE=False
+    volumes:
+      # Persistência de dados
+      - auditplus-data:/app/data
+      - auditplus-logs:/app/logs
+      - auditplus-backups:/app/backups
+      # Pasta de XMLs para processamento (monte sua pasta local)
+      # - /caminho/local/xmls:/app/xmls:ro
+    networks:
+      - auditplus-network
+    healthcheck:
+      test: [ "CMD", "python", "-c", "import sys; sys.exit(0)" ]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # ==============================================
+  # Serviço de Backup Automático (opcional)
+  # ==============================================
+  backup:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: auditplus-backup
+    restart: unless-stopped
+    entrypoint: [ "python", "scripts/backup.py", "--scheduled" ]
+    environment:
+      - BACKUP_INTERVAL_HOURS=24
+      - MAX_BACKUPS=7
+    volumes:
+      - auditplus-data:/app/data:ro
+      - auditplus-backups:/app/backups
+    networks:
+      - auditplus-network
+    depends_on:
+      - auditplus
+    profiles:
+      - backup
+
+# ==============================================
+# Volumes Persistentes
+# ==============================================
+volumes:
+  auditplus-data:
+    driver: local
+    name: auditplus-data
+  auditplus-logs:
+    driver: local
+    name: auditplus-logs
+  auditplus-backups:
+    driver: local
+    name: auditplus-backups
+
+# ==============================================
+# Rede
+# ==============================================
+networks:
+  auditplus-network:
+    driver: bridge
+    name: auditplus-network
