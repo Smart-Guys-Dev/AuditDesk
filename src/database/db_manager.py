@@ -147,9 +147,11 @@ def get_dashboard_stats():
     stats = {
         'total_executions': 0,
         'total_files': 0,
+        'total_arquivos': 0,  # Alias para guias corrigidas
         'success_count': 0,
         'error_count': 0,
-        'success_rate': 0.0
+        'success_rate': 0.0,
+        'top_unimed_errors': None  # Maior Unimed com erros de layout
     }
     try:
         # Agregar dados de ExecutionLog
@@ -157,12 +159,40 @@ def get_dashboard_stats():
         stats['total_executions'] = len(executions)
         
         for exc in executions:
-            stats['total_files'] += (exc.success_count + exc.error_count) # ou exc.total_files se confiável
+            stats['total_files'] += (exc.success_count + exc.error_count)
             stats['success_count'] += exc.success_count
             stats['error_count'] += exc.error_count
             
         if stats['total_files'] > 0:
             stats['success_rate'] = (stats['success_count'] / stats['total_files']) * 100
+        
+        # Total de arquivos processados = guias corrigidas (success_count)
+        stats['total_arquivos'] = stats['success_count']
+        
+        # Buscar Top Unimed com mais erros (via FileLog se disponível)
+        try:
+            from sqlalchemy import func
+            top_error = session.query(
+                FileLog.filename, 
+                func.count(FileLog.id).label('error_count')
+            ).filter(
+                FileLog.status == 'ERRO'
+            ).group_by(
+                FileLog.filename
+            ).order_by(
+                func.count(FileLog.id).desc()
+            ).first()
+            
+            if top_error and top_error.error_count > 0:
+                # Extrair código da Unimed do nome do arquivo (padrão: N0XXXXXX)
+                import re
+                match = re.search(r'N0(\d+)', top_error.filename)
+                if match:
+                    stats['top_unimed_errors'] = f"N0{match.group(1)}"
+                else:
+                    stats['top_unimed_errors'] = "Ver logs"
+        except Exception as e:
+            logger.debug(f"Não foi possível obter top unimed: {e}")
             
     except Exception as e:
         print(f"Erro ao gerar estatísticas: {e}")
@@ -171,6 +201,7 @@ def get_dashboard_stats():
     
     
     return stats
+
 
 def authenticate_user(username, password):
     """
@@ -435,7 +466,7 @@ def get_recent_activity(limit=5):
 
 def log_roi_metric(execution_id: int, file_name: str, rule_id: str, 
                    rule_description: str, correction_type: str, financial_impact: float):
-    """Registra uma métrica de ROI no banco de dados."""
+    """Registra uma métrica de economia/glosa evitada no banco de dados."""
     if execution_id == -1: return
 
     session = get_session()
@@ -458,7 +489,7 @@ def log_roi_metric(execution_id: int, file_name: str, rule_id: str,
 
 def get_roi_stats():
     """
-    Retorna estatísticas consolidadas de ROI (Realizado + Potencial).
+    Retorna estatísticas consolidadas de Economia (Glosas Evitadas + Potencial).
     """
     session = get_session()
     stats = {
@@ -473,17 +504,17 @@ def get_roi_stats():
         from sqlalchemy import func
         from .models import AlertMetrics
         
-        # ROI REALIZADO (Correções automáticas)
+        # GLOSAS EVITADAS (Correções automáticas realizadas)
         metrics = session.query(ROIMetrics).all()
         stats['total_corrections'] = len(metrics)
         stats['total_saved'] = sum(m.financial_impact for m in metrics)
         
-        # ROI POTENCIAL (Alertas pendentes)
+        # ECONOMIA POTENCIAL (Alertas pendentes de revisão)
         alertas = session.query(AlertMetrics).filter_by(status='POTENCIAL').all()
         stats['total_alertas'] = len(alertas)
         stats['roi_potencial'] = sum(a.financial_impact for a in alertas)
         
-        # ROI TOTAL
+        # ECONOMIA TOTAL (Glosas + Potencial)
         stats['roi_total'] = stats['total_saved'] + stats['roi_potencial']
         
         # Top regras (mantém lógica existente)

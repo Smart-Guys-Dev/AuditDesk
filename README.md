@@ -2,7 +2,7 @@
 
 **Sistema de automação e validação de arquivos PTU para auditoria médica.**
 
-Desenvolvido por **BisonCode**.
+Desenvolvido por **Pedro Lucas Lima de Freitas**.
 
 ---
 
@@ -108,16 +108,16 @@ AuditPlusv2.0/
 
 ## 📝 Licença
 
-Propriedade de **BisonCode**.  
+Propriedade de **Pedro Lucas Lima de Freitas**.  
 Todos os direitos reservados.
 
 ---
 
 ## 👨‍💻 Suporte
 
-Para suporte ou dúvidas, entre em contato com a equipe BisonCode.
+Para suporte ou dúvidas, entre em contato com Pedro Lucas Lima de Freitas.
 
 ---
 
-**Audit+ v2.0** - Powered by BisonCode
+**Audit+ v2.0** - Desenvolvido por Pedro Lucas Lima de Freitas
 # AuditPlus_Desktop

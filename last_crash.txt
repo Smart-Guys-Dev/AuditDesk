@@ -1,35 +1,10 @@
 Traceback (most recent call last):
-  File "c:\Users\pedro.freitas\AuditPlusv2.0\main.py", line 44, in on_login_success
-    main_window = MainWindow(user)
-  File "c:\Users\pedro.freitas\AuditPlusv2.0\src\main_window.py", line 892, in __init__
-    self.page_painel_principal = PaginaDashboard()
-                                 ~~~~~~~~~~~~~~~^^
-  File "c:\Users\pedro.freitas\AuditPlusv2.0\src\dashboard_page.py", line 50, in __init__
-    self.load_data()
-    ~~~~~~~~~~~~~~^^
-  File "c:\Users\pedro.freitas\AuditPlusv2.0\src\dashboard_page.py", line 190, in load_data
-    wedges, texts, autotexts = ax.pie(sizes, labels=None, autopct='%1.1f%%',
-                               ~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-                                    startangle=90, colors=colors[:len(sizes)])
-                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\pedro.freitas\AuditPlusv2.0\venv\Lib\site-packages\matplotlib\_api\deprecation.py", line 453, in wrapper
-    return func(*args, **kwargs)
-  File "C:\Users\pedro.freitas\AuditPlusv2.0\venv\Lib\site-packages\matplotlib\__init__.py", line 1524, in inner
-    return func(
-        ax,
-        *map(cbook.sanitize_sequence, args),
-        **{k: cbook.sanitize_sequence(v) for k, v in kwargs.items()})
-  File "C:\Users\pedro.freitas\AuditPlusv2.0\venv\Lib\site-packages\matplotlib\axes\_axes.py", line 3412, in pie
-    w = mpatches.Wedge((x, y), radius, 360. * min(theta1, theta2),
-                       360. * max(theta1, theta2),
-    ...<2 lines>...
-                       clip_on=False,
-                       label=label)
-  File "C:\Users\pedro.freitas\AuditPlusv2.0\venv\Lib\site-packages\matplotlib\patches.py", line 1252, in __init__
-    self._recompute_path()
-    ~~~~~~~~~~~~~~~~~~~~^^
-  File "C:\Users\pedro.freitas\AuditPlusv2.0\venv\Lib\site-packages\matplotlib\patches.py", line 1264, in _recompute_path
-    arc = Path.arc(theta1, theta2)
-  File "C:\Users\pedro.freitas\AuditPlusv2.0\venv\Lib\site-packages\matplotlib\path.py", line 1002, in arc
-    n = int(2 ** np.ceil((eta2 - eta1) / halfpi))
-ValueError: cannot convert float NaN to integer
+  File "c:\Users\pedro.freitas\AuditPlusv2.0\src\main_window.py", line 351, in on_task_finished
+    show_toast(self, "Processamento concluído com sucesso!", "success", 3000)
+    ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\pedro.freitas\AuditPlusv2.0\src\ui_helpers.py", line 247, in show_toast
+    toast = ToastNotification(message, toast_type, duration, parent)
+  File "c:\Users\pedro.freitas\AuditPlusv2.0\src\ui_helpers.py", line 170, in __init__
+    shadow = QGraphicsDropShadowEffect()
+             ^^^^^^^^^^^^^^^^^^^^^^^^^
+NameError: name 'QGraphicsDropShadowEffect' is not defined

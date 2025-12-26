@@ -1674,5 +1674,66 @@
       "novo_conteudo": "23"
     },
     "log_sucesso": "Tipo de atendimento alterado de 04 para 23 para evitar rejeição ANS conforme boletim."
+  },
+  {
+    "id": "REGRA_GARANTIR_CPF_PRESTADOR_9134",
+    "descricao": "Garante que o bloco <cdCnpjCpf> com o CPF 03548691161 exista para o prestador 9134 (TATIANE ALVES GRATAO) e corrige a ordem das tags.",
+    "ativo": true,
+    "condicoes": {
+      "tipo_elemento": "procedimentosExecutados",
+      "condicao_multipla": {
+        "tipo": "AND",
+        "sub_condicoes": [
+          {
+            "condicao_tag_valor": {
+              "xpath": "./ptu:equipe_Profissional/ptu:Prestador/ptu:cd_Prest",
+              "valor_permitido": [
+                "9134"
+              ]
+            }
+          },
+          {
+            "condicao_tag_valor": {
+              "xpath": "./ptu:equipe_Profissional/ptu:cdCnpjCpf",
+              "tipo_comparacao": "nao_existe"
+            }
+          }
+        ]
+      }
+    },
+    "acao": {
+      "tipo_acao": "multiplas_acoes",
+      "sub_acoes": [
+        {
+          "tipo_acao": "garantir_tag_com_conteudo",
+          "tag_alvo": "./ptu:equipe_Profissional/ptu:cdCnpjCpf",
+          "novo_conteudo": ""
+        },
+        {
+          "tipo_acao": "garantir_tag_com_conteudo",
+          "tag_alvo": "./ptu:equipe_Profissional/ptu:cdCnpjCpf/ptu:cd_cpf",
+          "novo_conteudo": "03548691161"
+        },
+        {
+          "tipo_acao": "reordenar_elementos_filhos",
+          "tag_alvo": "./ptu:equipe_Profissional",
+          "ordem_correta": [
+            "tp_Participacao",
+            "Prestador",
+            "nm_Profissional",
+            "cdCnpjCpf",
+            "dadosConselho",
+            "CBO"
+          ]
+        }
+      ]
+    },
+    "log_sucesso": "Bloco <cdCnpjCpf> com CPF inserido e reordenado para o prestador 9134 (TATIANE ALVES GRATAO).",
+    "metadata_glosa": {
+      "categoria": "GLOSA_GUIA",
+      "impacto": "ALTO",
+      "razao": "Falta de CPF/CNPJ do profissional causa glosa da guia pela operadora",
+      "contabilizar": true
+    }
   }
 ]

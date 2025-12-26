@@ -10,7 +10,7 @@ class AppSettings:
     """Gerencia configurações persistentes da aplicação"""
     
     def __init__(self):
-        self.settings = QSettings("BisonCode", "AuditPlus")
+        self.settings = QSettings("PedroLucas", "AuditPlus")
     
     # Últimas pastas usadas
     def save_last_folder(self, key: str, path: str):

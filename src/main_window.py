@@ -99,7 +99,7 @@ class PaginaBoasVindas(QWidget):
         
         # --- Footer ---
         main_layout.addStretch()
-        watermark = QLabel("Audit+ Enterprise • Powered by BisonCode")
+        watermark = QLabel("Audit+ Enterprise • Desenvolvido por Pedro Lucas Lima de Freitas")
         watermark.setObjectName("watermark")
         watermark.setAlignment(Qt.AlignmentFlag.AlignRight)
         main_layout.addWidget(watermark)
@@ -898,32 +898,127 @@ class MainWindow(QMainWindow):
         # Sidebar
         sidebar_widget = QWidget()
         sidebar_widget.setObjectName("sidebar")
-        sidebar_widget.setFixedWidth(240)
+        sidebar_widget.setFixedWidth(260)
+        sidebar_widget.setStyleSheet("""
+            QWidget#sidebar {
+                background: qlineargradient(
+                    x1:0, y1:0, x2:0, y2:1,
+                    stop:0 #0D1117,
+                    stop:1 #161B22
+                );
+                border-right: 1px solid #30363D;
+            }
+        """)
         sidebar_layout = QVBoxLayout(sidebar_widget)
         sidebar_layout.setAlignment(Qt.AlignmentFlag.AlignTop)
-        sidebar_layout.setContentsMargins(0, 20, 0, 0)
-        sidebar_layout.setSpacing(5)
+        sidebar_layout.setContentsMargins(16, 20, 16, 20)
+        sidebar_layout.setSpacing(8)
+        
+        # Logo no topo da sidebar
+        logo_container = QFrame()
+        logo_container.setStyleSheet("""
+            QFrame {
+                background: qlineargradient(
+                    x1:0, y1:0, x2:1, y2:1,
+                    stop:0 #00A859,
+                    stop:1 #008C45
+                );
+                border-radius: 12px;
+                padding: 15px;
+                margin-bottom: 10px;
+            }
+        """)
+        logo_layout = QVBoxLayout(logo_container)
+        logo_layout.setContentsMargins(15, 12, 15, 12)
+        logo_layout.setSpacing(2)
+        
+        logo_label = QLabel("Audit+")
+        logo_label.setStyleSheet("font-size: 22px; font-weight: 800; color: white;")
+        logo_label.setAlignment(Qt.AlignmentFlag.AlignCenter)
+        
+        version_label = QLabel("v2.0 Enterprise")
+        version_label.setStyleSheet("font-size: 10px; color: rgba(255,255,255,0.8); letter-spacing: 1px;")
+        version_label.setAlignment(Qt.AlignmentFlag.AlignCenter)
+        
+        logo_layout.addWidget(logo_label)
+        logo_layout.addWidget(version_label)
+        sidebar_layout.addWidget(logo_container)
+        
+        # Espaçador
+        sidebar_layout.addSpacing(10)
+        
+        # Label de navegação
+        nav_label = QLabel("NAVEGAÇÃO")
+        nav_label.setStyleSheet("""
+            color: #8B949E; 
+            font-size: 11px; 
+            font-weight: 600; 
+            letter-spacing: 1.5px;
+            padding-left: 8px;
+            margin-top: 5px;
+        """)
+        sidebar_layout.addWidget(nav_label)
+        
+        # Estilo comum dos botões da sidebar
+        sidebar_btn_style = """
+            QPushButton {
+                text-align: left;
+                padding: 14px 16px;
+                border: none;
+                border-radius: 10px;
+                font-size: 14px;
+                font-weight: 500;
+                color: #8B949E;
+                background-color: transparent;
+            }
+            QPushButton:hover {
+                background-color: rgba(0, 168, 89, 0.1);
+                color: #00A859;
+            }
+            QPushButton:checked {
+                background: qlineargradient(
+                    x1:0, y1:0, x2:1, y2:0,
+                    stop:0 rgba(0, 168, 89, 0.2),
+                    stop:1 rgba(0, 168, 89, 0.05)
+                );
+                color: #00A859;
+                border-left: 3px solid #00A859;
+                font-weight: 600;
+            }
+        """
 
-        btn_painel_principal = QPushButton("  🏠 Painel Principal")
+        btn_painel_principal = QPushButton("  🏠  Painel Principal")
         btn_painel_principal.setCheckable(True)
         btn_painel_principal.setChecked(True)
+        btn_painel_principal.setStyleSheet(sidebar_btn_style)
+        btn_painel_principal.setCursor(Qt.CursorShape.PointingHandCursor)
 
-        btn_processador_xml = QPushButton("  📄 Processador")
+        btn_processador_xml = QPushButton("  📄  Processador")
         btn_processador_xml.setCheckable(True)
         btn_processador_xml.setToolTip("Processar faturas (Ctrl+P)")
+        btn_processador_xml.setStyleSheet(sidebar_btn_style)
+        btn_processador_xml.setCursor(Qt.CursorShape.PointingHandCursor)
 
-        btn_validador_tiss = QPushButton("  ✓ Validador PTU XML")
+        btn_validador_tiss = QPushButton("  ✓  Validador PTU XML")
         btn_validador_tiss.setCheckable(True)
         btn_validador_tiss.setToolTip("Validar arquivos XML (Ctrl+V)")
+        btn_validador_tiss.setStyleSheet(sidebar_btn_style)
+        btn_validador_tiss.setCursor(Qt.CursorShape.PointingHandCursor)
 
-        btn_atualizar_hash = QPushButton("  # Atualizar HASH")
+        btn_atualizar_hash = QPushButton("  #  Atualizar HASH")
         btn_atualizar_hash.setCheckable(True)
+        btn_atualizar_hash.setStyleSheet(sidebar_btn_style)
+        btn_atualizar_hash.setCursor(Qt.CursorShape.PointingHandCursor)
 
-        btn_historico = QPushButton("  📜 Histórico")
+        btn_historico = QPushButton("  📜  Histórico")
         btn_historico.setCheckable(True)
+        btn_historico.setStyleSheet(sidebar_btn_style)
+        btn_historico.setCursor(Qt.CursorShape.PointingHandCursor)
 
-        btn_relatorios = QPushButton("  📊 Relatórios")
+        btn_relatorios = QPushButton("  📊  Relatórios")
         btn_relatorios.setCheckable(True)
+        btn_relatorios.setStyleSheet(sidebar_btn_style)
+        btn_relatorios.setCursor(Qt.CursorShape.PointingHandCursor)
 
         sidebar_layout.addWidget(btn_painel_principal)
         sidebar_layout.addWidget(btn_processador_xml)
@@ -935,8 +1030,22 @@ class MainWindow(QMainWindow):
         # Botão de Gestão de Usuários (Apenas Admin)
         self.btn_gestao_usuarios = None
         if self.user and self.user.role == 'ADMIN':
-            self.btn_gestao_usuarios = QPushButton("  👥 Gestão de Usuários")
-            self.btn_gestao_usuarios.setCheckable(False) # Abre modal, não muda página
+            sidebar_layout.addSpacing(10)
+            admin_label = QLabel("ADMINISTRAÇÃO")
+            admin_label.setStyleSheet("""
+                color: #8B949E; 
+                font-size: 11px; 
+                font-weight: 600; 
+                letter-spacing: 1.5px;
+                padding-left: 8px;
+                margin-top: 10px;
+            """)
+            sidebar_layout.addWidget(admin_label)
+            
+            self.btn_gestao_usuarios = QPushButton("  👥  Gestão de Usuários")
+            self.btn_gestao_usuarios.setCheckable(False)
+            self.btn_gestao_usuarios.setStyleSheet(sidebar_btn_style)
+            self.btn_gestao_usuarios.setCursor(Qt.CursorShape.PointingHandCursor)
             self.btn_gestao_usuarios.clicked.connect(self.abrir_gestao_usuarios)
             sidebar_layout.addWidget(self.btn_gestao_usuarios)
 
@@ -944,33 +1053,71 @@ class MainWindow(QMainWindow):
         
         # Rodapé da Sidebar com info do usuário e Logout
         if self.user:
-            user_container = QWidget()
+            # Container do usuário com estilo moderno
+            user_container = QFrame()
+            user_container.setStyleSheet("""
+                QFrame {
+                    background-color: rgba(255, 255, 255, 0.03);
+                    border-radius: 12px;
+                    border: 1px solid #30363D;
+                    padding: 10px;
+                }
+            """)
             user_layout = QVBoxLayout(user_container)
-            user_layout.setSpacing(5)
+            user_layout.setSpacing(8)
+            user_layout.setContentsMargins(12, 12, 12, 12)
             
-            user_info = QLabel(f"👤 {self.user.username}\n({self.user.role})")
-            user_info.setStyleSheet("color: #D8DEE9; font-size: 12px; font-weight: bold;")
-            user_info.setAlignment(Qt.AlignmentFlag.AlignCenter)
+            # Info do usuário
+            user_info = QLabel(f"👤 {self.user.username}")
+            user_info.setStyleSheet("color: #E6EDF3; font-size: 13px; font-weight: 600;")
+            user_info.setAlignment(Qt.AlignmentFlag.AlignLeft)
             
-            btn_logout = QPushButton("Sair / Logoff")
+            role_badge = QLabel(f"({self.user.role})")
+            role_badge.setStyleSheet("""
+                color: #00A859; 
+                font-size: 11px; 
+                font-weight: 500;
+                padding: 2px 8px;
+                background-color: rgba(0, 168, 89, 0.15);
+                border-radius: 4px;
+            """)
+            role_badge.setAlignment(Qt.AlignmentFlag.AlignLeft)
+            
+            btn_logout = QPushButton("🚪 Sair / Logoff")
             btn_logout.setCursor(Qt.CursorShape.PointingHandCursor)
             btn_logout.setStyleSheet("""
                 QPushButton {
-                    background-color: #BF616A;
+                    background: qlineargradient(
+                        x1:0, y1:0, x2:0, y2:1,
+                        stop:0 #F85149,
+                        stop:1 #DA3633
+                    );
                     color: white;
                     border: none;
-                    padding: 8px;
-                    border-radius: 4px;
+                    padding: 10px 16px;
+                    border-radius: 8px;
                     font-size: 12px;
-                    margin-top: 5px;
+                    font-weight: 600;
+                    margin-top: 8px;
                 }
-                QPushButton:hover { background-color: #D08770; }
+                QPushButton:hover { 
+                    background: qlineargradient(
+                        x1:0, y1:0, x2:0, y2:1,
+                        stop:0 #FF6B6B,
+                        stop:1 #F85149
+                    );
+                }
+                QPushButton:pressed {
+                    background-color: #B62324;
+                }
             """)
             btn_logout.clicked.connect(self.logout_requested.emit)
             
             user_layout.addWidget(user_info)
+            user_layout.addWidget(role_badge)
             user_layout.addWidget(btn_logout)
             sidebar_layout.addWidget(user_container)
+
 
         # Páginas
         self.pages_widget = QStackedWidget()

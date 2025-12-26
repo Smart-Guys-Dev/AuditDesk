@@ -8,9 +8,10 @@ Inclui:
 - Status feedback
 """
 from PyQt6.QtWidgets import (QMessageBox, QProgressDialog, QWidget, QLabel,
-                             QVBoxLayout, QFrame, QGraphicsOpacityEffect)
+                             QVBoxLayout, QFrame, QGraphicsOpacityEffect,
+                             QGraphicsDropShadowEffect)
 from PyQt6.QtCore import Qt, QTimer, QPropertyAnimation, QEasingCurve, pyqtSignal
-from PyQt6.QtGui import QIcon
+from PyQt6.QtGui import QIcon, QColor
 import logging
 
 logger = logging.getLogger(__name__)
@@ -113,9 +114,10 @@ class EnhancedProgressDialog(QProgressDialog):
 class ToastNotification(QWidget):
     """
     Notificação toast não-bloqueante que desaparece automaticamente.
+    Posicionada no rodapé central da área de conteúdo.
     """
     
-    def __init__(self, message, toast_type="info", duration=3000, parent=None):
+    def __init__(self, message, toast_type="info", duration=4000, parent=None):
         super().__init__(parent)
         
         # Configuração da janela
@@ -132,12 +134,12 @@ class ToastNotification(QWidget):
         self.frame = QFrame()
         self.frame.setObjectName("toastFrame")
         
-        # Cores baseadas no tipo
+        # Cores Unimed + variações por tipo
         colors = {
-            "success": "#48bb78",
-            "error": "#f56565",
-            "warning": "#ed8936",
-            "info": "#4299e1"
+            "success": {"bg": "#00A859", "border": "#00C16E", "shadow": "rgba(0, 168, 89, 0.4)"},
+            "error": {"bg": "#DC3545", "border": "#FF5252", "shadow": "rgba(220, 53, 69, 0.4)"},
+            "warning": {"bg": "#FFC107", "border": "#FFD54F", "shadow": "rgba(255, 193, 7, 0.4)"},
+            "info": {"bg": "#17A2B8", "border": "#4DD0E1", "shadow": "rgba(23, 162, 184, 0.4)"}
         }
         
         icons = {
@@ -147,25 +149,50 @@ class ToastNotification(QWidget):
             "info": "ℹ️"
         }
         
-        bg_color = colors.get(toast_type, "#4299e1")
+        color_set = colors.get(toast_type, colors["info"])
         icon = icons.get(toast_type, "ℹ️")
         
+        # Estilo moderno com gradiente e sombra
         self.frame.setStyleSheet(f"""
             #toastFrame {{
-                background: {bg_color};
+                background: qlineargradient(
+                    x1:0, y1:0, x2:0, y2:1,
+                    stop:0 {color_set['border']},
+                    stop:1 {color_set['bg']}
+                );
                 color: white;
-                border-radius: 8px;
-                padding: 15px 20px;
+                border-radius: 12px;
+                padding: 16px 32px;
+                border: 2px solid {color_set['border']};
             }}
         """)
         
-        # Label com mensagem
+        # Sombra 3D
+        shadow = QGraphicsDropShadowEffect()
+        shadow.setBlurRadius(25)
+        shadow.setColor(QColor(0, 0, 0, 100))
+        shadow.setOffset(0, 6)
+        self.frame.setGraphicsEffect(shadow)
+        
+        # Label com mensagem - fonte maior
         frame_layout = QVBoxLayout(self.frame)
-        label = QLabel(f"{icon} {message}")
-        label.setStyleSheet("font-size: 14px; font-weight: 500;")
+        frame_layout.setContentsMargins(8, 4, 8, 4)
+        
+        label = QLabel(f"{icon}  {message}")
+        label.setStyleSheet("""
+            font-size: 15px; 
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            color: white;
+        """)
+        label.setAlignment(Qt.AlignmentFlag.AlignCenter)
         frame_layout.addWidget(label)
         
         layout.addWidget(self.frame)
+        
+        # Ajustar tamanho mínimo
+        self.setMinimumWidth(350)
+        self.adjustSize()
         
         # Animação de fade in
         self.opacity_effect = QGraphicsOpacityEffect(self.frame)
@@ -181,40 +208,46 @@ class ToastNotification(QWidget):
         QTimer.singleShot(duration, self._fade_out)
         
     def showEvent(self, event):
-        """Executado ao mostrar - inicia fade in"""
+        """Executado ao mostrar - inicia fade in e posiciona no rodapé central"""
         super().showEvent(event)
         self.fade_in_animation.start()
         
-        # Posicionar no canto superior direito
+        # Posicionar no RODAPÉ CENTRAL do parent
         if self.parent():
             parent_rect = self.parent().geometry()
-            x = parent_rect.width() - self.width() - 20
-            y = 20
+            # Centralizar horizontalmente
+            x = (parent_rect.width() - self.width()) // 2
+            # Posicionar no rodapé (30px do fundo)
+            y = parent_rect.height() - self.height() - 40
             self.move(x, y)
     
     def _fade_out(self):
         """Fade out e fechar"""
-        fade_out = QPropertyAnimation(self.opacity_effect, b"opacity")
-        fade_out.setDuration(300)
-        fade_out.setStartValue(1)
-        fade_out.setEndValue(0)
-        fade_out.setEasingCurve(QEasingCurve.Type.InOutQuad)
-        fade_out.finished.connect(self.close)
-        fade_out.start()
+        # Manter referência para evitar garbage collection antes de terminar
+        self.fade_out_animation = QPropertyAnimation(self.opacity_effect, b"opacity")
+        self.fade_out_animation.setDuration(400)
+        self.fade_out_animation.setStartValue(1)
+        self.fade_out_animation.setEndValue(0)
+        self.fade_out_animation.setEasingCurve(QEasingCurve.Type.InOutQuad)
+        self.fade_out_animation.finished.connect(self.close)
+        self.fade_out_animation.finished.connect(self.deleteLater)
+        self.fade_out_animation.start()
 
 
-def show_toast(parent, message, toast_type="info", duration=3000):
+
+def show_toast(parent, message, toast_type="info", duration=4000):
     """
-    Mostra notificação toast.
+    Mostra notificação toast no rodapé central.
     
     Args:
         parent: Widget pai
         message: Mensagem
         toast_type: Tipo (success, error, warning, info)
-        duration: Duração em ms
+        duration: Duração em ms (padrão 4s)
     """
     toast = ToastNotification(message, toast_type, duration, parent)
     toast.show()
+
     return toast
 
 
