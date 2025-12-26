@@ -863,7 +863,9 @@ class MainWindow(QMainWindow):
 
     def __init__(self, user=None):
         super().__init__()
-        self.controller = WorkflowController()
+        # ✅ Passar user_id para tracking de produtividade
+        user_id = user.id if user else None
+        self.controller = WorkflowController(user_id=user_id)
         self.user = user
         self.setWindowTitle("Audit+ v2.0")
         

@@ -14,7 +14,8 @@ from .database import db_manager
 class WorkflowController:
     VALOR_MINIMO_GUIA = 25000.0
 
-    def __init__(self):
+    def __init__(self, user_id: int = None):
+        self.user_id = user_id  # Para tracking de produtividade
         self.lista_faturas_processadas: List[dict] = []
         self.pasta_faturas_importadas_atual: Optional[str] = None
         self.plano_ultima_distribuicao: dict = {}
@@ -183,7 +184,8 @@ class WorkflowController:
             # Criar registro de execução para tracking de ROI
             self.current_execution_id = db_manager.log_execution_start(
                 operation_type='VALIDATION',
-                total_files=len(xml_files)
+                total_files=len(xml_files),
+                user_id=self.user_id  # ✅ Agora passa o user_id para produtividade
             )
             log(f"INFO: Execução ID {self.current_execution_id} criada.")
             

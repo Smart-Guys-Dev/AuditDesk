@@ -111,143 +111,115 @@ class EnhancedProgressDialog(QProgressDialog):
             self.setLabelText(f"{current} de {total} ({percentage}%)")
 
 
-class ToastNotification(QWidget):
+class ToastNotification(QFrame):
     """
-    Notificação toast não-bloqueante que desaparece automaticamente.
-    Posicionada no rodapé central da área de conteúdo.
+    Notificação embutida que aparece dentro da janela pai.
+    Design moderno com gradiente e fade automático.
     """
     
-    def __init__(self, message, toast_type="info", duration=4000, parent=None):
+    def __init__(self, message, toast_type="info", duration=3500, parent=None):
         super().__init__(parent)
         
-        # Configuração da janela
-        self.setWindowFlags(Qt.WindowType.FramelessWindowHint | 
-                           Qt.WindowType.Tool |
-                           Qt.WindowType.WindowStaysOnTopHint)
-        self.setAttribute(Qt.WidgetAttribute.WA_TranslucentBackground)
+        self.setObjectName("toastFrame")
         
-        # Layout
-        layout = QVBoxLayout(self)
-        layout.setContentsMargins(0, 0, 0, 0)
-        
-        # Frame com conteúdo
-        self.frame = QFrame()
-        self.frame.setObjectName("toastFrame")
-        
-        # Cores Unimed + variações por tipo
+        # Cores por tipo
         colors = {
-            "success": {"bg": "#00A859", "border": "#00C16E", "shadow": "rgba(0, 168, 89, 0.4)"},
-            "error": {"bg": "#DC3545", "border": "#FF5252", "shadow": "rgba(220, 53, 69, 0.4)"},
-            "warning": {"bg": "#FFC107", "border": "#FFD54F", "shadow": "rgba(255, 193, 7, 0.4)"},
-            "info": {"bg": "#17A2B8", "border": "#4DD0E1", "shadow": "rgba(23, 162, 184, 0.4)"}
+            "success": ("#00C16E", "#00A859", "✓"),
+            "error": ("#FF5252", "#D32F2F", "✕"),
+            "warning": ("#FFB300", "#FF8F00", "!"),
+            "info": ("#29B6F6", "#0288D1", "i")
         }
         
-        icons = {
-            "success": "✅",
-            "error": "❌",
-            "warning": "⚠️",
-            "info": "ℹ️"
-        }
+        bg_start, bg_end, icon = colors.get(toast_type, colors["info"])
         
-        color_set = colors.get(toast_type, colors["info"])
-        icon = icons.get(toast_type, "ℹ️")
-        
-        # Estilo moderno com gradiente e sombra
-        self.frame.setStyleSheet(f"""
+        # Estilo premium
+        self.setStyleSheet(f"""
             #toastFrame {{
                 background: qlineargradient(
-                    x1:0, y1:0, x2:0, y2:1,
-                    stop:0 {color_set['border']},
-                    stop:1 {color_set['bg']}
+                    x1:0, y1:0, x2:1, y2:0,
+                    stop:0 {bg_start},
+                    stop:1 {bg_end}
                 );
-                color: white;
-                border-radius: 12px;
-                padding: 16px 32px;
-                border: 2px solid {color_set['border']};
+                border-radius: 8px;
+                padding: 10px 20px;
+                margin: 10px;
             }}
         """)
         
-        # Sombra 3D
-        shadow = QGraphicsDropShadowEffect()
-        shadow.setBlurRadius(25)
-        shadow.setColor(QColor(0, 0, 0, 100))
-        shadow.setOffset(0, 6)
-        self.frame.setGraphicsEffect(shadow)
+        # Layout horizontal
+        from PyQt6.QtWidgets import QHBoxLayout
+        layout = QHBoxLayout(self)
+        layout.setContentsMargins(8, 4, 8, 4)
+        layout.setSpacing(12)
         
-        # Label com mensagem - fonte maior
-        frame_layout = QVBoxLayout(self.frame)
-        frame_layout.setContentsMargins(8, 4, 8, 4)
-        
-        label = QLabel(f"{icon}  {message}")
-        label.setStyleSheet("""
-            font-size: 15px; 
-            font-weight: 600;
-            letter-spacing: 0.5px;
+        # Ícone
+        icon_label = QLabel(icon)
+        icon_label.setFixedSize(24, 24)
+        icon_label.setAlignment(Qt.AlignmentFlag.AlignCenter)
+        icon_label.setStyleSheet("""
+            background: rgba(255,255,255,0.25);
+            border-radius: 12px;
+            font-size: 14px;
+            font-weight: bold;
             color: white;
         """)
-        label.setAlignment(Qt.AlignmentFlag.AlignCenter)
-        frame_layout.addWidget(label)
+        layout.addWidget(icon_label)
         
-        layout.addWidget(self.frame)
+        # Mensagem
+        text_label = QLabel(message)
+        text_label.setStyleSheet("""
+            font-size: 13px;
+            font-weight: 500;
+            color: white;
+        """)
+        layout.addWidget(text_label)
+        layout.addStretch()
         
-        # Ajustar tamanho mínimo
-        self.setMinimumWidth(350)
-        self.adjustSize()
-        
-        # Animação de fade in
-        self.opacity_effect = QGraphicsOpacityEffect(self.frame)
-        self.frame.setGraphicsEffect(self.opacity_effect)
-        
-        self.fade_in_animation = QPropertyAnimation(self.opacity_effect, b"opacity")
-        self.fade_in_animation.setDuration(300)
-        self.fade_in_animation.setStartValue(0)
-        self.fade_in_animation.setEndValue(1)
-        self.fade_in_animation.setEasingCurve(QEasingCurve.Type.InOutQuad)
-        
-        # Timer para fechar
+        # Fechar automaticamente
         QTimer.singleShot(duration, self._fade_out)
         
-    def showEvent(self, event):
-        """Executado ao mostrar - inicia fade in e posiciona no rodapé central"""
-        super().showEvent(event)
-        self.fade_in_animation.start()
+        # Posicionar no topo do parent
+        self.adjustSize()
+        if parent:
+            self.setFixedWidth(parent.width() - 40)
+            self.move(20, 20)
         
-        # Posicionar no RODAPÉ CENTRAL do parent
-        if self.parent():
-            parent_rect = self.parent().geometry()
-            # Centralizar horizontalmente
-            x = (parent_rect.width() - self.width()) // 2
-            # Posicionar no rodapé (30px do fundo)
-            y = parent_rect.height() - self.height() - 40
-            self.move(x, y)
+        self.show()
+        self.raise_()
     
     def _fade_out(self):
-        """Fade out e fechar"""
-        # Manter referência para evitar garbage collection antes de terminar
-        self.fade_out_animation = QPropertyAnimation(self.opacity_effect, b"opacity")
-        self.fade_out_animation.setDuration(400)
-        self.fade_out_animation.setStartValue(1)
-        self.fade_out_animation.setEndValue(0)
-        self.fade_out_animation.setEasingCurve(QEasingCurve.Type.InOutQuad)
-        self.fade_out_animation.finished.connect(self.close)
-        self.fade_out_animation.finished.connect(self.deleteLater)
-        self.fade_out_animation.start()
+        """Fechar com fade"""
+        self.opacity_effect = QGraphicsOpacityEffect(self)
+        self.setGraphicsEffect(self.opacity_effect)
+        
+        self.animation = QPropertyAnimation(self.opacity_effect, b"opacity")
+        self.animation.setDuration(300)
+        self.animation.setStartValue(1.0)
+        self.animation.setEndValue(0.0)
+        self.animation.finished.connect(self.deleteLater)
+        self.animation.start()
 
 
-
-def show_toast(parent, message, toast_type="info", duration=4000):
+def show_toast(parent, message, toast_type="info", duration=3500):
     """
-    Mostra notificação toast no rodapé central.
+    Mostra notificação toast dentro do parent.
     
     Args:
-        parent: Widget pai
+        parent: Widget pai (onde o toast vai aparecer)
         message: Mensagem
         toast_type: Tipo (success, error, warning, info)
-        duration: Duração em ms (padrão 4s)
+        duration: Duração em ms
     """
-    toast = ToastNotification(message, toast_type, duration, parent)
-    toast.show()
-
+    # Encontrar o widget de conteúdo principal
+    main_content = parent
+    
+    # Se o parent for a janela principal, tentar encontrar o stacked widget
+    if hasattr(parent, 'stacked_widget'):
+        main_content = parent.stacked_widget
+    elif hasattr(parent, 'central_widget'):
+        main_content = parent.central_widget
+    
+    toast = ToastNotification(message, toast_type, duration, main_content)
     return toast
 
 
