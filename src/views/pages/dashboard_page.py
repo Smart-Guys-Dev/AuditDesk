@@ -343,12 +343,12 @@ class PaginaDashboard(QWidget):
         )
         kpi_layout.addWidget(self.card_potencial, 0, 2)
         
-        self.card_alertas = ModernKPICard(
-            "Alertas Pendentes", "0", "⚠️",
+        self.card_regras = ModernKPICard(
+            "Regras Ativas", "0", "📋",
             gradient_start=ACCENT_PURPLE, gradient_end="#8B5CF6",
             size="normal"
         )
-        kpi_layout.addWidget(self.card_alertas, 0, 3)
+        kpi_layout.addWidget(self.card_regras, 0, 3)
         
         # ROW 2 - Métricas operacionais
         self.card_faturas = ModernKPICard(
@@ -372,12 +372,12 @@ class PaginaDashboard(QWidget):
         )
         kpi_layout.addWidget(self.card_sucesso, 1, 2)
         
-        self.card_top_unimed = ModernKPICard(
-            "Top Unimed c/ Erros", "--", "🏥",
-            gradient_start=ACCENT_RED, gradient_end="#B62324",
+        self.card_ultima_exec = ModernKPICard(
+            "Última Execução", "--", "🕐",
+            gradient_start="#64748B", gradient_end="#475569",
             size="normal"
         )
-        kpi_layout.addWidget(self.card_top_unimed, 1, 3)
+        kpi_layout.addWidget(self.card_ultima_exec, 1, 3)
         
         # Definir proporções iguais
         for i in range(4):
@@ -509,7 +509,14 @@ class PaginaDashboard(QWidget):
         self.card_total.update_value(f"R$ {roi_stats['roi_total']:,.2f}")
         self.card_glosas.update_value(f"R$ {roi_stats['total_saved']:,.2f}")
         self.card_potencial.update_value(f"R$ {roi_stats['roi_potencial']:,.2f}")
-        self.card_alertas.update_value(str(roi_stats['total_alertas']))
+        
+        # Regras Ativas - buscar do banco de regras
+        try:
+            from src.database.rule_repository import RuleRepository
+            rule_stats = RuleRepository.get_stats()
+            self.card_regras.update_value(str(rule_stats.get('ativas', 0)))
+        except:
+            self.card_regras.update_value("--")
         
         # ROW 2 - Métricas operacionais
         total_faturas = general_stats.get('total_executions', 0)
@@ -521,15 +528,15 @@ class PaginaDashboard(QWidget):
         taxa_sucesso = general_stats.get('success_rate', 0)
         self.card_sucesso.update_value(f"{taxa_sucesso:.1f}%")
         
-        # Top Unimed com erros - buscar do banco ou mostrar placeholder
+        # Última Execução - buscar do banco
         try:
-            top_unimed = general_stats.get('top_unimed_errors', None)
-            if top_unimed:
-                self.card_top_unimed.update_value(top_unimed[:15])
+            ultima_exec = db_manager.get_last_execution_time()
+            if ultima_exec:
+                self.card_ultima_exec.update_value(ultima_exec)
             else:
-                self.card_top_unimed.update_value("Nenhum")
+                self.card_ultima_exec.update_value("Nunca")
         except:
-            self.card_top_unimed.update_value("--")
+            self.card_ultima_exec.update_value("--")
         
         # Atualizar timestamp
         self.last_update_lbl.setText(f"Última atualização: {datetime.now().strftime('%H:%M:%S')}")

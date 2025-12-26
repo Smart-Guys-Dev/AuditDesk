@@ -462,6 +462,24 @@ def get_recent_activity(limit=5):
     finally:
         session.close()
 
+
+def get_last_execution_time():
+    """Retorna a data/hora da última execução em formato legível."""
+    session = get_session()
+    try:
+        last_exec = session.query(ExecutionLog).order_by(
+            ExecutionLog.start_time.desc()
+        ).first()
+        
+        if last_exec and last_exec.start_time:
+            return last_exec.start_time.strftime("%d/%m %H:%M")
+        return None
+    except Exception as e:
+        print(f"Erro ao buscar última execução: {e}")
+        return None
+    finally:
+        session.close()
+
 # --- ROI Metrics ---
 
 def log_roi_metric(execution_id: int, file_name: str, rule_id: str, 
