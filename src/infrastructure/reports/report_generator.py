@@ -77,13 +77,20 @@ def _formatar_unimed_destino(cod_unimed: Optional[str], nome_unimed: Optional[st
 
 def gerar_relatorio_distribuicao(plano_distribuicao: Dict[str, Any],
                                  caminho_pasta_distribuicao: str) -> Tuple[bool, Optional[str]]:
-    """Gera relatório Excel com a distribuição das faturas por auditor."""
+    """
+    Gera relatório Excel com a distribuição das faturas por auditor.
+    
+    NOVO: Também salva uma cópia no histórico e auto-importa para o banco de faturas.
+    """
     if not plano_distribuicao:
         logging.error("Plano de distribuição está vazio. Relatório Excel não gerado.")
         return False, None
 
     nome_arquivo_excel = "DISTRIBUIÇÃO.xlsx"
     caminho_completo_excel = os.path.join(caminho_pasta_distribuicao, nome_arquivo_excel)
+    
+    # Lista para coletar faturas para importação
+    faturas_para_importar = []
 
     try:
         workbook = openpyxl.Workbook()
@@ -112,19 +119,32 @@ def gerar_relatorio_distribuicao(plano_distribuicao: Dict[str, Any],
                 nome_uni_destino = fatura_info.get('nome_unimed_destino')
                 unimed_destino_formatada = _formatar_unimed_destino(cod_uni_destino, nome_uni_destino)
 
+                valor_numerico = _formatar_valor_para_numero(fatura_info.get('valor_total_documento'))
+                
                 linha_dados = [
                     fatura_info.get('numero_fatura', 'N/A'),
                     competencia_fmt,
                     unimed_destino_formatada,
                     _formatar_data_para_relatorio(data_emissao_original),
                     _formatar_data_para_relatorio(fatura_info.get('data_vencimento')),
-                    _formatar_valor_para_numero(fatura_info.get('valor_total_documento')),
+                    valor_numerico,
                     nome_auditor
                 ]
                 sheet.append(linha_dados)
                 
                 cell_valor = sheet.cell(row=sheet.max_row, column=cabecalhos.index("VALOR") + 1)
                 cell_valor.number_format = 'R$ #,##0.00'
+                
+                # Coletar fatura para importação ao banco
+                faturas_para_importar.append({
+                    'nro_fatura': str(fatura_info.get('numero_fatura', '')),
+                    'competencia': competencia_fmt,
+                    'unimed_codigo': cod_uni_destino,
+                    'unimed_nome': nome_uni_destino,
+                    'valor': valor_numerico,
+                    'responsavel': nome_auditor,
+                    'status': 'PENDENTE'
+                })
         
         for col_idx, column in enumerate(sheet.columns, 1):
             max_length = 0
@@ -138,8 +158,32 @@ def gerar_relatorio_distribuicao(plano_distribuicao: Dict[str, Any],
             adjusted_width = (max_length + 2) if max_length > 0 else 12
             sheet.column_dimensions[column_letter].width = adjusted_width
 
+        # Salvar na pasta de distribuição
         workbook.save(filename=caminho_completo_excel)
         logging.info(f"Relatório '{nome_arquivo_excel}' gerado com sucesso em '{caminho_pasta_distribuicao}'.")
+        
+        # ✅ NOVO: Salvar cópia no histórico com timestamp
+        try:
+            historico_dir = os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(os.path.dirname(__file__)))), 'data', 'historico_distribuicao')
+            os.makedirs(historico_dir, exist_ok=True)
+            
+            timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+            nome_historico = f"DISTRIBUICAO_{timestamp}.xlsx"
+            caminho_historico = os.path.join(historico_dir, nome_historico)
+            
+            workbook.save(filename=caminho_historico)
+            logging.info(f"📁 Cópia salva no histórico: {caminho_historico}")
+        except Exception as e:
+            logging.warning(f"Não foi possível salvar cópia no histórico: {e}")
+        
+        # ✅ NOVO: Auto-importar faturas para o banco de consulta
+        try:
+            from src.database.fatura_repository import importar_lote
+            stats = importar_lote(faturas_para_importar, f"Distribuição {datetime.now().strftime('%d/%m/%Y')}")
+            logging.info(f"📊 {stats['criadas']} faturas criadas, {stats['atualizadas']} atualizadas no banco.")
+        except Exception as e:
+            logging.warning(f"Não foi possível importar faturas para o banco: {e}")
+        
         return True, caminho_completo_excel
 
     except Exception as e:
