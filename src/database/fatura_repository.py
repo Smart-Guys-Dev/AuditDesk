@@ -219,3 +219,40 @@ def importar_lote(faturas: List[Dict], origem: str = "Excel") -> Dict:
         return stats
     finally:
         session.close()
+
+
+def get_faturas_por_auditor() -> List[Dict]:
+    """
+    Retorna contagem de faturas agrupadas por auditor/responsável.
+    
+    Returns:
+        Lista de dicionários: [{'auditor': 'Nome', 'total': 100, 'valor': 50000.0}]
+    """
+    session = get_session()
+    try:
+        resultados = session.query(
+            Fatura.responsavel,
+            func.count(Fatura.id).label('total'),
+            func.sum(Fatura.valor).label('valor_total')
+        ).filter(
+            Fatura.responsavel != None,
+            Fatura.responsavel != ''
+        ).group_by(
+            Fatura.responsavel
+        ).order_by(
+            func.count(Fatura.id).desc()
+        ).all()
+        
+        return [
+            {
+                'auditor': r.responsavel or 'Não atribuído',
+                'total': r.total or 0,
+                'valor': r.valor_total or 0.0
+            }
+            for r in resultados
+        ]
+    except Exception as e:
+        print(f"Erro ao obter faturas por auditor: {e}")
+        return []
+    finally:
+        session.close()

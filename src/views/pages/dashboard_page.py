@@ -453,6 +453,50 @@ class PaginaDashboard(QWidget):
         
         layout.addLayout(content_layout)
         
+        # ===== SEÇÃO FATURAS POR AUDITOR =====
+        auditor_section = ModernSectionCard("Faturas por Auditor", "👥")
+        
+        self.auditor_table = QTableWidget()
+        self.auditor_table.setColumnCount(3)
+        self.auditor_table.setHorizontalHeaderLabels(["Auditor", "Qtd Faturas", "Valor Total"])
+        self.auditor_table.verticalHeader().setVisible(False)
+        self.auditor_table.setSelectionMode(QTableWidget.SelectionMode.NoSelection)
+        self.auditor_table.setEditTriggers(QTableWidget.EditTrigger.NoEditTriggers)
+        self.auditor_table.setShowGrid(False)
+        self.auditor_table.setMaximumHeight(200)
+        
+        auditor_header = self.auditor_table.horizontalHeader()
+        auditor_header.setSectionResizeMode(0, QHeaderView.ResizeMode.Stretch)
+        auditor_header.setSectionResizeMode(1, QHeaderView.ResizeMode.Fixed)
+        auditor_header.setSectionResizeMode(2, QHeaderView.ResizeMode.Fixed)
+        self.auditor_table.setColumnWidth(1, 100)
+        self.auditor_table.setColumnWidth(2, 150)
+        
+        self.auditor_table.setStyleSheet(f"""
+            QTableWidget {{
+                background-color: {BG_DARK};
+                color: {TEXT_PRIMARY};
+                border: none;
+                border-radius: 8px;
+                font-size: 13px;
+            }}
+            QTableWidget::item {{
+                padding: 10px 8px;
+                border-bottom: 1px solid {BORDER_COLOR};
+            }}
+            QHeaderView::section {{
+                background-color: {BG_CARD};
+                color: {TEXT_SECONDARY};
+                padding: 10px 8px;
+                border: none;
+                font-weight: 600;
+                font-size: 12px;
+            }}
+        """)
+        
+        auditor_section.add_content(self.auditor_table)
+        layout.addWidget(auditor_section)
+        
         # ===== RODAPÉ COM STATUS =====
         footer_layout = QHBoxLayout()
         footer_layout.setSpacing(20)
@@ -548,6 +592,33 @@ class PaginaDashboard(QWidget):
                 self.card_ultima_exec.update_value("Nunca")
         except:
             self.card_ultima_exec.update_value("--")
+        
+        # Tabela de Faturas por Auditor
+        try:
+            from src.database.fatura_repository import get_faturas_por_auditor
+            auditor_stats = get_faturas_por_auditor()
+            
+            self.auditor_table.setRowCount(len(auditor_stats))
+            
+            for row, stats in enumerate(auditor_stats):
+                # Auditor
+                item_auditor = QTableWidgetItem(stats['auditor'])
+                item_auditor.setForeground(QColor(TEXT_PRIMARY))
+                self.auditor_table.setItem(row, 0, item_auditor)
+                
+                # Quantidade
+                item_qtd = QTableWidgetItem(f"{stats['total']:,}")
+                item_qtd.setTextAlignment(Qt.AlignmentFlag.AlignCenter)
+                item_qtd.setForeground(QColor(UNIMED_GREEN))
+                self.auditor_table.setItem(row, 1, item_qtd)
+                
+                # Valor
+                item_valor = QTableWidgetItem(f"R$ {stats['valor']:,.2f}")
+                item_valor.setTextAlignment(Qt.AlignmentFlag.AlignRight | Qt.AlignmentFlag.AlignVCenter)
+                item_valor.setForeground(QColor(ACCENT_BLUE))
+                self.auditor_table.setItem(row, 2, item_valor)
+        except Exception as e:
+            print(f"Erro ao carregar auditores: {e}")
         
         # Atualizar timestamp
         self.last_update_lbl.setText(f"Última atualização: {datetime.now().strftime('%H:%M:%S')}")

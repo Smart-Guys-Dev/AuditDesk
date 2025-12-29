@@ -12,6 +12,7 @@ from .worker import Worker
 from .history_page import PaginaHistorico
 from .dashboard_page import PaginaDashboard
 from src.views.pages.consulta_faturas_page import PaginaConsultaFaturas
+from src.views.pages.importar_relatorios_page import PaginaImportarRelatorios
 from src.utils import resource_path
 from src.ui_helpers import show_friendly_error, show_toast, show_warning
 from src.app_settings import app_settings
@@ -1037,6 +1038,11 @@ class MainWindow(QMainWindow):
         btn_consulta_faturas.setCursor(Qt.CursorShape.PointingHandCursor)
         sidebar_layout.addWidget(btn_consulta_faturas)
         
+        btn_importar_relatorios = QPushButton("  📥  Importar Relatórios")
+        btn_importar_relatorios.setCheckable(True)
+        btn_importar_relatorios.setStyleSheet(sidebar_btn_style)
+        btn_importar_relatorios.setCursor(Qt.CursorShape.PointingHandCursor)
+        sidebar_layout.addWidget(btn_importar_relatorios)
         # Botão de Gestão de Usuários (Apenas Admin)
         self.btn_gestao_usuarios = None
         if self.user and self.user.role == 'ADMIN':
@@ -1150,12 +1156,16 @@ class MainWindow(QMainWindow):
         # Página de Consulta de Faturas
         self.page_consulta_faturas = PaginaConsultaFaturas()
         self.pages_widget.addWidget(self.page_consulta_faturas)
+        
+        # Página de Importar Relatórios
+        self.page_importar_relatorios = PaginaImportarRelatorios()
+        self.pages_widget.addWidget(self.page_importar_relatorios)
 
         main_layout.addWidget(sidebar_widget)
         main_layout.addWidget(self.pages_widget)
 
         # Conectar botões
-        botoes = [btn_painel_principal, btn_processador_xml, btn_validador_tiss, btn_atualizar_hash, btn_historico, btn_relatorios, btn_consulta_faturas]
+        botoes = [btn_painel_principal, btn_processador_xml, btn_validador_tiss, btn_atualizar_hash, btn_historico, btn_relatorios, btn_consulta_faturas, btn_importar_relatorios]
         btn_painel_principal.clicked.connect(lambda: self.mudar_pagina(0, botoes))
         btn_processador_xml.clicked.connect(lambda: self.mudar_pagina(1, botoes))
         btn_validador_tiss.clicked.connect(lambda: self.mudar_pagina(2, botoes))
@@ -1163,6 +1173,7 @@ class MainWindow(QMainWindow):
         btn_historico.clicked.connect(lambda: self.mudar_pagina(4, botoes))
         btn_relatorios.clicked.connect(lambda: self.mudar_pagina(5, botoes))
         btn_consulta_faturas.clicked.connect(lambda: self.mudar_pagina(6, botoes))
+        btn_importar_relatorios.clicked.connect(lambda: self.mudar_pagina(7, botoes))
         
         # Configurar atalhos de teclado
         self.setup_keyboard_shortcuts()
