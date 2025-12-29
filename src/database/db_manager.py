@@ -3,6 +3,7 @@ from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker, scoped_session
 from datetime import datetime
 from .models import Base, ExecutionLog, FileLog, User, ROIMetrics
+from .models_fatura import Fatura, FaturaHistorico  # Modelos de faturas para consulta
 
 # ✅ SEGURANÇA: Importar gerenciador seguro de senhas
 from src.infrastructure.security.password_manager import PasswordManager

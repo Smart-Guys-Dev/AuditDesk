@@ -11,6 +11,7 @@ from .workflow_controller import WorkflowController
 from .worker import Worker
 from .history_page import PaginaHistorico
 from .dashboard_page import PaginaDashboard
+from src.views.pages.consulta_faturas_page import PaginaConsultaFaturas
 from src.utils import resource_path
 from src.ui_helpers import show_friendly_error, show_toast, show_warning
 from src.app_settings import app_settings
@@ -1029,6 +1030,13 @@ class MainWindow(QMainWindow):
         sidebar_layout.addWidget(btn_historico)
         sidebar_layout.addWidget(btn_relatorios)
         
+        # Botão Consulta de Faturas
+        btn_consulta_faturas = QPushButton("  🔍  Consulta Faturas")
+        btn_consulta_faturas.setCheckable(True)
+        btn_consulta_faturas.setStyleSheet(sidebar_btn_style)
+        btn_consulta_faturas.setCursor(Qt.CursorShape.PointingHandCursor)
+        sidebar_layout.addWidget(btn_consulta_faturas)
+        
         # Botão de Gestão de Usuários (Apenas Admin)
         self.btn_gestao_usuarios = None
         if self.user and self.user.role == 'ADMIN':
@@ -1138,18 +1146,23 @@ class MainWindow(QMainWindow):
         self.pages_widget.addWidget(self.page_hash)
         self.pages_widget.addWidget(self.page_historico)
         self.pages_widget.addWidget(self.page_relatorios)
+        
+        # Página de Consulta de Faturas
+        self.page_consulta_faturas = PaginaConsultaFaturas()
+        self.pages_widget.addWidget(self.page_consulta_faturas)
 
         main_layout.addWidget(sidebar_widget)
         main_layout.addWidget(self.pages_widget)
 
         # Conectar botões
-        botoes = [btn_painel_principal, btn_processador_xml, btn_validador_tiss, btn_atualizar_hash, btn_historico, btn_relatorios]
+        botoes = [btn_painel_principal, btn_processador_xml, btn_validador_tiss, btn_atualizar_hash, btn_historico, btn_relatorios, btn_consulta_faturas]
         btn_painel_principal.clicked.connect(lambda: self.mudar_pagina(0, botoes))
         btn_processador_xml.clicked.connect(lambda: self.mudar_pagina(1, botoes))
         btn_validador_tiss.clicked.connect(lambda: self.mudar_pagina(2, botoes))
         btn_atualizar_hash.clicked.connect(lambda: self.mudar_pagina(3, botoes))
         btn_historico.clicked.connect(lambda: self.mudar_pagina(4, botoes))
         btn_relatorios.clicked.connect(lambda: self.mudar_pagina(5, botoes))
+        btn_consulta_faturas.clicked.connect(lambda: self.mudar_pagina(6, botoes))
         
         # Configurar atalhos de teclado
         self.setup_keyboard_shortcuts()
