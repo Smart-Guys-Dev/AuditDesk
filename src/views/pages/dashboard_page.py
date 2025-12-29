@@ -336,12 +336,12 @@ class PaginaDashboard(QWidget):
         )
         kpi_layout.addWidget(self.card_glosas, 0, 1)
         
-        self.card_potencial = ModernKPICard(
-            "Economia Potencial", "R$ 0,00", "📈",
+        self.card_total_faturado = ModernKPICard(
+            "Total Faturado", "R$ 0,00", "📊",
             gradient_start=ACCENT_YELLOW, gradient_end="#D4A72C",
             size="normal"
         )
-        kpi_layout.addWidget(self.card_potencial, 0, 2)
+        kpi_layout.addWidget(self.card_total_faturado, 0, 2)
         
         self.card_regras = ModernKPICard(
             "Regras Ativas", "0", "📋",
@@ -508,7 +508,18 @@ class PaginaDashboard(QWidget):
         # ROW 1 - Métricas financeiras
         self.card_total.update_value(f"R$ {roi_stats['roi_total']:,.2f}")
         self.card_glosas.update_value(f"R$ {roi_stats['total_saved']:,.2f}")
-        self.card_potencial.update_value(f"R$ {roi_stats['roi_potencial']:,.2f}")
+        
+        # Total Faturado - buscar das faturas importadas
+        try:
+            from src.database.fatura_repository import get_estatisticas_faturas
+            fatura_stats = get_estatisticas_faturas()
+            valor_faturado = fatura_stats.get('valor_total', 0)
+            if valor_faturado > 0:
+                self.card_total_faturado.update_value(f"R$ {valor_faturado:,.2f}")
+            else:
+                self.card_total_faturado.update_value("Importar")
+        except:
+            self.card_total_faturado.update_value("--")
         
         # Regras Ativas - buscar do banco de regras
         try:
