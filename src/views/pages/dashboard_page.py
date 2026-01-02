@@ -312,8 +312,31 @@ class PaginaDashboard(QWidget):
         """)
         btn_refresh.clicked.connect(self.load_data)
         
+        # Botão resetar dados
+        btn_reset = QPushButton("🗑️ Resetar Dados")
+        btn_reset.setCursor(Qt.CursorShape.PointingHandCursor)
+        btn_reset.setStyleSheet(f"""
+            QPushButton {{
+                background-color: #DC3545;
+                color: white;
+                padding: 12px 20px;
+                border-radius: 10px;
+                font-weight: 600;
+                font-size: 13px;
+                border: none;
+            }}
+            QPushButton:hover {{
+                background-color: #C82333;
+            }}
+            QPushButton:pressed {{
+                background-color: #A71D2A;
+            }}
+        """)
+        btn_reset.clicked.connect(self.resetar_dados)
+        
         header_layout.addWidget(filter_container)
         header_layout.addWidget(btn_refresh)
+        header_layout.addWidget(btn_reset)
         
         layout.addLayout(header_layout)
 
@@ -716,3 +739,55 @@ class PaginaDashboard(QWidget):
         
         self.figure.tight_layout()
         self.canvas.draw()
+    
+    def resetar_dados(self):
+        """Reseta os dados de estatísticas após confirmação do usuário"""
+        from PyQt6.QtWidgets import QMessageBox
+        
+        # Diálogo de confirmação
+        msg = QMessageBox()
+        msg.setIcon(QMessageBox.Icon.Warning)
+        msg.setWindowTitle("Confirmar Reset")
+        msg.setText("⚠️ Tem certeza que deseja resetar todos os dados?")
+        msg.setInformativeText(
+            "Isso irá apagar:\n"
+            "• Todas as execuções de regras\n"
+            "• Todas as faturas importadas\n"
+            "• Todo o histórico\n\n"
+            "Esta ação NÃO pode ser desfeita!"
+        )
+        msg.setStandardButtons(QMessageBox.StandardButton.Yes | QMessageBox.StandardButton.No)
+        msg.setDefaultButton(QMessageBox.StandardButton.No)
+        
+        if msg.exec() == QMessageBox.StandardButton.Yes:
+            try:
+                from src.database.db_manager import get_session
+                from src.database.models import RuleExecution
+                from src.database.models_fatura import Fatura, FaturaHistorico
+                from sqlalchemy import delete
+                
+                session = get_session()
+                
+                # Limpar tabelas
+                session.execute(delete(FaturaHistorico))
+                session.execute(delete(Fatura))
+                session.execute(delete(RuleExecution))
+                session.commit()
+                session.close()
+                
+                QMessageBox.information(
+                    self, 
+                    "Sucesso", 
+                    "✅ Dados resetados com sucesso!\n\nO dashboard será atualizado."
+                )
+                
+                # Recarregar dados
+                self.load_data()
+                
+            except Exception as e:
+                QMessageBox.critical(
+                    self, 
+                    "Erro", 
+                    f"❌ Falha ao resetar dados:\n{str(e)}"
+                )
+
