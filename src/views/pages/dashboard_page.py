@@ -762,7 +762,7 @@ class PaginaDashboard(QWidget):
         if msg.exec() == QMessageBox.StandardButton.Yes:
             try:
                 from src.database.db_manager import get_session
-                from src.database.models import RuleExecution
+                from src.database.models import ExecutionLog, ROIMetrics, FileLog
                 from src.database.models_fatura import Fatura, FaturaHistorico
                 from sqlalchemy import delete
                 
@@ -771,7 +771,9 @@ class PaginaDashboard(QWidget):
                 # Limpar tabelas
                 session.execute(delete(FaturaHistorico))
                 session.execute(delete(Fatura))
-                session.execute(delete(RuleExecution))
+                session.execute(delete(ExecutionLog))
+                session.execute(delete(ROIMetrics))
+                session.execute(delete(FileLog))
                 session.commit()
                 session.close()
                 
