@@ -738,5 +738,85 @@
       "razao": "Participação incorreta causa glosa do item pela operadora",
       "contabilizar": true
     }
+  },
+  {
+    "id": "REGRA_PARTICIPACAO_30602467_COM_ANESTESIA",
+    "descricao": "Garante tp_Participacao = '06' para o serviço 30602467 quando houver Porte Anestésico.",
+    "ativo": true,
+    "condicoes": {
+      "tipo_elemento": "procedimentosExecutados",
+      "condicao_multipla": {
+        "tipo": "AND",
+        "sub_condicoes": [
+          {
+            "condicao_tag_valor": {
+              "xpath": "./ptu:procedimentos/ptu:cd_Servico",
+              "valor_permitido": [
+                "30602467"
+              ]
+            }
+          },
+          {
+            "condicao_tag_valor": {
+              "xpath": "./ptu:cd_PorteAnestesico",
+              "tipo_comparacao": "existe"
+            }
+          }
+        ]
+      }
+    },
+    "acao": {
+      "tipo_acao": "garantir_tag_com_conteudo",
+      "tag_alvo": "./ptu:equipe_Profissional/ptu:tp_Participacao",
+      "novo_conteudo": "06",
+      "posicao_insercao": "primeiro_filho",
+      "tag_pai_referencia": "./ptu:equipe_Profissional"
+    },
+    "metadata_glosa": {
+      "categoria": "GLOSA_ITEM",
+      "impacto": "MEDIO",
+      "razao": "Participação incorreta causa glosa do item pela operadora",
+      "contabilizar": true
+    }
+  },
+  {
+    "id": "REGRA_PARTICIPACAO_30602467_SEM_ANESTESIA",
+    "descricao": "Garante tp_Participacao = '00' para o serviço 30602467 quando NÃO houver Porte Anestésico.",
+    "ativo": true,
+    "condicoes": {
+      "tipo_elemento": "procedimentosExecutados",
+      "condicao_multipla": {
+        "tipo": "AND",
+        "sub_condicoes": [
+          {
+            "condicao_tag_valor": {
+              "xpath": "./ptu:procedimentos/ptu:cd_Servico",
+              "valor_permitido": [
+                "30602467"
+              ]
+            }
+          },
+          {
+            "condicao_tag_valor": {
+              "xpath": "./ptu:cd_PorteAnestesico",
+              "tipo_comparacao": "nao_existe"
+            }
+          }
+        ]
+      }
+    },
+    "acao": {
+      "tipo_acao": "garantir_tag_com_conteudo",
+      "tag_alvo": "./ptu:equipe_Profissional/ptu:tp_Participacao",
+      "novo_conteudo": "00",
+      "posicao_insercao": "primeiro_filho",
+      "tag_pai_referencia": "./ptu:equipe_Profissional"
+    },
+    "metadata_glosa": {
+      "categoria": "GLOSA_ITEM",
+      "impacto": "MEDIO",
+      "razao": "Participação incorreta causa glosa do item pela operadora",
+      "contabilizar": true
+    }
   }
 ]
