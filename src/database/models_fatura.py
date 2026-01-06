@@ -1,5 +1,5 @@
 """
-AuditPlus v2.0 - Modelos de Faturas para Consulta
+Glox - Modelos de Faturas para Consulta
 
 Tabelas:
 - faturas: Dados principais das faturas importadas
@@ -40,8 +40,8 @@ class Fatura(Base):
     data_envio = Column(DateTime)
     data_importacao = Column(DateTime, default=datetime.utcnow)
     
-    # Tracking do AuditPlus
-    corrigida_auditplus = Column(Boolean, default=False)
+    # Tracking do Glox
+    corrigida_Glox = Column(Boolean, default=False)
     arquivo_origem = Column(String(200))
     
     # Relacionamentos
@@ -72,7 +72,7 @@ class Fatura(Base):
             'competencia': self.competencia or "",
             'responsavel': self.responsavel or "",
             'data_envio': self.data_envio.strftime("%d/%m/%Y %H:%M") if self.data_envio else None,
-            'corrigida_auditplus': self.corrigida_auditplus
+            'corrigida_Glox': self.corrigida_Glox
         }
 
 
@@ -88,7 +88,7 @@ class FaturaHistorico(Base):
     
     data_hora = Column(DateTime, default=datetime.utcnow)
     acao = Column(String(100), nullable=False)  # "Importada do SGU", "Enviada para NCMB", etc.
-    origem = Column(String(50))  # SGU, NCMB, AuditPlus, Manual
+    origem = Column(String(50))  # SGU, NCMB, Glox, Manual
     detalhes = Column(Text)  # Informações adicionais
     
     # Relacionamento

@@ -56,14 +56,14 @@ class TOTPManager:
         return secret
     
     @staticmethod
-    def get_provisioning_uri(secret: str, username: str, issuer: str = "AuditPlus") -> Optional[str]:
+    def get_provisioning_uri(secret: str, username: str, issuer: str = "Glox") -> Optional[str]:
         """
         Gera URI de provisionamento para QR code.
         
         Args:
             secret: Secret key do usuário
             username: Nome de usuário
-            issuer: Nome do emissor (padrão: AuditPlus)
+            issuer: Nome do emissor (padrão: Glox)
             
         Returns:
             URI otpauth:// ou None

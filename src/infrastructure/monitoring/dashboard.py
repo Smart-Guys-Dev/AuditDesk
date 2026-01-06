@@ -1,5 +1,5 @@
 """
-Dashboard de monitoramento para AuditPlus v2.0.
+Dashboard de monitoramento para Glox.
 
 Coleta e exibe métricas operacionais em tempo real.
 """
@@ -109,7 +109,7 @@ def generate_dashboard(metrics_file: str = "metrics.jsonl", output_html: str = "
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AuditPlus v2.0 - Dashboard</title>
+    <title>Glox - Dashboard</title>
     <style>
         * {{ margin: 0; padding: 0; box-sizing: border-box; }}
         body {{ font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #f5f7fa; padding: 20px; }}
@@ -132,7 +132,7 @@ def generate_dashboard(metrics_file: str = "metrics.jsonl", output_html: str = "
 </head>
 <body>
     <div class="container">
-        <h1>📊 AuditPlus v2.0 - Dashboard de Monitoramento</h1>
+        <h1>📊 Glox - Dashboard de Monitoramento</h1>
         
         <div class="metrics-grid">
             <div class="metric-card">
@@ -199,7 +199,7 @@ def generate_dashboard(metrics_file: str = "metrics.jsonl", output_html: str = "
         
         <div class="footer">
             <p>Última atualização: {now}</p>
-            <p>AuditPlus v2.0 - Desenvolvido por Pedro Lucas</p>
+            <p>Glox - Desenvolvido por Pedro Lucas</p>
         </div>
     </div>
 </body>

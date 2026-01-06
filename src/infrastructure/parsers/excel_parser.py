@@ -1,5 +1,5 @@
 """
-AuditPlus v2.0 - Parser de Excel para Importação
+Glox - Parser de Excel para Importação
 
 Parseia arquivos Excel do BI e converte para formato de fatura.
 Suporta: A500 enviados, Distribuição de Faturas, Faturas Emitidas

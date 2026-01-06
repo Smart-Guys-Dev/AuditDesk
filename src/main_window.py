@@ -869,7 +869,7 @@ class MainWindow(QMainWindow):
         user_id = user.id if user else None
         self.controller = WorkflowController(user_id=user_id)
         self.user = user
-        self.setWindowTitle("Audit+ v2.0")
+        self.setWindowTitle("Glox")
         
         # Definir ícone da aplicação
         # Usando resource_path para funcionar no executável

@@ -1,13 +1,13 @@
-# AuditPlus v2.0 - Documentação do Sistema
+# Glox - Documentação do Sistema
 
 ## Visão Geral
 
-O **AuditPlus** é um sistema desktop para auditoria e validação de arquivos XML no padrão PTU (Padrão TISS Unimed). O sistema aplica regras de negócio automaticamente para corrigir inconsistências antes do envio às operadoras, evitando glosas.
+O **Glox** é um sistema desktop para auditoria e validação de arquivos XML no padrão PTU (Padrão TISS Unimed). O sistema aplica regras de negócio automaticamente para corrigir inconsistências antes do envio às operadoras, evitando glosas.
 
 ## Arquitetura
 
 ```
-AuditPlusv2.0/
+Gloxv2.0/
 ├── src/
 │   ├── business/rules/       # Motor de regras
 │   ├── config/               # Configurações e regras JSON
@@ -154,7 +154,7 @@ Edite `src/config/regras/cnes.json`:
 
 ```powershell
 # Ativar ambiente virtual
-& c:/Users/pedro.freitas/AuditPlusv2.0/venv/Scripts/Activate.ps1
+& c:/Users/pedro.freitas/Gloxv2.0/venv/Scripts/Activate.ps1
 
 # Executar aplicação
 python main.py

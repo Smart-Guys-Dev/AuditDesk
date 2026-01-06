@@ -1,5 +1,5 @@
 """
-AuditPlus v2.0 - Modelos de Regras (SQLite)
+Glox - Modelos de Regras (SQLite)
 
 Nomenclatura Padrão:
 - Tabela: audit_rules (regras principais)

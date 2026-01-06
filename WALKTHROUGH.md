@@ -8,7 +8,7 @@
 
 ## 📊 **RESUMO EXECUTIVO**
 
-Implementação de sistema de relatório gerencial que quantifica **valores REAIS** de glosas evitadas pelo AuditPlus, substituindo estimativas fixas por valores extraídos diretamente dos XMLs TISS.
+Implementação de sistema de relatório gerencial que quantifica **valores REAIS** de glosas evitadas pelo Glox, substituindo estimativas fixas por valores extraídos diretamente dos XMLs TISS.
 
 **Objetivo Alcançado:**
 - ✅ Categorização de regras (GLOSA_GUIA, GLOSA_ITEM, OTIMIZAÇÃO)
@@ -171,7 +171,7 @@ WIP: Relatório Gerencial - Fases 1-3 (60% completo)
 
 ## ✅ **FASE 3: TRACKING COM VALORES REAIS**
 
-### 3.1. Extrator de Valores ([extractor.py](file:///c:/Users/pedro.freitas/AuditPlusv2.0/src/relatorio_glosas/extractor.py))
+### 3.1. Extrator de Valores ([extractor.py](file:///c:/Users/pedro.freitas/Gloxv2.0/src/relatorio_glosas/extractor.py))
 
 **Funções Implementadas:**
 
@@ -194,7 +194,7 @@ extrair_seq_item(procedimento)
   → Retorna: int
 ```
 
-### 3.2. Tracker Principal ([tracker.py](file:///c:/Users/pedro.freitas/AuditPlusv2.0/src/relatorio_glosas/tracker.py))
+### 3.2. Tracker Principal ([tracker.py](file:///c:/Users/pedro.freitas/Gloxv2.0/src/relatorio_glosas/tracker.py))
 
 **Lógica de Negócio:**
 
@@ -230,7 +230,7 @@ processar_correcao(execution_id, file_name, xml_tree, rule, elemento):
 
 ### 3.3. Integração no Rule Engine
 
-**Arquivo:** [rule_engine.py](file:///c:/Users/pedro.freitas/AuditPlusv2.0/src/rule_engine.py) (linhas 13-17, 292-303)
+**Arquivo:** [rule_engine.py](file:///c:/Users/pedro.freitas/Gloxv2.0/src/rule_engine.py) (linhas 13-17, 292-303)
 
 ```python
 # Import (linha 13-17)
@@ -262,7 +262,7 @@ Integrar tracking de glosas no rule_engine
 
 ## ✅ **FASE 4: GERADOR DE RELATÓRIOS**
 
-### 4.1. Reporter Module ([reporter.py](file:///c:/Users/pedro.freitas/AuditPlusv2.0/src/relatorio_glosas/reporter.py))
+### 4.1. Reporter Module ([reporter.py](file:///c:/Users/pedro.freitas/Gloxv2.0/src/relatorio_glosas/reporter.py))
 
 **Funções:**
 
@@ -327,7 +327,7 @@ Guia: 257855220
 
 ### 4.3. Script de Teste
 
-[teste_relatorio.py](file:///c:/Users/pedro.freitas/AuditPlusv2.0/scripts/teste_relatorio.py) - Gera relatório da última execução
+[teste_relatorio.py](file:///c:/Users/pedro.freitas/Gloxv2.0/scripts/teste_relatorio.py) - Gera relatório da última execução
 
 ### Commits:
 ```
@@ -468,4 +468,4 @@ DEPOIS: Conta R$ 2.150,00 (real) ✅
 
 **Desenvolvido por:** Giga (Antigravity AI)  
 **Para:** Pedro Freitas  
-**Projeto:** AuditPlus v2.0 - Relatório Gerencial de Glosas
+**Projeto:** Glox - Relatório Gerencial de Glosas

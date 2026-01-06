@@ -1,4 +1,4 @@
-# 🧪 Plano de Homologação - AuditPlus v2.0
+# 🧪 Plano de Homologação - Glox
 
 ## Estratégia de Rollout Gradual
 

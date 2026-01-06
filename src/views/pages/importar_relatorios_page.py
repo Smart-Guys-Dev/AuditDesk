@@ -1,5 +1,5 @@
 """
-AuditPlus v2.0 - Página de Importação de Relatórios
+Glox - Página de Importação de Relatórios
 
 Permite ao auditor importar os 3 tipos de relatórios Excel
 para as pastas padrão do sistema.

@@ -1,5 +1,5 @@
 """
-AuditPlus v2.0 - Página de Consulta de Faturas
+Glox - Página de Consulta de Faturas
 
 Permite buscar faturas por número e visualizar status/histórico.
 Também permite importar dados de planilhas Excel.
@@ -174,9 +174,9 @@ class PaginaConsultaFaturas(QWidget):
         self.lbl_envio.setStyleSheet("color: #D8DEE9; font-size: 14px;")
         info_layout.addWidget(self.lbl_envio)
         
-        self.lbl_auditplus = QLabel()
-        self.lbl_auditplus.setStyleSheet("color: #88C0D0; font-size: 14px;")
-        info_layout.addWidget(self.lbl_auditplus)
+        self.lbl_Glox = QLabel()
+        self.lbl_Glox.setStyleSheet("color: #88C0D0; font-size: 14px;")
+        info_layout.addWidget(self.lbl_Glox)
         
         resultado_layout.addWidget(self.info_frame)
         
@@ -284,10 +284,10 @@ class PaginaConsultaFaturas(QWidget):
         self.lbl_responsavel.setText(f"👤 Responsável: {dados.get('responsavel', 'N/A')}")
         self.lbl_envio.setText(f"📤 Data Envio: {dados.get('data_envio') or 'Não enviada'}")
         
-        if dados.get('corrigida_auditplus'):
-            self.lbl_auditplus.setText("✅ Corrigida pelo AuditPlus")
+        if dados.get('corrigida_Glox'):
+            self.lbl_Glox.setText("✅ Corrigida pelo Glox")
         else:
-            self.lbl_auditplus.setText("")
+            self.lbl_Glox.setText("")
         
         # Histórico
         historico = dados.get('historico', [])
@@ -369,7 +369,7 @@ Por Status:
 
 Valor Total: R$ {stats['valor_total']:,.2f}
 
-Corrigidas pelo AuditPlus: {stats['corrigidas_auditplus']:,}
+Corrigidas pelo Glox: {stats['corrigidas_Glox']:,}
 Taxa de Correção: {stats['taxa_correcao']:.1f}%
 """
         QMessageBox.information(self, "Estatísticas", msg)

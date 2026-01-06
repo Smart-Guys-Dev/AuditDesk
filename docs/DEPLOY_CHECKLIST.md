@@ -1,4 +1,4 @@
-# 🚀 Checklist de Deploy - AuditPlus v2.0
+# 🚀 Checklist de Deploy - Glox
 
 ## ✅ Pré-Deploy (1 dia antes)
 

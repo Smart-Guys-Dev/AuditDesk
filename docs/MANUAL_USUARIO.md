@@ -1,4 +1,4 @@
-# 📖 Manual do Usuário - AuditPlus v2.0
+# 📖 Manual do Usuário - Glox
 
 **Sistema de auditoria de contas médicas e validação de arquivos PTU/XML**
 
@@ -6,7 +6,7 @@
 
 ## 🎯 Visão Geral
 
-O AuditPlus v2.0 processa automaticamente arquivos XML PTU/TISS, aplicando 105 regras de validação e correção para evitar glosas e rejeições.
+O Glox processa automaticamente arquivos XML PTU/TISS, aplicando 105 regras de validação e correção para evitar glosas e rejeições.
 
 ---
 

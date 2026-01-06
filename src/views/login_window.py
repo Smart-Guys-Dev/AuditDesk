@@ -23,7 +23,7 @@ class LoginWindow(QWidget):
 
     def __init__(self):
         super().__init__()
-        self.setWindowTitle("Audit+ Login")
+        self.setWindowTitle("Glox - Login")
         self.setFixedSize(420, 580)
         self.setWindowFlags(Qt.WindowType.FramelessWindowHint)
         self.setAttribute(Qt.WidgetAttribute.WA_TranslucentBackground)

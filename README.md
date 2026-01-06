@@ -74,7 +74,7 @@ python main.py
 ## 📁 Estrutura do Projeto
 
 ```
-AuditPlusv2.0/
+Gloxv2.0/
 ├── main.py                 # Ponto de entrada da aplicação
 ├── requirements.txt        # Dependências Python
 ├── src/
@@ -120,4 +120,4 @@ Para suporte ou dúvidas, entre em contato com Pedro Lucas Lima de Freitas.
 ---
 
 **Audit+ v2.0** - Desenvolvido por Pedro Lucas Lima de Freitas
-# AuditPlus_Desktop
+# Glox_Desktop

@@ -1,12 +1,12 @@
 # ❓ FAQ - Perguntas Frequentes
 
-## AuditPlus v2.0
+## Glox
 
 ---
 
 ## Geral
 
-**Q: O que é o AuditPlus v2.0?**  
+**Q: O que é o Glox?**  
 A: Sistema automatizado de auditoria de contas médicas que valida e corrige arquivos XML PTU/TISS, aplicando 105 regras para evitar glosas.
 
 **Q: Quais arquivos posso processar?**  

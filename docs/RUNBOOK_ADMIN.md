@@ -1,4 +1,4 @@
-# 🔧 Runbook Operacional - AuditPlus v2.0
+# 🔧 Runbook Operacional - Glox
 
 **Para Administradores e Equipe de TI**
 
@@ -9,7 +9,7 @@
 ### Iniciar Sistema
 
 ```bash
-cd C:\Users\pedro.freitas\AuditPlusv2.0
+cd C:\Users\pedro.freitas\Gloxv2.0
 python main.py
 ```
 
@@ -148,7 +148,7 @@ source venv/bin/activate
 Arquivos críticos para backup:
 - `src/config/regras_grupo_*.json`
 - `src/config/.versions/` (histórico)
-- `database/auditplus.db`
+- `database/Glox.db`
 
 ```bash
 # Backup manual

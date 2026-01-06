@@ -1,5 +1,5 @@
 """
-AuditPlus v2.0 - Repositório de Regras
+Glox - Repositório de Regras
 
 Gerencia operações CRUD para regras no banco SQLite.
 Inclui versionamento automático e histórico de alterações.

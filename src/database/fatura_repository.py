@@ -1,5 +1,5 @@
 """
-AuditPlus v2.0 - Repositório de Faturas
+Glox - Repositório de Faturas
 
 Funções para consulta e gerenciamento de faturas importadas.
 """
@@ -96,7 +96,7 @@ def adicionar_historico(nro_fatura: str, acao: str, origem: str = None, detalhes
     Args:
         nro_fatura: Número da fatura
         acao: Descrição da ação (ex: "Enviada para NCMB")
-        origem: Sistema de origem (SGU, NCMB, AuditPlus)
+        origem: Sistema de origem (SGU, NCMB, Glox)
         detalhes: Informações adicionais
     """
     session = get_session()
@@ -142,16 +142,16 @@ def get_estatisticas_faturas() -> Dict:
         
         valor_total = session.query(func.sum(Fatura.valor)).scalar() or 0
         
-        corrigidas_auditplus = session.query(func.count(Fatura.id)).filter(
-            Fatura.corrigida_auditplus == True
+        corrigidas_Glox = session.query(func.count(Fatura.id)).filter(
+            Fatura.corrigida_Glox == True
         ).scalar() or 0
         
         return {
             'total': total,
             'por_status': por_status,
             'valor_total': valor_total,
-            'corrigidas_auditplus': corrigidas_auditplus,
-            'taxa_correcao': (corrigidas_auditplus / total * 100) if total > 0 else 0
+            'corrigidas_Glox': corrigidas_Glox,
+            'taxa_correcao': (corrigidas_Glox / total * 100) if total > 0 else 0
         }
     except Exception as e:
         print(f"Erro ao obter estatísticas: {e}")
