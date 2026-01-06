@@ -60,7 +60,7 @@ class LoginWindow(QWidget):
         card_layout.setSpacing(18)
 
         # ===== LOGO / TÍTULO =====
-        lbl_logo = QLabel("Audit+")
+        lbl_logo = QLabel("Glox")
         lbl_logo.setAlignment(Qt.AlignmentFlag.AlignCenter)
         lbl_logo.setStyleSheet(f"""
             font-size: 48px; 
@@ -70,7 +70,7 @@ class LoginWindow(QWidget):
             font-family: 'Segoe UI', Arial, sans-serif;
         """)
         
-        lbl_subtitle = QLabel("Sistema de Auditoria e Validação")
+        lbl_subtitle = QLabel("Validação e Correção PTU/TISS")
         lbl_subtitle.setAlignment(Qt.AlignmentFlag.AlignCenter)
         lbl_subtitle.setStyleSheet(f"""
             font-size: 12px; 
