@@ -9,17 +9,43 @@ venv/
 .env
 .venv/
 
+# Build artifacts
+*.egg-info/
+build/
+dist/
+*.spec
+*.egg
+
 # VS Code
 .vscode/
 
-# Logs
+# Logs e debug
 *.log
+debug_hash.txt
+last_crash.txt
+test_output.txt
 
-# AuditPlus specific
+# Relatórios temporários
+relatorio_exec_*.json
+relatorio_exec_*.txt
+relatorio_classificacao_glosas.txt
+
+# Database local (não versionar dados reais)
+*.db
+
+# Cache
+.pytest_cache/
+.mypy_cache/
+.coverage
+htmlcov/
+
+# Glox specific
 tmp/
-dist/
-build/
-*.spec
 Backup/
 Distribuição/
 Correção XML/
+PASTA TESTE DOCS/
+
+# OS
+.DS_Store
+Thumbs.db
