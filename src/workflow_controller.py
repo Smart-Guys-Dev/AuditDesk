@@ -3,6 +3,7 @@
 import os
 import shutil
 import tempfile
+import hashlib
 import lxml.etree as etree
 from typing import Callable, List, Optional
 
@@ -10,6 +11,14 @@ from . import (data_manager, distribution_engine, file_manager,
                hash_calculator, report_generator, xml_parser,
                rule_engine)
 from .database import db_manager
+from .models.repositories.execution_repository import ExecutionRepository
+
+
+def calculate_file_hash(file_path: str) -> str:
+    """Calcula o hash MD5 do conteúdo de um arquivo."""
+    with open(file_path, 'rb') as f:
+        return hashlib.md5(f.read()).hexdigest()
+
 
 class WorkflowController:
     VALOR_MINIMO_GUIA = 25000.0
@@ -189,11 +198,24 @@ class WorkflowController:
             )
             log(f"INFO: Execução ID {self.current_execution_id} criada.")
             
+            # Repositório para verificar duplicatas
+            exec_repo = ExecutionRepository()
+            
             modificados = 0
+            pulados = 0
             
             for xml_file in xml_files:
                 nome_arquivo = os.path.basename(xml_file)
                 log(f"--- Validando: {nome_arquivo} ---")
+                
+                # Calcular hash do arquivo para deduplicação
+                file_hash = calculate_file_hash(xml_file)
+                
+                # Verificar se já foi processado
+                if exec_repo.is_file_processed(file_hash):
+                    log(f"⏭️ PULADO: Arquivo já processado anteriormente.")
+                    pulados += 1
+                    continue
                 
                 xml_tree = engine.xml_reader.load_xml_tree(xml_file)
                 if not xml_tree: 
@@ -204,10 +226,31 @@ class WorkflowController:
                     engine.file_handler.save_xml_tree(xml_tree, xml_file)
                     log(f"INFO: Arquivo modificado e salvo.")
                     modificados += 1
+                    
+                    # Registrar arquivo processado com hash
+                    db_manager.log_file_processing(
+                        execution_id=self.current_execution_id,
+                        file_name=nome_arquivo,
+                        file_path=xml_file,
+                        file_hash=file_hash,
+                        status='SUCCESS'
+                    )
                 else:
                     log("INFO: Nenhuma regra aplicável encontrada.")
+                    # Registrar mesmo sem modificações
+                    db_manager.log_file_processing(
+                        execution_id=self.current_execution_id,
+                        file_name=nome_arquivo,
+                        file_path=xml_file,
+                        file_hash=file_hash,
+                        status='SUCCESS',
+                        message='Nenhuma regra aplicada'
+                    )
             
-            msg_final = f"Validação concluída. {modificados} de {len(xml_files)} arquivo(s) foram modificados."
+            if pulados > 0:
+                msg_final = f"Validação concluída. {modificados} modificado(s), {pulados} pulado(s) (já processados)."
+            else:
+                msg_final = f"Validação concluída. {modificados} de {len(xml_files)} arquivo(s) foram modificados."
             log(f"SUCESSO: {msg_final}")
             
             # Finalizar registro de execução

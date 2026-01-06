@@ -121,7 +121,7 @@ def log_execution_end(execution_id: int, status: str, success_count: int, error_
     finally:
         session.close()
 
-def log_file_processed(execution_id: int, file_name: str, file_path: str, status: str, message: str = None):
+def log_file_processed(execution_id: int, file_name: str, file_path: str, status: str, message: str = None, file_hash: str = None):
     """Registra o processamento de um arquivo individual."""
     if execution_id == -1: return
 
@@ -131,6 +131,7 @@ def log_file_processed(execution_id: int, file_name: str, file_path: str, status
             execution_id=execution_id,
             file_name=file_name,
             file_path=file_path,
+            file_hash=file_hash,
             status=status,
             message=message
         )
@@ -141,6 +142,11 @@ def log_file_processed(execution_id: int, file_name: str, file_path: str, status
         session.rollback()
     finally:
         session.close()
+
+# Alias para compatibilidade
+def log_file_processing(execution_id: int, file_name: str, file_path: str, file_hash: str = None, status: str = 'SUCCESS', message: str = None):
+    """Alias para log_file_processed com parâmetros reordenados."""
+    log_file_processed(execution_id, file_name, file_path, status, message, file_hash)
 
 def get_dashboard_stats():
     """Retorna estatísticas gerais para o dashboard."""

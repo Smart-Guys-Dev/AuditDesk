@@ -17,6 +17,7 @@ class FileLog(Base):
     execution_id = Column(Integer, ForeignKey('execution_logs.id'), nullable=False)
     file_name = Column(String(255), nullable=False)
     file_path = Column(String(500), nullable=True)
+    file_hash = Column(String(32), nullable=True, index=True)  # MD5 hash para deduplicação
     status = Column(String(20), default='PENDING')  # SUCCESS, ERROR, SKIPPED
     message = Column(Text, nullable=True)
     created_at = Column(DateTime, default=datetime.now)
@@ -25,3 +26,4 @@ class FileLog(Base):
 
     def __repr__(self):
         return f"<FileLog(file={self.file_name}, status={self.status})>"
+
