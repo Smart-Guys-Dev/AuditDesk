@@ -449,5 +449,46 @@
       "razao": "CNES incorreto causa glosa total da guia pela operadora",
       "contabilizar": true
     }
+  },
+  {
+    "id": "REGRA_GARANTIR_CNES_RITMOLOGIA_BRASILIA_22414227000116",
+    "descricao": "Garante que o CNES (9213074) esteja correto para o prestador CENTRO DE RITMOLOGIA DE BRASILIA LTDA (CNPJ 22414227000116).",
+    "ativo": true,
+    "condicoes": {
+      "tipo_elemento": "dadosExecutante",
+      "condicao_multipla": {
+        "tipo": "AND",
+        "sub_condicoes": [
+          {
+            "condicao_tag_valor": {
+              "xpath": "./ptu:CPF_CNPJ/ptu:cd_cnpj",
+              "valor_permitido": [
+                "22414227000116"
+              ]
+            }
+          },
+          {
+            "condicao_tag_valor": {
+              "xpath": "./ptu:CNES",
+              "tipo_comparacao": "valor_atual_diferente",
+              "valor_atual": "9213074"
+            }
+          }
+        ]
+      }
+    },
+    "acao": {
+      "tipo_acao": "garantir_tag_com_conteudo",
+      "tag_alvo": "./ptu:CNES",
+      "novo_conteudo": "9213074",
+      "tag_referencia_posicao": "./ptu:CPF_CNPJ"
+    },
+    "log_sucesso": "CNES do prestador 22414227000116 corrigido/inserido para 9213074.",
+    "metadata_glosa": {
+      "categoria": "GLOSA_GUIA",
+      "impacto": "ALTO",
+      "razao": "CNES incorreto causa glosa total da guia pela operadora",
+      "contabilizar": true
+    }
   }
 ]
