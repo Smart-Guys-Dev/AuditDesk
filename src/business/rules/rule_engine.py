@@ -346,6 +346,11 @@ class RuleEngine:
             # Armazenar alerta na lista de alertas do engine
             if not hasattr(self, 'alertas'):
                 self.alertas = []
+            
+            # Adicionar nome do arquivo se disponível
+            if hasattr(self, '_current_file_name'):
+                alerta_info["dados"]["arquivo"] = self._current_file_name
+            
             self.alertas.append(alerta_info)
             
             logger.warning(f"ALERTA: {mensagem} - Dados: {alerta_info['dados']}")
@@ -368,6 +373,9 @@ class RuleEngine:
         """
         alterations_made = False
         root = xml_tree.getroot()
+        
+        # Armazenar o nome do arquivo para uso nos alertas
+        self._current_file_name = file_name
         
         for rule in self.loaded_rules:
             try:

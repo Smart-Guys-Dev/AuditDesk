@@ -253,6 +253,65 @@ class WorkflowController:
                 msg_final = f"Validação concluída. {modificados} de {len(xml_files)} arquivo(s) foram modificados."
             log(f"SUCESSO: {msg_final}")
             
+            # Gerar relatório de alertas se houver
+            if hasattr(engine, 'alertas') and engine.alertas:
+                try:
+                    from datetime import datetime
+                    from openpyxl import Workbook
+                    from openpyxl.styles import Font, PatternFill, Alignment, Border, Side
+                    
+                    wb = Workbook()
+                    ws = wb.active
+                    ws.title = "Alertas"
+                    
+                    # Estilos
+                    header_fill = PatternFill(start_color="FF6B6B", end_color="FF6B6B", fill_type="solid")
+                    header_font = Font(bold=True, color="FFFFFF")
+                    border = Border(
+                        left=Side(style='thin'),
+                        right=Side(style='thin'),
+                        top=Side(style='thin'),
+                        bottom=Side(style='thin')
+                    )
+                    
+                    # Headers
+                    headers = ["Arquivo", "Guia", "Beneficiário", "Código", "Mensagem"]
+                    for col, header in enumerate(headers, 1):
+                        cell = ws.cell(row=1, column=col, value=header)
+                        cell.fill = header_fill
+                        cell.font = header_font
+                        cell.alignment = Alignment(horizontal='center')
+                        cell.border = border
+                    
+                    # Dados
+                    for row, alerta in enumerate(engine.alertas, 2):
+                        dados = alerta.get("dados", {})
+                        ws.cell(row=row, column=1, value=dados.get("arquivo", "")).border = border
+                        ws.cell(row=row, column=2, value=dados.get("guia", "")).border = border
+                        ws.cell(row=row, column=3, value=dados.get("beneficiario", "")).border = border
+                        ws.cell(row=row, column=4, value=dados.get("codigo", "")).border = border
+                        ws.cell(row=row, column=5, value=alerta.get("mensagem", "")).border = border
+                    
+                    # Ajustar largura das colunas
+                    ws.column_dimensions['A'].width = 30
+                    ws.column_dimensions['B'].width = 15
+                    ws.column_dimensions['C'].width = 20
+                    ws.column_dimensions['D'].width = 15
+                    ws.column_dimensions['E'].width = 50
+                    
+                    # Salvar arquivo
+                    timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+                    alertas_path = os.path.join(caminho_pasta, f"ALERTAS_REMOCAO_{timestamp}.xlsx")
+                    wb.save(alertas_path)
+                    
+                    log(f"⚠️ ALERTAS: {len(engine.alertas)} alerta(s) gerado(s) - Relatório: {alertas_path}")
+                    msg_final += f"\n⚠️ {len(engine.alertas)} alerta(s) gerado(s). Veja o relatório Excel."
+                    
+                    # Limpar alertas
+                    engine.alertas = []
+                except Exception as alert_error:
+                    log(f"AVISO: Erro ao gerar relatório de alertas: {alert_error}")
+            
             # Finalizar registro de execução
             db_manager.log_execution_end(
                 execution_id=self.current_execution_id,
