@@ -314,6 +314,43 @@ class RuleEngine:
                 else:
                     parent_node.append(new_tag)
                 modified = True
+        
+        elif action_type == "gerar_alerta":
+            # Gera um alerta para o usuário (não modifica o XML)
+            mensagem = action_config.get("mensagem_alerta", "Alerta gerado")
+            dados_alerta = action_config.get("dados_alerta", [])
+            
+            # Coletar dados do contexto do XML
+            alerta_info = {"mensagem": mensagem, "dados": {}}
+            
+            # Buscar dados no contexto do XML (elemento pai = procedimentosExecutados)
+            parent_guia = element.getparent()  # guiasSP_SADT
+            if parent_guia is not None:
+                parent_fatura = parent_guia.getparent()  # faturaSP_SADT
+                
+                # Número da guia
+                nr_guia = self.xml_reader.find_elements_by_xpath(parent_guia, "./ptu:nr_Guia")
+                if nr_guia:
+                    alerta_info["dados"]["guia"] = nr_guia[0].text
+                
+                # Número do beneficiário (inscrição)
+                nr_inscricao = self.xml_reader.find_elements_by_xpath(parent_guia, "./ptu:nr_Inscricao")
+                if nr_inscricao:
+                    alerta_info["dados"]["beneficiario"] = nr_inscricao[0].text
+                
+                # Código do serviço
+                cd_servico = self.xml_reader.find_elements_by_xpath(element, "./ptu:procedimentos/ptu:cd_Servico")
+                if cd_servico:
+                    alerta_info["dados"]["codigo"] = cd_servico[0].text
+            
+            # Armazenar alerta na lista de alertas do engine
+            if not hasattr(self, 'alertas'):
+                self.alertas = []
+            self.alertas.append(alerta_info)
+            
+            logger.warning(f"ALERTA: {mensagem} - Dados: {alerta_info['dados']}")
+            # Não modifica o XML, mas retorna True para indicar que a regra foi processada
+            modified = True
                 
         return modified
     

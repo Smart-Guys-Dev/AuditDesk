@@ -59,6 +59,11 @@
       "nome_grupo": "Regras de Correção de tp_Participacao",
       "arquivo_regras": "regras_tp_participacao.json",
       "ativo": true
+    },
+    {
+      "nome_grupo": "Códigos de Remoção",
+      "arquivo_regras": "regras/remocao.json",
+      "ativo": true
     }
   ],
   "listas_comuns": {
