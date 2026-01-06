@@ -1,6 +1,6 @@
-# Audit+ v2.0
+# Glox
 
-**Sistema de automação e validação de arquivos PTU para auditoria médica.**
+**Sistema de validação e correção automática de arquivos PTU/TISS para faturamento médico.**
 
 Desenvolvido por **Pedro Lucas Lima de Freitas**.
 
@@ -9,14 +9,18 @@ Desenvolvido por **Pedro Lucas Lima de Freitas**.
 ## 📦 Instalação
 
 ### Requisitos
-- Python 3.8 ou superior
+- Python 3.11 ou superior
 - pip
 
 ### Passos
 
-1. Clone ou baixe o repositório
+1. Clone o repositório:
+```bash
+git clone https://github.com/pdrlucs/Autofatx.git
+cd Autofatx
+```
 
-2. Crie um ambiente virtual (recomendado):
+2. Crie um ambiente virtual:
 ```bash
 python -m venv venv
 ```
@@ -39,7 +43,6 @@ pip install -r requirements.txt
 
 ## 🚀 Uso
 
-Execute a aplicação:
 ```bash
 python main.py
 ```
@@ -49,60 +52,36 @@ python main.py
 ## 🔧 Funcionalidades
 
 ### 📄 Processador XML
-- Importação automática de faturas em arquivos ZIP
-- Extração e processamento de XMLs
-- Geração de relatórios em Excel e CSV
+- Validação e correção automática de arquivos PTU/TISS
+- Aplicação de regras de negócio configuráveis
+- Geração de arquivos corrigidos
 
-### 👥 Distribuição Inteligente
-- Distribuição automática de faturas entre auditores
-- Balanceamento de carga
-- Organização por pastas
+### ✅ Motor de Regras
+- 100+ regras de validação
+- Correção de tp_Participacao por procedimento
+- Correção de CNES por CNPJ do prestador
+- Regras de equipe obrigatória
 
-### ✓ Validação TISS
-- Validação de regras de negócio
-- Validação de estrutura XSD
-- Verificação de internações de curta permanência
-- Relatórios detalhados de validação
+### 📊 Dashboard
+- KPIs em tempo real
+- Economia total / Glosas evitadas
+- Taxa de sucesso
+- Histórico de execuções
 
-### # Atualização de Hash
-- Atualização seletiva de hash em arquivos específicos
-- Recriação de arquivos ZIP
-- Modo batch para todos os arquivos
-
----
-
-## 📁 Estrutura do Projeto
-
-```
-Gloxv2.0/
-├── main.py                 # Ponto de entrada da aplicação
-├── requirements.txt        # Dependências Python
-├── src/
-│   ├── assets/            # Recursos (ícones, estilos)
-│   ├── config/            # Arquivos de configuração JSON
-│   ├── schemas/           # Schemas XSD para validação
-│   ├── constants.py       # Constantes da aplicação
-│   ├── logger_config.py   # Configuração de logging
-│   ├── main_window.py     # Interface gráfica principal
-│   ├── workflow_controller.py  # Controlador de fluxo
-│   ├── xml_parser.py      # Parser de XMLs
-│   ├── rule_engine.py     # Motor de regras
-│   ├── file_manager.py    # Gerenciamento de arquivos
-│   ├── hash_calculator.py # Cálculo de hash
-│   ├── data_manager.py    # Gerenciamento de dados
-│   ├── distribution_engine.py  # Motor de distribuição
-│   └── report_generator.py     # Geração de relatórios
-└── audit_plus.log         # Arquivo de log (gerado automaticamente)
-```
+### 📥 Importação de Relatórios
+- A500 Enviados
+- Distribuição de Faturas
+- Faturas Emitidas
 
 ---
 
 ## 🛠️ Tecnologias
 
-- **Python 3.8+**
+- **Python 3.11+**
 - **PyQt6** - Interface gráfica
+- **SQLAlchemy** - ORM
 - **lxml** - Processamento XML
-- **openpyxl** - Geração de relatórios Excel
+- **pandas** - Manipulação de dados
 
 ---
 
@@ -113,11 +92,10 @@ Todos os direitos reservados.
 
 ---
 
-## 👨‍💻 Suporte
+## 👨‍💻 Autor
 
-Para suporte ou dúvidas, entre em contato com Pedro Lucas Lima de Freitas.
+**Pedro Lucas Lima de Freitas**
 
 ---
 
-**Audit+ v2.0** - Desenvolvido por Pedro Lucas Lima de Freitas
-# Glox_Desktop
+**Glox** - Eliminando glosas automaticamente 🚀
