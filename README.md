@@ -1,6 +1,6 @@
 # Glox
 
-**Sistema de validação e correção automática de arquivos PTU/TISS para faturamento médico.**
+**Sistema de validação e correção automática de arquivos PTU/TISS para faturamento de contas médicas (intercâmbio e trânsito).**
 
 Desenvolvido por **Pedro Lucas Lima de Freitas**.
 
