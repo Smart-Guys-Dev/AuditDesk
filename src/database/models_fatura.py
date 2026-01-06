@@ -41,7 +41,7 @@ class Fatura(Base):
     data_importacao = Column(DateTime, default=datetime.utcnow)
     
     # Tracking do Glox
-    corrigida_Glox = Column(Boolean, default=False)
+    corrigida_auditplus = Column(Boolean, default=False)
     arquivo_origem = Column(String(200))
     
     # Relacionamentos
@@ -72,7 +72,7 @@ class Fatura(Base):
             'competencia': self.competencia or "",
             'responsavel': self.responsavel or "",
             'data_envio': self.data_envio.strftime("%d/%m/%Y %H:%M") if self.data_envio else None,
-            'corrigida_Glox': self.corrigida_Glox
+            'corrigida_auditplus': self.corrigida_auditplus
         }
 
 

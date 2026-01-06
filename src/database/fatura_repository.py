@@ -143,7 +143,7 @@ def get_estatisticas_faturas() -> Dict:
         valor_total = session.query(func.sum(Fatura.valor)).scalar() or 0
         
         corrigidas_Glox = session.query(func.count(Fatura.id)).filter(
-            Fatura.corrigida_Glox == True
+            Fatura.corrigida_auditplus == True
         ).scalar() or 0
         
         return {

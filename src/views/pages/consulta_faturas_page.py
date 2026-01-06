@@ -284,7 +284,7 @@ class PaginaConsultaFaturas(QWidget):
         self.lbl_responsavel.setText(f"👤 Responsável: {dados.get('responsavel', 'N/A')}")
         self.lbl_envio.setText(f"📤 Data Envio: {dados.get('data_envio') or 'Não enviada'}")
         
-        if dados.get('corrigida_Glox'):
+        if dados.get('corrigida_auditplus'):
             self.lbl_Glox.setText("✅ Corrigida pelo Glox")
         else:
             self.lbl_Glox.setText("")
