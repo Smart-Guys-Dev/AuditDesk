@@ -1,0 +1,24 @@
+[
+    {
+        "id": "REGRA_CORRIGIR_DIA_31_INTERNACAO",
+        "descricao": "Corrige datas com dia 31 para dia 30 em guias de internação. Limite de 30 dias conforme Manual de Intercâmbio Nacional.",
+        "ativo": true,
+        "condicoes": {
+            "tipo_elemento": "guiaInternacao",
+            "condicao_tag_valor": {
+                "xpath": ".//ptu:dt_FimFaturamento",
+                "tipo_comparacao": "contem",
+                "valor": "/31"
+            }
+        },
+        "acao": {
+            "tipo_acao": "corrigir_dia_31_internacao"
+        },
+        "log_sucesso": "Dia 31 corrigido para dia 30 em guia de internação (dt_FimFaturamento e procedimentos).",
+        "metadata_glosa": {
+            "categoria": "GLOSA_GUIA",
+            "impacto": "ALTO",
+            "razao": "Conforme Manual de Intercâmbio Nacional, cobranças parciais têm limite de 30 dias corridos"
+        }
+    }
+]
