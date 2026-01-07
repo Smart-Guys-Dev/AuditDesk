@@ -210,6 +210,10 @@ class RuleEngine:
                 # Verifica se o texto NÃO começa com o valor especificado
                 valor_inicio = str(tag_cond.get("valor_atual", ""))
                 return not str(node_text).startswith(valor_inicio)
+            elif compare_type == "contem":
+                # Verifica se o texto contém o valor especificado
+                valor = str(tag_cond.get("valor", ""))
+                return valor in str(node_text)
             elif "valor_permitido" in tag_cond:
                 return node_text in tag_cond["valor_permitido"]
         
@@ -261,6 +265,48 @@ class RuleEngine:
                 target_node_for_reorder.append(child)
             
             return True  # ✅ Houve mudança
+
+        # Ação especial que não requer tag_alvo
+        if action_type == "corrigir_dia_31_internacao":
+            import re
+            modified = False
+            
+            def substituir_dia_31(texto):
+                """Substitui /31 por /30 em datas no formato YYYY/MM/DD"""
+                if texto and '/31' in texto:
+                    return re.sub(r'/31(?=\d{2}:\d{2}:\d{2}|$)', '/30', texto)
+                return texto
+            
+            # Corrigir dt_FimFaturamento
+            dt_fim_nodes = self.xml_reader.find_elements_by_xpath(element, ".//ptu:dt_FimFaturamento")
+            for dt_node in dt_fim_nodes:
+                if dt_node.text and '/31' in dt_node.text:
+                    novo_valor = substituir_dia_31(dt_node.text)
+                    logger.info(f"Corrigindo dt_FimFaturamento: {dt_node.text} -> {novo_valor}")
+                    dt_node.text = novo_valor
+                    modified = True
+            
+            # Corrigir dt_Execucao em todos os procedimentosExecutados
+            procs = self.xml_reader.find_elements_by_xpath(element, ".//ptu:procedimentosExecutados")
+            for proc in procs:
+                dt_exec_nodes = self.xml_reader.find_elements_by_xpath(proc, ".//ptu:dt_Execucao")
+                for dt_node in dt_exec_nodes:
+                    if dt_node.text and '/31' in dt_node.text:
+                        novo_valor = substituir_dia_31(dt_node.text)
+                        logger.info(f"Corrigindo dt_Execucao: {dt_node.text} -> {novo_valor}")
+                        dt_node.text = novo_valor
+                        modified = True
+                
+                for tag_data in ["dt_Atendimento", "dt_Inicial", "dt_Final"]:
+                    dt_nodes = self.xml_reader.find_elements_by_xpath(proc, f".//ptu:{tag_data}")
+                    for dt_node in dt_nodes:
+                        if dt_node.text and '/31' in dt_node.text:
+                            novo_valor = substituir_dia_31(dt_node.text)
+                            logger.info(f"Corrigindo {tag_data}: {dt_node.text} -> {novo_valor}")
+                            dt_node.text = novo_valor
+                            modified = True
+            
+            return modified
 
         if not tag_alvo_xpath: return False
 
@@ -356,49 +402,6 @@ class RuleEngine:
             logger.warning(f"ALERTA: {mensagem} - Dados: {alerta_info['dados']}")
             # Não modifica o XML, mas retorna True para indicar que a regra foi processada
             modified = True
-        
-        elif action_type == "corrigir_dia_31_internacao":
-            # Ação especial: Corrige dia 31 para dia 30 em guias de internação
-            # 1. Corrigir dt_FimFaturamento
-            # 2. Corrigir todas as datas dos procedimentosExecutados
-            import re
-            
-            def substituir_dia_31(texto):
-                """Substitui /31 por /30 em datas no formato YYYY/MM/DD"""
-                if texto and '/31' in texto:
-                    return re.sub(r'/31(?=\d{2}:\d{2}:\d{2}|$)', '/30', texto)
-                return texto
-            
-            # Corrigir dt_FimFaturamento (já é o element pois tipo_elemento é guiaInternacao)
-            dt_fim_nodes = self.xml_reader.find_elements_by_xpath(element, ".//ptu:dt_FimFaturamento")
-            for dt_node in dt_fim_nodes:
-                if dt_node.text and '/31' in dt_node.text:
-                    novo_valor = substituir_dia_31(dt_node.text)
-                    logger.info(f"Corrigindo dt_FimFaturamento: {dt_node.text} -> {novo_valor}")
-                    dt_node.text = novo_valor
-                    modified = True
-            
-            # Corrigir dt_Execucao em todos os procedimentosExecutados
-            procs = self.xml_reader.find_elements_by_xpath(element, ".//ptu:procedimentosExecutados")
-            for proc in procs:
-                # dt_Execucao
-                dt_exec_nodes = self.xml_reader.find_elements_by_xpath(proc, ".//ptu:dt_Execucao")
-                for dt_node in dt_exec_nodes:
-                    if dt_node.text and '/31' in dt_node.text:
-                        novo_valor = substituir_dia_31(dt_node.text)
-                        logger.info(f"Corrigindo dt_Execucao: {dt_node.text} -> {novo_valor}")
-                        dt_node.text = novo_valor
-                        modified = True
-                
-                # Outras tags de data que podem ter o problema
-                for tag_data in ["dt_Atendimento", "dt_Inicial", "dt_Final"]:
-                    dt_nodes = self.xml_reader.find_elements_by_xpath(proc, f".//ptu:{tag_data}")
-                    for dt_node in dt_nodes:
-                        if dt_node.text and '/31' in dt_node.text:
-                            novo_valor = substituir_dia_31(dt_node.text)
-                            logger.info(f"Corrigindo {tag_data}: {dt_node.text} -> {novo_valor}")
-                            dt_node.text = novo_valor
-                            modified = True
                 
         return modified
     
