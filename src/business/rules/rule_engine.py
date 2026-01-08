@@ -46,6 +46,10 @@ class RuleEngine:
         self.external_lists = {}
         self.xml_reader = XMLReader()
         self.file_handler = FileHandler()
+        
+        # Carregar configuração de regras
+        rules_config_path = os.path.join(self.config_dir, "rules_config.json")
+        self.rules_config_master = self._load_json_file(rules_config_path) or {}
 
     def _load_json_file(self, file_path):
         """Carrega e decodifica um arquivo JSON de forma segura."""
