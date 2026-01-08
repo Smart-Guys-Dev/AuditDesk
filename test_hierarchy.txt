@@ -1,0 +1,6 @@
+Ocorrencia 4: 2025/10/3123:59:00-04
+  Hierarquia: GuiaCobrancaUtilizacao > arquivoCobrancaUtilizacao > Tipoguia > guiaInternacao > dadosInternacao > dadosFaturamento > dt_FimFaturamento
+
+Ocorrencia 13: 2025/10/3123:59:00-04
+  Hierarquia: GuiaCobrancaUtilizacao > arquivoCobrancaUtilizacao > Tipoguia > guiaHonorarios > dataFaturamento > dt_FimFaturamento
+
