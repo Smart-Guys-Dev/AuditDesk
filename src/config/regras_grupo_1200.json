@@ -676,7 +676,7 @@
   {
     "id": "REGRA_10104020_NORMALIZAR_EQUIPE_PF_DR_RODRIGO_FORCAR",
     "descricao": "Para cd_Servico=10104020, força a normalização completa do bloco <equipe_Profissional> para o PF do Dr. Rodrigo (troca PJ 11039 por PF 11021).",
-    "ativo": true,
+    "ativo": false,
     "condicoes": {
       "tipo_elemento": "procedimentosExecutados",
       "condicao_multipla": {
