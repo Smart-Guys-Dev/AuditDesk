@@ -434,18 +434,18 @@ class RuleEngine:
         if action_type == "corrigir_para_intensivista_rotativo":
             # Lista de médicos intensivistas validados pela Unimed do Brasil (A400)
             INTENSIVISTAS = [
-                {"nome": "ELIZETE OSHIRO", "cd_prest": "997", "crm": "2248", "uf": "50", "cbo": "225150", "tp_participacao": "13"},
-                {"nome": "RONALDO NEDER GONCALVES PEREIRA", "cd_prest": "1320", "crm": "569", "uf": "50", "cbo": "225150", "tp_participacao": "13"},
-                {"nome": "CYNTHYA MASSAE ASAHIDE", "cd_prest": "2402", "crm": "7851", "uf": "50", "cbo": "225150", "tp_participacao": "13"},
-                {"nome": "RENATA BREHM DE OLIVEIRA BARBOSA", "cd_prest": "2322", "crm": "5827", "uf": "50", "cbo": "225150", "tp_participacao": "13"},
-                {"nome": "ALINE ALBUQUERQUE DE ABREU MARIANO", "cd_prest": "2323", "crm": "6166", "uf": "50", "cbo": "225150", "tp_participacao": "13"},
-                {"nome": "FABIO SARTORI SCHWERZ", "cd_prest": "2321", "crm": "6804", "uf": "50", "cbo": "225150", "tp_participacao": "13"},
-                {"nome": "MIRIAN SANDRI DE OLIVEIRA TRENTIN", "cd_prest": "445", "crm": "282", "uf": "50", "cbo": "225150", "tp_participacao": "13"},
-                {"nome": "SERGIO RENATO DE ALMEIDA COUTO", "cd_prest": "763", "crm": "2037", "uf": "50", "cbo": "225150", "tp_participacao": "13"},
-                {"nome": "GABRIELA CASAL SANTOS YUASSA", "cd_prest": "2180", "crm": "5912", "uf": "50", "cbo": "225150", "tp_participacao": "13"},
-                {"nome": "CASSIA ASSIS VEDOVATTE", "cd_prest": "2055", "crm": "5825", "uf": "50", "cbo": "225150", "tp_participacao": "13"},
-                {"nome": "ANDRE PAULO DE MEDEIROS OLIVEIRA", "cd_prest": "1764", "crm": "3959", "uf": "50", "cbo": "225150", "tp_participacao": "13"},
-                {"nome": "MARCIO ANDRE BUENO", "cd_prest": "1952", "crm": "3458", "uf": "50", "cbo": "225150", "tp_participacao": "13"}
+                {"nome": "ELIZETE OSHIRO", "cpf": "06091359967", "cd_prest": "997", "crm": "2248", "uf": "50", "cbo": "225150", "tp_participacao": "13"},
+                {"nome": "RONALDO NEDER GONCALVES PEREIRA", "cpf": "10659200163", "cd_prest": "1320", "crm": "569", "uf": "50", "cbo": "225150", "tp_participacao": "13"},
+                {"nome": "CYNTHYA MASSAE ASAHIDE", "cpf": "02608557155", "cd_prest": "2402", "crm": "7851", "uf": "50", "cbo": "225150", "tp_participacao": "13"},
+                {"nome": "RENATA BREHM DE OLIVEIRA BARBOSA", "cpf": "72774452104", "cd_prest": "2322", "crm": "5827", "uf": "50", "cbo": "225150", "tp_participacao": "13"},
+                {"nome": "ALINE ALBUQUERQUE DE ABREU MARIANO", "cpf": "32668374871", "cd_prest": "2323", "crm": "6166", "uf": "50", "cbo": "225150", "tp_participacao": "13"},
+                {"nome": "FABIO SARTORI SCHWERZ", "cpf": "01588669165", "cd_prest": "2321", "crm": "6804", "uf": "50", "cbo": "225150", "tp_participacao": "13"},
+                {"nome": "MIRIAN SANDRI DE OLIVEIRA TRENTIN", "cpf": "20272251100", "cd_prest": "445", "crm": "282", "uf": "50", "cbo": "225150", "tp_participacao": "13"},
+                {"nome": "SERGIO RENATO DE ALMEIDA COUTO", "cpf": "66407931720", "cd_prest": "763", "crm": "2037", "uf": "50", "cbo": "225150", "tp_participacao": "13"},
+                {"nome": "GABRIELA CASAL SANTOS YUASSA", "cpf": "22065893893", "cd_prest": "2180", "crm": "5912", "uf": "50", "cbo": "225150", "tp_participacao": "13"},
+                {"nome": "CASSIA ASSIS VEDOVATTE", "cpf": "00130363197", "cd_prest": "2055", "crm": "5825", "uf": "50", "cbo": "225150", "tp_participacao": "13"},
+                {"nome": "ANDRE PAULO DE MEDEIROS OLIVEIRA", "cpf": "47812443259", "cd_prest": "1764", "crm": "3959", "uf": "50", "cbo": "225150", "tp_participacao": "13"},
+                {"nome": "MARCIO ANDRE BUENO", "cpf": "18155662802", "cd_prest": "1952", "crm": "3458", "uf": "50", "cbo": "225150", "tp_participacao": "13"}
             ]
             
             # Contador por beneficiário (garante médicos diferentes para mesma carteirinha)
