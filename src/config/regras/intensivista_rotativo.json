@@ -1,7 +1,7 @@
 [
     {
         "id": "REGRA_INTENSIVISTA_SUBSTITUIR_EQUIPE",
-        "descricao": "Para códigos 10104020 e 10104011: Substitui bloco equipe_Profissional por médico intensivista (CBO 225150) com rotação. Sempre aplica pois médicos executantes nunca são intensivistas.",
+        "descricao": "Para códigos 10104020 e 10104011: Substitui bloco equipe_Profissional por médico intensivista quando tp_Participacao != 13 OU CBO != 225150.",
         "ativo": true,
         "condicoes": {
             "tipo_elemento": "procedimentosExecutados",
@@ -22,6 +22,27 @@
                             "xpath": "./ptu:equipe_Profissional",
                             "tipo_comparacao": "existe"
                         }
+                    },
+                    {
+                        "condicao_multipla": {
+                            "tipo": "OR",
+                            "sub_condicoes": [
+                                {
+                                    "condicao_tag_valor": {
+                                        "xpath": "./ptu:equipe_Profissional/ptu:tp_Participacao",
+                                        "tipo_comparacao": "valor_atual_diferente",
+                                        "valor_atual": "13"
+                                    }
+                                },
+                                {
+                                    "condicao_tag_valor": {
+                                        "xpath": "./ptu:equipe_Profissional/ptu:CBO",
+                                        "tipo_comparacao": "valor_atual_diferente",
+                                        "valor_atual": "225150"
+                                    }
+                                }
+                            ]
+                        }
                     }
                 ]
             }
@@ -29,7 +50,7 @@
         "acao": {
             "tipo_acao": "corrigir_para_intensivista_rotativo"
         },
-        "log_sucesso": "Equipe substituída por médico intensivista (CBO 225150).",
+        "log_sucesso": "Equipe corrigida para médico intensivista (CBO 225150, tp_Participacao=13).",
         "metadata_glosa": {
             "categoria": "GLOSA_ITEM",
             "impacto": "ALTO",
