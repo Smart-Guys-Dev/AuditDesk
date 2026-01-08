@@ -1,0 +1,40 @@
+[
+    {
+        "id": "REGRA_PROFISSIONAL_ROTATIVO",
+        "descricao": "Corrige bloco <ptu:profissional> com rotação de 4 profissionais quando dados incorretos.",
+        "ativo": true,
+        "condicoes": {
+            "tipo_elemento": "profissional",
+            "condicao_multipla": {
+                "tipo": "OR",
+                "sub_condicoes": [
+                    {
+                        "condicao_tag_valor": {
+                            "xpath": "./ptu:dadosConselho/ptu:sg_Conselho",
+                            "valor_permitido": [
+                                "OUT"
+                            ]
+                        }
+                    },
+                    {
+                        "condicao_tag_valor": {
+                            "xpath": "./ptu:dadosConselho/ptu:nr_Conselho",
+                            "valor_permitido": [
+                                "0"
+                            ]
+                        }
+                    }
+                ]
+            }
+        },
+        "acao": {
+            "tipo_acao": "corrigir_profissional_rotativo"
+        },
+        "log_sucesso": "Bloco profissional corrigido com rotação.",
+        "metadata_glosa": {
+            "categoria": "GLOSA_GUIA",
+            "impacto": "ALTO",
+            "razao": "Dados do profissional incorretos causam glosa total da guia"
+        }
+    }
+]

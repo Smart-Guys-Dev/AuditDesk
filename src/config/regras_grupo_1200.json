@@ -762,7 +762,7 @@
   {
     "id": "REGRA_PROFISSIONAL_PADRAO_DR_RODRIGO_FORCAR",
     "descricao": "Força o bloco <ptu:profissional> a conter os dados PF do Dr. Rodrigo (nome, conselho, UF e CBO), independentemente do que veio.",
-    "ativo": true,
+    "ativo": false,
     "condicoes": {
       "tipo_elemento": "profissional",
       "condicao_multipla": {
