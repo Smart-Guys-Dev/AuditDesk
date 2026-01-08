@@ -1,99 +1,7 @@
 [
     {
-        "id": "REGRA_INTENSIVISTA_CORRIGIR_PARTICIPACAO_13",
-        "descricao": "Para códigos 10104020 e 10104011, corrige tp_Participacao para 13 se estiver diferente.",
-        "ativo": true,
-        "condicoes": {
-            "tipo_elemento": "procedimentosExecutados",
-            "condicao_multipla": {
-                "tipo": "AND",
-                "sub_condicoes": [
-                    {
-                        "condicao_tag_valor": {
-                            "xpath": "./ptu:procedimentos/ptu:cd_Servico",
-                            "valor_permitido": [
-                                "10104020",
-                                "10104011"
-                            ]
-                        }
-                    },
-                    {
-                        "condicao_tag_valor": {
-                            "xpath": "./ptu:equipe_Profissional/ptu:tp_Participacao",
-                            "tipo_comparacao": "existe"
-                        }
-                    },
-                    {
-                        "condicao_tag_valor": {
-                            "xpath": "./ptu:equipe_Profissional/ptu:tp_Participacao",
-                            "tipo_comparacao": "valor_atual_diferente",
-                            "valor_atual": "13"
-                        }
-                    }
-                ]
-            }
-        },
-        "acao": {
-            "tipo_acao": "substituir_conteudo_tag",
-            "tag_alvo": "./ptu:equipe_Profissional/ptu:tp_Participacao",
-            "novo_conteudo": "13"
-        },
-        "log_sucesso": "Intensivista: tp_Participacao corrigido para 13.",
-        "metadata_glosa": {
-            "categoria": "GLOSA_ITEM",
-            "impacto": "ALTO",
-            "razao": "Nova CMB exige tp_Participacao=13 para intensivistas"
-        }
-    },
-    {
-        "id": "REGRA_INTENSIVISTA_CORRIGIR_CBO_225150",
-        "descricao": "Para códigos 10104020 e 10104011, corrige CBO para 225150 (Médico Intensivista) se estiver diferente.",
-        "ativo": true,
-        "condicoes": {
-            "tipo_elemento": "procedimentosExecutados",
-            "condicao_multipla": {
-                "tipo": "AND",
-                "sub_condicoes": [
-                    {
-                        "condicao_tag_valor": {
-                            "xpath": "./ptu:procedimentos/ptu:cd_Servico",
-                            "valor_permitido": [
-                                "10104020",
-                                "10104011"
-                            ]
-                        }
-                    },
-                    {
-                        "condicao_tag_valor": {
-                            "xpath": "./ptu:equipe_Profissional/ptu:CBO",
-                            "tipo_comparacao": "existe"
-                        }
-                    },
-                    {
-                        "condicao_tag_valor": {
-                            "xpath": "./ptu:equipe_Profissional/ptu:CBO",
-                            "tipo_comparacao": "valor_atual_diferente",
-                            "valor_atual": "225150"
-                        }
-                    }
-                ]
-            }
-        },
-        "acao": {
-            "tipo_acao": "substituir_conteudo_tag",
-            "tag_alvo": "./ptu:equipe_Profissional/ptu:CBO",
-            "novo_conteudo": "225150"
-        },
-        "log_sucesso": "Intensivista: CBO corrigido para 225150.",
-        "metadata_glosa": {
-            "categoria": "GLOSA_ITEM",
-            "impacto": "ALTO",
-            "razao": "Nova CMB exige CBO 225150 para intensivistas"
-        }
-    },
-    {
-        "id": "REGRA_INTENSIVISTA_SUBSTITUIR_BLOCO_GENERICO",
-        "descricao": "Para códigos 10104020 e 10104011, substitui bloco completo quando nm_Profissional é nome institucional/genérico.",
+        "id": "REGRA_INTENSIVISTA_SUBSTITUIR_EQUIPE",
+        "descricao": "Para códigos 10104020 e 10104011: Substitui bloco equipe_Profissional por médico intensivista (CBO 225150) com rotação. Sempre aplica pois médicos executantes nunca são intensivistas.",
         "ativo": true,
         "condicoes": {
             "tipo_elemento": "procedimentosExecutados",
@@ -114,41 +22,6 @@
                             "xpath": "./ptu:equipe_Profissional",
                             "tipo_comparacao": "existe"
                         }
-                    },
-                    {
-                        "condicao_multipla": {
-                            "tipo": "OR",
-                            "sub_condicoes": [
-                                {
-                                    "condicao_tag_valor": {
-                                        "xpath": "./ptu:equipe_Profissional/ptu:nm_Profissional",
-                                        "tipo_comparacao": "contem_inicio",
-                                        "valor_atual": "HOSPITAL"
-                                    }
-                                },
-                                {
-                                    "condicao_tag_valor": {
-                                        "xpath": "./ptu:equipe_Profissional/ptu:nm_Profissional",
-                                        "tipo_comparacao": "contem_inicio",
-                                        "valor_atual": "PLANTONISTA"
-                                    }
-                                },
-                                {
-                                    "condicao_tag_valor": {
-                                        "xpath": "./ptu:equipe_Profissional/ptu:nm_Profissional",
-                                        "tipo_comparacao": "contem_inicio",
-                                        "valor_atual": "CLINICA"
-                                    }
-                                },
-                                {
-                                    "condicao_tag_valor": {
-                                        "xpath": "./ptu:equipe_Profissional/ptu:nm_Profissional",
-                                        "tipo_comparacao": "contem_inicio",
-                                        "valor_atual": "UNIMED"
-                                    }
-                                }
-                            ]
-                        }
                     }
                 ]
             }
@@ -156,11 +29,11 @@
         "acao": {
             "tipo_acao": "corrigir_para_intensivista_rotativo"
         },
-        "log_sucesso": "Intensivista: Bloco genérico substituído por médico intensivista.",
+        "log_sucesso": "Equipe substituída por médico intensivista (CBO 225150).",
         "metadata_glosa": {
             "categoria": "GLOSA_ITEM",
             "impacto": "ALTO",
-            "razao": "Nome institucional/genérico precisa ser substituído por médico intensivista"
+            "razao": "Nova CMB exige médico intensivista (CBO 225150) e tp_Participacao=13"
         }
     }
 ]
