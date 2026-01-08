@@ -429,6 +429,82 @@ class RuleEngine:
                 logger.info(f"PJ→PF Rotativo: Beneficiário {key} → {prof['nome']}")
             
             return modified
+        
+        # Ação especial: Normaliza equipe para médico intensivista (CBO 225150)
+        if action_type == "corrigir_para_intensivista_rotativo":
+            # Lista de médicos intensivistas para rotação
+            INTENSIVISTAS = [
+                {
+                    "nome": "SYLVIA CAROLINA ARAUJO BORGES",
+                    "cpf": "96522585120",
+                    "cd_prest": "2320",
+                    "crm": "6087",
+                    "uf": "50",
+                    "cbo": "225150",
+                    "tp_participacao": "13"
+                },
+                {
+                    "nome": "ANDRE PAULO DE MEDEIROS OLIVEIRA",
+                    "cpf": "47812443272",
+                    "cd_prest": "1764",
+                    "crm": "3959",
+                    "uf": "50",
+                    "cbo": "225150",
+                    "tp_participacao": "13"
+                },
+                {
+                    "nome": "ODINILSON ALMEIDA FONSECA",
+                    "cpf": "86220152972",
+                    "cd_prest": "1494",
+                    "crm": "3786",
+                    "uf": "50",
+                    "cbo": "225150",
+                    "tp_participacao": "13"
+                }
+            ]
+            
+            # Contador para rotação
+            if not hasattr(self, '_intensivista_rotation_counter'):
+                self._intensivista_rotation_counter = 0
+            
+            idx = self._intensivista_rotation_counter % len(INTENSIVISTAS)
+            prof = INTENSIVISTAS[idx]
+            self._intensivista_rotation_counter += 1
+            
+            modified = False
+            
+            # Função auxiliar para garantir tag com conteúdo
+            def set_tag(xpath, valor):
+                nonlocal modified
+                nodes = self.xml_reader.find_elements_by_xpath(element, xpath)
+                if nodes:
+                    if nodes[0].text != valor:
+                        nodes[0].text = valor
+                        modified = True
+            
+            # Remover CNPJ se existir (caso seja PJ)
+            cnpj_nodes = self.xml_reader.find_elements_by_xpath(element, "./ptu:equipe_Profissional/ptu:cdCnpjCpf/ptu:cd_cnpj")
+            for cnpj_node in cnpj_nodes:
+                parent = cnpj_node.getparent()
+                if parent is not None:
+                    parent.remove(cnpj_node)
+                    modified = True
+            
+            # Atualizar dados do intensivista
+            set_tag("./ptu:equipe_Profissional/ptu:tp_Participacao", prof["tp_participacao"])
+            set_tag("./ptu:equipe_Profissional/ptu:Prestador/ptu:cd_Uni_Prest", "51")
+            set_tag("./ptu:equipe_Profissional/ptu:Prestador/ptu:cd_Prest", prof["cd_prest"])
+            set_tag("./ptu:equipe_Profissional/ptu:cdCnpjCpf/ptu:cd_cpf", prof["cpf"])
+            set_tag("./ptu:equipe_Profissional/ptu:nm_Profissional", prof["nome"])
+            set_tag("./ptu:equipe_Profissional/ptu:dadosConselho/ptu:sg_Conselho", "CRM")
+            set_tag("./ptu:equipe_Profissional/ptu:dadosConselho/ptu:nr_Conselho", prof["crm"])
+            set_tag("./ptu:equipe_Profissional/ptu:dadosConselho/ptu:UF", prof["uf"])
+            set_tag("./ptu:equipe_Profissional/ptu:CBO", prof["cbo"])
+            
+            if modified:
+                logger.info(f"Intensivista Rotativo: {prof['nome']} (CRM {prof['crm']})")
+            
+            return modified
 
         if not tag_alvo_xpath: return False
 

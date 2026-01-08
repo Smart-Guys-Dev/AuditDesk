@@ -1,0 +1,39 @@
+[
+    {
+        "id": "REGRA_INTENSIVISTA_ROTATIVO_10104020_10104011",
+        "descricao": "Para códigos 10104020 e 10104011: Normaliza equipe para médico intensivista (CBO 225150) com rotação entre 3 profissionais.",
+        "ativo": true,
+        "condicoes": {
+            "tipo_elemento": "procedimentosExecutados",
+            "condicao_multipla": {
+                "tipo": "AND",
+                "sub_condicoes": [
+                    {
+                        "condicao_tag_valor": {
+                            "xpath": "./ptu:procedimentos/ptu:cd_Servico",
+                            "valor_permitido": [
+                                "10104020",
+                                "10104011"
+                            ]
+                        }
+                    },
+                    {
+                        "condicao_tag_valor": {
+                            "xpath": "./ptu:equipe_Profissional",
+                            "tipo_comparacao": "existe"
+                        }
+                    }
+                ]
+            }
+        },
+        "acao": {
+            "tipo_acao": "corrigir_para_intensivista_rotativo"
+        },
+        "log_sucesso": "Equipe normalizada para médico intensivista (CBO 225150).",
+        "metadata_glosa": {
+            "categoria": "GLOSA_ITEM",
+            "impacto": "ALTO",
+            "razao": "Códigos 10104020 e 10104011 exigem médico intensivista"
+        }
+    }
+]
