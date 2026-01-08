@@ -1,0 +1,35 @@
+[
+    {
+        "id": "REGRA_SOLICITANTE_GENERICO_ROTATIVO",
+        "descricao": "Corrige dados do profissional solicitante genérico (sg_Conselho=OUT, nr_Conselho=0) com rotação de 4 profissionais.",
+        "ativo": true,
+        "condicoes": {
+            "tipo_elemento": "dadosSolicitante",
+            "condicao_multipla": {
+                "tipo": "AND",
+                "sub_condicoes": [
+                    {
+                        "condicao_tag_valor": {
+                            "xpath": "./ptu:profissional/ptu:dadosConselho/ptu:sg_Conselho",
+                            "valor_permitido": [
+                                "OUT"
+                            ]
+                        }
+                    },
+                    {
+                        "condicao_tag_valor": {
+                            "xpath": "./ptu:profissional/ptu:dadosConselho/ptu:nr_Conselho",
+                            "valor_permitido": [
+                                "0"
+                            ]
+                        }
+                    }
+                ]
+            }
+        },
+        "acao": {
+            "tipo_acao": "corrigir_solicitante_rotativo"
+        },
+        "log_sucesso": "Solicitante genérico corrigido com rotação de profissionais."
+    }
+]

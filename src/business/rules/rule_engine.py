@@ -505,6 +505,67 @@ class RuleEngine:
                 logger.info(f"Intensivista Rotativo: {prof['nome']} (CRM {prof['crm']})")
             
             return modified
+        
+        # Ação especial: Corrige solicitante genérico com rotação de profissionais
+        if action_type == "corrigir_solicitante_rotativo":
+            # Mesmos 4 profissionais da rotação PJ→PF
+            PROFISSIONAIS = [
+                {
+                    "nome": "RODRIGO DOMINGUES LARAYA",
+                    "crm": "5185",
+                    "uf": "50",
+                    "cbo": "225125"
+                },
+                {
+                    "nome": "ROTTERDAM PEREIRA GUIMARAES",
+                    "crm": "10730",
+                    "uf": "50",
+                    "cbo": "225125"
+                },
+                {
+                    "nome": "JUSTINIANO BARBOSA VAVAS",
+                    "crm": "1491",
+                    "uf": "50",
+                    "cbo": "225125"
+                },
+                {
+                    "nome": "VICTOR H. M. BONOMO",
+                    "crm": "8108",
+                    "uf": "50",
+                    "cbo": "225125"
+                }
+            ]
+            
+            # Contador para rotação
+            if not hasattr(self, '_solicitante_rotation_counter'):
+                self._solicitante_rotation_counter = 0
+            
+            idx = self._solicitante_rotation_counter % len(PROFISSIONAIS)
+            prof = PROFISSIONAIS[idx]
+            self._solicitante_rotation_counter += 1
+            
+            modified = False
+            
+            # Função auxiliar
+            def set_tag(xpath, valor):
+                nonlocal modified
+                nodes = self.xml_reader.find_elements_by_xpath(element, xpath)
+                if nodes:
+                    if nodes[0].text != valor:
+                        nodes[0].text = valor
+                        modified = True
+            
+            # Atualizar dados do solicitante
+            set_tag("./ptu:profissional/ptu:nm_Profissional", prof["nome"])
+            set_tag("./ptu:profissional/ptu:dadosConselho/ptu:sg_Conselho", "CRM")
+            set_tag("./ptu:profissional/ptu:dadosConselho/ptu:nr_Conselho", prof["crm"])
+            set_tag("./ptu:profissional/ptu:dadosConselho/ptu:UF", prof["uf"])
+            set_tag("./ptu:profissional/ptu:CBO", prof["cbo"])
+            
+            if modified:
+                logger.info(f"Solicitante Rotativo: {prof['nome']} (CRM {prof['crm']})")
+            
+            return modified
 
         if not tag_alvo_xpath: return False
 

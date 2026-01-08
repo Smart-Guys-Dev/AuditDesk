@@ -79,6 +79,11 @@
       "nome_grupo": "Intensivista Rotativo",
       "arquivo_regras": "regras/intensivista_rotativo.json",
       "ativo": true
+    },
+    {
+      "nome_grupo": "Solicitante Rotativo",
+      "arquivo_regras": "regras/solicitante_rotativo.json",
+      "ativo": true
     }
   ],
   "listas_comuns": {
