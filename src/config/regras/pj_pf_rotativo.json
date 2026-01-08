@@ -1,0 +1,39 @@
+[
+    {
+        "id": "REGRA_CORRIGIR_EQUIPE_PJ_PARA_PF_ROTATIVO",
+        "descricao": "Para prestador 11101: Converte equipe PJ para PF com rotação de profissionais. Evita glosa de Consulta Retorno quando beneficiário tem múltiplas consultas.",
+        "ativo": true,
+        "condicoes": {
+            "tipo_elemento": "procedimentosExecutados",
+            "condicao_multipla": {
+                "tipo": "AND",
+                "sub_condicoes": [
+                    {
+                        "condicao_tag_valor": {
+                            "xpath": "./ptu:procedimentos/ptu:cd_Servico",
+                            "valor_permitido": [
+                                "10101039",
+                                "40401014"
+                            ]
+                        }
+                    },
+                    {
+                        "condicao_tag_valor": {
+                            "xpath": "./ptu:equipe_Profissional/ptu:cdCnpjCpf/ptu:cd_cnpj",
+                            "tipo_comparacao": "existe"
+                        }
+                    }
+                ]
+            }
+        },
+        "acao": {
+            "tipo_acao": "corrigir_pj_para_pf_rotativo"
+        },
+        "log_sucesso": "Equipe PJ convertida para PF com rotação de profissionais.",
+        "metadata_glosa": {
+            "categoria": "GLOSA_ITEM",
+            "impacto": "ALTO",
+            "razao": "Serviços que exigem PF não podem ter equipe com CNPJ"
+        }
+    }
+]

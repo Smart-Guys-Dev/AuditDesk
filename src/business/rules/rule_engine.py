@@ -334,6 +334,101 @@ class RuleEngine:
                             modified = True
             
             return modified
+        
+        # Ação especial: Converte PJ para PF com rotação de profissionais
+        if action_type == "corrigir_pj_para_pf_rotativo":
+            # Lista de profissionais para rotação (evita glosa de Consulta Retorno)
+            PROFISSIONAIS = [
+                {
+                    "nome": "RODRIGO DOMINGUES LARAYA",
+                    "cpf": "20034717153",
+                    "cd_prest": "11021",
+                    "crm": "5432",
+                    "uf": "50",
+                    "cbo": "225125"
+                },
+                {
+                    "nome": "ROTTERDAM PEREIRA GUIMARAES",
+                    "cpf": "60829800182",
+                    "cd_prest": "198063",
+                    "crm": "10730",
+                    "uf": "50",
+                    "cbo": "225125"
+                },
+                {
+                    "nome": "JUSTINIANO BARBOSA VAVAS",
+                    "cpf": "20033389187",
+                    "cd_prest": "559",
+                    "crm": "1491",
+                    "uf": "50",
+                    "cbo": "225125"
+                },
+                {
+                    "nome": "VICTOR H. M. BONOMO",
+                    "cpf": "04700094117",
+                    "cd_prest": "18763",
+                    "crm": "8108",
+                    "uf": "50",
+                    "cbo": "225125"
+                }
+            ]
+            
+            # Contador para rotação (usa atributo da instância para manter estado entre chamadas)
+            if not hasattr(self, '_pf_rotation_counter'):
+                self._pf_rotation_counter = {}
+            
+            # Obter beneficiário para agrupar
+            beneficiario = None
+            parent_guia = element.getparent()
+            if parent_guia is not None:
+                nr_inscricao = self.xml_reader.find_elements_by_xpath(parent_guia, "./ptu:nr_Inscricao")
+                if nr_inscricao and nr_inscricao[0].text:
+                    beneficiario = nr_inscricao[0].text
+            
+            # Se não conseguiu identificar beneficiário, usa contador global
+            key = beneficiario or "_global"
+            
+            # Incrementar contador e obter profissional
+            if key not in self._pf_rotation_counter:
+                self._pf_rotation_counter[key] = 0
+            
+            idx = self._pf_rotation_counter[key] % len(PROFISSIONAIS)
+            prof = PROFISSIONAIS[idx]
+            self._pf_rotation_counter[key] += 1
+            
+            modified = False
+            
+            # Remover CNPJ se existir
+            cnpj_nodes = self.xml_reader.find_elements_by_xpath(element, "./ptu:equipe_Profissional/ptu:cdCnpjCpf/ptu:cd_cnpj")
+            for cnpj_node in cnpj_nodes:
+                parent = cnpj_node.getparent()
+                if parent is not None:
+                    parent.remove(cnpj_node)
+                    modified = True
+            
+            # Função auxiliar para garantir tag com conteúdo
+            def set_tag(xpath, valor):
+                nonlocal modified
+                nodes = self.xml_reader.find_elements_by_xpath(element, xpath)
+                if nodes:
+                    if nodes[0].text != valor:
+                        nodes[0].text = valor
+                        modified = True
+            
+            # Atualizar dados do profissional
+            set_tag("./ptu:equipe_Profissional/ptu:Prestador/ptu:cd_Uni_Prest", "51")
+            set_tag("./ptu:equipe_Profissional/ptu:Prestador/ptu:cd_Prest", prof["cd_prest"])
+            set_tag("./ptu:equipe_Profissional/ptu:cdCnpjCpf/ptu:cd_cpf", prof["cpf"])
+            set_tag("./ptu:equipe_Profissional/ptu:nm_Profissional", prof["nome"])
+            set_tag("./ptu:equipe_Profissional/ptu:dadosConselho/ptu:sg_Conselho", "CRM")
+            set_tag("./ptu:equipe_Profissional/ptu:dadosConselho/ptu:nr_Conselho", prof["crm"])
+            set_tag("./ptu:equipe_Profissional/ptu:dadosConselho/ptu:UF", prof["uf"])
+            set_tag("./ptu:equipe_Profissional/ptu:CBO", prof["cbo"])
+            
+            if modified:
+                logger.info(f"PJ→PF Rotativo: Beneficiário {key} → {prof['nome']}")
+            
+            return modified
 
         if not tag_alvo_xpath: return False
 
