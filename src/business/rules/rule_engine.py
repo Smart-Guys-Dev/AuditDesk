@@ -275,16 +275,39 @@ class RuleEngine:
             import re
             modified = False
             
+            def tem_dia_31(texto):
+                """Verifica se o texto contém dia 31 em qualquer formato"""
+                if not texto:
+                    return False
+                # Formato YYYY/MM/DD (ex: 2025/10/3123:59:00-04)
+                if '/31' in texto:
+                    return True
+                # Formato YYYYMMDD (ex: 20251031)
+                if re.search(r'\d{4}(01|03|05|07|08|10|12)31', texto):
+                    return True
+                return False
+            
             def substituir_dia_31(texto):
-                """Substitui /31 por /30 em datas no formato YYYY/MM/DD"""
-                if texto and '/31' in texto:
-                    return re.sub(r'/31(?=\d{2}:\d{2}:\d{2}|$)', '/30', texto)
-                return texto
+                """Substitui dia 31 por dia 30 em ambos formatos de data"""
+                if not texto:
+                    return texto
+                
+                resultado = texto
+                
+                # Formato YYYY/MM/DD (ex: 2025/10/3123:59:00-04)
+                if '/31' in resultado:
+                    resultado = re.sub(r'/31(?=\d{2}:\d{2}:\d{2}|$)', '/30', resultado)
+                
+                # Formato YYYYMMDD (ex: 20251031 -> 20251030)
+                # Meses com 31 dias: 01, 03, 05, 07, 08, 10, 12
+                resultado = re.sub(r'(\d{4})(01|03|05|07|08|10|12)31', r'\g<1>\g<2>30', resultado)
+                
+                return resultado
             
             # Corrigir dt_FimFaturamento
             dt_fim_nodes = self.xml_reader.find_elements_by_xpath(element, ".//ptu:dt_FimFaturamento")
             for dt_node in dt_fim_nodes:
-                if dt_node.text and '/31' in dt_node.text:
+                if tem_dia_31(dt_node.text):
                     novo_valor = substituir_dia_31(dt_node.text)
                     logger.info(f"Corrigindo dt_FimFaturamento: {dt_node.text} -> {novo_valor}")
                     dt_node.text = novo_valor
@@ -295,7 +318,7 @@ class RuleEngine:
             for proc in procs:
                 dt_exec_nodes = self.xml_reader.find_elements_by_xpath(proc, ".//ptu:dt_Execucao")
                 for dt_node in dt_exec_nodes:
-                    if dt_node.text and '/31' in dt_node.text:
+                    if tem_dia_31(dt_node.text):
                         novo_valor = substituir_dia_31(dt_node.text)
                         logger.info(f"Corrigindo dt_Execucao: {dt_node.text} -> {novo_valor}")
                         dt_node.text = novo_valor
@@ -304,7 +327,7 @@ class RuleEngine:
                 for tag_data in ["dt_Atendimento", "dt_Inicial", "dt_Final"]:
                     dt_nodes = self.xml_reader.find_elements_by_xpath(proc, f".//ptu:{tag_data}")
                     for dt_node in dt_nodes:
-                        if dt_node.text and '/31' in dt_node.text:
+                        if tem_dia_31(dt_node.text):
                             novo_valor = substituir_dia_31(dt_node.text)
                             logger.info(f"Corrigindo {tag_data}: {dt_node.text} -> {novo_valor}")
                             dt_node.text = novo_valor
