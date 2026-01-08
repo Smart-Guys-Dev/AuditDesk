@@ -448,13 +448,29 @@ class RuleEngine:
                 {"nome": "MARCIO ANDRE BUENO", "cd_prest": "1952", "crm": "3458", "uf": "50", "cbo": "225150", "tp_participacao": "13"}
             ]
             
-            # Contador para rotação
+            # Contador por beneficiário (garante médicos diferentes para mesma carteirinha)
             if not hasattr(self, '_intensivista_rotation_counter'):
-                self._intensivista_rotation_counter = 0
+                self._intensivista_rotation_counter = {}
             
-            idx = self._intensivista_rotation_counter % len(INTENSIVISTAS)
+            # Obter id_Benef do beneficiário
+            beneficiario_key = "_global"
+            parent = element.getparent()
+            while parent is not None:
+                id_benef = self.xml_reader.find_elements_by_xpath(parent, ".//ptu:dadosBeneficiario/ptu:id_Benef")
+                if id_benef and id_benef[0].text:
+                    beneficiario_key = id_benef[0].text
+                    break
+                parent = parent.getparent()
+            
+            # Inicializar contador para este beneficiário
+            if beneficiario_key not in self._intensivista_rotation_counter:
+                self._intensivista_rotation_counter[beneficiario_key] = 0
+            
+            idx = self._intensivista_rotation_counter[beneficiario_key] % len(INTENSIVISTAS)
             prof = INTENSIVISTAS[idx]
-            self._intensivista_rotation_counter += 1
+            self._intensivista_rotation_counter[beneficiario_key] += 1
+            
+            logger.debug(f"Intensivista: Beneficiário {beneficiario_key} → {prof['nome']} (índice {idx})")
             
             modified = False
             
