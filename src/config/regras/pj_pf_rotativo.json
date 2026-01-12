@@ -1,7 +1,7 @@
 [
     {
         "id": "REGRA_CORRIGIR_EQUIPE_PJ_PARA_PF_ROTATIVO",
-        "descricao": "Para prestador 11101: Converte equipe PJ para PF com rotação de profissionais. Evita glosa de Consulta Retorno quando beneficiário tem múltiplas consultas.",
+        "descricao": "Converte equipe PJ para PF quando sg_Conselho=OUT (dados genéricos). Rotação de profissionais evita glosa de duplicidade.",
         "ativo": true,
         "condicoes": {
             "tipo_elemento": "procedimentosExecutados",
@@ -22,6 +22,14 @@
                             "xpath": "./ptu:equipe_Profissional/ptu:cdCnpjCpf/ptu:cd_cnpj",
                             "tipo_comparacao": "existe"
                         }
+                    },
+                    {
+                        "condicao_tag_valor": {
+                            "xpath": "./ptu:equipe_Profissional/ptu:dadosConselho/ptu:sg_Conselho",
+                            "valor_permitido": [
+                                "OUT"
+                            ]
+                        }
                     }
                 ]
             }
@@ -29,11 +37,11 @@
         "acao": {
             "tipo_acao": "corrigir_pj_para_pf_rotativo"
         },
-        "log_sucesso": "Equipe PJ convertida para PF com rotação de profissionais.",
+        "log_sucesso": "Equipe PJ/OUT convertida para PF com rotação de profissionais.",
         "metadata_glosa": {
             "categoria": "GLOSA_ITEM",
             "impacto": "ALTO",
-            "razao": "Serviços que exigem PF não podem ter equipe com CNPJ"
+            "razao": "Dados genéricos (sg_Conselho=OUT) precisam ser substituídos por profissional válido"
         }
     }
 ]
