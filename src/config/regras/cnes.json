@@ -490,5 +490,46 @@
       "razao": "CNES incorreto causa glosa total da guia pela operadora",
       "contabilizar": true
     }
+  },
+  {
+    "id": "REGRA_GARANTIR_CNES_ABRACE_43253789000103",
+    "descricao": "Garante que o CNES (3409406) esteja correto para o prestador ABRACE CLINICA COMPORTAMENTAL LTDA (CNPJ 43253789000103).",
+    "ativo": true,
+    "condicoes": {
+      "tipo_elemento": "dadosExecutante",
+      "condicao_multipla": {
+        "tipo": "AND",
+        "sub_condicoes": [
+          {
+            "condicao_tag_valor": {
+              "xpath": "./ptu:CPF_CNPJ/ptu:cd_cnpj",
+              "valor_permitido": [
+                "43253789000103"
+              ]
+            }
+          },
+          {
+            "condicao_tag_valor": {
+              "xpath": "./ptu:CNES",
+              "tipo_comparacao": "valor_atual_diferente",
+              "valor_atual": "3409406"
+            }
+          }
+        ]
+      }
+    },
+    "acao": {
+      "tipo_acao": "garantir_tag_com_conteudo",
+      "tag_alvo": "./ptu:CNES",
+      "novo_conteudo": "3409406",
+      "tag_referencia_posicao": "./ptu:CPF_CNPJ"
+    },
+    "log_sucesso": "CNES do prestador 43253789000103 corrigido/inserido para 3409406.",
+    "metadata_glosa": {
+      "categoria": "GLOSA_GUIA",
+      "impacto": "ALTO",
+      "razao": "CNES incorreto causa glosa total da guia pela operadora",
+      "contabilizar": true
+    }
   }
 ]
