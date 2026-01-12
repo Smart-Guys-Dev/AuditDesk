@@ -304,24 +304,31 @@ class RuleEngine:
                 
                 return resultado
             
-            # Corrigir dt_FimFaturamento (apenas se dias forem diferentes do dt_IniFaturamento)
+            # Corrigir dt_FimFaturamento (apenas se período > 30 dias)
             dt_fim_nodes = self.xml_reader.find_elements_by_xpath(element, ".//ptu:dt_FimFaturamento")
             dt_ini_nodes = self.xml_reader.find_elements_by_xpath(element, ".//ptu:dt_IniFaturamento")
             
             for dt_node in dt_fim_nodes:
                 if tem_dia_31(dt_node.text):
-                    # Verificar se dt_IniFaturamento também é dia 31 do mesmo dia
-                    eh_mesmo_dia = False
+                    # Verificar se período de internação é <= 30 dias (válido)
+                    periodo_valido = False
                     if dt_ini_nodes:
+                        from datetime import datetime
                         ini_text = dt_ini_nodes[0].text or ""
                         fim_text = dt_node.text or ""
-                        # Comparar apenas a parte da data (YYYY/MM/DD)
-                        ini_data = ini_text[:10] if len(ini_text) >= 10 else ini_text
-                        fim_data = fim_text[:10] if len(fim_text) >= 10 else fim_text
-                        eh_mesmo_dia = (ini_data == fim_data)
+                        try:
+                            # Extrair data (YYYY/MM/DD)
+                            ini_data_str = ini_text[:10].replace("/", "-")
+                            fim_data_str = fim_text[:10].replace("/", "-")
+                            ini_data = datetime.strptime(ini_data_str, "%Y-%m-%d")
+                            fim_data = datetime.strptime(fim_data_str, "%Y-%m-%d")
+                            diferenca_dias = (fim_data - ini_data).days
+                            periodo_valido = (diferenca_dias <= 30)
+                        except (ValueError, IndexError):
+                            periodo_valido = False
                     
-                    if eh_mesmo_dia:
-                        logger.debug(f"dt_FimFaturamento dia 31 mantido (mesmo dia que dt_IniFaturamento): {dt_node.text}")
+                    if periodo_valido:
+                        logger.debug(f"dt_FimFaturamento dia 31 mantido (período <= 30 dias): {dt_node.text}")
                     else:
                         novo_valor = substituir_dia_31(dt_node.text)
                         logger.info(f"Corrigindo dt_FimFaturamento: {dt_node.text} -> {novo_valor}")
