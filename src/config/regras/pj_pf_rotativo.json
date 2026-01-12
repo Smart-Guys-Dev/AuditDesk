@@ -1,7 +1,7 @@
 [
     {
         "id": "REGRA_CORRIGIR_EQUIPE_PJ_PARA_PF_ROTATIVO",
-        "descricao": "Converte equipe PJ para PF quando sg_Conselho=OUT (dados genéricos). Rotação de profissionais evita glosa de duplicidade.",
+        "descricao": "Converte equipe PJ para PF quando sg_Conselho=OUT OU nome institucional (HOSPITAL, CLINICA, UNIMED, PLANTONISTA). Rotação evita glosa de duplicidade.",
         "ativo": true,
         "condicoes": {
             "tipo_elemento": "procedimentosExecutados",
@@ -24,10 +24,45 @@
                         }
                     },
                     {
-                        "condicao_tag_valor": {
-                            "xpath": "./ptu:equipe_Profissional/ptu:dadosConselho/ptu:sg_Conselho",
-                            "valor_permitido": [
-                                "OUT"
+                        "condicao_multipla": {
+                            "tipo": "OR",
+                            "sub_condicoes": [
+                                {
+                                    "condicao_tag_valor": {
+                                        "xpath": "./ptu:equipe_Profissional/ptu:dadosConselho/ptu:sg_Conselho",
+                                        "valor_permitido": [
+                                            "OUT"
+                                        ]
+                                    }
+                                },
+                                {
+                                    "condicao_tag_valor": {
+                                        "xpath": "./ptu:equipe_Profissional/ptu:nm_Profissional",
+                                        "tipo_comparacao": "contem_inicio",
+                                        "valor_atual": "HOSPITAL"
+                                    }
+                                },
+                                {
+                                    "condicao_tag_valor": {
+                                        "xpath": "./ptu:equipe_Profissional/ptu:nm_Profissional",
+                                        "tipo_comparacao": "contem_inicio",
+                                        "valor_atual": "CLINICA"
+                                    }
+                                },
+                                {
+                                    "condicao_tag_valor": {
+                                        "xpath": "./ptu:equipe_Profissional/ptu:nm_Profissional",
+                                        "tipo_comparacao": "contem_inicio",
+                                        "valor_atual": "UNIMED"
+                                    }
+                                },
+                                {
+                                    "condicao_tag_valor": {
+                                        "xpath": "./ptu:equipe_Profissional/ptu:nm_Profissional",
+                                        "tipo_comparacao": "contem_inicio",
+                                        "valor_atual": "PLANTONISTA"
+                                    }
+                                }
                             ]
                         }
                     }
@@ -37,11 +72,11 @@
         "acao": {
             "tipo_acao": "corrigir_pj_para_pf_rotativo"
         },
-        "log_sucesso": "Equipe PJ/OUT convertida para PF com rotação de profissionais.",
+        "log_sucesso": "Equipe PJ com dados genéricos convertida para PF com rotação.",
         "metadata_glosa": {
             "categoria": "GLOSA_ITEM",
             "impacto": "ALTO",
-            "razao": "Dados genéricos (sg_Conselho=OUT) precisam ser substituídos por profissional válido"
+            "razao": "Dados genéricos (sg_Conselho=OUT ou nome institucional) precisam ser substituídos"
         }
     }
 ]
