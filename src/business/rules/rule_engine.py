@@ -398,12 +398,15 @@ class RuleEngine:
             
             modified = False
             
-            # Remover CNPJ se existir
+            # Remover CNPJ se existir e criar cd_cpf
             cnpj_nodes = self.xml_reader.find_elements_by_xpath(element, "./ptu:equipe_Profissional/ptu:cdCnpjCpf/ptu:cd_cnpj")
             for cnpj_node in cnpj_nodes:
                 parent = cnpj_node.getparent()
                 if parent is not None:
                     parent.remove(cnpj_node)
+                    # Criar tag cd_cpf dentro do cdCnpjCpf
+                    cpf_tag = etree.SubElement(parent, "{http://www.unimed.coop.br/schemas/V4_0/PTU}cd_cpf")
+                    cpf_tag.text = prof["cpf"]
                     modified = True
             
             # Função auxiliar para garantir tag com conteúdo
@@ -483,12 +486,15 @@ class RuleEngine:
                         nodes[0].text = valor
                         modified = True
             
-            # Remover CNPJ se existir (caso seja PJ)
+            # Remover CNPJ se existir e criar cd_cpf
             cnpj_nodes = self.xml_reader.find_elements_by_xpath(element, "./ptu:equipe_Profissional/ptu:cdCnpjCpf/ptu:cd_cnpj")
             for cnpj_node in cnpj_nodes:
                 parent = cnpj_node.getparent()
                 if parent is not None:
                     parent.remove(cnpj_node)
+                    # Criar tag cd_cpf dentro do cdCnpjCpf
+                    cpf_tag = etree.SubElement(parent, "{http://www.unimed.coop.br/schemas/V4_0/PTU}cd_cpf")
+                    cpf_tag.text = prof["cpf"]
                     modified = True
             
             # Atualizar dados do intensivista
