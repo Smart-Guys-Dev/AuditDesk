@@ -480,7 +480,7 @@ class RuleEngine:
                 {"nome": "SERGIO RENATO DE ALMEIDA COUTO", "cpf": "66407931720", "cd_prest": "763", "crm": "2037", "uf": "50", "cbo": "225150", "tp_participacao": "13"},
                 {"nome": "GABRIELA CASAL SANTOS YUASSA", "cpf": "22065893893", "cd_prest": "2180", "crm": "5912", "uf": "50", "cbo": "225150", "tp_participacao": "13"},
                 {"nome": "CASSIA ASSIS VEDOVATTE", "cpf": "00130363197", "cd_prest": "2055", "crm": "5825", "uf": "50", "cbo": "225150", "tp_participacao": "13"},
-                {"nome": "ANDRE PAULO DE MEDEIROS OLIVEIRA", "cpf": "47812443259", "cd_prest": "1764", "crm": "3959", "uf": "50", "cbo": "225150", "tp_participacao": "13"},
+                {"nome": "ANDRE PAULO DE MEDEIROS OLIVEIRA", "cpf": "47812443272", "cd_prest": "1764", "crm": "3959", "uf": "50", "cbo": "225150", "tp_participacao": "13"},
                 {"nome": "MARCIO ANDRE BUENO", "cpf": "18155662802", "cd_prest": "1952", "crm": "3458", "uf": "50", "cbo": "225150", "tp_participacao": "13"}
             ]
             
