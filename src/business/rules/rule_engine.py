@@ -322,7 +322,7 @@ class RuleEngine:
                             fim_data_str = fim_text[:10].replace("/", "-")
                             ini_data = datetime.strptime(ini_data_str, "%Y-%m-%d")
                             fim_data = datetime.strptime(fim_data_str, "%Y-%m-%d")
-                            diferenca_dias = (fim_data - ini_data).days
+                            diferenca_dias = (fim_data - ini_data).days + 1  # Contagem inclusiva
                             periodo_valido = (diferenca_dias <= 30)
                         except (ValueError, IndexError):
                             periodo_valido = False
