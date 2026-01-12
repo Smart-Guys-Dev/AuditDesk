@@ -398,14 +398,15 @@ class RuleEngine:
             
             modified = False
             
-            # Remover CNPJ se existir e criar cd_cpf
+            # Remover CNPJ se existir e criar cd_cpf com namespace correto
+            PTU_NS = "http://www.unimed.coop.br/schemas/V4_0/PTU"
             cnpj_nodes = self.xml_reader.find_elements_by_xpath(element, "./ptu:equipe_Profissional/ptu:cdCnpjCpf/ptu:cd_cnpj")
             for cnpj_node in cnpj_nodes:
                 parent = cnpj_node.getparent()
                 if parent is not None:
                     parent.remove(cnpj_node)
-                    # Criar tag cd_cpf dentro do cdCnpjCpf
-                    cpf_tag = etree.SubElement(parent, "{http://www.unimed.coop.br/schemas/V4_0/PTU}cd_cpf")
+                    # Criar tag cd_cpf usando o QName para manter o prefixo ptu
+                    cpf_tag = etree.SubElement(parent, etree.QName(PTU_NS, "cd_cpf"), nsmap=parent.nsmap)
                     cpf_tag.text = prof["cpf"]
                     modified = True
             
@@ -486,14 +487,15 @@ class RuleEngine:
                         nodes[0].text = valor
                         modified = True
             
-            # Remover CNPJ se existir e criar cd_cpf
+            # Remover CNPJ se existir e criar cd_cpf com namespace correto
+            PTU_NS = "http://www.unimed.coop.br/schemas/V4_0/PTU"
             cnpj_nodes = self.xml_reader.find_elements_by_xpath(element, "./ptu:equipe_Profissional/ptu:cdCnpjCpf/ptu:cd_cnpj")
             for cnpj_node in cnpj_nodes:
                 parent = cnpj_node.getparent()
                 if parent is not None:
                     parent.remove(cnpj_node)
-                    # Criar tag cd_cpf dentro do cdCnpjCpf
-                    cpf_tag = etree.SubElement(parent, "{http://www.unimed.coop.br/schemas/V4_0/PTU}cd_cpf")
+                    # Criar tag cd_cpf usando o QName para manter o prefixo ptu
+                    cpf_tag = etree.SubElement(parent, etree.QName(PTU_NS, "cd_cpf"), nsmap=parent.nsmap)
                     cpf_tag.text = prof["cpf"]
                     modified = True
             
