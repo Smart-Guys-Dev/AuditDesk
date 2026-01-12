@@ -414,15 +414,16 @@ class RuleEngine:
             
             modified = False
             
-            # Remover CNPJ se existir e criar cd_cpf com namespace correto
-            PTU_NS = "http://www.unimed.coop.br/schemas/V4_0/PTU"
+            # Remover CNPJ se existir e criar cd_cpf com namespace do elemento original
             cnpj_nodes = self.xml_reader.find_elements_by_xpath(element, "./ptu:equipe_Profissional/ptu:cdCnpjCpf/ptu:cd_cnpj")
             for cnpj_node in cnpj_nodes:
                 parent = cnpj_node.getparent()
                 if parent is not None:
+                    # Pegar namespace do próprio elemento cd_cnpj
+                    ns = etree.QName(cnpj_node).namespace
                     parent.remove(cnpj_node)
-                    # Criar tag cd_cpf usando o QName para manter o prefixo ptu
-                    cpf_tag = etree.SubElement(parent, etree.QName(PTU_NS, "cd_cpf"), nsmap=parent.nsmap)
+                    # Criar tag cd_cpf com o mesmo namespace do cd_cnpj removido
+                    cpf_tag = etree.SubElement(parent, f"{{{ns}}}cd_cpf")
                     cpf_tag.text = prof["cpf"]
                     modified = True
             
@@ -503,15 +504,16 @@ class RuleEngine:
                         nodes[0].text = valor
                         modified = True
             
-            # Remover CNPJ se existir e criar cd_cpf com namespace correto
-            PTU_NS = "http://www.unimed.coop.br/schemas/V4_0/PTU"
+            # Remover CNPJ se existir e criar cd_cpf com namespace do elemento original
             cnpj_nodes = self.xml_reader.find_elements_by_xpath(element, "./ptu:equipe_Profissional/ptu:cdCnpjCpf/ptu:cd_cnpj")
             for cnpj_node in cnpj_nodes:
                 parent = cnpj_node.getparent()
                 if parent is not None:
+                    # Pegar namespace do próprio elemento cd_cnpj
+                    ns = etree.QName(cnpj_node).namespace
                     parent.remove(cnpj_node)
-                    # Criar tag cd_cpf usando o QName para manter o prefixo ptu
-                    cpf_tag = etree.SubElement(parent, etree.QName(PTU_NS, "cd_cpf"), nsmap=parent.nsmap)
+                    # Criar tag cd_cpf com o mesmo namespace do cd_cnpj removido
+                    cpf_tag = etree.SubElement(parent, f"{{{ns}}}cd_cpf")
                     cpf_tag.text = prof["cpf"]
                     modified = True
             
