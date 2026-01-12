@@ -373,6 +373,22 @@ class RuleEngine:
                 }
             ]
             
+            # VALIDAÇÃO DE SEGURANÇA: só aplica quando dados são genéricos
+            # Verifica sg_Conselho = OUT ou nome institucional
+            sg_conselho_nodes = self.xml_reader.find_elements_by_xpath(element, "./ptu:equipe_Profissional/ptu:dadosConselho/ptu:sg_Conselho")
+            nm_profissional_nodes = self.xml_reader.find_elements_by_xpath(element, "./ptu:equipe_Profissional/ptu:nm_Profissional")
+            
+            sg_conselho = sg_conselho_nodes[0].text if sg_conselho_nodes else ""
+            nm_profissional = nm_profissional_nodes[0].text if nm_profissional_nodes else ""
+            
+            PREFIXOS_INSTITUCIONAIS = ["HOSPITAL", "CLINICA", "CLÍNICA", "UNIMED", "PLANTONISTA"]
+            eh_nome_institucional = any(nm_profissional.upper().startswith(p) for p in PREFIXOS_INSTITUCIONAIS) if nm_profissional else False
+            
+            if sg_conselho != "OUT" and not eh_nome_institucional:
+                # Dados parecem válidos (conselho não é OUT e nome não é institucional)
+                logger.debug(f"PJ→PF Ignorado: {nm_profissional} (sg_Conselho={sg_conselho})")
+                return False
+            
             # Contador para rotação (usa atributo da instância para manter estado entre chamadas)
             if not hasattr(self, '_pf_rotation_counter'):
                 self._pf_rotation_counter = {}
