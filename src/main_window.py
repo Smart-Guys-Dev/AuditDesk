@@ -877,6 +877,25 @@ class MainWindow(QMainWindow):
         if os.path.exists(icon_path):
             self.setWindowIcon(QIcon(icon_path))
         
+        # 🖥️ Detectar resolução da tela e adaptar interface
+        screen = QApplication.primaryScreen().geometry()
+        screen_width = screen.width()
+        screen_height = screen.height()
+        
+        # Definir largura da sidebar baseado na resolução
+        if screen_width <= 1366:
+            self.sidebar_width = 180
+            window_width = min(1280, screen_width - 50)
+            window_height = min(700, screen_height - 80)
+        elif screen_width <= 1920:
+            self.sidebar_width = 220
+            window_width = min(1400, screen_width - 100)
+            window_height = min(850, screen_height - 100)
+        else:
+            self.sidebar_width = 260
+            window_width = min(1600, screen_width - 150)
+            window_height = min(950, screen_height - 100)
+        
         # Restaurar geometria e estado da janela
         saved_geometry = app_settings.get_window_geometry()
         saved_state = app_settings.get_window_state()
@@ -884,10 +903,14 @@ class MainWindow(QMainWindow):
         if saved_geometry:
             self.restoreGeometry(saved_geometry)
         else:
-            self.setGeometry(200, 200, 1200, 800)
+            # Centralizar janela na tela
+            x = (screen_width - window_width) // 2
+            y = (screen_height - window_height) // 2
+            self.setGeometry(x, y, window_width, window_height)
         
         if saved_state:
             self.restoreState(saved_state)
+
         
         # Carregar estilos do arquivo externo
         self.load_styles()
@@ -902,7 +925,7 @@ class MainWindow(QMainWindow):
         # Sidebar
         sidebar_widget = QWidget()
         sidebar_widget.setObjectName("sidebar")
-        sidebar_widget.setFixedWidth(260)
+        sidebar_widget.setFixedWidth(self.sidebar_width)  # Largura adaptável à resolução
         sidebar_widget.setStyleSheet("""
             QWidget#sidebar {
                 background: qlineargradient(
