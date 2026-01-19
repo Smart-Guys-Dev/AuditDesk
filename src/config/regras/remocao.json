@@ -226,5 +226,121 @@
             "impacto": "ALTO",
             "razao": "Códigos de remoção devem ter complemento informado"
         }
+    },
+    {
+        "id": "REGRA_REMOCAO_CD_EXCECAO_ZERO",
+        "descricao": "Para códigos de Remoção, se cd_Excecao estiver com valor diferente de '0', altera para '0'.",
+        "ativo": true,
+        "condicoes": {
+            "tipo_elemento": "procedimentosExecutados",
+            "condicao_multipla": {
+                "tipo": "AND",
+                "sub_condicoes": [
+                    {
+                        "condicao_tag_valor": {
+                            "xpath": "./ptu:procedimentos/ptu:cd_Servico",
+                            "valor_permitido": [
+                                "60018658",
+                                "60018666",
+                                "60018682",
+                                "60018690",
+                                "60018712",
+                                "60018720",
+                                "60018747",
+                                "60018755",
+                                "60018895",
+                                "60018909",
+                                "60018925",
+                                "60018933",
+                                "60018950",
+                                "60018968",
+                                "60018984",
+                                "60018992",
+                                "60019131",
+                                "60019140",
+                                "60019166",
+                                "60019174",
+                                "60019190",
+                                "60019204",
+                                "60019220",
+                                "60019239",
+                                "60019859",
+                                "60019867",
+                                "60019883",
+                                "60019891",
+                                "60019913",
+                                "60019921",
+                                "60019948",
+                                "60019956",
+                                "60020091",
+                                "60020105",
+                                "60020121",
+                                "60020130",
+                                "60020156",
+                                "60020164",
+                                "60020180",
+                                "60020199",
+                                "60020326",
+                                "60020334",
+                                "60020342",
+                                "60020350",
+                                "60020369",
+                                "60020377",
+                                "60020385",
+                                "60020393",
+                                "60020407",
+                                "60020415",
+                                "60020423",
+                                "60020431",
+                                "60020814",
+                                "60020822",
+                                "60020849",
+                                "60020857",
+                                "60020873",
+                                "60020881",
+                                "60020903",
+                                "60020911",
+                                "60021055",
+                                "60021063",
+                                "60021080",
+                                "60021098",
+                                "60021110",
+                                "60021128",
+                                "60021144",
+                                "60021152",
+                                "60022191",
+                                "60018631",
+                                "60034777",
+                                "60034807",
+                                "60034823",
+                                "60034858",
+                                "60034874",
+                                "60034904",
+                                "60034920",
+                                "60034939"
+                            ]
+                        }
+                    },
+                    {
+                        "condicao_tag_valor": {
+                            "xpath": "./ptu:cd_Excecao",
+                            "tipo_comparacao": "diferente",
+                            "valor": "0"
+                        }
+                    }
+                ]
+            }
+        },
+        "acao": {
+            "tipo_acao": "alterar_tag",
+            "tag_alvo": "./ptu:cd_Excecao",
+            "novo_valor": "0"
+        },
+        "log_sucesso": "Campo cd_Excecao alterado para '0' em código de remoção.",
+        "metadata_glosa": {
+            "categoria": "GLOSA_ITEM",
+            "impacto": "MEDIO",
+            "razao": "Códigos de remoção não devem ter exceção diferente de 0"
+        }
     }
 ]

@@ -218,6 +218,10 @@ class RuleEngine:
                 # Verifica se o texto contém o valor especificado
                 valor = str(tag_cond.get("valor", ""))
                 return valor in str(node_text)
+            elif compare_type == "diferente":
+                # Verifica se o texto é diferente do valor especificado
+                valor = str(tag_cond.get("valor", ""))
+                return str(node_text) != valor
             elif "valor_permitido" in tag_cond:
                 return node_text in tag_cond["valor_permitido"]
         
@@ -663,6 +667,14 @@ class RuleEngine:
                 new_content = str(action_config.get("novo_conteudo", ""))
                 if target_nodes[0].text != new_content:
                     target_nodes[0].text = new_content
+                    modified = True
+        
+        elif action_type == "alterar_tag":
+            # Altera o valor de uma tag para um novo valor
+            if target_nodes:
+                novo_valor = str(action_config.get("novo_valor", ""))
+                if target_nodes[0].text != novo_valor:
+                    target_nodes[0].text = novo_valor
                     modified = True
         
         elif action_type == "remover_tag_inteira":
