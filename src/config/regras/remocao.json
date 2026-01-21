@@ -323,7 +323,7 @@
                     },
                     {
                         "condicao_tag_valor": {
-                            "xpath": "./ptu:cd_Excecao",
+                            "xpath": "../ptu:cd_Excecao",
                             "tipo_comparacao": "diferente",
                             "valor": "0"
                         }
@@ -333,7 +333,7 @@
         },
         "acao": {
             "tipo_acao": "alterar_tag",
-            "tag_alvo": "./ptu:cd_Excecao",
+            "tag_alvo": "../ptu:cd_Excecao",
             "novo_valor": "0"
         },
         "log_sucesso": "Campo cd_Excecao alterado para '0' em código de remoção.",
