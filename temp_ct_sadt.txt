@@ -1,0 +1,66 @@
+﻿	<complexType name="ct_SADT">
+		<sequence>
+			<element name="dadosBeneficiario">
+				<complexType>
+					<complexContent>
+						<extension base="ptu:ct_identificacaoBenef">
+							<sequence>
+								<element name="nm_Benef" type="ptu:st_nomeBenef" minOccurs="0"/>
+								<element name="id_RN" type="ptu:st_SimNao"/>
+								<element name="tp_Paciente" type="ptu:st_tpPaciente"/>
+							</sequence>
+						</extension>
+					</complexContent>
+				</complexType>
+			</element>
+			<element name="dadosSolicitante" type="ptu:ct_dadosSolicitante"/>
+			<element name="dadosExecutante" type="ptu:ct_dadosExecutante"/>
+			<element name="dadosAtendimento" type="ptu:ct_dadosAtendimento"/>
+			<element name="dadosGuia">
+				<complexType>
+					<complexContent>
+						<extension base="ptu:ct_dadosGuias_SADT">
+							<sequence>
+								<element name="id_GuiaPrincipal" type="ptu:st_SimNao"/>
+							</sequence>
+						</extension>
+					</complexContent>
+				</complexType>
+			</element>
+			<element name="reapresentacaoGlosado" type="ptu:ct_reapresentacaoGlosado" minOccurs="0"/>
+		</sequence>
+	</complexType>
+	<!-- ******************************************************************************************************************************************************************** -->
+	<!-- ************************************** Guia de Interna��o ********************************************************************************************************** -->
+	<!--********************************************************************************************************************************************************************* -->
+	<complexType name="ct_Internacao">
+		<sequence>
+			<element name="dadosBeneficiario">
+				<complexType>
+					<complexContent>
+						<extension base="ptu:ct_identificacaoBenef">
+							<sequence>
+								<element name="nm_Benef" type="ptu:st_nomeBenef" minOccurs="0"/>
+								<element name="id_RN" type="ptu:st_SimNao"/>
+								<element name="tp_Paciente" type="ptu:st_tpPaciente"/>
+							</sequence>
+						</extension>
+					</complexContent>
+				</complexType>
+			</element>
+			<element name="dadosSolicitante" type="ptu:ct_dadosSolicitante"/>
+			<element name="dadosExecutante" type="ptu:ct_dadosExecutanteInter"/>
+			<element name="dadosInternacao" type="ptu:ct_dadosInternacao" maxOccurs="1"/>
+			<element name="dadosSaidaInternacao" type="ptu:ct_dadosSaidaInternacao" maxOccurs="1"/>
+			<element name="dadosAuditoria" type="ptu:ct_dadosAuditoria" minOccurs="0"/>
+			<element name="dadosGuia" type="ptu:ct_dadosGuias"/>
+			<element name="reapresentacaoGlosado" type="ptu:ct_reapresentacaoGlosado" minOccurs="0"/>
+		</sequence>
+	</complexType>
+	<!-- ******************************************************************************************************************************************************************* -->
+	<!-- ************************************** Guia de Honor�rio ********************************************************************************************************** -->
+	<!-- ******************************************************************************************************************************************************************* -->
+	<complexType name="ct_Honorarios">
+		<sequence>
+			<element name="dadosBeneficiario">
+				<complexType>
