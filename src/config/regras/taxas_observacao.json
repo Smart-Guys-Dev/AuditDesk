@@ -1,0 +1,55 @@
+[
+    {
+        "id": "REGRA_TAXA_OBSERVACAO_CORRIGIR_HORARIOS",
+        "descricao": "Para taxas de sala de observação (60033681, 60033665), se hr_Inicial = hr_Final OU hr_Inicial = 00:00:00, copia os horários de outro item válido da mesma guia. Conforme boletim GTFI 25/09/2025.",
+        "ativo": true,
+        "condicoes": {
+            "tipo_elemento": "procedimentosExecutados",
+            "condicao_multipla": {
+                "tipo": "AND",
+                "sub_condicoes": [
+                    {
+                        "condicao_tag_valor": {
+                            "xpath": "./ptu:procedimentos/ptu:cd_Servico",
+                            "valor_permitido": [
+                                "60033681",
+                                "60033665"
+                            ]
+                        }
+                    },
+                    {
+                        "condicao_multipla": {
+                            "tipo": "OR",
+                            "sub_condicoes": [
+                                {
+                                    "condicao_horarios_iguais": {
+                                        "xpath_hr_inicial": "./ptu:hr_Inicial",
+                                        "xpath_hr_final": "./ptu:hr_Final"
+                                    }
+                                },
+                                {
+                                    "condicao_tag_valor": {
+                                        "xpath": "./ptu:hr_Inicial",
+                                        "tipo_comparacao": "contem_inicio",
+                                        "valor_atual": "00:00"
+                                    }
+                                }
+                            ]
+                        }
+                    }
+                ]
+            }
+        },
+        "acao": {
+            "tipo_acao": "copiar_horarios_de_outro_item",
+            "tag_hr_inicial": "./ptu:hr_Inicial",
+            "tag_hr_final": "./ptu:hr_Final"
+        },
+        "log_sucesso": "Horários da taxa de observação corrigidos conforme boletim GTFI 25/09/2025.",
+        "metadata_glosa": {
+            "categoria": "CORRECAO_AUTOMATICA",
+            "impacto": "ALTO",
+            "razao": "Taxa de observação requer horários distintos para refletir período de permanência"
+        }
+    }
+]

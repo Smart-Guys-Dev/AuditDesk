@@ -111,5 +111,45 @@
       "impacto": "MEDIO",
       "razao": "Operadora glosa apenas o procedimento específico"
     }
+  },
+  {
+    "id": "REGRA_CORRIGIR_TP_PARTICIPACAO_CAUTERIZACAO_QUIMICA",
+    "descricao": "Corrige o tp_Participacao de 11 (Cirurgião Auxiliar) para 12 (Instrumentador) no procedimento de Cauterização Química (30101107). Dermatologista não requer auxiliar cirúrgico.",
+    "ativo": true,
+    "condicoes": {
+      "tipo_elemento": "equipe_Profissional",
+      "condicao_multipla": {
+        "tipo": "AND",
+        "sub_condicoes": [
+          {
+            "condicao_tag_valor": {
+              "xpath": "../ptu:procedimentos/ptu:cd_Servico",
+              "valor_permitido": [
+                "30101107"
+              ]
+            }
+          },
+          {
+            "condicao_tag_valor": {
+              "xpath": "./ptu:tp_Participacao",
+              "valor_permitido": [
+                "11"
+              ]
+            }
+          }
+        ]
+      }
+    },
+    "acao": {
+      "tipo_acao": "substituir_conteudo_tag",
+      "tag_alvo": "./ptu:tp_Participacao",
+      "novo_conteudo": "12"
+    },
+    "log_sucesso": "tp_Participacao corrigido de 11 para 12 no procedimento de Cauterização Química.",
+    "metadata_glosa": {
+      "categoria": "GLOSA_ITEM",
+      "impacto": "MEDIO",
+      "razao": "Tipo de participação incorreto para procedimento dermatológico"
+    }
   }
 ]

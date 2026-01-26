@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AuditPlus Web - Proposta de Implementação</title>
+    <style>
+        :root {
+            --primary: #2563eb;
+            --primary-dark: #1d4ed8;
+            --secondary: #0f172a;
+            --accent: #06b6d4;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --bg: #f8fafc;
+            --card: #ffffff;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background: var(--bg);
+            color: var(--secondary);
+            line-height: 1.6;
+        }
+        
+        .hero {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: white;
+            padding: 60px 20px;
+            text-align: center;
+        }
+        
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+        
+        .hero .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+        
+        .hero .badge {
+            display: inline-block;
+            background: rgba(255,255,255,0.2);
+            padding: 8px 20px;
+            border-radius: 50px;
+            margin-top: 20px;
+            font-size: 0.9rem;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+        
+        .section-title {
+            font-size: 1.8rem;
+            color: var(--secondary);
+            margin-bottom: 30px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid var(--primary);
+            display: inline-block;
+        }
+        
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            margin-bottom: 50px;
+        }
+        
+        .card {
+            background: var(--card);
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px -5px rgba(0,0,0,0.15);
+        }
+        
+        .card-icon {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+        }
+        
+        .card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+            color: var(--secondary);
+        }
+        
+        .card p {
+            color: #64748b;
+            font-size: 0.95rem;
+        }
+        
+        .tech-stack {
+            background: var(--card);
+            border-radius: 12px;
+            padding: 40px;
+            margin-bottom: 50px;
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);
+        }
+        
+        .tech-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
+        }
+        
+        .tech-item {
+            text-align: center;
+            padding: 25px;
+            background: var(--bg);
+            border-radius: 12px;
+        }
+        
+        .tech-item .tech-name {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--primary);
+            margin-bottom: 5px;
+        }
+        
+        .tech-item .tech-desc {
+            font-size: 0.85rem;
+            color: #64748b;
+        }
+        
+        .tech-item .tech-badge {
+            display: inline-block;
+            background: var(--success);
+            color: white;
+            padding: 4px 12px;
+            border-radius: 50px;
+            font-size: 0.75rem;
+            margin-top: 10px;
+        }
+        
+        .architecture {
+            background: var(--secondary);
+            color: white;
+            border-radius: 12px;
+            padding: 40px;
+            margin-bottom: 50px;
+        }
+        
+        .architecture h2 {
+            color: white;
+            margin-bottom: 30px;
+        }
+        
+        .arch-diagram {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            align-items: center;
+        }
+        
+        .arch-layer {
+            background: rgba(255,255,255,0.1);
+            border: 2px solid rgba(255,255,255,0.2);
+            border-radius: 12px;
+            padding: 25px 50px;
+            text-align: center;
+            width: 100%;
+            max-width: 500px;
+        }
+        
+        .arch-layer.frontend { border-color: var(--accent); }
+        .arch-layer.backend { border-color: var(--success); }
+        .arch-layer.database { border-color: var(--warning); }
+        
+        .arch-layer .layer-title {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            opacity: 0.7;
+            margin-bottom: 5px;
+        }
+        
+        .arch-layer .layer-tech {
+            font-size: 1.3rem;
+            font-weight: 600;
+        }
+        
+        .arch-arrow {
+            font-size: 1.5rem;
+            opacity: 0.5;
+        }
+        
+        .timeline {
+            position: relative;
+            padding-left: 30px;
+        }
+        
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: var(--primary);
+            border-radius: 3px;
+        }
+        
+        .timeline-item {
+            position: relative;
+            padding-bottom: 30px;
+        }
+        
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -34px;
+            top: 5px;
+            width: 12px;
+            height: 12px;
+            background: var(--primary);
+            border-radius: 50%;
+            border: 3px solid white;
+            box-shadow: 0 0 0 3px var(--primary);
+        }
+        
+        .timeline-item h4 {
+            font-size: 1.1rem;
+            color: var(--secondary);
+            margin-bottom: 5px;
+        }
+        
+        .timeline-item p {
+            color: #64748b;
+            font-size: 0.9rem;
+        }
+        
+        .timeline-item .phase-badge {
+            display: inline-block;
+            background: var(--primary);
+            color: white;
+            padding: 3px 12px;
+            border-radius: 50px;
+            font-size: 0.75rem;
+            margin-bottom: 10px;
+        }
+        
+        .benefits {
+            background: linear-gradient(135deg, var(--success), #059669);
+            color: white;
+            border-radius: 12px;
+            padding: 40px;
+            margin-bottom: 50px;
+        }
+        
+        .benefits h2 {
+            margin-bottom: 30px;
+        }
+        
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+        }
+        
+        .benefit-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+        }
+        
+        .benefit-icon {
+            font-size: 1.5rem;
+        }
+        
+        .benefit-text h4 {
+            font-size: 1rem;
+            margin-bottom: 5px;
+        }
+        
+        .benefit-text p {
+            font-size: 0.85rem;
+            opacity: 0.9;
+        }
+        
+        .footer {
+            text-align: center;
+            padding: 40px;
+            background: var(--secondary);
+            color: white;
+        }
+        
+        .footer p {
+            opacity: 0.7;
+            font-size: 0.9rem;
+        }
+        
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 1.8rem; }
+            .section-title { font-size: 1.4rem; }
+        }
+    </style>
+</head>
+<body>
+    <header class="hero">
+        <h1>🏥 AuditPlus Web</h1>
+        <p class="subtitle">Sistema de Auditoria e Correção de Faturas XML - Versão Web</p>
+        <span class="badge">Proposta de Implementação 2026</span>
+    </header>
+    
+    <div class="container">
+        <h2 class="section-title">Visão Geral</h2>
+        <div class="grid">
+            <div class="card">
+                <div class="card-icon">🎯</div>
+                <h3>Objetivo</h3>
+                <p>Migrar o sistema AuditPlus para versão web, permitindo acesso centralizado via navegador e integração com banco de dados Oracle corporativo.</p>
+            </div>
+            <div class="card">
+                <div class="card-icon">👥</div>
+                <h3>Beneficiários</h3>
+                <p>Equipe de faturamento, auditoria médica e gestão, com acesso simultâneo e colaborativo ao sistema.</p>
+            </div>
+            <div class="card">
+                <div class="card-icon">⚡</div>
+                <h3>Diferenciais</h3>
+                <p>49+ regras automáticas de correção, processamento em lote, relatórios gerenciais e rastreabilidade completa.</p>
+            </div>
+        </div>
+        
+        <div class="tech-stack">
+            <h2 class="section-title">Stack Tecnológica</h2>
+            <div class="tech-grid">
+                <div class="tech-item">
+                    <div class="tech-name">React</div>
+                    <div class="tech-desc">Frontend Moderno</div>
+                    <span class="tech-badge">TypeScript</span>
+                </div>
+                <div class="tech-item">
+                    <div class="tech-name">FastAPI</div>
+                    <div class="tech-desc">Backend Python</div>
+                    <span class="tech-badge">Alta Performance</span>
+                </div>
+                <div class="tech-item">
+                    <div class="tech-name">Oracle</div>
+                    <div class="tech-desc">Banco de Dados</div>
+                    <span class="tech-badge">Corporativo</span>
+                </div>
+                <div class="tech-item">
+                    <div class="tech-name">Docker</div>
+                    <div class="tech-desc">Containerização</div>
+                    <span class="tech-badge">Deploy</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="architecture">
+            <h2>Arquitetura do Sistema</h2>
+            <div class="arch-diagram">
+                <div class="arch-layer frontend">
+                    <div class="layer-title">Frontend</div>
+                    <div class="layer-tech">React + TypeScript + Vite</div>
+                </div>
+                <div class="arch-arrow">↕️ REST API</div>
+                <div class="arch-layer backend">
+                    <div class="layer-title">Backend</div>
+                    <div class="layer-tech">FastAPI + Motor de Regras</div>
+                </div>
+                <div class="arch-arrow">↕️ SQLAlchemy + cx_Oracle</div>
+                <div class="arch-layer database">
+                    <div class="layer-title">Banco de Dados</div>
+                    <div class="layer-tech">Oracle Database</div>
+                </div>
+            </div>
+        </div>
+        
+        <h2 class="section-title">Cronograma de Implementação</h2>
+        <div class="timeline">
+            <div class="timeline-item">
+                <span class="phase-badge">Fase 1</span>
+                <h4>Estrutura Backend + API REST</h4>
+                <p>Configuração do FastAPI, integração com motor de regras existente, endpoints básicos.</p>
+            </div>
+            <div class="timeline-item">
+                <span class="phase-badge">Fase 2</span>
+                <h4>Interface React</h4>
+                <p>Dashboard principal, upload de XMLs, visualização de correções aplicadas.</p>
+            </div>
+            <div class="timeline-item">
+                <span class="phase-badge">Fase 3</span>
+                <h4>Integração Oracle</h4>
+                <p>Conexão com banco corporativo, migração de schemas, configuração de acesso.</p>
+            </div>
+            <div class="timeline-item">
+                <span class="phase-badge">Fase 4</span>
+                <h4>Deploy e Treinamento</h4>
+                <p>Implantação em servidor, documentação, capacitação da equipe.</p>
+            </div>
+        </div>
+        
+        <div class="benefits">
+            <h2>Benefícios da Migração</h2>
+            <div class="benefits-grid">
+                <div class="benefit-item">
+                    <span class="benefit-icon">🌐</span>
+                    <div class="benefit-text">
+                        <h4>Acesso Universal</h4>
+                        <p>Qualquer dispositivo com navegador pode acessar o sistema.</p>
+                    </div>
+                </div>
+                <div class="benefit-item">
+                    <span class="benefit-icon">👥</span>
+                    <div class="benefit-text">
+                        <h4>Multiusuário</h4>
+                        <p>Equipe inteira trabalhando simultaneamente.</p>
+                    </div>
+                </div>
+                <div class="benefit-item">
+                    <span class="benefit-icon">🔒</span>
+                    <div class="benefit-text">
+                        <h4>Segurança</h4>
+                        <p>Autenticação centralizada e controle de acesso.</p>
+                    </div>
+                </div>
+                <div class="benefit-item">
+                    <span class="benefit-icon">📊</span>
+                    <div class="benefit-text">
+                        <h4>Relatórios</h4>
+                        <p>Dashboards em tempo real com métricas de desempenho.</p>
+                    </div>
+                </div>
+                <div class="benefit-item">
+                    <span class="benefit-icon">🔄</span>
+                    <div class="benefit-text">
+                        <h4>Atualizações</h4>
+                        <p>Novas regras disponíveis instantaneamente para todos.</p>
+                    </div>
+                </div>
+                <div class="benefit-item">
+                    <span class="benefit-icon">💾</span>
+                    <div class="benefit-text">
+                        <h4>Backup Centralizado</h4>
+                        <p>Dados seguros no servidor Oracle da empresa.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <footer class="footer">
+        <p>AuditPlus Web • Unimed Campo Grande • 2026</p>
+    </footer>
+</body>
+</html>

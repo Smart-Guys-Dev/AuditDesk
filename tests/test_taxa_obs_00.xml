@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ptu:GuiaCobrancaUtilizacao xmlns:ptu="http://ptu.unimed.coop.br/schemas/V3_0">
+<ptu:cabecalho/>
+<ptu:arquivoCobrancaUtilizacao>
+<ptu:Tipoguia>
+<ptu:guiaSADT>
+<ptu:dadosGuia>
+<ptu:procedimentosExecutados>
+<ptu:dt_Execucao>20260109</ptu:dt_Execucao>
+<ptu:hr_Inicial>13:59:37</ptu:hr_Inicial>
+<ptu:hr_Final>17:15:00</ptu:hr_Final>
+<ptu:procedimentos>
+<ptu:seq_item>1</ptu:seq_item>
+<ptu:cd_Servico>10101039</ptu:cd_Servico>
+<ptu:ds_Servico>CONSULTA EM PRONTO SOCORRO</ptu:ds_Servico>
+</ptu:procedimentos>
+</ptu:procedimentosExecutados>
+<ptu:procedimentosExecutados>
+<ptu:dt_Execucao>20260109</ptu:dt_Execucao>
+<ptu:hr_Inicial>00:00:00</ptu:hr_Inicial>
+<ptu:hr_Final>17:15:00</ptu:hr_Final>
+<ptu:procedimentos>
+<ptu:seq_item>2</ptu:seq_item>
+<ptu:cd_Servico>60033681</ptu:cd_Servico>
+<ptu:ds_Servico>TAXA DE SALA DE OBSERVACAO ATE 6 HORAS</ptu:ds_Servico>
+</ptu:procedimentos>
+</ptu:procedimentosExecutados>
+</ptu:dadosGuia>
+</ptu:guiaSADT>
+</ptu:Tipoguia>
+</ptu:arquivoCobrancaUtilizacao>
+</ptu:GuiaCobrancaUtilizacao>

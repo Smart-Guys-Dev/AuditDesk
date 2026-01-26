@@ -531,5 +531,46 @@
       "razao": "CNES incorreto causa glosa total da guia pela operadora",
       "contabilizar": true
     }
+  },
+  {
+    "id": "REGRA_GARANTIR_CNES_CNE_NEUROLOGIA_11625676000197",
+    "descricao": "Garante que o CNES (6501796) esteja correto para o prestador CNE NEUROLOGIA CLINICA E NEUROCIRURGIA LTDA (CNPJ 11625676000197).",
+    "ativo": true,
+    "condicoes": {
+      "tipo_elemento": "dadosExecutante",
+      "condicao_multipla": {
+        "tipo": "AND",
+        "sub_condicoes": [
+          {
+            "condicao_tag_valor": {
+              "xpath": "./ptu:CPF_CNPJ/ptu:cd_cnpj",
+              "valor_permitido": [
+                "11625676000197"
+              ]
+            }
+          },
+          {
+            "condicao_tag_valor": {
+              "xpath": "./ptu:CNES",
+              "tipo_comparacao": "valor_atual_diferente",
+              "valor_atual": "6501796"
+            }
+          }
+        ]
+      }
+    },
+    "acao": {
+      "tipo_acao": "garantir_tag_com_conteudo",
+      "tag_alvo": "./ptu:CNES",
+      "novo_conteudo": "6501796",
+      "tag_referencia_posicao": "./ptu:CPF_CNPJ"
+    },
+    "log_sucesso": "CNES do prestador 11625676000197 corrigido/inserido para 6501796.",
+    "metadata_glosa": {
+      "categoria": "GLOSA_GUIA",
+      "impacto": "ALTO",
+      "razao": "CNES incorreto causa glosa total da guia pela operadora",
+      "contabilizar": true
+    }
   }
 ]

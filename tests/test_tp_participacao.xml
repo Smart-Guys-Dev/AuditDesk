@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ptu:mensagemPTU xmlns:ptu="http://ptu.unimed.coop.br/schemas/V3_0">
+  <ptu:cabecalho>
+    <ptu:id_Transacao>TEST_TP_PARTICIPACAO</ptu:id_Transacao>
+  </ptu:cabecalho>
+  <ptu:conteudo>
+    <ptu:guiaConsulta>
+      <ptu:dadosGuia>
+        <ptu:nr_Guia>TEST001</ptu:nr_Guia>
+      </ptu:dadosGuia>
+      <ptu:procedimentosExecutados>
+        <ptu:dt_Execucao>20260105</ptu:dt_Execucao>
+        <ptu:hr_Inicial>12:15:00</ptu:hr_Inicial>
+        <ptu:hr_Final>12:30:00</ptu:hr_Final>
+        <ptu:procedimentos>
+          <ptu:seq_item>1</ptu:seq_item>
+          <ptu:tp_Tabela>22</ptu:tp_Tabela>
+          <ptu:cd_Servico>30101107</ptu:cd_Servico>
+          <ptu:ds_Servico>CAUTERIZACAO QUIMICA POR GRUPO DE ATE 5 LESOES</ptu:ds_Servico>
+          <ptu:qt_Cobrada>1.0000</ptu:qt_Cobrada>
+        </ptu:procedimentos>
+        <ptu:equipe_Profissional>
+          <ptu:tp_Participacao>11</ptu:tp_Participacao>
+          <ptu:Prestador>
+            <ptu:cd_Uni_Prest>51</ptu:cd_Uni_Prest>
+            <ptu:cd_Prest>581</ptu:cd_Prest>
+          </ptu:Prestador>
+          <ptu:cdCnpjCpf>
+            <ptu:cd_cpf>00223848719</ptu:cd_cpf>
+          </ptu:cdCnpjCpf>
+          <ptu:nm_Profissional>RUBEN ARNEZ ARANDIA</ptu:nm_Profissional>
+        </ptu:equipe_Profissional>
+      </ptu:procedimentosExecutados>
+    </ptu:guiaConsulta>
+  </ptu:conteudo>
+</ptu:mensagemPTU>

@@ -89,6 +89,11 @@
       "nome_grupo": "Profissional Rotativo",
       "arquivo_regras": "regras/profissional_rotativo.json",
       "ativo": true
+    },
+    {
+      "nome_grupo": "Taxas de Observação",
+      "arquivo_regras": "regras/taxas_observacao.json",
+      "ativo": true
     }
   ],
   "listas_comuns": {

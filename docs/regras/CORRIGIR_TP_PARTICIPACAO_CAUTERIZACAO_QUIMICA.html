@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Documentação de Regra: CORRIGIR TP PARTICIPACAO CAUTERIZACAO QUIMICA</title>
+    <style>
+        :root {
+            --primary-color: #00995D;
+            --secondary-color: #263238;
+            --bg-color: #f4f6f8;
+            --card-bg: #ffffff;
+            --text-color: #333;
+            --border-radius: 8px;
+        }
+        body {
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            margin: 0;
+            padding: 30px;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+        .container { max-width: 900px; margin: 0 auto; }
+        header {
+            background-color: var(--card-bg);
+            padding: 25px 35px;
+            border-radius: var(--border-radius);
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.04);
+            margin-bottom: 30px;
+            border-left: 6px solid var(--primary-color);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        h1 { color: var(--primary-color); margin: 0; font-size: 24px; font-weight: 600; }
+        .status-badge {
+            padding: 6px 14px;
+            border-radius: 15px;
+            font-weight: bold;
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .status-implementado { background-color: #e8f5e9; color: #00995D; border: 1px solid #c8e6c9; }
+        .status-desenvolvimento { background-color: #fff3e0; color: #f57c00; border: 1px solid #ffe0b2; }
+        .status-desativado { background-color: #ffebee; color: #c62828; border: 1px solid #ffcdd2; }
+        .card {
+            background-color: var(--card-bg);
+            border-radius: var(--border-radius);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+            padding: 30px;
+            margin-bottom: 25px;
+            border: 1px solid rgba(0, 0, 0, 0.02);
+        }
+        h2 {
+            color: #444;
+            border-bottom: 2px solid #f0f0f0;
+            padding-bottom: 12px;
+            margin-top: 0;
+            font-size: 18px;
+            font-weight: 600;
+        }
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+        .info-item label {
+            display: block;
+            font-size: 11px;
+            text-transform: uppercase;
+            color: var(--primary-color);
+            margin-bottom: 5px;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            opacity: 0.9;
+        }
+        .info-item span { font-size: 16px; color: var(--secondary-color); font-weight: 500; word-break: break-all; }
+        .info-item p { margin: 5px 0 0 0; font-size: 14px; }
+        .metric-cards {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        .metric-card {
+            background: #fff;
+            border: 1px solid #e0e0e0;
+            border-radius: var(--border-radius);
+            padding: 20px;
+            text-align: center;
+            transition: transform 0.2s;
+        }
+        .metric-card:hover { transform: translateY(-2px); box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05); }
+        .metric-card:nth-child(1) { border-top: 3px solid #ff7043; }
+        .metric-card:nth-child(2) { border-top: 3px solid var(--primary-color); }
+        .metric-card:nth-child(3) { border-top: 3px solid #42a5f5; }
+        .metric-card:nth-child(4) { border-top: 3px solid #ab47bc; }
+        .metric-value { font-size: 22px; font-weight: bold; color: #333; display: block; }
+        .metric-label { font-size: 11px; color: #777; text-transform: uppercase; letter-spacing: 0.5px; }
+        pre {
+            background-color: #263238;
+            color: #eceff1;
+            padding: 20px;
+            border-radius: var(--border-radius);
+            overflow-x: auto;
+            font-family: 'Consolas', 'Monaco', monospace;
+            font-size: 13px;
+            line-height: 1.5;
+        }
+        .json-key { color: #80cbc4; }
+        .json-string { color: #a5d6a7; }
+        .json-number { color: #ffab91; }
+        .json-boolean { color: #ce93d8; }
+        .test-case {
+            background: #fafafa;
+            border-left: 4px solid var(--primary-color);
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 0 var(--border-radius) var(--border-radius) 0;
+        }
+        .test-case.passed { border-left-color: #4caf50; }
+        .test-case.failed { border-left-color: #f44336; }
+        footer {
+            text-align: center;
+            font-size: 13px;
+            color: #777;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #e0e0e0;
+        }
+        .category-badge {
+            display: inline-block;
+            padding: 3px 10px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+        .cat-glosa-guia { background: #ffebee; color: #c62828; }
+        .cat-glosa-item { background: #fff3e0; color: #ef6c00; }
+        .cat-validacao { background: #e3f2fd; color: #1565c0; }
+        .cat-otimizacao { background: #f3e5f5; color: #7b1fa2; }
+        .cat-correcao { background: #e8f5e9; color: #2e7d32; }
+    </style>
+</head>
+<body>
+<div class="container">
+    <header>
+        <h1>Relatório de Implementação de Regra</h1>
+        <span class="status-badge status-implementado">IMPLEMENTADO</span>
+    </header>
+
+    <div class="card">
+        <h2>📋 Informações da Regra</h2>
+        <div class="info-grid">
+            <div class="info-item">
+                <label>ID da Regra</label>
+                <span>REGRA_CORRIGIR_TP_PARTICIPACAO_CAUTERIZACAO_QUIMICA</span>
+            </div>
+            <div class="info-item">
+                <label>Grupo</label>
+                <span>Procedimentos e Serviços</span>
+            </div>
+            <div class="info-item">
+                <label>Categoria</label>
+                <span class="category-badge cat-glosa-item">GLOSA_ITEM</span>
+            </div>
+            <div class="info-item">
+                <label>Tipo de Ação</label>
+                <span>substituir_conteudo_tag</span>
+            </div>
+        </div>
+        <div class="info-item">
+            <label>Descrição</label>
+            <p>Corrige o tp_Participacao de 11 (Cirurgião Auxiliar) para 12 (Instrumentador) no procedimento de Cauterização Química (30101107). Dermatologista não requer auxiliar cirúrgico.</p>
+        </div>
+    </div>
+
+    <div class="card">
+        <h2>📊 Métricas de Desenvolvimento</h2>
+        <div class="metric-cards">
+            <div class="metric-card">
+                <span class="metric-value">26/01</span>
+                <span class="metric-label">Data</span>
+            </div>
+            <div class="metric-card">
+                <span class="metric-value">10:25</span>
+                <span class="metric-label">Início</span>
+            </div>
+            <div class="metric-card">
+                <span class="metric-value">10:30</span>
+                <span class="metric-label">Conclusão</span>
+            </div>
+            <div class="metric-card">
+                <span class="metric-value">1</span>
+                <span class="metric-label">Testes</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="card">
+        <h2>⚙️ Configuração JSON</h2>
+        <pre>{
+    <span class="json-key">"id"</span>: <span class="json-string">"REGRA_CORRIGIR_TP_PARTICIPACAO_CAUTERIZACAO_QUIMICA"</span>,
+    <span class="json-key">"descricao"</span>: <span class="json-string">"Corrige o tp_Participacao de 11 (Cirurgião Auxiliar) para 12 (Instrumentador) no procedimento de Cauterização Química (30101107). Dermatologista não requer auxiliar cirúrgico."</span>,
+    <span class="json-key">"ativo"</span>: <span class="json-boolean">true</span>,
+    <span class="json-key">"condicoes"</span>: {
+        <span class="json-key">"tipo_elemento"</span>: <span class="json-string">"equipe_Profissional"</span>,
+        <span class="json-key">"condicao_multipla"</span>: {
+            <span class="json-key">"tipo"</span>: <span class="json-string">"AND"</span>,
+            <span class="json-key">"sub_condicoes"</span>: [
+                {
+                    <span class="json-key">"condicao_tag_valor"</span>: {
+                        <span class="json-key">"xpath"</span>: <span class="json-string">"../../ptu:procedimentos/ptu:cd_Servico"</span>,
+                        <span class="json-key">"valor_permitido"</span>: [
+                            "30101107"
+                        ]
+                    }
+                },
+                {
+                    <span class="json-key">"condicao_tag_valor"</span>: {
+                        <span class="json-key">"xpath"</span>: <span class="json-string">"./ptu:tp_Participacao"</span>,
+                        <span class="json-key">"valor_permitido"</span>: [
+                            "11"
+                        ]
+                    }
+                }
+            ]
+        }
+    },
+    <span class="json-key">"acao"</span>: {
+        <span class="json-key">"tipo_acao"</span>: <span class="json-string">"substituir_conteudo_tag"</span>,
+        <span class="json-key">"tag_alvo"</span>: <span class="json-string">"./ptu:tp_Participacao"</span>,
+        <span class="json-key">"novo_conteudo"</span>: <span class="json-string">"12"</span>
+    },
+    <span class="json-key">"log_sucesso"</span>: <span class="json-string">"tp_Participacao corrigido de 11 para 12 no procedimento de Cauterização Química."</span>,
+    <span class="json-key">"metadata_glosa"</span>: {
+        <span class="json-key">"categoria"</span>: <span class="json-string">"GLOSA_ITEM"</span>,
+        <span class="json-key">"impacto"</span>: <span class="json-string">"MEDIO"</span>,
+        <span class="json-key">"razao"</span>: <span class="json-string">"Tipo de participação incorreto para procedimento dermatológico"</span>
+    },
+    <span class="json-key">"_grupo"</span>: <span class="json-string">"Procedimentos e Serviços"</span>
+}</pre>
+    </div>
+
+    <div class="card">
+        <h2>📝 Detalhes da Solução</h2>
+        <p>Regra criada para corrigir tp_Participacao de 11 (Cirurgião Auxiliar) para 12 (Instrumentador) em procedimentos de Cauterização Química (30101107), pois dermatologistas não requerem auxiliar cirúrgico para este procedimento.</p>
+    </div>
+
+    
+
+    <footer>
+        Unimed Campo Grande • 26/01/2026 10:30 • AuditPlus v2.0 • Documentado por: Pedro Lucas Lima de Freitas
+    </footer>
+</div>
+</body>
+</html>

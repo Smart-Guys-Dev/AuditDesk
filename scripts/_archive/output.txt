@@ -1,0 +1,1813 @@
+﻿python : 
+INFO:src.business.rules.rule_engine:Lista 
+'codigos_equipe_obrigatoria' carregada 
+com 2744 itens.
+No linha:1 caractere:1
++ python scripts/test_complete.py 2>&1 | 
+Out-File -Encoding utf8 script ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecifie 
+   d: (INFO:src.busine...com 2744 itens.  
+  :String) [], RemoteException
+    + FullyQualifiedErrorId : NativeComma 
+   ndError
+ 
+INFO:src.business.rules.rule_engine:Lista 
+'codigos_terapias_seriadas' carregada com 
+108 itens.
+INFO:src.business.rules.rule_engine:Lista 
+'codigos_cbo_medicos' carregada com 63 
+itens.
+INFO:src.business.rules.rule_engine:\u2705
+ 77 regras carregadas do banco de dados.
+============================================================
+TESTE COMPLETO VIA RULEENGINE
+============================================================
+Config dir: C:\Users\pedro.freitas\OneDrive - UNIMEDCG\AuditPlusv2.0\src\config
+Engine config_dir: C:\Users\pedro.freitas\OneDrive - UNIMEDCG\AuditPlusv2.0\src\config
+Existe: True
+
+Carregando regras...
+Total regras: 77
+Regras taxa observaþÒo: 1
+
+Regra encontrada: REGRA_TAXA_OBSERVACAO_CORRIGIR_HORARIOS
+Ativo: True
+
+Carregando XML: C:\Users\pedro.freitas\OneDrive - UNIMEDCG\AuditPlusv2.0\tests\guia_user_request.xml
+
+Elementos taxa 60033681 encontrados via xpath direto: 1
+hr_Inicial: ['00:00:01']
+hr_Final: ['00:00:01']
+
+Testando _evaluate_condition...
+Condiþ§es: {'tipo_elemento': 'procedimentosExecutados', 'condicao_multipla': {'tipo': 'AND', 'sub_condicoes': [{'condicao_tag_valor': {'xpath': './ptu:cd_Servico', 'valor_permitido': ['60033681', '60033665']}}, {'condicao_horarios_iguais': {'xpath_hr_inicial': './ptu:hr_Inicial', 'xpath_hr_final': './ptu:hr_Final'}}]}}
+DEBUG: tag_valor falhou - node nÒo encontrado: ./ptu:cd_Servico
+DEBUG: horarios_iguais check: 00:00:01 == 00:00:01
+DEBUG: AND results: [False, True]
+Resultado: False
+
+========================================
+Aplicando regras via apply_rules_to_xml...
+========================================
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 1900227633, tipo: valor_permitido
+DEBUG: valor_permitido check: 1900227633 in ['40902064', '40202615', '40202038', '40202747'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:id_Acrescimo, valor: N, tipo: valor_permitido
+DEBUG: valor_permitido check: N in ['S'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 1900214434, tipo: valor_permitido
+DEBUG: valor_permitido check: 1900214434 in ['40902064', '40202615', '40202038', '40202747'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:id_Acrescimo, valor: N, tipo: valor_permitido
+DEBUG: valor_permitido check: N in ['S'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 1900153087, tipo: valor_permitido
+DEBUG: valor_permitido check: 1900153087 in ['40902064', '40202615', '40202038', '40202747'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:id_Acrescimo, valor: N, tipo: valor_permitido
+DEBUG: valor_permitido check: N in ['S'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 1900110922, tipo: valor_permitido
+DEBUG: valor_permitido check: 1900110922 in ['40902064', '40202615', '40202038', '40202747'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:id_Acrescimo, valor: N, tipo: valor_permitido
+DEBUG: valor_permitido check: N in ['S'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 90524403, tipo: valor_permitido
+DEBUG: valor_permitido check: 90524403 in ['40902064', '40202615', '40202038', '40202747'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:id_Acrescimo, valor: N, tipo: valor_permitido
+DEBUG: valor_permitido check: N in ['S'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 90491343, tipo: valor_permitido
+DEBUG: valor_permitido check: 90491343 in ['40902064', '40202615', '40202038', '40202747'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:id_Acrescimo, valor: N, tipo: valor_permitido
+DEBUG: valor_permitido check: N in ['S'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 90360362, tipo: valor_permitido
+DEBUG: valor_permitido check: 90360362 in ['40902064', '40202615', '40202038', '40202747'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:id_Acrescimo, valor: N, tipo: valor_permitido
+DEBUG: valor_permitido check: N in ['S'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 90207564, tipo: valor_permitido
+DEBUG: valor_permitido check: 90207564 in ['40902064', '40202615', '40202038', '40202747'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:id_Acrescimo, valor: N, tipo: valor_permitido
+DEBUG: valor_permitido check: N in ['S'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 90072367, tipo: valor_permitido
+DEBUG: valor_permitido check: 90072367 in ['40902064', '40202615', '40202038', '40202747'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:id_Acrescimo, valor: N, tipo: valor_permitido
+DEBUG: valor_permitido check: N in ['S'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 70852251, tipo: valor_permitido
+DEBUG: valor_permitido check: 70852251 in ['40902064', '40202615', '40202038', '40202747'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:id_Acrescimo, valor: N, tipo: valor_permitido
+DEBUG: valor_permitido check: N in ['S'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 70705348, tipo: valor_permitido
+DEBUG: valor_permitido check: 70705348 in ['40902064', '40202615', '40202038', '40202747'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:id_Acrescimo, valor: N, tipo: valor_permitido
+DEBUG: valor_permitido check: N in ['S'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 60033681, tipo: valor_permitido
+DEBUG: valor_permitido check: 60033681 in ['40902064', '40202615', '40202038', '40202747'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:id_Acrescimo, valor: N, tipo: valor_permitido
+DEBUG: valor_permitido check: N in ['S'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 10101039, tipo: valor_permitido
+DEBUG: valor_permitido check: 10101039 in ['40902064', '40202615', '40202038', '40202747'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:id_Acrescimo, valor: N, tipo: valor_permitido
+DEBUG: valor_permitido check: N in ['S'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:CBO, valor: 225275, tipo: in_lista
+DEBUG: tag_valor check - xpath: ./ptu:dadosConselho/ptu:sg_Conselho, valor: CRM, tipo: valor_permitido
+DEBUG: valor_permitido check: CRM in ['OUT'] -> False
+DEBUG: AND results: [True, False]
+DEBUG: tag_valor check - xpath: ./ptu:dadosConselho/ptu:sg_Conselho, valor: CRM, tipo: valor_permitido
+DEBUG: valor_permitido check: CRM in ['OUT'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:CBO, valor: 225275, tipo: in_lista
+DEBUG: AND results: [False, True]
+DEBUG: tag_valor falhou - node nÒo encontrado: ./ptu:equipe_Profissional/ptu:dadosConselho/ptu:sg_Conselho
+DEBUG: tag_valor falhou - node nÒo encontrado: ./ptu:equipe_Profissional/ptu:CBO
+DEBUG: tag_valor falhou - node nÒo encontrado: ./ptu:equipe_Profissional/ptu:dadosConselho/ptu:sg_Conselho
+DEBUG: tag_valor falhou - node nÒo encontrado: ./ptu:equipe_Profissional/ptu:CBO
+DEBUG: tag_valor falhou - node nÒo encontrado: ./ptu:equipe_Profissional/ptu:dadosConselho/ptu:sg_Conselho
+DEBUG: tag_valor falhou - node nÒo encontrado: ./ptu:equipe_Profissional/ptu:CBO
+DEBUG: tag_valor falhou - node nÒo encontrado: ./ptu:equipe_Profissional/ptu:dadosConselho/ptu:sg_Conselho
+DEBUG: tag_valor falhou - node nÒo encontrado: ./ptu:equipe_Profissional/ptu:CBO
+DEBUG: tag_valor falhou - node nÒo encontrado: ./ptu:equipe_Profissional/ptu:dadosConselho/ptu:sg_Conselho
+DEBUG: tag_valor falhou - node nÒo encontrado: ./ptu:equipe_Profissional/ptu:CBO
+DEBUG: tag_valor falhou - node nÒo encontrado: ./ptu:equipe_Profissional/ptu:dadosConselho/ptu:sg_Conselho
+DEBUG: tag_valor falhou - node nÒo encontrado: ./ptu:equipe_Profissional/ptu:CBO
+DEBUG: tag_valor falhou - node nÒo encontrado: ./ptu:equipe_Profissional/ptu:dadosConselho/ptu:sg_Conselho
+DEBUG: tag_valor falhou - node nÒo encontrado: ./ptu:equipe_Profissional/ptu:CBO
+DEBUG: tag_valor falhou - node nÒo encontrado: ./ptu:equipe_Profissional/ptu:dadosConselho/ptu:sg_Conselho
+DEBUG: tag_valor falhou - node nÒo encontrado: ./ptu:equipe_Profissional/ptu:CBO
+DEBUG: tag_valor falhou - node nÒo encontrado: ./ptu:equipe_Profissional/ptu:dadosConselho/ptu:sg_Conselho
+DEBUG: tag_valor falhou - node nÒo encontrado: ./ptu:equipe_Profissional/ptu:CBO
+DEBUG:src.business.rules.rule_engine:PJ\u2
+192PF Ignorado: CARLOS HENRIQUE SIMOES 
+MATHEUS (sg_Conselho=CRM)
+DEBUG: tag_valor falhou - node nÒo encontrado: ./ptu:equipe_Profissional/ptu:dadosConselho/ptu:sg_Conselho
+DEBUG: tag_valor falhou - node nÒo encontrado: ./ptu:equipe_Profissional/ptu:CBO
+DEBUG: tag_valor falhou - node nÒo encontrado: ./ptu:equipe_Profissional/ptu:dadosConselho/ptu:sg_Conselho
+DEBUG: tag_valor falhou - node nÒo encontrado: ./ptu:equipe_Profissional/ptu:CBO
+DEBUG: tag_valor falhou - node nÒo encontrado: ./ptu:equipe_Profissional/ptu:dadosConselho/ptu:sg_Conselho
+DEBUG: tag_valor falhou - node nÒo encontrado: ./ptu:equipe_Profissional/ptu:CBO
+DEBUG: tag_valor check - xpath: ./ptu:equipe_Profissional/ptu:dadosConselho/ptu:sg_Conselho, valor: CRM, tipo: valor_permitido
+DEBUG: valor_permitido check: CRM in ['OUT'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:equipe_Profissional/ptu:CBO, valor: 225275, tipo: in_lista
+DEBUG: AND results: [True, False, True]
+DEBUG: tag_valor check - xpath: ./ptu:dadosConselho/ptu:sg_Conselho, valor: CRM, tipo: valor_permitido
+DEBUG: valor_permitido check: CRM in ['OUT'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:CBO, valor: 225275, tipo: in_lista
+DEBUG: AND results: [False, True]
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 1900227633, tipo: valor_permitido
+DEBUG: valor_permitido check: 1900227633 in ['10101039', '40401014'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 1900214434, tipo: valor_permitido
+DEBUG: valor_permitido check: 1900214434 in ['10101039', '40401014'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 1900153087, tipo: valor_permitido
+DEBUG: valor_permitido check: 1900153087 in ['10101039', '40401014'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 1900110922, tipo: valor_permitido
+DEBUG: valor_permitido check: 1900110922 in ['10101039', '40401014'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 90524403, tipo: valor_permitido
+DEBUG: valor_permitido check: 90524403 in ['10101039', '40401014'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 90491343, tipo: valor_permitido
+DEBUG: valor_permitido check: 90491343 in ['10101039', '40401014'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 90360362, tipo: valor_permitido
+DEBUG: valor_permitido check: 90360362 in ['10101039', '40401014'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 90207564, tipo: valor_permitido
+DEBUG: valor_permitido check: 90207564 in ['10101039', '40401014'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 90072367, tipo: valor_permitido
+DEBUG: valor_permitido check: 90072367 in ['10101039', '40401014'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 70852251, tipo: valor_permitido
+DEBUG: valor_permitido check: 70852251 in ['10101039', '40401014'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 70705348, tipo: valor_permitido
+DEBUG: valor_permitido check: 70705348 in ['10101039', '40401014'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 60033681, tipo: valor_permitido
+DEBUG: valor_permitido check: 60033681 in ['10101039', '40401014'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 10101039, tipo: valor_permitido
+DEBUG: valor_permitido check: 10101039 in ['10101039', '40401014'] -> True
+DEBUG: AND results: [True, True]
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 1900227633, tipo: valor_permitido
+DEBUG: valor_permitido check: 1900227633 in ['40401014'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 1900214434, tipo: valor_permitido
+DEBUG: valor_permitido check: 1900214434 in ['40401014'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 1900153087, tipo: valor_permitido
+DEBUG: valor_permitido check: 1900153087 in ['40401014'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 1900110922, tipo: valor_permitido
+DEBUG: valor_permitido check: 1900110922 in ['40401014'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 90524403, tipo: valor_permitido
+DEBUG: valor_permitido check: 90524403 in ['40401014'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 90491343, tipo: valor_permitido
+DEBUG: valor_permitido check: 90491343 in ['40401014'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 90360362, tipo: valor_permitido
+DEBUG: valor_permitido check: 90360362 in ['40401014'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 90207564, tipo: valor_permitido
+DEBUG: valor_permitido check: 90207564 in ['40401014'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 90072367, tipo: valor_permitido
+DEBUG: valor_permitido check: 90072367 in ['40401014'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 70852251, tipo: valor_permitido
+DEBUG: valor_permitido check: 70852251 in ['40401014'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 70705348, tipo: valor_permitido
+DEBUG: valor_permitido check: 70705348 in ['40401014'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 60033681, tipo: valor_permitido
+DEBUG: valor_permitido check: 60033681 in ['40401014'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 10101039, tipo: valor_permitido
+DEBUG: valor_permitido check: 10101039 in ['40401014'] -> False
+DEBUG: AND results: [False, True]
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 1900227633, tipo: valor_permitido
+DEBUG: valor_permitido check: 1900227633 in ['30203015'] -> False
+DEBUG: tag_valor falhou - node nÒo encontrado: ./ptu:equipe_Profissional/ptu:Prestador/ptu:cd_Prest
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 1900214434, tipo: valor_permitido
+DEBUG: valor_permitido check: 1900214434 in ['30203015'] -> False
+DEBUG: tag_valor falhou - node nÒo encontrado: ./ptu:equipe_Profissional/ptu:Prestador/ptu:cd_Prest
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 1900153087, tipo: valor_permitido
+DEBUG: valor_permitido check: 1900153087 in ['30203015'] -> False
+DEBUG: tag_valor falhou - node nÒo encontrado: ./ptu:equipe_Profissional/ptu:Prestador/ptu:cd_Prest
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 1900110922, tipo: valor_permitido
+DEBUG: valor_permitido check: 1900110922 in ['30203015'] -> False
+DEBUG: tag_valor falhou - node nÒo encontrado: ./ptu:equipe_Profissional/ptu:Prestador/ptu:cd_Prest
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 90524403, tipo: valor_permitido
+DEBUG: valor_permitido check: 90524403 in ['30203015'] -> False
+DEBUG: tag_valor falhou - node nÒo encontrado: ./ptu:equipe_Profissional/ptu:Prestador/ptu:cd_Prest
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 90491343, tipo: valor_permitido
+DEBUG: valor_permitido check: 90491343 in ['30203015'] -> False
+DEBUG: tag_valor falhou - node nÒo encontrado: ./ptu:equipe_Profissional/ptu:Prestador/ptu:cd_Prest
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 90360362, tipo: valor_permitido
+DEBUG: valor_permitido check: 90360362 in ['30203015'] -> False
+DEBUG: tag_valor falhou - node nÒo encontrado: ./ptu:equipe_Profissional/ptu:Prestador/ptu:cd_Prest
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 90207564, tipo: valor_permitido
+DEBUG: valor_permitido check: 90207564 in ['30203015'] -> False
+DEBUG: tag_valor falhou - node nÒo encontrado: ./ptu:equipe_Profissional/ptu:Prestador/ptu:cd_Prest
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 90072367, tipo: valor_permitido
+DEBUG: valor_permitido check: 90072367 in ['30203015'] -> False
+DEBUG: tag_valor falhou - node nÒo encontrado: ./ptu:equipe_Profissional/ptu:Prestador/ptu:cd_Prest
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 70852251, tipo: valor_permitido
+DEBUG: valor_permitido check: 70852251 in ['30203015'] -> False
+DEBUG: tag_valor falhou - node nÒo encontrado: ./ptu:equipe_Profissional/ptu:Prestador/ptu:cd_Prest
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 70705348, tipo: valor_permitido
+DEBUG: valor_permitido check: 70705348 in ['30203015'] -> False
+DEBUG: tag_valor falhou - node nÒo encontrado: ./ptu:equipe_Profissional/ptu:Prestador/ptu:cd_Prest
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 60033681, tipo: valor_permitido
+DEBUG: valor_permitido check: 60033681 in ['30203015'] -> False
+DEBUG: tag_valor falhou - node nÒo encontrado: ./ptu:equipe_Profissional/ptu:Prestador/ptu:cd_Prest
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 10101039, tipo: valor_permitido
+DEBUG: valor_permitido check: 10101039 in ['30203015'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:equipe_Profissional/ptu:Prestador/ptu:cd_Prest, valor: 11099, tipo: valor_permitido
+DEBUG: valor_permitido check: 11099 in ['11039'] -> False
+DEBUG: AND results: [False, False, True]
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 1900227633, tipo: valor_permitido
+DEBUG: valor_permitido check: 1900227633 in ['1999999943'] -> False
+DEBUG: AND results: [False, True]
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 1900214434, tipo: valor_permitido
+DEBUG: valor_permitido check: 1900214434 in ['1999999943'] -> False
+DEBUG: AND results: [False, True]
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 1900153087, tipo: valor_permitido
+DEBUG: valor_permitido check: 1900153087 in ['1999999943'] -> False
+DEBUG: AND results: [False, True]
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 1900110922, tipo: valor_permitido
+DEBUG: valor_permitido check: 1900110922 in ['1999999943'] -> False
+DEBUG: AND results: [False, True]
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 90524403, tipo: valor_permitido
+DEBUG: valor_permitido check: 90524403 in ['1999999943'] -> False
+DEBUG: AND results: [False, True]
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 90491343, tipo: valor_permitido
+DEBUG: valor_permitido check: 90491343 in ['1999999943'] -> False
+DEBUG: AND results: [False, True]
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 90360362, tipo: valor_permitido
+DEBUG: valor_permitido check: 90360362 in ['1999999943'] -> False
+DEBUG: AND results: [False, True]
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 90207564, tipo: valor_permitido
+DEBUG: valor_permitido check: 90207564 in ['1999999943'] -> False
+DEBUG: AND results: [False, True]
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 90072367, tipo: valor_permitido
+DEBUG: valor_permitido check: 90072367 in ['1999999943'] -> False
+DEBUG: AND results: [False, True]
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 70852251, tipo: valor_permitido
+DEBUG: valor_permitido check: 70852251 in ['1999999943'] -> False
+DEBUG: AND results: [False, True]
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 70705348, tipo: valor_permitido
+DEBUG: valor_permitido check: 70705348 in ['1999999943'] -> False
+DEBUG: AND results: [False, True]
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 60033681, tipo: valor_permitido
+DEBUG: valor_permitido check: 60033681 in ['1999999943'] -> False
+DEBUG: AND results: [False, True]
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 10101039, tipo: valor_permitido
+DEBUG: valor_permitido check: 10101039 in ['1999999943'] -> False
+DEBUG: AND results: [False, True]
+DEBUG: tag_valor check - xpath: ./ptu:CPF_CNPJ/ptu:cd_cnpj, valor: 03315918000541, tipo: valor_permitido
+DEBUG: valor_permitido check: 03315918000541 in ['20923177000177'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:CNES, valor: 3018903, tipo: valor_atual_diferente
+DEBUG: AND results: [False, True]
+DEBUG: tag_valor check - xpath: ./ptu:CPF_CNPJ/ptu:cd_cnpj, valor: 03315918000541, tipo: valor_permitido
+DEBUG: valor_permitido check: 03315918000541 in ['37918606000110'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:CNES, valor: 3018903, tipo: valor_atual_diferente
+DEBUG: AND results: [False, True]
+DEBUG: tag_valor check - xpath: ./ptu:CPF_CNPJ/ptu:cd_cnpj, valor: 03315918000541, tipo: valor_permitido
+DEBUG: valor_permitido check: 03315918000541 in ['37812515000104'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:CNES, valor: 3018903, tipo: valor_atual_diferente
+DEBUG: AND results: [False, True]
+DEBUG: tag_valor check - xpath: ./ptu:CPF_CNPJ/ptu:cd_cnpj, valor: 03315918000541, tipo: valor_permitido
+DEBUG: valor_permitido check: 03315918000541 in ['23072687000176'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:CNES, valor: 3018903, tipo: valor_atual_diferente
+DEBUG: AND results: [False, True]
+DEBUG: tag_valor check - xpath: ./ptu:CPF_CNPJ/ptu:cd_cnpj, valor: 03315918000541, tipo: valor_permitido
+DEBUG: valor_permitido check: 03315918000541 in ['03761500000134'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:CNES, valor: 3018903, tipo: valor_atual_diferente
+DEBUG: AND results: [False, True]
+DEBUG: tag_valor check - xpath: ./ptu:CPF_CNPJ/ptu:cd_cnpj, valor: 03315918000541, tipo: valor_permitido
+DEBUG: valor_permitido check: 03315918000541 in ['40659789000101'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:CNES, valor: 3018903, tipo: valor_atual_diferente
+DEBUG: AND results: [False, True]
+DEBUG: tag_valor check - xpath: ./ptu:CPF_CNPJ/ptu:cd_cnpj, valor: 03315918000541, tipo: valor_permitido
+DEBUG: valor_permitido check: 03315918000541 in ['51804254000101'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:CNES, valor: 3018903, tipo: valor_atual_diferente
+DEBUG: AND results: [False, True]
+DEBUG: tag_valor check - xpath: ./ptu:CPF_CNPJ/ptu:cd_cnpj, valor: 03315918000541, tipo: valor_permitido
+DEBUG: valor_permitido check: 03315918000541 in ['34281088000189'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:CNES, valor: 3018903, tipo: valor_atual_diferente
+DEBUG: AND results: [False, True]
+DEBUG: tag_valor check - xpath: ./ptu:CPF_CNPJ/ptu:cd_cnpj, valor: 03315918000541, tipo: valor_permitido
+DEBUG: valor_permitido check: 03315918000541 in ['12412317000114'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:CNES, valor: 3018903, tipo: valor_atual_diferente
+DEBUG: AND results: [False, True]
+DEBUG: tag_valor check - xpath: ./ptu:CPF_CNPJ/ptu:cd_cnpj, valor: 03315918000541, tipo: valor_permitido
+DEBUG: valor_permitido check: 03315918000541 in ['52838800000180'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:CNES, valor: 3018903, tipo: valor_atual_diferente
+DEBUG: AND results: [False, True]
+DEBUG: tag_valor check - xpath: ./ptu:CPF_CNPJ/ptu:cd_cnpj, valor: 03315918000541, tipo: valor_permitido
+DEBUG: valor_permitido check: 03315918000541 in ['09046397000127'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:CNES, valor: 3018903, tipo: valor_atual_diferente
+DEBUG: AND results: [False, True]
+DEBUG: tag_valor falhou - node nÒo encontrado: ./ptu:equipe_Profissional/ptu:Prestador/ptu:cd_Prest
+DEBUG: AND results: [False, True]
+DEBUG: tag_valor falhou - node nÒo encontrado: ./ptu:equipe_Profissional/ptu:Prestador/ptu:cd_Prest
+DEBUG: AND results: [False, True]
+DEBUG: tag_valor falhou - node nÒo encontrado: ./ptu:equipe_Profissional/ptu:Prestador/ptu:cd_Prest
+DEBUG: AND results: [False, True]
+DEBUG: tag_valor falhou - node nÒo encontrado: ./ptu:equipe_Profissional/ptu:Prestador/ptu:cd_Prest
+DEBUG: AND results: [False, True]
+DEBUG: tag_valor falhou - node nÒo encontrado: ./ptu:equipe_Profissional/ptu:Prestador/ptu:cd_Prest
+DEBUG: AND results: [False, True]
+DEBUG: tag_valor falhou - node nÒo encontrado: ./ptu:equipe_Profissional/ptu:Prestador/ptu:cd_Prest
+DEBUG: AND results: [False, True]
+DEBUG: tag_valor falhou - node nÒo encontrado: ./ptu:equipe_Profissional/ptu:Prestador/ptu:cd_Prest
+DEBUG: AND results: [False, True]
+DEBUG: tag_valor falhou - node nÒo encontrado: ./ptu:equipe_Profissional/ptu:Prestador/ptu:cd_Prest
+DEBUG: AND results: [False, True]
+DEBUG: tag_valor falhou - node nÒo encontrado: ./ptu:equipe_Profissional/ptu:Prestador/ptu:cd_Prest
+DEBUG: AND results: [False, True]
+DEBUG: tag_valor falhou - node nÒo encontrado: ./ptu:equipe_Profissional/ptu:Prestador/ptu:cd_Prest
+DEBUG: AND results: [False, True]
+DEBUG: tag_valor falhou - node nÒo encontrado: ./ptu:equipe_Profissional/ptu:Prestador/ptu:cd_Prest
+DEBUG: AND results: [False, True]
+DEBUG: tag_valor falhou - node nÒo encontrado: ./ptu:equipe_Profissional/ptu:Prestador/ptu:cd_Prest
+DEBUG: AND results: [False, True]
+DEBUG: tag_valor check - xpath: ./ptu:equipe_Profissional/ptu:Prestador/ptu:cd_Prest, valor: 11099, tipo: valor_permitido
+DEBUG: valor_permitido check: 11099 in ['24018'] -> False
+DEBUG: tag_valor falhou - node nÒo encontrado: ./ptu:equipe_Profissional/ptu:Prestador/ptu:cd_Prest
+DEBUG: AND results: [False, True]
+DEBUG: tag_valor falhou - node nÒo encontrado: ./ptu:equipe_Profissional/ptu:Prestador/ptu:cd_Prest
+DEBUG: AND results: [False, True]
+DEBUG: tag_valor falhou - node nÒo encontrado: ./ptu:equipe_Profissional/ptu:Prestador/ptu:cd_Prest
+DEBUG: AND results: [False, True]
+DEBUG: tag_valor falhou - node nÒo encontrado: ./ptu:equipe_Profissional/ptu:Prestador/ptu:cd_Prest
+DEBUG: AND results: [False, True]
+DEBUG: tag_valor falhou - node nÒo encontrado: ./ptu:equipe_Profissional/ptu:Prestador/ptu:cd_Prest
+DEBUG: AND results: [False, True]
+DEBUG: tag_valor falhou - node nÒo encontrado: ./ptu:equipe_Profissional/ptu:Prestador/ptu:cd_Prest
+DEBUG: AND results: [False, True]
+DEBUG: tag_valor falhou - node nÒo encontrado: ./ptu:equipe_Profissional/ptu:Prestador/ptu:cd_Prest
+DEBUG: AND results: [False, True]
+DEBUG: tag_valor falhou - node nÒo encontrado: ./ptu:equipe_Profissional/ptu:Prestador/ptu:cd_Prest
+DEBUG: AND results: [False, True]
+DEBUG: tag_valor falhou - node nÒo encontrado: ./ptu:equipe_Profissional/ptu:Prestador/ptu:cd_Prest
+DEBUG: AND results: [False, True]
+DEBUG: tag_valor falhou - node nÒo encontrado: ./ptu:equipe_Profissional/ptu:Prestador/ptu:cd_Prest
+DEBUG: AND results: [False, True]
+DEBUG: tag_valor falhou - node nÒo encontrado: ./ptu:equipe_Profissional/ptu:Prestador/ptu:cd_Prest
+DEBUG: AND results: [False, True]
+DEBUG: tag_valor falhou - node nÒo encontrado: ./ptu:equipe_Profissional/ptu:Prestador/ptu:cd_Prest
+DEBUG: AND results: [False, True]
+DEBUG: tag_valor check - xpath: ./ptu:equipe_Profissional/ptu:Prestador/ptu:cd_Prest, valor: 11099, tipo: valor_permitido
+DEBUG: valor_permitido check: 11099 in ['24022'] -> False
+DEBUG: tag_valor falhou - node nÒo encontrado: ./ptu:equipe_Profissional/ptu:Prestador/ptu:cd_Prest
+DEBUG: AND results: [False, True]
+DEBUG: tag_valor falhou - node nÒo encontrado: ./ptu:equipe_Profissional/ptu:Prestador/ptu:cd_Prest
+DEBUG: AND results: [False, True]
+DEBUG: tag_valor falhou - node nÒo encontrado: ./ptu:equipe_Profissional/ptu:Prestador/ptu:cd_Prest
+DEBUG: AND results: [False, True]
+DEBUG: tag_valor falhou - node nÒo encontrado: ./ptu:equipe_Profissional/ptu:Prestador/ptu:cd_Prest
+DEBUG: AND results: [False, True]
+DEBUG: tag_valor falhou - node nÒo encontrado: ./ptu:equipe_Profissional/ptu:Prestador/ptu:cd_Prest
+DEBUG: AND results: [False, True]
+DEBUG: tag_valor falhou - node nÒo encontrado: ./ptu:equipe_Profissional/ptu:Prestador/ptu:cd_Prest
+DEBUG: AND results: [False, True]
+DEBUG: tag_valor falhou - node nÒo encontrado: ./ptu:equipe_Profissional/ptu:Prestador/ptu:cd_Prest
+DEBUG: AND results: [False, True]
+DEBUG: tag_valor falhou - node nÒo encontrado: ./ptu:equipe_Profissional/ptu:Prestador/ptu:cd_Prest
+DEBUG: AND results: [False, True]
+DEBUG: tag_valor falhou - node nÒo encontrado: ./ptu:equipe_Profissional/ptu:Prestador/ptu:cd_Prest
+DEBUG: AND results: [False, True]
+DEBUG: tag_valor falhou - node nÒo encontrado: ./ptu:equipe_Profissional/ptu:Prestador/ptu:cd_Prest
+DEBUG: AND results: [False, True]
+DEBUG: tag_valor falhou - node nÒo encontrado: ./ptu:equipe_Profissional/ptu:Prestador/ptu:cd_Prest
+DEBUG: AND results: [False, True]
+DEBUG: tag_valor falhou - node nÒo encontrado: ./ptu:equipe_Profissional/ptu:Prestador/ptu:cd_Prest
+DEBUG: AND results: [False, True]
+DEBUG: tag_valor check - xpath: ./ptu:equipe_Profissional/ptu:Prestador/ptu:cd_Prest, valor: 11099, tipo: valor_permitido
+DEBUG: valor_permitido check: 11099 in ['9131'] -> False
+DEBUG: tag_valor falhou - node nÒo encontrado: ./ptu:equipe_Profissional/ptu:Prestador/ptu:cd_Prest
+DEBUG: AND results: [False, True]
+DEBUG: tag_valor falhou - node nÒo encontrado: ./ptu:equipe_Profissional/ptu:Prestador/ptu:cd_Prest
+DEBUG: AND results: [False, True]
+DEBUG: tag_valor falhou - node nÒo encontrado: ./ptu:equipe_Profissional/ptu:Prestador/ptu:cd_Prest
+DEBUG: AND results: [False, True]
+DEBUG: tag_valor falhou - node nÒo encontrado: ./ptu:equipe_Profissional/ptu:Prestador/ptu:cd_Prest
+DEBUG: AND results: [False, True]
+DEBUG: tag_valor falhou - node nÒo encontrado: ./ptu:equipe_Profissional/ptu:Prestador/ptu:cd_Prest
+DEBUG: AND results: [False, True]
+DEBUG: tag_valor falhou - node nÒo encontrado: ./ptu:equipe_Profissional/ptu:Prestador/ptu:cd_Prest
+DEBUG: AND results: [False, True]
+DEBUG: tag_valor falhou - node nÒo encontrado: ./ptu:equipe_Profissional/ptu:Prestador/ptu:cd_Prest
+DEBUG: AND results: [False, True]
+DEBUG: tag_valor falhou - node nÒo encontrado: ./ptu:equipe_Profissional/ptu:Prestador/ptu:cd_Prest
+DEBUG: AND results: [False, True]
+DEBUG: tag_valor falhou - node nÒo encontrado: ./ptu:equipe_Profissional/ptu:Prestador/ptu:cd_Prest
+DEBUG: AND results: [False, True]
+DEBUG: tag_valor falhou - node nÒo encontrado: ./ptu:equipe_Profissional/ptu:Prestador/ptu:cd_Prest
+DEBUG: AND results: [False, True]
+DEBUG: tag_valor falhou - node nÒo encontrado: ./ptu:equipe_Profissional/ptu:Prestador/ptu:cd_Prest
+DEBUG: AND results: [False, True]
+DEBUG: tag_valor falhou - node nÒo encontrado: ./ptu:equipe_Profissional/ptu:Prestador/ptu:cd_Prest
+DEBUG: AND results: [False, True]
+DEBUG: tag_valor check - xpath: ./ptu:equipe_Profissional/ptu:Prestador/ptu:cd_Prest, valor: 11099, tipo: valor_permitido
+DEBUG: valor_permitido check: 11099 in ['9134'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 1900227633, tipo: valor_permitido
+DEBUG: valor_permitido check: 1900227633 in ['40314618', '40324796', '40324798', '40324788', '40325024', '40323676'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 1900214434, tipo: valor_permitido
+DEBUG: valor_permitido check: 1900214434 in ['40314618', '40324796', '40324798', '40324788', '40325024', '40323676'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 1900153087, tipo: valor_permitido
+DEBUG: valor_permitido check: 1900153087 in ['40314618', '40324796', '40324798', '40324788', '40325024', '40323676'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 1900110922, tipo: valor_permitido
+DEBUG: valor_permitido check: 1900110922 in ['40314618', '40324796', '40324798', '40324788', '40325024', '40323676'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 90524403, tipo: valor_permitido
+DEBUG: valor_permitido check: 90524403 in ['40314618', '40324796', '40324798', '40324788', '40325024', '40323676'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 90491343, tipo: valor_permitido
+DEBUG: valor_permitido check: 90491343 in ['40314618', '40324796', '40324798', '40324788', '40325024', '40323676'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 90360362, tipo: valor_permitido
+DEBUG: valor_permitido check: 90360362 in ['40314618', '40324796', '40324798', '40324788', '40325024', '40323676'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 90207564, tipo: valor_permitido
+DEBUG: valor_permitido check: 90207564 in ['40314618', '40324796', '40324798', '40324788', '40325024', '40323676'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 90072367, tipo: valor_permitido
+DEBUG: valor_permitido check: 90072367 in ['40314618', '40324796', '40324798', '40324788', '40325024', '40323676'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 70852251, tipo: valor_permitido
+DEBUG: valor_permitido check: 70852251 in ['40314618', '40324796', '40324798', '40324788', '40325024', '40323676'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 70705348, tipo: valor_permitido
+DEBUG: valor_permitido check: 70705348 in ['40314618', '40324796', '40324798', '40324788', '40325024', '40323676'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 60033681, tipo: valor_permitido
+DEBUG: valor_permitido check: 60033681 in ['40314618', '40324796', '40324798', '40324788', '40325024', '40323676'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 10101039, tipo: valor_permitido
+DEBUG: valor_permitido check: 10101039 in ['40314618', '40324796', '40324798', '40324788', '40325024', '40323676'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 1900227633, tipo: valor_permitido
+DEBUG: valor_permitido check: 1900227633 in ['10104020', '10104011'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 1900214434, tipo: valor_permitido
+DEBUG: valor_permitido check: 1900214434 in ['10104020', '10104011'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 1900153087, tipo: valor_permitido
+DEBUG: valor_permitido check: 1900153087 in ['10104020', '10104011'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 1900110922, tipo: valor_permitido
+DEBUG: valor_permitido check: 1900110922 in ['10104020', '10104011'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 90524403, tipo: valor_permitido
+DEBUG: valor_permitido check: 90524403 in ['10104020', '10104011'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 90491343, tipo: valor_permitido
+DEBUG: valor_permitido check: 90491343 in ['10104020', '10104011'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 90360362, tipo: valor_permitido
+DEBUG: valor_permitido check: 90360362 in ['10104020', '10104011'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 90207564, tipo: valor_permitido
+DEBUG: valor_permitido check: 90207564 in ['10104020', '10104011'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 90072367, tipo: valor_permitido
+DEBUG: valor_permitido check: 90072367 in ['10104020', '10104011'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 70852251, tipo: valor_permitido
+DEBUG: valor_permitido check: 70852251 in ['10104020', '10104011'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 70705348, tipo: valor_permitido
+DEBUG: valor_permitido check: 70705348 in ['10104020', '10104011'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 60033681, tipo: valor_permitido
+DEBUG: valor_permitido check: 60033681 in ['10104020', '10104011'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 10101039, tipo: valor_permitido
+DEBUG: valor_permitido check: 10101039 in ['10104020', '10104011'] -> False
+DEBUG: AND results: [False, True]
+DEBUG: tag_valor falhou - node nÒo encontrado: ./ptu:equipe_Profissional/ptu:nm_Profissional
+DEBUG: tag_valor falhou - node nÒo encontrado: ./ptu:equipe_Profissional/ptu:nm_Profissional
+DEBUG: tag_valor falhou - node nÒo encontrado: ./ptu:equipe_Profissional/ptu:nm_Profissional
+DEBUG: tag_valor falhou - node nÒo encontrado: ./ptu:equipe_Profissional/ptu:nm_Profissional
+DEBUG: tag_valor falhou - node nÒo encontrado: ./ptu:equipe_Profissional/ptu:nm_Profissional
+DEBUG: tag_valor falhou - node nÒo encontrado: ./ptu:equipe_Profissional/ptu:nm_Profissional
+DEBUG: tag_valor falhou - node nÒo encontrado: ./ptu:equipe_Profissional/ptu:nm_Profissional
+DEBUG: tag_valor falhou - node nÒo encontrado: ./ptu:equipe_Profissional/ptu:nm_Profissional
+DEBUG: tag_valor falhou - node nÒo encontrado: ./ptu:equipe_Profissional/ptu:nm_Profissional
+DEBUG: tag_valor falhou - node nÒo encontrado: ./ptu:equipe_Profissional/ptu:nm_Profissional
+DEBUG: tag_valor falhou - node nÒo encontrado: ./ptu:equipe_Profissional/ptu:nm_Profissional
+DEBUG: tag_valor falhou - node nÒo encontrado: ./ptu:equipe_Profissional/ptu:nm_Profissional
+DEBUG: tag_valor check - xpath: ./ptu:equipe_Profissional/ptu:nm_Profissional, valor: CARLOS HENRIQUE SIMOES MATHEUS, tipo: valor_permitido
+DEBUG: valor_permitido check: CARLOS HENRIQUE SIMOES MATHEUS in ['PLANTONISTA PA'] -> False
+DEBUG: AND results: [True, False]
+DEBUG: AND results: [True, False]
+DEBUG: AND results: [True, False]
+DEBUG: AND results: [False, True, True]
+DEBUG: AND results: [False, True, True]
+DEBUG: AND results: [False, True, True]
+DEBUG: AND results: [False, True, True]
+DEBUG: AND results: [False, True, True]
+DEBUG: AND results: [False, True, True]
+DEBUG: AND results: [False, True, True]
+DEBUG: AND results: [False, True, True]
+DEBUG: AND results: [False, True, True]
+DEBUG: AND results: [False, True, True]
+DEBUG: AND results: [False, True, True]
+DEBUG: AND results: [False, True, True]
+DEBUG: AND results: [True, True, True]
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 1900227633, tipo: valor_permitido
+DEBUG: valor_permitido check: 1900227633 in ['10101039'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 1900214434, tipo: valor_permitido
+DEBUG: valor_permitido check: 1900214434 in ['10101039'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 1900153087, tipo: valor_permitido
+DEBUG: valor_permitido check: 1900153087 in ['10101039'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 1900110922, tipo: valor_permitido
+DEBUG: valor_permitido check: 1900110922 in ['10101039'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 90524403, tipo: valor_permitido
+DEBUG: valor_permitido check: 90524403 in ['10101039'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 90491343, tipo: valor_permitido
+DEBUG: valor_permitido check: 90491343 in ['10101039'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 90360362, tipo: valor_permitido
+DEBUG: valor_permitido check: 90360362 in ['10101039'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 90207564, tipo: valor_permitido
+DEBUG: valor_permitido check: 90207564 in ['10101039'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 90072367, tipo: valor_permitido
+DEBUG: valor_permitido check: 90072367 in ['10101039'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 70852251, tipo: valor_permitido
+DEBUG: valor_permitido check: 70852251 in ['10101039'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 70705348, tipo: valor_permitido
+DEBUG: valor_permitido check: 70705348 in ['10101039'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 60033681, tipo: valor_permitido
+DEBUG: valor_permitido check: 60033681 in ['10101039'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 10101039, tipo: valor_permitido
+DEBUG: valor_permitido check: 10101039 in ['10101039'] -> True
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 1900227633, tipo: valor_permitido
+DEBUG: valor_permitido check: 1900227633 in ['10102019'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 1900214434, tipo: valor_permitido
+DEBUG: valor_permitido check: 1900214434 in ['10102019'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 1900153087, tipo: valor_permitido
+DEBUG: valor_permitido check: 1900153087 in ['10102019'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 1900110922, tipo: valor_permitido
+DEBUG: valor_permitido check: 1900110922 in ['10102019'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 90524403, tipo: valor_permitido
+DEBUG: valor_permitido check: 90524403 in ['10102019'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 90491343, tipo: valor_permitido
+DEBUG: valor_permitido check: 90491343 in ['10102019'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 90360362, tipo: valor_permitido
+DEBUG: valor_permitido check: 90360362 in ['10102019'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 90207564, tipo: valor_permitido
+DEBUG: valor_permitido check: 90207564 in ['10102019'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 90072367, tipo: valor_permitido
+DEBUG: valor_permitido check: 90072367 in ['10102019'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 70852251, tipo: valor_permitido
+DEBUG: valor_permitido check: 70852251 in ['10102019'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 70705348, tipo: valor_permitido
+DEBUG: valor_permitido check: 70705348 in ['10102019'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 60033681, tipo: valor_permitido
+DEBUG: valor_permitido check: 60033681 in ['10102019'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 10101039, tipo: valor_permitido
+DEBUG: valor_permitido check: 10101039 in ['10102019'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 1900227633, tipo: valor_permitido
+DEBUG: valor_permitido check: 1900227633 in ['20102038'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 1900214434, tipo: valor_permitido
+DEBUG: valor_permitido check: 1900214434 in ['20102038'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 1900153087, tipo: valor_permitido
+DEBUG: valor_permitido check: 1900153087 in ['20102038'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 1900110922, tipo: valor_permitido
+DEBUG: valor_permitido check: 1900110922 in ['20102038'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 90524403, tipo: valor_permitido
+DEBUG: valor_permitido check: 90524403 in ['20102038'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 90491343, tipo: valor_permitido
+DEBUG: valor_permitido check: 90491343 in ['20102038'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 90360362, tipo: valor_permitido
+DEBUG: valor_permitido check: 90360362 in ['20102038'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 90207564, tipo: valor_permitido
+DEBUG: valor_permitido check: 90207564 in ['20102038'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 90072367, tipo: valor_permitido
+DEBUG: valor_permitido check: 90072367 in ['20102038'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 70852251, tipo: valor_permitido
+DEBUG: valor_permitido check: 70852251 in ['20102038'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 70705348, tipo: valor_permitido
+DEBUG: valor_permitido check: 70705348 in ['20102038'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 60033681, tipo: valor_permitido
+DEBUG: valor_permitido check: 60033681 in ['20102038'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 10101039, tipo: valor_permitido
+DEBUG: valor_permitido check: 10101039 in ['20102038'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 1900227633, tipo: valor_permitido
+DEBUG: valor_permitido check: 1900227633 in ['20103301'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 1900214434, tipo: valor_permitido
+DEBUG: valor_permitido check: 1900214434 in ['20103301'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 1900153087, tipo: valor_permitido
+DEBUG: valor_permitido check: 1900153087 in ['20103301'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 1900110922, tipo: valor_permitido
+DEBUG: valor_permitido check: 1900110922 in ['20103301'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 90524403, tipo: valor_permitido
+DEBUG: valor_permitido check: 90524403 in ['20103301'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 90491343, tipo: valor_permitido
+DEBUG: valor_permitido check: 90491343 in ['20103301'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 90360362, tipo: valor_permitido
+DEBUG: valor_permitido check: 90360362 in ['20103301'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 90207564, tipo: valor_permitido
+DEBUG: valor_permitido check: 90207564 in ['20103301'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 90072367, tipo: valor_permitido
+DEBUG: valor_permitido check: 90072367 in ['20103301'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 70852251, tipo: valor_permitido
+DEBUG: valor_permitido check: 70852251 in ['20103301'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 70705348, tipo: valor_permitido
+DEBUG: valor_permitido check: 70705348 in ['20103301'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 60033681, tipo: valor_permitido
+DEBUG: valor_permitido check: 60033681 in ['20103301'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 10101039, tipo: valor_permitido
+DEBUG: valor_permitido check: 10101039 in ['20103301'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 1900227633, tipo: valor_permitido
+DEBUG: valor_permitido check: 1900227633 in ['20104090'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 1900214434, tipo: valor_permitido
+DEBUG: valor_permitido check: 1900214434 in ['20104090'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 1900153087, tipo: valor_permitido
+DEBUG: valor_permitido check: 1900153087 in ['20104090'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 1900110922, tipo: valor_permitido
+DEBUG: valor_permitido check: 1900110922 in ['20104090'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 90524403, tipo: valor_permitido
+DEBUG: valor_permitido check: 90524403 in ['20104090'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 90491343, tipo: valor_permitido
+DEBUG: valor_permitido check: 90491343 in ['20104090'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 90360362, tipo: valor_permitido
+DEBUG: valor_permitido check: 90360362 in ['20104090'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 90207564, tipo: valor_permitido
+DEBUG: valor_permitido check: 90207564 in ['20104090'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 90072367, tipo: valor_permitido
+DEBUG: valor_permitido check: 90072367 in ['20104090'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 70852251, tipo: valor_permitido
+DEBUG: valor_permitido check: 70852251 in ['20104090'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 70705348, tipo: valor_permitido
+DEBUG: valor_permitido check: 70705348 in ['20104090'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 60033681, tipo: valor_permitido
+DEBUG: valor_permitido check: 60033681 in ['20104090'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 10101039, tipo: valor_permitido
+DEBUG: valor_permitido check: 10101039 in ['20104090'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 1900227633, tipo: valor_permitido
+DEBUG: valor_permitido check: 1900227633 in ['20104103'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 1900214434, tipo: valor_permitido
+DEBUG: valor_permitido check: 1900214434 in ['20104103'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 1900153087, tipo: valor_permitido
+DEBUG: valor_permitido check: 1900153087 in ['20104103'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 1900110922, tipo: valor_permitido
+DEBUG: valor_permitido check: 1900110922 in ['20104103'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 90524403, tipo: valor_permitido
+DEBUG: valor_permitido check: 90524403 in ['20104103'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 90491343, tipo: valor_permitido
+DEBUG: valor_permitido check: 90491343 in ['20104103'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 90360362, tipo: valor_permitido
+DEBUG: valor_permitido check: 90360362 in ['20104103'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 90207564, tipo: valor_permitido
+DEBUG: valor_permitido check: 90207564 in ['20104103'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 90072367, tipo: valor_permitido
+DEBUG: valor_permitido check: 90072367 in ['20104103'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 70852251, tipo: valor_permitido
+DEBUG: valor_permitido check: 70852251 in ['20104103'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 70705348, tipo: valor_permitido
+DEBUG: valor_permitido check: 70705348 in ['20104103'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 60033681, tipo: valor_permitido
+DEBUG: valor_permitido check: 60033681 in ['20104103'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 10101039, tipo: valor_permitido
+DEBUG: valor_permitido check: 10101039 in ['20104103'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 1900227633, tipo: valor_permitido
+DEBUG: valor_permitido check: 1900227633 in ['30302064'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 1900214434, tipo: valor_permitido
+DEBUG: valor_permitido check: 1900214434 in ['30302064'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 1900153087, tipo: valor_permitido
+DEBUG: valor_permitido check: 1900153087 in ['30302064'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 1900110922, tipo: valor_permitido
+DEBUG: valor_permitido check: 1900110922 in ['30302064'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 90524403, tipo: valor_permitido
+DEBUG: valor_permitido check: 90524403 in ['30302064'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 90491343, tipo: valor_permitido
+DEBUG: valor_permitido check: 90491343 in ['30302064'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 90360362, tipo: valor_permitido
+DEBUG: valor_permitido check: 90360362 in ['30302064'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 90207564, tipo: valor_permitido
+DEBUG: valor_permitido check: 90207564 in ['30302064'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 90072367, tipo: valor_permitido
+DEBUG: valor_permitido check: 90072367 in ['30302064'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 70852251, tipo: valor_permitido
+DEBUG: valor_permitido check: 70852251 in ['30302064'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 70705348, tipo: valor_permitido
+DEBUG: valor_permitido check: 70705348 in ['30302064'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 60033681, tipo: valor_permitido
+DEBUG: valor_permitido check: 60033681 in ['30302064'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 10101039, tipo: valor_permitido
+DEBUG: valor_permitido check: 10101039 in ['30302064'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 1900227633, tipo: valor_permitido
+DEBUG: valor_permitido check: 1900227633 in ['30712092'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 1900214434, tipo: valor_permitido
+DEBUG: valor_permitido check: 1900214434 in ['30712092'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 1900153087, tipo: valor_permitido
+DEBUG: valor_permitido check: 1900153087 in ['30712092'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 1900110922, tipo: valor_permitido
+DEBUG: valor_permitido check: 1900110922 in ['30712092'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 90524403, tipo: valor_permitido
+DEBUG: valor_permitido check: 90524403 in ['30712092'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 90491343, tipo: valor_permitido
+DEBUG: valor_permitido check: 90491343 in ['30712092'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 90360362, tipo: valor_permitido
+DEBUG: valor_permitido check: 90360362 in ['30712092'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 90207564, tipo: valor_permitido
+DEBUG: valor_permitido check: 90207564 in ['30712092'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 90072367, tipo: valor_permitido
+DEBUG: valor_permitido check: 90072367 in ['30712092'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 70852251, tipo: valor_permitido
+DEBUG: valor_permitido check: 70852251 in ['30712092'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 70705348, tipo: valor_permitido
+DEBUG: valor_permitido check: 70705348 in ['30712092'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 60033681, tipo: valor_permitido
+DEBUG: valor_permitido check: 60033681 in ['30712092'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 10101039, tipo: valor_permitido
+DEBUG: valor_permitido check: 10101039 in ['30712092'] -> False
+DEBUG: AND results: [False, True]
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 1900227633, tipo: valor_permitido
+DEBUG: valor_permitido check: 1900227633 in ['30720109', '30711010', '30101611', '30711037', '30310067', '30711029'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 1900214434, tipo: valor_permitido
+DEBUG: valor_permitido check: 1900214434 in ['30720109', '30711010', '30101611', '30711037', '30310067', '30711029'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 1900153087, tipo: valor_permitido
+DEBUG: valor_permitido check: 1900153087 in ['30720109', '30711010', '30101611', '30711037', '30310067', '30711029'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 1900110922, tipo: valor_permitido
+DEBUG: valor_permitido check: 1900110922 in ['30720109', '30711010', '30101611', '30711037', '30310067', '30711029'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 90524403, tipo: valor_permitido
+DEBUG: valor_permitido check: 90524403 in ['30720109', '30711010', '30101611', '30711037', '30310067', '30711029'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 90491343, tipo: valor_permitido
+DEBUG: valor_permitido check: 90491343 in ['30720109', '30711010', '30101611', '30711037', '30310067', '30711029'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 90360362, tipo: valor_permitido
+DEBUG: valor_permitido check: 90360362 in ['30720109', '30711010', '30101611', '30711037', '30310067', '30711029'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 90207564, tipo: valor_permitido
+DEBUG: valor_permitido check: 90207564 in ['30720109', '30711010', '30101611', '30711037', '30310067', '30711029'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 90072367, tipo: valor_permitido
+DEBUG: valor_permitido check: 90072367 in ['30720109', '30711010', '30101611', '30711037', '30310067', '30711029'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 70852251, tipo: valor_permitido
+DEBUG: valor_permitido check: 70852251 in ['30720109', '30711010', '30101611', '30711037', '30310067', '30711029'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 70705348, tipo: valor_permitido
+DEBUG: valor_permitido check: 70705348 in ['30720109', '30711010', '30101611', '30711037', '30310067', '30711029'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 60033681, tipo: valor_permitido
+DEBUG: valor_permitido check: 60033681 in ['30720109', '30711010', '30101611', '30711037', '30310067', '30711029'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 10101039, tipo: valor_permitido
+DEBUG: valor_permitido check: 10101039 in ['30720109', '30711010', '30101611', '30711037', '30310067', '30711029'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 1900227633, tipo: valor_permitido
+DEBUG: valor_permitido check: 1900227633 in ['30721130'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 1900214434, tipo: valor_permitido
+DEBUG: valor_permitido check: 1900214434 in ['30721130'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 1900153087, tipo: valor_permitido
+DEBUG: valor_permitido check: 1900153087 in ['30721130'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 1900110922, tipo: valor_permitido
+DEBUG: valor_permitido check: 1900110922 in ['30721130'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 90524403, tipo: valor_permitido
+DEBUG: valor_permitido check: 90524403 in ['30721130'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 90491343, tipo: valor_permitido
+DEBUG: valor_permitido check: 90491343 in ['30721130'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 90360362, tipo: valor_permitido
+DEBUG: valor_permitido check: 90360362 in ['30721130'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 90207564, tipo: valor_permitido
+DEBUG: valor_permitido check: 90207564 in ['30721130'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 90072367, tipo: valor_permitido
+DEBUG: valor_permitido check: 90072367 in ['30721130'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 70852251, tipo: valor_permitido
+DEBUG: valor_permitido check: 70852251 in ['30721130'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 70705348, tipo: valor_permitido
+DEBUG: valor_permitido check: 70705348 in ['30721130'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 60033681, tipo: valor_permitido
+DEBUG: valor_permitido check: 60033681 in ['30721130'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 10101039, tipo: valor_permitido
+DEBUG: valor_permitido check: 10101039 in ['30721130'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 1900227633, tipo: valor_permitido
+DEBUG: valor_permitido check: 1900227633 in ['31403026'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 1900214434, tipo: valor_permitido
+DEBUG: valor_permitido check: 1900214434 in ['31403026'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 1900153087, tipo: valor_permitido
+DEBUG: valor_permitido check: 1900153087 in ['31403026'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 1900110922, tipo: valor_permitido
+DEBUG: valor_permitido check: 1900110922 in ['31403026'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 90524403, tipo: valor_permitido
+DEBUG: valor_permitido check: 90524403 in ['31403026'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 90491343, tipo: valor_permitido
+DEBUG: valor_permitido check: 90491343 in ['31403026'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 90360362, tipo: valor_permitido
+DEBUG: valor_permitido check: 90360362 in ['31403026'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 90207564, tipo: valor_permitido
+DEBUG: valor_permitido check: 90207564 in ['31403026'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 90072367, tipo: valor_permitido
+DEBUG: valor_permitido check: 90072367 in ['31403026'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 70852251, tipo: valor_permitido
+DEBUG: valor_permitido check: 70852251 in ['31403026'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 70705348, tipo: valor_permitido
+DEBUG: valor_permitido check: 70705348 in ['31403026'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 60033681, tipo: valor_permitido
+DEBUG: valor_permitido check: 60033681 in ['31403026'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 10101039, tipo: valor_permitido
+DEBUG: valor_permitido check: 10101039 in ['31403026'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 1900227633, tipo: valor_permitido
+DEBUG: valor_permitido check: 1900227633 in ['31602070'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 1900214434, tipo: valor_permitido
+DEBUG: valor_permitido check: 1900214434 in ['31602070'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 1900153087, tipo: valor_permitido
+DEBUG: valor_permitido check: 1900153087 in ['31602070'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 1900110922, tipo: valor_permitido
+DEBUG: valor_permitido check: 1900110922 in ['31602070'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 90524403, tipo: valor_permitido
+DEBUG: valor_permitido check: 90524403 in ['31602070'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 90491343, tipo: valor_permitido
+DEBUG: valor_permitido check: 90491343 in ['31602070'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 90360362, tipo: valor_permitido
+DEBUG: valor_permitido check: 90360362 in ['31602070'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 90207564, tipo: valor_permitido
+DEBUG: valor_permitido check: 90207564 in ['31602070'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 90072367, tipo: valor_permitido
+DEBUG: valor_permitido check: 90072367 in ['31602070'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 70852251, tipo: valor_permitido
+DEBUG: valor_permitido check: 70852251 in ['31602070'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 70705348, tipo: valor_permitido
+DEBUG: valor_permitido check: 70705348 in ['31602070'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 60033681, tipo: valor_permitido
+DEBUG: valor_permitido check: 60033681 in ['31602070'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 10101039, tipo: valor_permitido
+DEBUG: valor_permitido check: 10101039 in ['31602070'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 1900227633, tipo: valor_permitido
+DEBUG: valor_permitido check: 1900227633 in ['31602207'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 1900214434, tipo: valor_permitido
+DEBUG: valor_permitido check: 1900214434 in ['31602207'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 1900153087, tipo: valor_permitido
+DEBUG: valor_permitido check: 1900153087 in ['31602207'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 1900110922, tipo: valor_permitido
+DEBUG: valor_permitido check: 1900110922 in ['31602207'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 90524403, tipo: valor_permitido
+DEBUG: valor_permitido check: 90524403 in ['31602207'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 90491343, tipo: valor_permitido
+DEBUG: valor_permitido check: 90491343 in ['31602207'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 90360362, tipo: valor_permitido
+DEBUG: valor_permitido check: 90360362 in ['31602207'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 90207564, tipo: valor_permitido
+DEBUG: valor_permitido check: 90207564 in ['31602207'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 90072367, tipo: valor_permitido
+DEBUG: valor_permitido check: 90072367 in ['31602207'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 70852251, tipo: valor_permitido
+DEBUG: valor_permitido check: 70852251 in ['31602207'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 70705348, tipo: valor_permitido
+DEBUG: valor_permitido check: 70705348 in ['31602207'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 60033681, tipo: valor_permitido
+DEBUG: valor_permitido check: 60033681 in ['31602207'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 10101039, tipo: valor_permitido
+DEBUG: valor_permitido check: 10101039 in ['31602207'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 1900227633, tipo: valor_permitido
+DEBUG: valor_permitido check: 1900227633 in ['40202445'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 1900214434, tipo: valor_permitido
+DEBUG: valor_permitido check: 1900214434 in ['40202445'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 1900153087, tipo: valor_permitido
+DEBUG: valor_permitido check: 1900153087 in ['40202445'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 1900110922, tipo: valor_permitido
+DEBUG: valor_permitido check: 1900110922 in ['40202445'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 90524403, tipo: valor_permitido
+DEBUG: valor_permitido check: 90524403 in ['40202445'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 90491343, tipo: valor_permitido
+DEBUG: valor_permitido check: 90491343 in ['40202445'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 90360362, tipo: valor_permitido
+DEBUG: valor_permitido check: 90360362 in ['40202445'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 90207564, tipo: valor_permitido
+DEBUG: valor_permitido check: 90207564 in ['40202445'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 90072367, tipo: valor_permitido
+DEBUG: valor_permitido check: 90072367 in ['40202445'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 70852251, tipo: valor_permitido
+DEBUG: valor_permitido check: 70852251 in ['40202445'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 70705348, tipo: valor_permitido
+DEBUG: valor_permitido check: 70705348 in ['40202445'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 60033681, tipo: valor_permitido
+DEBUG: valor_permitido check: 60033681 in ['40202445'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 10101039, tipo: valor_permitido
+DEBUG: valor_permitido check: 10101039 in ['40202445'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 1900227633, tipo: valor_permitido
+DEBUG: valor_permitido check: 1900227633 in ['40808238'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 1900214434, tipo: valor_permitido
+DEBUG: valor_permitido check: 1900214434 in ['40808238'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 1900153087, tipo: valor_permitido
+DEBUG: valor_permitido check: 1900153087 in ['40808238'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 1900110922, tipo: valor_permitido
+DEBUG: valor_permitido check: 1900110922 in ['40808238'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 90524403, tipo: valor_permitido
+DEBUG: valor_permitido check: 90524403 in ['40808238'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 90491343, tipo: valor_permitido
+DEBUG: valor_permitido check: 90491343 in ['40808238'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 90360362, tipo: valor_permitido
+DEBUG: valor_permitido check: 90360362 in ['40808238'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 90207564, tipo: valor_permitido
+DEBUG: valor_permitido check: 90207564 in ['40808238'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 90072367, tipo: valor_permitido
+DEBUG: valor_permitido check: 90072367 in ['40808238'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 70852251, tipo: valor_permitido
+DEBUG: valor_permitido check: 70852251 in ['40808238'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 70705348, tipo: valor_permitido
+DEBUG: valor_permitido check: 70705348 in ['40808238'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 60033681, tipo: valor_permitido
+DEBUG: valor_permitido check: 60033681 in ['40808238'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 10101039, tipo: valor_permitido
+DEBUG: valor_permitido check: 10101039 in ['40808238'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 1900227633, tipo: valor_permitido
+DEBUG: valor_permitido check: 1900227633 in ['40808262'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 1900214434, tipo: valor_permitido
+DEBUG: valor_permitido check: 1900214434 in ['40808262'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 1900153087, tipo: valor_permitido
+DEBUG: valor_permitido check: 1900153087 in ['40808262'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 1900110922, tipo: valor_permitido
+DEBUG: valor_permitido check: 1900110922 in ['40808262'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 90524403, tipo: valor_permitido
+DEBUG: valor_permitido check: 90524403 in ['40808262'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 90491343, tipo: valor_permitido
+DEBUG: valor_permitido check: 90491343 in ['40808262'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 90360362, tipo: valor_permitido
+DEBUG: valor_permitido check: 90360362 in ['40808262'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 90207564, tipo: valor_permitido
+DEBUG: valor_permitido check: 90207564 in ['40808262'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 90072367, tipo: valor_permitido
+DEBUG: valor_permitido check: 90072367 in ['40808262'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 70852251, tipo: valor_permitido
+DEBUG: valor_permitido check: 70852251 in ['40808262'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 70705348, tipo: valor_permitido
+DEBUG: valor_permitido check: 70705348 in ['40808262'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 60033681, tipo: valor_permitido
+DEBUG: valor_permitido check: 60033681 in ['40808262'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 10101039, tipo: valor_permitido
+DEBUG: valor_permitido check: 10101039 in ['40808262'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 1900227633, tipo: valor_permitido
+DEBUG: valor_permitido check: 1900227633 in ['40809218'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 1900214434, tipo: valor_permitido
+DEBUG: valor_permitido check: 1900214434 in ['40809218'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 1900153087, tipo: valor_permitido
+DEBUG: valor_permitido check: 1900153087 in ['40809218'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 1900110922, tipo: valor_permitido
+DEBUG: valor_permitido check: 1900110922 in ['40809218'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 90524403, tipo: valor_permitido
+DEBUG: valor_permitido check: 90524403 in ['40809218'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 90491343, tipo: valor_permitido
+DEBUG: valor_permitido check: 90491343 in ['40809218'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 90360362, tipo: valor_permitido
+DEBUG: valor_permitido check: 90360362 in ['40809218'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 90207564, tipo: valor_permitido
+DEBUG: valor_permitido check: 90207564 in ['40809218'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 90072367, tipo: valor_permitido
+DEBUG: valor_permitido check: 90072367 in ['40809218'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 70852251, tipo: valor_permitido
+DEBUG: valor_permitido check: 70852251 in ['40809218'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 70705348, tipo: valor_permitido
+DEBUG: valor_permitido check: 70705348 in ['40809218'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 60033681, tipo: valor_permitido
+DEBUG: valor_permitido check: 60033681 in ['40809218'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 10101039, tipo: valor_permitido
+DEBUG: valor_permitido check: 10101039 in ['40809218'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 1900227633, tipo: valor_permitido
+DEBUG: valor_permitido check: 1900227633 in ['40809226', '40809161'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 1900214434, tipo: valor_permitido
+DEBUG: valor_permitido check: 1900214434 in ['40809226', '40809161'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 1900153087, tipo: valor_permitido
+DEBUG: valor_permitido check: 1900153087 in ['40809226', '40809161'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 1900110922, tipo: valor_permitido
+DEBUG: valor_permitido check: 1900110922 in ['40809226', '40809161'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 90524403, tipo: valor_permitido
+DEBUG: valor_permitido check: 90524403 in ['40809226', '40809161'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 90491343, tipo: valor_permitido
+DEBUG: valor_permitido check: 90491343 in ['40809226', '40809161'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 90360362, tipo: valor_permitido
+DEBUG: valor_permitido check: 90360362 in ['40809226', '40809161'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 90207564, tipo: valor_permitido
+DEBUG: valor_permitido check: 90207564 in ['40809226', '40809161'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 90072367, tipo: valor_permitido
+DEBUG: valor_permitido check: 90072367 in ['40809226', '40809161'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 70852251, tipo: valor_permitido
+DEBUG: valor_permitido check: 70852251 in ['40809226', '40809161'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 70705348, tipo: valor_permitido
+DEBUG: valor_permitido check: 70705348 in ['40809226', '40809161'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 60033681, tipo: valor_permitido
+DEBUG: valor_permitido check: 60033681 in ['40809226', '40809161'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 10101039, tipo: valor_permitido
+DEBUG: valor_permitido check: 10101039 in ['40809226', '40809161'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 1900227633, tipo: valor_permitido
+DEBUG: valor_permitido check: 1900227633 in ['40813363'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 1900214434, tipo: valor_permitido
+DEBUG: valor_permitido check: 1900214434 in ['40813363'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 1900153087, tipo: valor_permitido
+DEBUG: valor_permitido check: 1900153087 in ['40813363'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 1900110922, tipo: valor_permitido
+DEBUG: valor_permitido check: 1900110922 in ['40813363'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 90524403, tipo: valor_permitido
+DEBUG: valor_permitido check: 90524403 in ['40813363'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 90491343, tipo: valor_permitido
+DEBUG: valor_permitido check: 90491343 in ['40813363'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 90360362, tipo: valor_permitido
+DEBUG: valor_permitido check: 90360362 in ['40813363'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 90207564, tipo: valor_permitido
+DEBUG: valor_permitido check: 90207564 in ['40813363'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 90072367, tipo: valor_permitido
+DEBUG: valor_permitido check: 90072367 in ['40813363'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 70852251, tipo: valor_permitido
+DEBUG: valor_permitido check: 70852251 in ['40813363'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 70705348, tipo: valor_permitido
+DEBUG: valor_permitido check: 70705348 in ['40813363'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 60033681, tipo: valor_permitido
+DEBUG: valor_permitido check: 60033681 in ['40813363'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 10101039, tipo: valor_permitido
+DEBUG: valor_permitido check: 10101039 in ['40813363'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 1900227633, tipo: valor_permitido
+DEBUG: valor_permitido check: 1900227633 in ['40813363'] -> False
+DEBUG: AND results: [False, True]
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 1900214434, tipo: valor_permitido
+DEBUG: valor_permitido check: 1900214434 in ['40813363'] -> False
+DEBUG: AND results: [False, True]
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 1900153087, tipo: valor_permitido
+DEBUG: valor_permitido check: 1900153087 in ['40813363'] -> False
+DEBUG: AND results: [False, True]
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 1900110922, tipo: valor_permitido
+DEBUG: valor_permitido check: 1900110922 in ['40813363'] -> False
+DEBUG: AND results: [False, True]
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 90524403, tipo: valor_permitido
+DEBUG: valor_permitido check: 90524403 in ['40813363'] -> False
+DEBUG: AND results: [False, True]
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 90491343, tipo: valor_permitido
+DEBUG: valor_permitido check: 90491343 in ['40813363'] -> False
+DEBUG: AND results: [False, True]
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 90360362, tipo: valor_permitido
+DEBUG: valor_permitido check: 90360362 in ['40813363'] -> False
+DEBUG: AND results: [False, True]
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 90207564, tipo: valor_permitido
+DEBUG: valor_permitido check: 90207564 in ['40813363'] -> False
+DEBUG: AND results: [False, True]
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 90072367, tipo: valor_permitido
+DEBUG: valor_permitido check: 90072367 in ['40813363'] -> False
+DEBUG: AND results: [False, True]
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 70852251, tipo: valor_permitido
+DEBUG: valor_permitido check: 70852251 in ['40813363'] -> False
+DEBUG: AND results: [False, True]
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 70705348, tipo: valor_permitido
+DEBUG: valor_permitido check: 70705348 in ['40813363'] -> False
+DEBUG: AND results: [False, True]
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 60033681, tipo: valor_permitido
+DEBUG: valor_permitido check: 60033681 in ['40813363'] -> False
+DEBUG: AND results: [False, True]
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 10101039, tipo: valor_permitido
+DEBUG: valor_permitido check: 10101039 in ['40813363'] -> False
+DEBUG: AND results: [False, True]
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 1900227633, tipo: valor_permitido
+DEBUG: valor_permitido check: 1900227633 in ['40813401'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 1900214434, tipo: valor_permitido
+DEBUG: valor_permitido check: 1900214434 in ['40813401'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 1900153087, tipo: valor_permitido
+DEBUG: valor_permitido check: 1900153087 in ['40813401'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 1900110922, tipo: valor_permitido
+DEBUG: valor_permitido check: 1900110922 in ['40813401'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 90524403, tipo: valor_permitido
+DEBUG: valor_permitido check: 90524403 in ['40813401'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 90491343, tipo: valor_permitido
+DEBUG: valor_permitido check: 90491343 in ['40813401'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 90360362, tipo: valor_permitido
+DEBUG: valor_permitido check: 90360362 in ['40813401'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 90207564, tipo: valor_permitido
+DEBUG: valor_permitido check: 90207564 in ['40813401'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 90072367, tipo: valor_permitido
+DEBUG: valor_permitido check: 90072367 in ['40813401'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 70852251, tipo: valor_permitido
+DEBUG: valor_permitido check: 70852251 in ['40813401'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 70705348, tipo: valor_permitido
+DEBUG: valor_permitido check: 70705348 in ['40813401'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 60033681, tipo: valor_permitido
+DEBUG: valor_permitido check: 60033681 in ['40813401'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 10101039, tipo: valor_permitido
+DEBUG: valor_permitido check: 10101039 in ['40813401'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 1900227633, tipo: valor_permitido
+DEBUG: valor_permitido check: 1900227633 in ['40902110'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 1900214434, tipo: valor_permitido
+DEBUG: valor_permitido check: 1900214434 in ['40902110'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 1900153087, tipo: valor_permitido
+DEBUG: valor_permitido check: 1900153087 in ['40902110'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 1900110922, tipo: valor_permitido
+DEBUG: valor_permitido check: 1900110922 in ['40902110'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 90524403, tipo: valor_permitido
+DEBUG: valor_permitido check: 90524403 in ['40902110'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 90491343, tipo: valor_permitido
+DEBUG: valor_permitido check: 90491343 in ['40902110'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 90360362, tipo: valor_permitido
+DEBUG: valor_permitido check: 90360362 in ['40902110'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 90207564, tipo: valor_permitido
+DEBUG: valor_permitido check: 90207564 in ['40902110'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 90072367, tipo: valor_permitido
+DEBUG: valor_permitido check: 90072367 in ['40902110'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 70852251, tipo: valor_permitido
+DEBUG: valor_permitido check: 70852251 in ['40902110'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 70705348, tipo: valor_permitido
+DEBUG: valor_permitido check: 70705348 in ['40902110'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 60033681, tipo: valor_permitido
+DEBUG: valor_permitido check: 60033681 in ['40902110'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 10101039, tipo: valor_permitido
+DEBUG: valor_permitido check: 10101039 in ['40902110'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:dadosConselho/ptu:sg_Conselho, valor: CRM, tipo: valor_permitido
+DEBUG: valor_permitido check: CRM in ['OUT'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:dadosConselho/ptu:nr_Conselho, valor: 8228, tipo: valor_permitido
+DEBUG: valor_permitido check: 8228 in ['0'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:CBO, valor: 225275, tipo: valor_atual_igual
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 1900227633, tipo: valor_permitido
+DEBUG: valor_permitido check: 1900227633 in ['60018658', '60018666', '60018682', '60018690', '60018712', '60018720', '60018747', '60018755', '60018895', '60018909', '60018925', '60018933', '60018950', '60018968', '60018984', '60018992', '60019131', '60019140', '60019166', '60019174', '60019190', '60019204', '60019220', '60019239', '60019859', '60019867', '60019883', '60019891', '60019913', '60019921', '60019948', '60019956', '60020091', '60020105', '60020121', '60020130', '60020156', '60020164', '60020180', '60020199', '60020326', '60020334', '60020342', '60020350', '60020369', '60020377', '60020385', '60020393', '60020407', '60020415', '60020423', '60020431', '60020814', '60020822', '60020849', '60020857', '60020873', '60020881', '60020903', '60020911', '60021055', '60021063', '60021080', '60021098', '60021110', '60021128', '60021144', '60021152', '60022191', '60018631', '60034777', '60034807', '60034823', '60034858', '60034874', '60034904', '60034920', '60034939'] -> False
+DEBUG: AND results: [False, True]
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 1900214434, tipo: valor_permitido
+DEBUG: valor_permitido check: 1900214434 in ['60018658', '60018666', '60018682', '60018690', '60018712', '60018720', '60018747', '60018755', '60018895', '60018909', '60018925', '60018933', '60018950', '60018968', '60018984', '60018992', '60019131', '60019140', '60019166', '60019174', '60019190', '60019204', '60019220', '60019239', '60019859', '60019867', '60019883', '60019891', '60019913', '60019921', '60019948', '60019956', '60020091', '60020105', '60020121', '60020130', '60020156', '60020164', '60020180', '60020199', '60020326', '60020334', '60020342', '60020350', '60020369', '60020377', '60020385', '60020393', '60020407', '60020415', '60020423', '60020431', '60020814', '60020822', '60020849', '60020857', '60020873', '60020881', '60020903', '60020911', '60021055', '60021063', '60021080', '60021098', '60021110', '60021128', '60021144', '60021152', '60022191', '60018631', '60034777', '60034807', '60034823', '60034858', '60034874', '60034904', '60034920', '60034939'] -> False
+DEBUG: AND results: [False, True]
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 1900153087, tipo: valor_permitido
+DEBUG: valor_permitido check: 1900153087 in ['60018658', '60018666', '60018682', '60018690', '60018712', '60018720', '60018747', '60018755', '60018895', '60018909', '60018925', '60018933', '60018950', '60018968', '60018984', '60018992', '60019131', '60019140', '60019166', '60019174', '60019190', '60019204', '60019220', '60019239', '60019859', '60019867', '60019883', '60019891', '60019913', '60019921', '60019948', '60019956', '60020091', '60020105', '60020121', '60020130', '60020156', '60020164', '60020180', '60020199', '60020326', '60020334', '60020342', '60020350', '60020369', '60020377', '60020385', '60020393', '60020407', '60020415', '60020423', '60020431', '60020814', '60020822', '60020849', '60020857', '60020873', '60020881', '60020903', '60020911', '60021055', '60021063', '60021080', '60021098', '60021110', '60021128', '60021144', '60021152', '60022191', '60018631', '60034777', '60034807', '60034823', '60034858', '60034874', '60034904', '60034920', '60034939'] -> False
+DEBUG: AND results: [False, True]
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 1900110922, tipo: valor_permitido
+DEBUG: valor_permitido check: 1900110922 in ['60018658', '60018666', '60018682', '60018690', '60018712', '60018720', '60018747', '60018755', '60018895', '60018909', '60018925', '60018933', '60018950', '60018968', '60018984', '60018992', '60019131', '60019140', '60019166', '60019174', '60019190', '60019204', '60019220', '60019239', '60019859', '60019867', '60019883', '60019891', '60019913', '60019921', '60019948', '60019956', '60020091', '60020105', '60020121', '60020130', '60020156', '60020164', '60020180', '60020199', '60020326', '60020334', '60020342', '60020350', '60020369', '60020377', '60020385', '60020393', '60020407', '60020415', '60020423', '60020431', '60020814', '60020822', '60020849', '60020857', '60020873', '60020881', '60020903', '60020911', '60021055', '60021063', '60021080', '60021098', '60021110', '60021128', '60021144', '60021152', '60022191', '60018631', '60034777', '60034807', '60034823', '60034858', '60034874', '60034904', '60034920', '60034939'] -> False
+DEBUG: AND results: [False, True]
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 90524403, tipo: valor_permitido
+DEBUG: valor_permitido check: 90524403 in ['60018658', '60018666', '60018682', '60018690', '60018712', '60018720', '60018747', '60018755', '60018895', '60018909', '60018925', '60018933', '60018950', '60018968', '60018984', '60018992', '60019131', '60019140', '60019166', '60019174', '60019190', '60019204', '60019220', '60019239', '60019859', '60019867', '60019883', '60019891', '60019913', '60019921', '60019948', '60019956', '60020091', '60020105', '60020121', '60020130', '60020156', '60020164', '60020180', '60020199', '60020326', '60020334', '60020342', '60020350', '60020369', '60020377', '60020385', '60020393', '60020407', '60020415', '60020423', '60020431', '60020814', '60020822', '60020849', '60020857', '60020873', '60020881', '60020903', '60020911', '60021055', '60021063', '60021080', '60021098', '60021110', '60021128', '60021144', '60021152', '60022191', '60018631', '60034777', '60034807', '60034823', '60034858', '60034874', '60034904', '60034920', '60034939'] -> False
+DEBUG: AND results: [False, True]
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 90491343, tipo: valor_permitido
+DEBUG: valor_permitido check: 90491343 in ['60018658', '60018666', '60018682', '60018690', '60018712', '60018720', '60018747', '60018755', '60018895', '60018909', '60018925', '60018933', '60018950', '60018968', '60018984', '60018992', '60019131', '60019140', '60019166', '60019174', '60019190', '60019204', '60019220', '60019239', '60019859', '60019867', '60019883', '60019891', '60019913', '60019921', '60019948', '60019956', '60020091', '60020105', '60020121', '60020130', '60020156', '60020164', '60020180', '60020199', '60020326', '60020334', '60020342', '60020350', '60020369', '60020377', '60020385', '60020393', '60020407', '60020415', '60020423', '60020431', '60020814', '60020822', '60020849', '60020857', '60020873', '60020881', '60020903', '60020911', '60021055', '60021063', '60021080', '60021098', '60021110', '60021128', '60021144', '60021152', '60022191', '60018631', '60034777', '60034807', '60034823', '60034858', '60034874', '60034904', '60034920', '60034939'] -> False
+DEBUG: AND results: [False, True]
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 90360362, tipo: valor_permitido
+DEBUG: valor_permitido check: 90360362 in ['60018658', '60018666', '60018682', '60018690', '60018712', '60018720', '60018747', '60018755', '60018895', '60018909', '60018925', '60018933', '60018950', '60018968', '60018984', '60018992', '60019131', '60019140', '60019166', '60019174', '60019190', '60019204', '60019220', '60019239', '60019859', '60019867', '60019883', '60019891', '60019913', '60019921', '60019948', '60019956', '60020091', '60020105', '60020121', '60020130', '60020156', '60020164', '60020180', '60020199', '60020326', '60020334', '60020342', '60020350', '60020369', '60020377', '60020385', '60020393', '60020407', '60020415', '60020423', '60020431', '60020814', '60020822', '60020849', '60020857', '60020873', '60020881', '60020903', '60020911', '60021055', '60021063', '60021080', '60021098', '60021110', '60021128', '60021144', '60021152', '60022191', '60018631', '60034777', '60034807', '60034823', '60034858', '60034874', '60034904', '60034920', '60034939'] -> False
+DEBUG: AND results: [False, True]
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 90207564, tipo: valor_permitido
+DEBUG: valor_permitido check: 90207564 in ['60018658', '60018666', '60018682', '60018690', '60018712', '60018720', '60018747', '60018755', '60018895', '60018909', '60018925', '60018933', '60018950', '60018968', '60018984', '60018992', '60019131', '60019140', '60019166', '60019174', '60019190', '60019204', '60019220', '60019239', '60019859', '60019867', '60019883', '60019891', '60019913', '60019921', '60019948', '60019956', '60020091', '60020105', '60020121', '60020130', '60020156', '60020164', '60020180', '60020199', '60020326', '60020334', '60020342', '60020350', '60020369', '60020377', '60020385', '60020393', '60020407', '60020415', '60020423', '60020431', '60020814', '60020822', '60020849', '60020857', '60020873', '60020881', '60020903', '60020911', '60021055', '60021063', '60021080', '60021098', '60021110', '60021128', '60021144', '60021152', '60022191', '60018631', '60034777', '60034807', '60034823', '60034858', '60034874', '60034904', '60034920', '60034939'] -> False
+DEBUG: AND results: [False, True]
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 90072367, tipo: valor_permitido
+DEBUG: valor_permitido check: 90072367 in ['60018658', '60018666', '60018682', '60018690', '60018712', '60018720', '60018747', '60018755', '60018895', '60018909', '60018925', '60018933', '60018950', '60018968', '60018984', '60018992', '60019131', '60019140', '60019166', '60019174', '60019190', '60019204', '60019220', '60019239', '60019859', '60019867', '60019883', '60019891', '60019913', '60019921', '60019948', '60019956', '60020091', '60020105', '60020121', '60020130', '60020156', '60020164', '60020180', '60020199', '60020326', '60020334', '60020342', '60020350', '60020369', '60020377', '60020385', '60020393', '60020407', '60020415', '60020423', '60020431', '60020814', '60020822', '60020849', '60020857', '60020873', '60020881', '60020903', '60020911', '60021055', '60021063', '60021080', '60021098', '60021110', '60021128', '60021144', '60021152', '60022191', '60018631', '60034777', '60034807', '60034823', '60034858', '60034874', '60034904', '60034920', '60034939'] -> False
+DEBUG: AND results: [False, True]
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 70852251, tipo: valor_permitido
+DEBUG: valor_permitido check: 70852251 in ['60018658', '60018666', '60018682', '60018690', '60018712', '60018720', '60018747', '60018755', '60018895', '60018909', '60018925', '60018933', '60018950', '60018968', '60018984', '60018992', '60019131', '60019140', '60019166', '60019174', '60019190', '60019204', '60019220', '60019239', '60019859', '60019867', '60019883', '60019891', '60019913', '60019921', '60019948', '60019956', '60020091', '60020105', '60020121', '60020130', '60020156', '60020164', '60020180', '60020199', '60020326', '60020334', '60020342', '60020350', '60020369', '60020377', '60020385', '60020393', '60020407', '60020415', '60020423', '60020431', '60020814', '60020822', '60020849', '60020857', '60020873', '60020881', '60020903', '60020911', '60021055', '60021063', '60021080', '60021098', '60021110', '60021128', '60021144', '60021152', '60022191', '60018631', '60034777', '60034807', '60034823', '60034858', '60034874', '60034904', '60034920', '60034939'] -> False
+DEBUG: AND results: [False, True]
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 70705348, tipo: valor_permitido
+DEBUG: valor_permitido check: 70705348 in ['60018658', '60018666', '60018682', '60018690', '60018712', '60018720', '60018747', '60018755', '60018895', '60018909', '60018925', '60018933', '60018950', '60018968', '60018984', '60018992', '60019131', '60019140', '60019166', '60019174', '60019190', '60019204', '60019220', '60019239', '60019859', '60019867', '60019883', '60019891', '60019913', '60019921', '60019948', '60019956', '60020091', '60020105', '60020121', '60020130', '60020156', '60020164', '60020180', '60020199', '60020326', '60020334', '60020342', '60020350', '60020369', '60020377', '60020385', '60020393', '60020407', '60020415', '60020423', '60020431', '60020814', '60020822', '60020849', '60020857', '60020873', '60020881', '60020903', '60020911', '60021055', '60021063', '60021080', '60021098', '60021110', '60021128', '60021144', '60021152', '60022191', '60018631', '60034777', '60034807', '60034823', '60034858', '60034874', '60034904', '60034920', '60034939'] -> False
+DEBUG: AND results: [False, True]
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 60033681, tipo: valor_permitido
+DEBUG: valor_permitido check: 60033681 in ['60018658', '60018666', '60018682', '60018690', '60018712', '60018720', '60018747', '60018755', '60018895', '60018909', '60018925', '60018933', '60018950', '60018968', '60018984', '60018992', '60019131', '60019140', '60019166', '60019174', '60019190', '60019204', '60019220', '60019239', '60019859', '60019867', '60019883', '60019891', '60019913', '60019921', '60019948', '60019956', '60020091', '60020105', '60020121', '60020130', '60020156', '60020164', '60020180', '60020199', '60020326', '60020334', '60020342', '60020350', '60020369', '60020377', '60020385', '60020393', '60020407', '60020415', '60020423', '60020431', '60020814', '60020822', '60020849', '60020857', '60020873', '60020881', '60020903', '60020911', '60021055', '60021063', '60021080', '60021098', '60021110', '60021128', '60021144', '60021152', '60022191', '60018631', '60034777', '60034807', '60034823', '60034858', '60034874', '60034904', '60034920', '60034939'] -> False
+DEBUG: AND results: [False, True]
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 10101039, tipo: valor_permitido
+DEBUG: valor_permitido check: 10101039 in ['60018658', '60018666', '60018682', '60018690', '60018712', '60018720', '60018747', '60018755', '60018895', '60018909', '60018925', '60018933', '60018950', '60018968', '60018984', '60018992', '60019131', '60019140', '60019166', '60019174', '60019190', '60019204', '60019220', '60019239', '60019859', '60019867', '60019883', '60019891', '60019913', '60019921', '60019948', '60019956', '60020091', '60020105', '60020121', '60020130', '60020156', '60020164', '60020180', '60020199', '60020326', '60020334', '60020342', '60020350', '60020369', '60020377', '60020385', '60020393', '60020407', '60020415', '60020423', '60020431', '60020814', '60020822', '60020849', '60020857', '60020873', '60020881', '60020903', '60020911', '60021055', '60021063', '60021080', '60021098', '60021110', '60021128', '60021144', '60021152', '60022191', '60018631', '60034777', '60034807', '60034823', '60034858', '60034874', '60034904', '60034920', '60034939'] -> False
+DEBUG: AND results: [False, True]
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 1900227633, tipo: valor_permitido
+DEBUG: valor_permitido check: 1900227633 in ['60018658', '60018666', '60018682', '60018690', '60018712', '60018720', '60018747', '60018755', '60018895', '60018909', '60018925', '60018933', '60018950', '60018968', '60018984', '60018992', '60019131', '60019140', '60019166', '60019174', '60019190', '60019204', '60019220', '60019239', '60019859', '60019867', '60019883', '60019891', '60019913', '60019921', '60019948', '60019956', '60020091', '60020105', '60020121', '60020130', '60020156', '60020164', '60020180', '60020199', '60020326', '60020334', '60020342', '60020350', '60020369', '60020377', '60020385', '60020393', '60020407', '60020415', '60020423', '60020431', '60020814', '60020822', '60020849', '60020857', '60020873', '60020881', '60020903', '60020911', '60021055', '60021063', '60021080', '60021098', '60021110', '60021128', '60021144', '60021152', '60022191', '60018631', '60034777', '60034807', '60034823', '60034858', '60034874', '60034904', '60034920', '60034939'] -> False
+DEBUG: AND results: [False, True]
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 1900214434, tipo: valor_permitido
+DEBUG: valor_permitido check: 1900214434 in ['60018658', '60018666', '60018682', '60018690', '60018712', '60018720', '60018747', '60018755', '60018895', '60018909', '60018925', '60018933', '60018950', '60018968', '60018984', '60018992', '60019131', '60019140', '60019166', '60019174', '60019190', '60019204', '60019220', '60019239', '60019859', '60019867', '60019883', '60019891', '60019913', '60019921', '60019948', '60019956', '60020091', '60020105', '60020121', '60020130', '60020156', '60020164', '60020180', '60020199', '60020326', '60020334', '60020342', '60020350', '60020369', '60020377', '60020385', '60020393', '60020407', '60020415', '60020423', '60020431', '60020814', '60020822', '60020849', '60020857', '60020873', '60020881', '60020903', '60020911', '60021055', '60021063', '60021080', '60021098', '60021110', '60021128', '60021144', '60021152', '60022191', '60018631', '60034777', '60034807', '60034823', '60034858', '60034874', '60034904', '60034920', '60034939'] -> False
+DEBUG: AND results: [False, True]
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 1900153087, tipo: valor_permitido
+DEBUG: valor_permitido check: 1900153087 in ['60018658', '60018666', '60018682', '60018690', '60018712', '60018720', '60018747', '60018755', '60018895', '60018909', '60018925', '60018933', '60018950', '60018968', '60018984', '60018992', '60019131', '60019140', '60019166', '60019174', '60019190', '60019204', '60019220', '60019239', '60019859', '60019867', '60019883', '60019891', '60019913', '60019921', '60019948', '60019956', '60020091', '60020105', '60020121', '60020130', '60020156', '60020164', '60020180', '60020199', '60020326', '60020334', '60020342', '60020350', '60020369', '60020377', '60020385', '60020393', '60020407', '60020415', '60020423', '60020431', '60020814', '60020822', '60020849', '60020857', '60020873', '60020881', '60020903', '60020911', '60021055', '60021063', '60021080', '60021098', '60021110', '60021128', '60021144', '60021152', '60022191', '60018631', '60034777', '60034807', '60034823', '60034858', '60034874', '60034904', '60034920', '60034939'] -> False
+DEBUG: AND results: [False, True]
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 1900110922, tipo: valor_permitido
+DEBUG: valor_permitido check: 1900110922 in ['60018658', '60018666', '60018682', '60018690', '60018712', '60018720', '60018747', '60018755', '60018895', '60018909', '60018925', '60018933', '60018950', '60018968', '60018984', '60018992', '60019131', '60019140', '60019166', '60019174', '60019190', '60019204', '60019220', '60019239', '60019859', '60019867', '60019883', '60019891', '60019913', '60019921', '60019948', '60019956', '60020091', '60020105', '60020121', '60020130', '60020156', '60020164', '60020180', '60020199', '60020326', '60020334', '60020342', '60020350', '60020369', '60020377', '60020385', '60020393', '60020407', '60020415', '60020423', '60020431', '60020814', '60020822', '60020849', '60020857', '60020873', '60020881', '60020903', '60020911', '60021055', '60021063', '60021080', '60021098', '60021110', '60021128', '60021144', '60021152', '60022191', '60018631', '60034777', '60034807', '60034823', '60034858', '60034874', '60034904', '60034920', '60034939'] -> False
+DEBUG: AND results: [False, True]
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 90524403, tipo: valor_permitido
+DEBUG: valor_permitido check: 90524403 in ['60018658', '60018666', '60018682', '60018690', '60018712', '60018720', '60018747', '60018755', '60018895', '60018909', '60018925', '60018933', '60018950', '60018968', '60018984', '60018992', '60019131', '60019140', '60019166', '60019174', '60019190', '60019204', '60019220', '60019239', '60019859', '60019867', '60019883', '60019891', '60019913', '60019921', '60019948', '60019956', '60020091', '60020105', '60020121', '60020130', '60020156', '60020164', '60020180', '60020199', '60020326', '60020334', '60020342', '60020350', '60020369', '60020377', '60020385', '60020393', '60020407', '60020415', '60020423', '60020431', '60020814', '60020822', '60020849', '60020857', '60020873', '60020881', '60020903', '60020911', '60021055', '60021063', '60021080', '60021098', '60021110', '60021128', '60021144', '60021152', '60022191', '60018631', '60034777', '60034807', '60034823', '60034858', '60034874', '60034904', '60034920', '60034939'] -> False
+DEBUG: AND results: [False, True]
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 90491343, tipo: valor_permitido
+DEBUG: valor_permitido check: 90491343 in ['60018658', '60018666', '60018682', '60018690', '60018712', '60018720', '60018747', '60018755', '60018895', '60018909', '60018925', '60018933', '60018950', '60018968', '60018984', '60018992', '60019131', '60019140', '60019166', '60019174', '60019190', '60019204', '60019220', '60019239', '60019859', '60019867', '60019883', '60019891', '60019913', '60019921', '60019948', '60019956', '60020091', '60020105', '60020121', '60020130', '60020156', '60020164', '60020180', '60020199', '60020326', '60020334', '60020342', '60020350', '60020369', '60020377', '60020385', '60020393', '60020407', '60020415', '60020423', '60020431', '60020814', '60020822', '60020849', '60020857', '60020873', '60020881', '60020903', '60020911', '60021055', '60021063', '60021080', '60021098', '60021110', '60021128', '60021144', '60021152', '60022191', '60018631', '60034777', '60034807', '60034823', '60034858', '60034874', '60034904', '60034920', '60034939'] -> False
+DEBUG: AND results: [False, True]
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 90360362, tipo: valor_permitido
+DEBUG: valor_permitido check: 90360362 in ['60018658', '60018666', '60018682', '60018690', '60018712', '60018720', '60018747', '60018755', '60018895', '60018909', '60018925', '60018933', '60018950', '60018968', '60018984', '60018992', '60019131', '60019140', '60019166', '60019174', '60019190', '60019204', '60019220', '60019239', '60019859', '60019867', '60019883', '60019891', '60019913', '60019921', '60019948', '60019956', '60020091', '60020105', '60020121', '60020130', '60020156', '60020164', '60020180', '60020199', '60020326', '60020334', '60020342', '60020350', '60020369', '60020377', '60020385', '60020393', '60020407', '60020415', '60020423', '60020431', '60020814', '60020822', '60020849', '60020857', '60020873', '60020881', '60020903', '60020911', '60021055', '60021063', '60021080', '60021098', '60021110', '60021128', '60021144', '60021152', '60022191', '60018631', '60034777', '60034807', '60034823', '60034858', '60034874', '60034904', '60034920', '60034939'] -> False
+DEBUG: AND results: [False, True]
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 90207564, tipo: valor_permitido
+DEBUG: valor_permitido check: 90207564 in ['60018658', '60018666', '60018682', '60018690', '60018712', '60018720', '60018747', '60018755', '60018895', '60018909', '60018925', '60018933', '60018950', '60018968', '60018984', '60018992', '60019131', '60019140', '60019166', '60019174', '60019190', '60019204', '60019220', '60019239', '60019859', '60019867', '60019883', '60019891', '60019913', '60019921', '60019948', '60019956', '60020091', '60020105', '60020121', '60020130', '60020156', '60020164', '60020180', '60020199', '60020326', '60020334', '60020342', '60020350', '60020369', '60020377', '60020385', '60020393', '60020407', '60020415', '60020423', '60020431', '60020814', '60020822', '60020849', '60020857', '60020873', '60020881', '60020903', '60020911', '60021055', '60021063', '60021080', '60021098', '60021110', '60021128', '60021144', '60021152', '60022191', '60018631', '60034777', '60034807', '60034823', '60034858', '60034874', '60034904', '60034920', '60034939'] -> False
+DEBUG: AND results: [False, True]
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 90072367, tipo: valor_permitido
+DEBUG: valor_permitido check: 90072367 in ['60018658', '60018666', '60018682', '60018690', '60018712', '60018720', '60018747', '60018755', '60018895', '60018909', '60018925', '60018933', '60018950', '60018968', '60018984', '60018992', '60019131', '60019140', '60019166', '60019174', '60019190', '60019204', '60019220', '60019239', '60019859', '60019867', '60019883', '60019891', '60019913', '60019921', '60019948', '60019956', '60020091', '60020105', '60020121', '60020130', '60020156', '60020164', '60020180', '60020199', '60020326', '60020334', '60020342', '60020350', '60020369', '60020377', '60020385', '60020393', '60020407', '60020415', '60020423', '60020431', '60020814', '60020822', '60020849', '60020857', '60020873', '60020881', '60020903', '60020911', '60021055', '60021063', '60021080', '60021098', '60021110', '60021128', '60021144', '60021152', '60022191', '60018631', '60034777', '60034807', '60034823', '60034858', '60034874', '60034904', '60034920', '60034939'] -> False
+DEBUG: AND results: [False, True]
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 70852251, tipo: valor_permitido
+DEBUG: valor_permitido check: 70852251 in ['60018658', '60018666', '60018682', '60018690', '60018712', '60018720', '60018747', '60018755', '60018895', '60018909', '60018925', '60018933', '60018950', '60018968', '60018984', '60018992', '60019131', '60019140', '60019166', '60019174', '60019190', '60019204', '60019220', '60019239', '60019859', '60019867', '60019883', '60019891', '60019913', '60019921', '60019948', '60019956', '60020091', '60020105', '60020121', '60020130', '60020156', '60020164', '60020180', '60020199', '60020326', '60020334', '60020342', '60020350', '60020369', '60020377', '60020385', '60020393', '60020407', '60020415', '60020423', '60020431', '60020814', '60020822', '60020849', '60020857', '60020873', '60020881', '60020903', '60020911', '60021055', '60021063', '60021080', '60021098', '60021110', '60021128', '60021144', '60021152', '60022191', '60018631', '60034777', '60034807', '60034823', '60034858', '60034874', '60034904', '60034920', '60034939'] -> False
+DEBUG: AND results: [False, True]
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 70705348, tipo: valor_permitido
+DEBUG: valor_permitido check: 70705348 in ['60018658', '60018666', '60018682', '60018690', '60018712', '60018720', '60018747', '60018755', '60018895', '60018909', '60018925', '60018933', '60018950', '60018968', '60018984', '60018992', '60019131', '60019140', '60019166', '60019174', '60019190', '60019204', '60019220', '60019239', '60019859', '60019867', '60019883', '60019891', '60019913', '60019921', '60019948', '60019956', '60020091', '60020105', '60020121', '60020130', '60020156', '60020164', '60020180', '60020199', '60020326', '60020334', '60020342', '60020350', '60020369', '60020377', '60020385', '60020393', '60020407', '60020415', '60020423', '60020431', '60020814', '60020822', '60020849', '60020857', '60020873', '60020881', '60020903', '60020911', '60021055', '60021063', '60021080', '60021098', '60021110', '60021128', '60021144', '60021152', '60022191', '60018631', '60034777', '60034807', '60034823', '60034858', '60034874', '60034904', '60034920', '60034939'] -> False
+DEBUG: AND results: [False, True]
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 60033681, tipo: valor_permitido
+DEBUG: valor_permitido check: 60033681 in ['60018658', '60018666', '60018682', '60018690', '60018712', '60018720', '60018747', '60018755', '60018895', '60018909', '60018925', '60018933', '60018950', '60018968', '60018984', '60018992', '60019131', '60019140', '60019166', '60019174', '60019190', '60019204', '60019220', '60019239', '60019859', '60019867', '60019883', '60019891', '60019913', '60019921', '60019948', '60019956', '60020091', '60020105', '60020121', '60020130', '60020156', '60020164', '60020180', '60020199', '60020326', '60020334', '60020342', '60020350', '60020369', '60020377', '60020385', '60020393', '60020407', '60020415', '60020423', '60020431', '60020814', '60020822', '60020849', '60020857', '60020873', '60020881', '60020903', '60020911', '60021055', '60021063', '60021080', '60021098', '60021110', '60021128', '60021144', '60021152', '60022191', '60018631', '60034777', '60034807', '60034823', '60034858', '60034874', '60034904', '60034920', '60034939'] -> False
+DEBUG: AND results: [False, True]
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 10101039, tipo: valor_permitido
+DEBUG: valor_permitido check: 10101039 in ['60018658', '60018666', '60018682', '60018690', '60018712', '60018720', '60018747', '60018755', '60018895', '60018909', '60018925', '60018933', '60018950', '60018968', '60018984', '60018992', '60019131', '60019140', '60019166', '60019174', '60019190', '60019204', '60019220', '60019239', '60019859', '60019867', '60019883', '60019891', '60019913', '60019921', '60019948', '60019956', '60020091', '60020105', '60020121', '60020130', '60020156', '60020164', '60020180', '60020199', '60020326', '60020334', '60020342', '60020350', '60020369', '60020377', '60020385', '60020393', '60020407', '60020415', '60020423', '60020431', '60020814', '60020822', '60020849', '60020857', '60020873', '60020881', '60020903', '60020911', '60021055', '60021063', '60021080', '60021098', '60021110', '60021128', '60021144', '60021152', '60022191', '60018631', '60034777', '60034807', '60034823', '60034858', '60034874', '60034904', '60034920', '60034939'] -> False
+DEBUG: AND results: [False, True]
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:tp_Tabela, valor: 00, tipo: valor_permitido
+DEBUG: valor_permitido check: 00 in ['22', '00'] -> True
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 1900227633, tipo: not_in_lista
+DEBUG: AND results: [True, True, False]
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:tp_Tabela, valor: 00, tipo: valor_permitido
+DEBUG: valor_permitido check: 00 in ['22', '00'] -> True
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 1900214434, tipo: not_in_lista
+DEBUG: AND results: [True, True, False]
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:tp_Tabela, valor: 00, tipo: valor_permitido
+DEBUG: valor_permitido check: 00 in ['22', '00'] -> True
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 1900153087, tipo: not_in_lista
+DEBUG: AND results: [True, True, False]
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:tp_Tabela, valor: 00, tipo: valor_permitido
+DEBUG: valor_permitido check: 00 in ['22', '00'] -> True
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 1900110922, tipo: not_in_lista
+DEBUG: AND results: [True, True, False]
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:tp_Tabela, valor: 20, tipo: valor_permitido
+DEBUG: valor_permitido check: 20 in ['22', '00'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 90524403, tipo: not_in_lista
+DEBUG: AND results: [False, True, False]
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:tp_Tabela, valor: 20, tipo: valor_permitido
+DEBUG: valor_permitido check: 20 in ['22', '00'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 90491343, tipo: not_in_lista
+DEBUG: AND results: [False, True, False]
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:tp_Tabela, valor: 20, tipo: valor_permitido
+DEBUG: valor_permitido check: 20 in ['22', '00'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 90360362, tipo: not_in_lista
+DEBUG: AND results: [False, True, False]
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:tp_Tabela, valor: 20, tipo: valor_permitido
+DEBUG: valor_permitido check: 20 in ['22', '00'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 90207564, tipo: not_in_lista
+DEBUG: AND results: [False, True, False]
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:tp_Tabela, valor: 20, tipo: valor_permitido
+DEBUG: valor_permitido check: 20 in ['22', '00'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 90072367, tipo: not_in_lista
+DEBUG: AND results: [False, True, False]
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:tp_Tabela, valor: 19, tipo: valor_permitido
+DEBUG: valor_permitido check: 19 in ['22', '00'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 70852251, tipo: not_in_lista
+DEBUG: AND results: [False, True, False]
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:tp_Tabela, valor: 19, tipo: valor_permitido
+DEBUG: valor_permitido check: 19 in ['22', '00'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 70705348, tipo: not_in_lista
+DEBUG: AND results: [False, True, False]
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:tp_Tabela, valor: 18, tipo: valor_permitido
+DEBUG: valor_permitido check: 18 in ['22', '00'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 60033681, tipo: not_in_lista
+DEBUG: AND results: [False, True, False]
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:tp_Tabela, valor: 22, tipo: valor_permitido
+DEBUG: valor_permitido check: 22 in ['22', '00'] -> True
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 10101039, tipo: not_in_lista
+DEBUG: AND results: [True, False, True]
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 1900227633, tipo: in_lista
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 1900214434, tipo: in_lista
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 1900153087, tipo: in_lista
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 1900110922, tipo: in_lista
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 90524403, tipo: in_lista
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 90491343, tipo: in_lista
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 90360362, tipo: in_lista
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 90207564, tipo: in_lista
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 90072367, tipo: in_lista
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 70852251, tipo: in_lista
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 70705348, tipo: in_lista
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 60033681, tipo: in_lista
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 10101039, tipo: in_lista
+DEBUG: AND results: [False, True]
+DEBUG: tag_valor check - xpath: ./ptu:profissional/ptu:dadosConselho/ptu:sg_Conselho, valor: CRM, tipo: valor_permitido
+DEBUG: valor_permitido check: CRM in ['OUT'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:profissional/ptu:dadosConselho/ptu:nr_Conselho, valor: 8228, tipo: valor_permitido
+DEBUG: valor_permitido check: 8228 in ['0'] -> False
+DEBUG: tag_valor falhou - node nÒo encontrado: ./ptu:cd_Servico
+DEBUG: horarios_iguais check: 10:53:31 == 14:28:00
+DEBUG: tag_valor falhou - node nÒo encontrado: ./ptu:cd_Servico
+DEBUG: horarios_iguais check: 10:53:31 == 14:28:00
+DEBUG: tag_valor falhou - node nÒo encontrado: ./ptu:cd_Servico
+DEBUG: horarios_iguais check: 10:53:31 == 14:28:00
+DEBUG: tag_valor falhou - node nÒo encontrado: ./ptu:cd_Servico
+DEBUG: horarios_iguais check: 10:53:31 == 14:28:00
+DEBUG: tag_valor falhou - node nÒo encontrado: ./ptu:cd_Servico
+DEBUG: horarios_iguais check: 10:53:31 == 14:28:00
+DEBUG: tag_valor falhou - node nÒo encontrado: ./ptu:cd_Servico
+DEBUG: horarios_iguais check: 10:53:31 == 14:28:00
+DEBUG: tag_valor falhou - node nÒo encontrado: ./ptu:cd_Servico
+DEBUG: horarios_iguais check: 10:53:31 == 14:28:00
+DEBUG: tag_valor falhou - node nÒo encontrado: ./ptu:cd_Servico
+DEBUG: horarios_iguais check: 10:53:31 == 14:28:00
+DEBUG: tag_valor falhou - node nÒo encontrado: ./ptu:cd_Servico
+DEBUG: horarios_iguais check: 10:53:31 == 14:28:00
+DEBUG: tag_valor falhou - node nÒo encontrado: ./ptu:cd_Servico
+DEBUG: horarios_iguais check: 10:53:31 == 14:28:00
+DEBUG: tag_valor falhou - node nÒo encontrado: ./ptu:cd_Servico
+DEBUG: horarios_iguais check: 10:53:31 == 14:28:00
+DEBUG: tag_valor falhou - node nÒo encontrado: ./ptu:cd_Servico
+DEBUG: horarios_iguais check: 00:00:01 == 00:00:01
+DEBUG: AND results: [False, True]
+DEBUG: tag_valor falhou - node nÒo encontrado: ./ptu:cd_Servico
+DEBUG: horarios_iguais check: 10:53:31 == 14:28:00
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:tp_Tabela, valor: 00, tipo: valor_permitido
+DEBUG: valor_permitido check: 00 in ['22', '00'] -> True
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 1900227633, tipo: contem_e_especialidade
+DEBUG: tag_valor falhou - node nÒo encontrado: ./ptu:equipe_Profissional/ptu:CBO
+DEBUG: AND results: [True, False, False]
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:tp_Tabela, valor: 00, tipo: valor_permitido
+DEBUG: valor_permitido check: 00 in ['22', '00'] -> True
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 1900214434, tipo: contem_e_especialidade
+DEBUG: tag_valor falhou - node nÒo encontrado: ./ptu:equipe_Profissional/ptu:CBO
+DEBUG: AND results: [True, False, False]
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:tp_Tabela, valor: 00, tipo: valor_permitido
+DEBUG: valor_permitido check: 00 in ['22', '00'] -> True
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 1900153087, tipo: contem_e_especialidade
+DEBUG: tag_valor falhou - node nÒo encontrado: ./ptu:equipe_Profissional/ptu:CBO
+DEBUG: AND results: [True, False, False]
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:tp_Tabela, valor: 00, tipo: valor_permitido
+DEBUG: valor_permitido check: 00 in ['22', '00'] -> True
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 1900110922, tipo: contem_e_especialidade
+DEBUG: tag_valor falhou - node nÒo encontrado: ./ptu:equipe_Profissional/ptu:CBO
+DEBUG: AND results: [True, False, False]
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:tp_Tabela, valor: 20, tipo: valor_permitido
+DEBUG: valor_permitido check: 20 in ['22', '00'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 90524403, tipo: contem_e_especialidade
+DEBUG: tag_valor falhou - node nÒo encontrado: ./ptu:equipe_Profissional/ptu:CBO
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:tp_Tabela, valor: 20, tipo: valor_permitido
+DEBUG: valor_permitido check: 20 in ['22', '00'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 90491343, tipo: contem_e_especialidade
+DEBUG: tag_valor falhou - node nÒo encontrado: ./ptu:equipe_Profissional/ptu:CBO
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:tp_Tabela, valor: 20, tipo: valor_permitido
+DEBUG: valor_permitido check: 20 in ['22', '00'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 90360362, tipo: contem_e_especialidade
+DEBUG: tag_valor falhou - node nÒo encontrado: ./ptu:equipe_Profissional/ptu:CBO
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:tp_Tabela, valor: 20, tipo: valor_permitido
+DEBUG: valor_permitido check: 20 in ['22', '00'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 90207564, tipo: contem_e_especialidade
+DEBUG: tag_valor falhou - node nÒo encontrado: ./ptu:equipe_Profissional/ptu:CBO
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:tp_Tabela, valor: 20, tipo: valor_permitido
+DEBUG: valor_permitido check: 20 in ['22', '00'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 90072367, tipo: contem_e_especialidade
+DEBUG: tag_valor falhou - node nÒo encontrado: ./ptu:equipe_Profissional/ptu:CBO
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:tp_Tabela, valor: 19, tipo: valor_permitido
+DEBUG: valor_permitido check: 19 in ['22', '00'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 70852251, tipo: contem_e_especialidade
+DEBUG: tag_valor falhou - node nÒo encontrado: ./ptu:equipe_Profissional/ptu:CBO
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:tp_Tabela, valor: 19, tipo: valor_permitido
+DEBUG: valor_permitido check: 19 in ['22', '00'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 70705348, tipo: contem_e_especialidade
+DEBUG: tag_valor falhou - node nÒo encontrado: ./ptu:equipe_Profissional/ptu:CBO
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:tp_Tabela, valor: 18, tipo: valor_permitido
+DEBUG: valor_permitido check: 18 in ['22', '00'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 60033681, tipo: contem_e_especialidade
+DEBUG: tag_valor falhou - node nÒo encontrado: ./ptu:equipe_Profissional/ptu:CBO
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:tp_Tabela, valor: 22, tipo: valor_permitido
+DEBUG: valor_permitido check: 22 in ['22', '00'] -> True
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 10101039, tipo: contem_e_especialidade
+DEBUG: tag_valor check - xpath: ./ptu:equipe_Profissional/ptu:CBO, valor: 225275, tipo: valor_atual_diferente
+DEBUG: AND results: [True, False, True]
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:tp_Tabela, valor: 00, tipo: valor_permitido
+DEBUG: valor_permitido check: 00 in ['22', '00'] -> True
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 1900227633, tipo: contem_e_especialidade
+DEBUG: tag_valor falhou - node nÒo encontrado: ./ptu:equipe_Profissional/ptu:CBO
+DEBUG: AND results: [True, False, False]
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:tp_Tabela, valor: 00, tipo: valor_permitido
+DEBUG: valor_permitido check: 00 in ['22', '00'] -> True
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 1900214434, tipo: contem_e_especialidade
+DEBUG: tag_valor falhou - node nÒo encontrado: ./ptu:equipe_Profissional/ptu:CBO
+DEBUG: AND results: [True, False, False]
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:tp_Tabela, valor: 00, tipo: valor_permitido
+DEBUG: valor_permitido check: 00 in ['22', '00'] -> True
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 1900153087, tipo: contem_e_especialidade
+DEBUG: tag_valor falhou - node nÒo encontrado: ./ptu:equipe_Profissional/ptu:CBO
+DEBUG: AND results: [True, False, False]
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:tp_Tabela, valor: 00, tipo: valor_permitido
+DEBUG: valor_permitido check: 00 in ['22', '00'] -> True
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 1900110922, tipo: contem_e_especialidade
+DEBUG: tag_valor falhou - node nÒo encontrado: ./ptu:equipe_Profissional/ptu:CBO
+DEBUG: AND results: [True, False, False]
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:tp_Tabela, valor: 20, tipo: valor_permitido
+DEBUG: valor_permitido check: 20 in ['22', '00'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 90524403, tipo: contem_e_especialidade
+DEBUG: tag_valor falhou - node nÒo encontrado: ./ptu:equipe_Profissional/ptu:CBO
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:tp_Tabela, valor: 20, tipo: valor_permitido
+DEBUG: valor_permitido check: 20 in ['22', '00'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 90491343, tipo: contem_e_especialidade
+DEBUG: tag_valor falhou - node nÒo encontrado: ./ptu:equipe_Profissional/ptu:CBO
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:tp_Tabela, valor: 20, tipo: valor_permitido
+DEBUG: valor_permitido check: 20 in ['22', '00'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 90360362, tipo: contem_e_especialidade
+DEBUG: tag_valor falhou - node nÒo encontrado: ./ptu:equipe_Profissional/ptu:CBO
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:tp_Tabela, valor: 20, tipo: valor_permitido
+DEBUG: valor_permitido check: 20 in ['22', '00'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 90207564, tipo: contem_e_especialidade
+DEBUG: tag_valor falhou - node nÒo encontrado: ./ptu:equipe_Profissional/ptu:CBO
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:tp_Tabela, valor: 20, tipo: valor_permitido
+DEBUG: valor_permitido check: 20 in ['22', '00'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 90072367, tipo: contem_e_especialidade
+DEBUG: tag_valor falhou - node nÒo encontrado: ./ptu:equipe_Profissional/ptu:CBO
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:tp_Tabela, valor: 19, tipo: valor_permitido
+DEBUG: valor_permitido check: 19 in ['22', '00'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 70852251, tipo: contem_e_especialidade
+DEBUG: tag_valor falhou - node nÒo encontrado: ./ptu:equipe_Profissional/ptu:CBO
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:tp_Tabela, valor: 19, tipo: valor_permitido
+DEBUG: valor_permitido check: 19 in ['22', '00'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 70705348, tipo: contem_e_especialidade
+DEBUG: tag_valor falhou - node nÒo encontrado: ./ptu:equipe_Profissional/ptu:CBO
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:tp_Tabela, valor: 18, tipo: valor_permitido
+DEBUG: valor_permitido check: 18 in ['22', '00'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 60033681, tipo: contem_e_especialidade
+DEBUG: tag_valor falhou - node nÒo encontrado: ./ptu:equipe_Profissional/ptu:CBO
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:tp_Tabela, valor: 22, tipo: valor_permitido
+DEBUG: valor_permitido check: 22 in ['22', '00'] -> True
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 10101039, tipo: contem_e_especialidade
+DEBUG: tag_valor check - xpath: ./ptu:equipe_Profissional/ptu:CBO, valor: 225275, tipo: valor_atual_diferente
+DEBUG: AND results: [True, False, True]
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:tp_Tabela, valor: 00, tipo: valor_permitido
+DEBUG: valor_permitido check: 00 in ['22', '00'] -> True
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 1900227633, tipo: contem_e_especialidade
+DEBUG: tag_valor falhou - node nÒo encontrado: ./ptu:equipe_Profissional/ptu:CBO
+DEBUG: AND results: [True, False, False]
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:tp_Tabela, valor: 00, tipo: valor_permitido
+DEBUG: valor_permitido check: 00 in ['22', '00'] -> True
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 1900214434, tipo: contem_e_especialidade
+DEBUG: tag_valor falhou - node nÒo encontrado: ./ptu:equipe_Profissional/ptu:CBO
+DEBUG: AND results: [True, False, False]
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:tp_Tabela, valor: 00, tipo: valor_permitido
+DEBUG: valor_permitido check: 00 in ['22', '00'] -> True
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 1900153087, tipo: contem_e_especialidade
+DEBUG: tag_valor falhou - node nÒo encontrado: ./ptu:equipe_Profissional/ptu:CBO
+DEBUG: AND results: [True, False, False]
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:tp_Tabela, valor: 00, tipo: valor_permitido
+DEBUG: valor_permitido check: 00 in ['22', '00'] -> True
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 1900110922, tipo: contem_e_especialidade
+DEBUG: tag_valor falhou - node nÒo encontrado: ./ptu:equipe_Profissional/ptu:CBO
+DEBUG: AND results: [True, False, False]
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:tp_Tabela, valor: 20, tipo: valor_permitido
+DEBUG: valor_permitido check: 20 in ['22', '00'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 90524403, tipo: contem_e_especialidade
+DEBUG: tag_valor falhou - node nÒo encontrado: ./ptu:equipe_Profissional/ptu:CBO
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:tp_Tabela, valor: 20, tipo: valor_permitido
+DEBUG: valor_permitido check: 20 in ['22', '00'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 90491343, tipo: contem_e_especialidade
+DEBUG: tag_valor falhou - node nÒo encontrado: ./ptu:equipe_Profissional/ptu:CBO
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:tp_Tabela, valor: 20, tipo: valor_permitido
+DEBUG: valor_permitido check: 20 in ['22', '00'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 90360362, tipo: contem_e_especialidade
+DEBUG: tag_valor falhou - node nÒo encontrado: ./ptu:equipe_Profissional/ptu:CBO
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:tp_Tabela, valor: 20, tipo: valor_permitido
+DEBUG: valor_permitido check: 20 in ['22', '00'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 90207564, tipo: contem_e_especialidade
+DEBUG: tag_valor falhou - node nÒo encontrado: ./ptu:equipe_Profissional/ptu:CBO
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:tp_Tabela, valor: 20, tipo: valor_permitido
+DEBUG: valor_permitido check: 20 in ['22', '00'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 90072367, tipo: contem_e_especialidade
+DEBUG: tag_valor falhou - node nÒo encontrado: ./ptu:equipe_Profissional/ptu:CBO
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:tp_Tabela, valor: 19, tipo: valor_permitido
+DEBUG: valor_permitido check: 19 in ['22', '00'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 70852251, tipo: contem_e_especialidade
+DEBUG: tag_valor falhou - node nÒo encontrado: ./ptu:equipe_Profissional/ptu:CBO
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:tp_Tabela, valor: 19, tipo: valor_permitido
+DEBUG: valor_permitido check: 19 in ['22', '00'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 70705348, tipo: contem_e_especialidade
+DEBUG: tag_valor falhou - node nÒo encontrado: ./ptu:equipe_Profissional/ptu:CBO
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:tp_Tabela, valor: 18, tipo: valor_permitido
+DEBUG: valor_permitido check: 18 in ['22', '00'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 60033681, tipo: contem_e_especialidade
+DEBUG: tag_valor falhou - node nÒo encontrado: ./ptu:equipe_Profissional/ptu:CBO
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:tp_Tabela, valor: 22, tipo: valor_permitido
+DEBUG: valor_permitido check: 22 in ['22', '00'] -> True
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 10101039, tipo: contem_e_especialidade
+DEBUG: tag_valor check - xpath: ./ptu:equipe_Profissional/ptu:CBO, valor: 225275, tipo: valor_atual_diferente
+DEBUG: AND results: [True, False, True]
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:tp_Tabela, valor: 00, tipo: valor_permitido
+DEBUG: valor_permitido check: 00 in ['22', '00'] -> True
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 1900227633, tipo: contem_e_especialidade
+DEBUG: tag_valor falhou - node nÒo encontrado: ./ptu:equipe_Profissional/ptu:CBO
+DEBUG: AND results: [True, False, False]
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:tp_Tabela, valor: 00, tipo: valor_permitido
+DEBUG: valor_permitido check: 00 in ['22', '00'] -> True
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 1900214434, tipo: contem_e_especialidade
+DEBUG: tag_valor falhou - node nÒo encontrado: ./ptu:equipe_Profissional/ptu:CBO
+DEBUG: AND results: [True, False, False]
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:tp_Tabela, valor: 00, tipo: valor_permitido
+DEBUG: valor_permitido check: 00 in ['22', '00'] -> True
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 1900153087, tipo: contem_e_especialidade
+DEBUG: tag_valor falhou - node nÒo encontrado: ./ptu:equipe_Profissional/ptu:CBO
+DEBUG: AND results: [True, False, False]
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:tp_Tabela, valor: 00, tipo: valor_permitido
+DEBUG: valor_permitido check: 00 in ['22', '00'] -> True
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 1900110922, tipo: contem_e_especialidade
+DEBUG: tag_valor falhou - node nÒo encontrado: ./ptu:equipe_Profissional/ptu:CBO
+DEBUG: AND results: [True, False, False]
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:tp_Tabela, valor: 20, tipo: valor_permitido
+DEBUG: valor_permitido check: 20 in ['22', '00'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 90524403, tipo: contem_e_especialidade
+DEBUG: tag_valor falhou - node nÒo encontrado: ./ptu:equipe_Profissional/ptu:CBO
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:tp_Tabela, valor: 20, tipo: valor_permitido
+DEBUG: valor_permitido check: 20 in ['22', '00'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 90491343, tipo: contem_e_especialidade
+DEBUG: tag_valor falhou - node nÒo encontrado: ./ptu:equipe_Profissional/ptu:CBO
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:tp_Tabela, valor: 20, tipo: valor_permitido
+DEBUG: valor_permitido check: 20 in ['22', '00'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 90360362, tipo: contem_e_especialidade
+DEBUG: tag_valor falhou - node nÒo encontrado: ./ptu:equipe_Profissional/ptu:CBO
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:tp_Tabela, valor: 20, tipo: valor_permitido
+DEBUG: valor_permitido check: 20 in ['22', '00'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 90207564, tipo: contem_e_especialidade
+DEBUG: tag_valor falhou - node nÒo encontrado: ./ptu:equipe_Profissional/ptu:CBO
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:tp_Tabela, valor: 20, tipo: valor_permitido
+DEBUG: valor_permitido check: 20 in ['22', '00'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 90072367, tipo: contem_e_especialidade
+DEBUG: tag_valor falhou - node nÒo encontrado: ./ptu:equipe_Profissional/ptu:CBO
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:tp_Tabela, valor: 19, tipo: valor_permitido
+DEBUG: valor_permitido check: 19 in ['22', '00'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 70852251, tipo: contem_e_especialidade
+DEBUG: tag_valor falhou - node nÒo encontrado: ./ptu:equipe_Profissional/ptu:CBO
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:tp_Tabela, valor: 19, tipo: valor_permitido
+DEBUG: valor_permitido check: 19 in ['22', '00'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 70705348, tipo: contem_e_especialidade
+DEBUG: tag_valor falhou - node nÒo encontrado: ./ptu:equipe_Profissional/ptu:CBO
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:tp_Tabela, valor: 18, tipo: valor_permitido
+DEBUG: valor_permitido check: 18 in ['22', '00'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 60033681, tipo: contem_e_especialidade
+DEBUG: tag_valor falhou - node nÒo encontrado: ./ptu:equipe_Profissional/ptu:CBO
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:tp_Tabela, valor: 22, tipo: valor_permitido
+DEBUG: valor_permitido check: 22 in ['22', '00'] -> True
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 10101039, tipo: contem_e_especialidade
+DEBUG: tag_valor check - xpath: ./ptu:equipe_Profissional/ptu:CBO, valor: 225275, tipo: valor_atual_diferente
+DEBUG: AND results: [True, False, True]
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:tp_Tabela, valor: 00, tipo: valor_permitido
+DEBUG: valor_permitido check: 00 in ['22', '00'] -> True
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 1900227633, tipo: contem_e_especialidade
+DEBUG: tag_valor falhou - node nÒo encontrado: ./ptu:equipe_Profissional/ptu:dadosConselho/ptu:sg_Conselho
+DEBUG: AND results: [True, False, False]
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:tp_Tabela, valor: 00, tipo: valor_permitido
+DEBUG: valor_permitido check: 00 in ['22', '00'] -> True
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 1900214434, tipo: contem_e_especialidade
+DEBUG: tag_valor falhou - node nÒo encontrado: ./ptu:equipe_Profissional/ptu:dadosConselho/ptu:sg_Conselho
+DEBUG: AND results: [True, False, False]
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:tp_Tabela, valor: 00, tipo: valor_permitido
+DEBUG: valor_permitido check: 00 in ['22', '00'] -> True
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 1900153087, tipo: contem_e_especialidade
+DEBUG: tag_valor falhou - node nÒo encontrado: ./ptu:equipe_Profissional/ptu:dadosConselho/ptu:sg_Conselho
+DEBUG: AND results: [True, False, False]
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:tp_Tabela, valor: 00, tipo: valor_permitido
+DEBUG: valor_permitido check: 00 in ['22', '00'] -> True
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 1900110922, tipo: contem_e_especialidade
+DEBUG: tag_valor falhou - node nÒo encontrado: ./ptu:equipe_Profissional/ptu:dadosConselho/ptu:sg_Conselho
+DEBUG: AND results: [True, False, False]
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:tp_Tabela, valor: 20, tipo: valor_permitido
+DEBUG: valor_permitido check: 20 in ['22', '00'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 90524403, tipo: contem_e_especialidade
+DEBUG: tag_valor falhou - node nÒo encontrado: ./ptu:equipe_Profissional/ptu:dadosConselho/ptu:sg_Conselho
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:tp_Tabela, valor: 20, tipo: valor_permitido
+DEBUG: valor_permitido check: 20 in ['22', '00'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 90491343, tipo: contem_e_especialidade
+DEBUG: tag_valor falhou - node nÒo encontrado: ./ptu:equipe_Profissional/ptu:dadosConselho/ptu:sg_Conselho
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:tp_Tabela, valor: 20, tipo: valor_permitido
+DEBUG: valor_permitido check: 20 in ['22', '00'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 90360362, tipo: contem_e_especialidade
+DEBUG: tag_valor falhou - node nÒo encontrado: ./ptu:equipe_Profissional/ptu:dadosConselho/ptu:sg_Conselho
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:tp_Tabela, valor: 20, tipo: valor_permitido
+DEBUG: valor_permitido check: 20 in ['22', '00'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 90207564, tipo: contem_e_especialidade
+DEBUG: tag_valor falhou - node nÒo encontrado: ./ptu:equipe_Profissional/ptu:dadosConselho/ptu:sg_Conselho
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:tp_Tabela, valor: 20, tipo: valor_permitido
+DEBUG: valor_permitido check: 20 in ['22', '00'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 90072367, tipo: contem_e_especialidade
+DEBUG: tag_valor falhou - node nÒo encontrado: ./ptu:equipe_Profissional/ptu:dadosConselho/ptu:sg_Conselho
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:tp_Tabela, valor: 19, tipo: valor_permitido
+DEBUG: valor_permitido check: 19 in ['22', '00'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 70852251, tipo: contem_e_especialidade
+DEBUG: tag_valor falhou - node nÒo encontrado: ./ptu:equipe_Profissional/ptu:dadosConselho/ptu:sg_Conselho
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:tp_Tabela, valor: 19, tipo: valor_permitido
+DEBUG: valor_permitido check: 19 in ['22', '00'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 70705348, tipo: contem_e_especialidade
+DEBUG: tag_valor falhou - node nÒo encontrado: ./ptu:equipe_Profissional/ptu:dadosConselho/ptu:sg_Conselho
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:tp_Tabela, valor: 18, tipo: valor_permitido
+DEBUG: valor_permitido check: 18 in ['22', '00'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 60033681, tipo: contem_e_especialidade
+DEBUG: tag_valor falhou - node nÒo encontrado: ./ptu:equipe_Profissional/ptu:dadosConselho/ptu:sg_Conselho
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:tp_Tabela, valor: 22, tipo: valor_permitido
+DEBUG: valor_permitido check: 22 in ['22', '00'] -> True
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 10101039, tipo: contem_e_especialidade
+DEBUG: tag_valor check - xpath: ./ptu:equipe_Profissional/ptu:dadosConselho/ptu:sg_Conselho, valor: CRM, tipo: valor_atual_diferente
+DEBUG: AND results: [True, False, True]
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:tp_Tabela, valor: 00, tipo: valor_permitido
+DEBUG: valor_permitido check: 00 in ['22', '00'] -> True
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 1900227633, tipo: contem_e_especialidade
+DEBUG: tag_valor falhou - node nÒo encontrado: ./ptu:equipe_Profissional/ptu:dadosConselho/ptu:sg_Conselho
+DEBUG: AND results: [True, False, False]
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:tp_Tabela, valor: 00, tipo: valor_permitido
+DEBUG: valor_permitido check: 00 in ['22', '00'] -> True
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 1900214434, tipo: contem_e_especialidade
+DEBUG: tag_valor falhou - node nÒo encontrado: ./ptu:equipe_Profissional/ptu:dadosConselho/ptu:sg_Conselho
+DEBUG: AND results: [True, False, False]
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:tp_Tabela, valor: 00, tipo: valor_permitido
+DEBUG: valor_permitido check: 00 in ['22', '00'] -> True
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 1900153087, tipo: contem_e_especialidade
+DEBUG: tag_valor falhou - node nÒo encontrado: ./ptu:equipe_Profissional/ptu:dadosConselho/ptu:sg_Conselho
+DEBUG: AND results: [True, False, False]
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:tp_Tabela, valor: 00, tipo: valor_permitido
+DEBUG: valor_permitido check: 00 in ['22', '00'] -> True
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 1900110922, tipo: contem_e_especialidade
+DEBUG: tag_valor falhou - node nÒo encontrado: ./ptu:equipe_Profissional/ptu:dadosConselho/ptu:sg_Conselho
+DEBUG: AND results: [True, False, False]
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:tp_Tabela, valor: 20, tipo: valor_permitido
+DEBUG: valor_permitido check: 20 in ['22', '00'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 90524403, tipo: contem_e_especialidade
+DEBUG: tag_valor falhou - node nÒo encontrado: ./ptu:equipe_Profissional/ptu:dadosConselho/ptu:sg_Conselho
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:tp_Tabela, valor: 20, tipo: valor_permitido
+DEBUG: valor_permitido check: 20 in ['22', '00'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 90491343, tipo: contem_e_especialidade
+DEBUG: tag_valor falhou - node nÒo encontrado: ./ptu:equipe_Profissional/ptu:dadosConselho/ptu:sg_Conselho
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:tp_Tabela, valor: 20, tipo: valor_permitido
+DEBUG: valor_permitido check: 20 in ['22', '00'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 90360362, tipo: contem_e_especialidade
+DEBUG: tag_valor falhou - node nÒo encontrado: ./ptu:equipe_Profissional/ptu:dadosConselho/ptu:sg_Conselho
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:tp_Tabela, valor: 20, tipo: valor_permitido
+DEBUG: valor_permitido check: 20 in ['22', '00'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 90207564, tipo: contem_e_especialidade
+DEBUG: tag_valor falhou - node nÒo encontrado: ./ptu:equipe_Profissional/ptu:dadosConselho/ptu:sg_Conselho
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:tp_Tabela, valor: 20, tipo: valor_permitido
+DEBUG: valor_permitido check: 20 in ['22', '00'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 90072367, tipo: contem_e_especialidade
+DEBUG: tag_valor falhou - node nÒo encontrado: ./ptu:equipe_Profissional/ptu:dadosConselho/ptu:sg_Conselho
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:tp_Tabela, valor: 19, tipo: valor_permitido
+DEBUG: valor_permitido check: 19 in ['22', '00'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 70852251, tipo: contem_e_especialidade
+DEBUG: tag_valor falhou - node nÒo encontrado: ./ptu:equipe_Profissional/ptu:dadosConselho/ptu:sg_Conselho
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:tp_Tabela, valor: 19, tipo: valor_permitido
+DEBUG: valor_permitido check: 19 in ['22', '00'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 70705348, tipo: contem_e_especialidade
+DEBUG: tag_valor falhou - node nÒo encontrado: ./ptu:equipe_Profissional/ptu:dadosConselho/ptu:sg_Conselho
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:tp_Tabela, valor: 18, tipo: valor_permitido
+DEBUG: valor_permitido check: 18 in ['22', '00'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 60033681, tipo: contem_e_especialidade
+DEBUG: tag_valor falhou - node nÒo encontrado: ./ptu:equipe_Profissional/ptu:dadosConselho/ptu:sg_Conselho
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:tp_Tabela, valor: 22, tipo: valor_permitido
+DEBUG: valor_permitido check: 22 in ['22', '00'] -> True
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 10101039, tipo: contem_e_especialidade
+DEBUG: tag_valor check - xpath: ./ptu:equipe_Profissional/ptu:dadosConselho/ptu:sg_Conselho, valor: CRM, tipo: valor_atual_diferente
+DEBUG: AND results: [True, False, True]
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:tp_Tabela, valor: 00, tipo: valor_permitido
+DEBUG: valor_permitido check: 00 in ['22', '00'] -> True
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 1900227633, tipo: contem_e_especialidade
+DEBUG: tag_valor falhou - node nÒo encontrado: ./ptu:equipe_Profissional/ptu:dadosConselho/ptu:sg_Conselho
+DEBUG: AND results: [True, False, False]
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:tp_Tabela, valor: 00, tipo: valor_permitido
+DEBUG: valor_permitido check: 00 in ['22', '00'] -> True
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 1900214434, tipo: contem_e_especialidade
+DEBUG: tag_valor falhou - node nÒo encontrado: ./ptu:equipe_Profissional/ptu:dadosConselho/ptu:sg_Conselho
+DEBUG: AND results: [True, False, False]
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:tp_Tabela, valor: 00, tipo: valor_permitido
+DEBUG: valor_permitido check: 00 in ['22', '00'] -> True
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 1900153087, tipo: contem_e_especialidade
+DEBUG: tag_valor falhou - node nÒo encontrado: ./ptu:equipe_Profissional/ptu:dadosConselho/ptu:sg_Conselho
+DEBUG: AND results: [True, False, False]
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:tp_Tabela, valor: 00, tipo: valor_permitido
+DEBUG: valor_permitido check: 00 in ['22', '00'] -> True
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 1900110922, tipo: contem_e_especialidade
+DEBUG: tag_valor falhou - node nÒo encontrado: ./ptu:equipe_Profissional/ptu:dadosConselho/ptu:sg_Conselho
+DEBUG: AND results: [True, False, False]
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:tp_Tabela, valor: 20, tipo: valor_permitido
+DEBUG: valor_permitido check: 20 in ['22', '00'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 90524403, tipo: contem_e_especialidade
+DEBUG: tag_valor falhou - node nÒo encontrado: ./ptu:equipe_Profissional/ptu:dadosConselho/ptu:sg_Conselho
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:tp_Tabela, valor: 20, tipo: valor_permitido
+DEBUG: valor_permitido check: 20 in ['22', '00'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 90491343, tipo: contem_e_especialidade
+DEBUG: tag_valor falhou - node nÒo encontrado: ./ptu:equipe_Profissional/ptu:dadosConselho/ptu:sg_Conselho
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:tp_Tabela, valor: 20, tipo: valor_permitido
+DEBUG: valor_permitido check: 20 in ['22', '00'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 90360362, tipo: contem_e_especialidade
+DEBUG: tag_valor falhou - node nÒo encontrado: ./ptu:equipe_Profissional/ptu:dadosConselho/ptu:sg_Conselho
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:tp_Tabela, valor: 20, tipo: valor_permitido
+DEBUG: valor_permitido check: 20 in ['22', '00'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 90207564, tipo: contem_e_especialidade
+DEBUG: tag_valor falhou - node nÒo encontrado: ./ptu:equipe_Profissional/ptu:dadosConselho/ptu:sg_Conselho
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:tp_Tabela, valor: 20, tipo: valor_permitido
+DEBUG: valor_permitido check: 20 in ['22', '00'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 90072367, tipo: contem_e_especialidade
+DEBUG: tag_valor falhou - node nÒo encontrado: ./ptu:equipe_Profissional/ptu:dadosConselho/ptu:sg_Conselho
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:tp_Tabela, valor: 19, tipo: valor_permitido
+DEBUG: valor_permitido check: 19 in ['22', '00'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 70852251, tipo: contem_e_especialidade
+DEBUG: tag_valor falhou - node nÒo encontrado: ./ptu:equipe_Profissional/ptu:dadosConselho/ptu:sg_Conselho
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:tp_Tabela, valor: 19, tipo: valor_permitido
+DEBUG: valor_permitido check: 19 in ['22', '00'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 70705348, tipo: contem_e_especialidade
+DEBUG: tag_valor falhou - node nÒo encontrado: ./ptu:equipe_Profissional/ptu:dadosConselho/ptu:sg_Conselho
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:tp_Tabela, valor: 18, tipo: valor_permitido
+DEBUG: valor_permitido check: 18 in ['22', '00'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 60033681, tipo: contem_e_especialidade
+DEBUG: tag_valor falhou - node nÒo encontrado: ./ptu:equipe_Profissional/ptu:dadosConselho/ptu:sg_Conselho
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:tp_Tabela, valor: 22, tipo: valor_permitido
+DEBUG: valor_permitido check: 22 in ['22', '00'] -> True
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 10101039, tipo: contem_e_especialidade
+DEBUG: tag_valor check - xpath: ./ptu:equipe_Profissional/ptu:dadosConselho/ptu:sg_Conselho, valor: CRM, tipo: valor_atual_diferente
+DEBUG: AND results: [True, False, True]
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:tp_Tabela, valor: 00, tipo: valor_permitido
+DEBUG: valor_permitido check: 00 in ['22', '00'] -> True
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 1900227633, tipo: contem_e_especialidade
+DEBUG: tag_valor falhou - node nÒo encontrado: ./ptu:equipe_Profissional/ptu:dadosConselho/ptu:sg_Conselho
+DEBUG: AND results: [True, False, False]
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:tp_Tabela, valor: 00, tipo: valor_permitido
+DEBUG: valor_permitido check: 00 in ['22', '00'] -> True
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 1900214434, tipo: contem_e_especialidade
+DEBUG: tag_valor falhou - node nÒo encontrado: ./ptu:equipe_Profissional/ptu:dadosConselho/ptu:sg_Conselho
+DEBUG: AND results: [True, False, False]
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:tp_Tabela, valor: 00, tipo: valor_permitido
+DEBUG: valor_permitido check: 00 in ['22', '00'] -> True
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 1900153087, tipo: contem_e_especialidade
+DEBUG: tag_valor falhou - node nÒo encontrado: ./ptu:equipe_Profissional/ptu:dadosConselho/ptu:sg_Conselho
+DEBUG: AND results: [True, False, False]
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:tp_Tabela, valor: 00, tipo: valor_permitido
+DEBUG: valor_permitido check: 00 in ['22', '00'] -> True
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 1900110922, tipo: contem_e_especialidade
+DEBUG: tag_valor falhou - node nÒo encontrado: ./ptu:equipe_Profissional/ptu:dadosConselho/ptu:sg_Conselho
+DEBUG: AND results: [True, False, False]
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:tp_Tabela, valor: 20, tipo: valor_permitido
+DEBUG: valor_permitido check: 20 in ['22', '00'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 90524403, tipo: contem_e_especialidade
+DEBUG: tag_valor falhou - node nÒo encontrado: ./ptu:equipe_Profissional/ptu:dadosConselho/ptu:sg_Conselho
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:tp_Tabela, valor: 20, tipo: valor_permitido
+DEBUG: valor_permitido check: 20 in ['22', '00'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 90491343, tipo: contem_e_especialidade
+DEBUG: tag_valor falhou - node nÒo encontrado: ./ptu:equipe_Profissional/ptu:dadosConselho/ptu:sg_Conselho
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:tp_Tabela, valor: 20, tipo: valor_permitido
+DEBUG: valor_permitido check: 20 in ['22', '00'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 90360362, tipo: contem_e_especialidade
+DEBUG: tag_valor falhou - node nÒo encontrado: ./ptu:equipe_Profissional/ptu:dadosConselho/ptu:sg_Conselho
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:tp_Tabela, valor: 20, tipo: valor_permitido
+DEBUG: valor_permitido check: 20 in ['22', '00'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 90207564, tipo: contem_e_especialidade
+DEBUG: tag_valor falhou - node nÒo encontrado: ./ptu:equipe_Profissional/ptu:dadosConselho/ptu:sg_Conselho
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:tp_Tabela, valor: 20, tipo: valor_permitido
+DEBUG: valor_permitido check: 20 in ['22', '00'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 90072367, tipo: contem_e_especialidade
+DEBUG: tag_valor falhou - node nÒo encontrado: ./ptu:equipe_Profissional/ptu:dadosConselho/ptu:sg_Conselho
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:tp_Tabela, valor: 19, tipo: valor_permitido
+DEBUG: valor_permitido check: 19 in ['22', '00'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 70852251, tipo: contem_e_especialidade
+DEBUG: tag_valor falhou - node nÒo encontrado: ./ptu:equipe_Profissional/ptu:dadosConselho/ptu:sg_Conselho
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:tp_Tabela, valor: 19, tipo: valor_permitido
+DEBUG: valor_permitido check: 19 in ['22', '00'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 70705348, tipo: contem_e_especialidade
+DEBUG: tag_valor falhou - node nÒo encontrado: ./ptu:equipe_Profissional/ptu:dadosConselho/ptu:sg_Conselho
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:tp_Tabela, valor: 18, tipo: valor_permitido
+DEBUG: valor_permitido check: 18 in ['22', '00'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 60033681, tipo: contem_e_especialidade
+DEBUG: tag_valor falhou - node nÒo encontrado: ./ptu:equipe_Profissional/ptu:dadosConselho/ptu:sg_Conselho
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:tp_Tabela, valor: 22, tipo: valor_permitido
+DEBUG: valor_permitido check: 22 in ['22', '00'] -> True
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 10101039, tipo: contem_e_especialidade
+DEBUG: tag_valor check - xpath: ./ptu:equipe_Profissional/ptu:dadosConselho/ptu:sg_Conselho, valor: CRM, tipo: valor_atual_diferente
+DEBUG: AND results: [True, False, True]
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:tp_Tabela, valor: 00, tipo: valor_permitido
+DEBUG: valor_permitido check: 00 in ['22', '00'] -> True
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 1900227633, tipo: in_lista
+DEBUG: AND results: [True, False, False]
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:tp_Tabela, valor: 00, tipo: valor_permitido
+DEBUG: valor_permitido check: 00 in ['22', '00'] -> True
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 1900214434, tipo: in_lista
+DEBUG: AND results: [True, False, False]
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:tp_Tabela, valor: 00, tipo: valor_permitido
+DEBUG: valor_permitido check: 00 in ['22', '00'] -> True
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 1900153087, tipo: in_lista
+DEBUG: AND results: [True, False, False]
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:tp_Tabela, valor: 00, tipo: valor_permitido
+DEBUG: valor_permitido check: 00 in ['22', '00'] -> True
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 1900110922, tipo: in_lista
+DEBUG: AND results: [True, False, False]
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:tp_Tabela, valor: 20, tipo: valor_permitido
+DEBUG: valor_permitido check: 20 in ['22', '00'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 90524403, tipo: in_lista
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:tp_Tabela, valor: 20, tipo: valor_permitido
+DEBUG: valor_permitido check: 20 in ['22', '00'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 90491343, tipo: in_lista
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:tp_Tabela, valor: 20, tipo: valor_permitido
+DEBUG: valor_permitido check: 20 in ['22', '00'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 90360362, tipo: in_lista
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:tp_Tabela, valor: 20, tipo: valor_permitido
+DEBUG: valor_permitido check: 20 in ['22', '00'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 90207564, tipo: in_lista
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:tp_Tabela, valor: 20, tipo: valor_permitido
+DEBUG: valor_permitido check: 20 in ['22', '00'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 90072367, tipo: in_lista
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:tp_Tabela, valor: 19, tipo: valor_permitido
+DEBUG: valor_permitido check: 19 in ['22', '00'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 70852251, tipo: in_lista
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:tp_Tabela, valor: 19, tipo: valor_permitido
+DEBUG: valor_permitido check: 19 in ['22', '00'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 70705348, tipo: in_lista
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:tp_Tabela, valor: 18, tipo: valor_permitido
+DEBUG: valor_permitido check: 18 in ['22', '00'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 60033681, tipo: in_lista
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:tp_Tabela, valor: 22, tipo: valor_permitido
+DEBUG: valor_permitido check: 22 in ['22', '00'] -> True
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 10101039, tipo: in_lista
+DEBUG: AND results: [True, False, True]
+DEBUG: tag_valor falhou - node nÒo encontrado: ./ptu:equipe_Profissional/ptu:tp_Participacao
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 1900227633, tipo: in_lista
+DEBUG: tag_valor falhou - node nÒo encontrado: ./ptu:equipe_Profissional/ptu:tp_Participacao
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 1900214434, tipo: in_lista
+DEBUG: tag_valor falhou - node nÒo encontrado: ./ptu:equipe_Profissional/ptu:tp_Participacao
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 1900153087, tipo: in_lista
+DEBUG: tag_valor falhou - node nÒo encontrado: ./ptu:equipe_Profissional/ptu:tp_Participacao
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 1900110922, tipo: in_lista
+DEBUG: tag_valor falhou - node nÒo encontrado: ./ptu:equipe_Profissional/ptu:tp_Participacao
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 90524403, tipo: in_lista
+DEBUG: tag_valor falhou - node nÒo encontrado: ./ptu:equipe_Profissional/ptu:tp_Participacao
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 90491343, tipo: in_lista
+DEBUG: tag_valor falhou - node nÒo encontrado: ./ptu:equipe_Profissional/ptu:tp_Participacao
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 90360362, tipo: in_lista
+DEBUG: tag_valor falhou - node nÒo encontrado: ./ptu:equipe_Profissional/ptu:tp_Participacao
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 90207564, tipo: in_lista
+DEBUG: tag_valor falhou - node nÒo encontrado: ./ptu:equipe_Profissional/ptu:tp_Participacao
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 90072367, tipo: in_lista
+DEBUG: tag_valor falhou - node nÒo encontrado: ./ptu:equipe_Profissional/ptu:tp_Participacao
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 70852251, tipo: in_lista
+DEBUG: tag_valor falhou - node nÒo encontrado: ./ptu:equipe_Profissional/ptu:tp_Participacao
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 70705348, tipo: in_lista
+DEBUG: tag_valor falhou - node nÒo encontrado: ./ptu:equipe_Profissional/ptu:tp_Participacao
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 60033681, tipo: in_lista
+DEBUG: tag_valor check - xpath: ./ptu:equipe_Profissional/ptu:tp_Participacao, valor: 12, tipo: valor_permitido
+DEBUG: valor_permitido check: 12 in ['11'] -> False
+DEBUG: tag_valor check - xpath: ./ptu:procedimentos/ptu:cd_Servico, valor: 10101039, tipo: in_lista
+
+APËS APLICAÃ├O:
+hr_Inicial: ['00:00:01']
+hr_Final: ['00:00:01']
+
+*** FALHA! Horßrios N├O foram modificados! ***
+
+============================================================

@@ -37,7 +37,11 @@ class RuleEngine:
             # Caminho base do projeto
             project_root = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
             self.config_dir = os.path.join(project_root, "config")
+        elif os.path.isabs(config_dir):
+            # Se for caminho absoluto, usar diretamente
+            self.config_dir = config_dir
         else:
+            # Se for caminho relativo, resolver a partir do projeto
             base_path = os.path.dirname(os.path.abspath(__file__))
             self.config_dir = os.path.join(base_path, config_dir)
         
@@ -173,7 +177,8 @@ class RuleEngine:
             sub_conditions = multi_cond.get("sub_condicoes", [])
             logic_type = multi_cond.get("tipo")
             if logic_type == "AND": 
-                return all(self._evaluate_condition(element, sc) for sc in sub_conditions)
+                results = [self._evaluate_condition(element, sc) for sc in sub_conditions]
+                return all(results)
             if logic_type == "OR": 
                 return any(self._evaluate_condition(element, sc) for sc in sub_conditions)
 
@@ -186,10 +191,13 @@ class RuleEngine:
             
             if compare_type == "existe": return bool(nodes)
             if compare_type == "nao_existe": return not bool(nodes)
-            if not nodes: return False
+            if not nodes: 
+                return False
             
             node_text = self.xml_reader.get_element_text(nodes[0])
             if node_text is None: return False
+
+
             
             list_id = tag_cond.get("id_lista")
             
@@ -223,7 +231,25 @@ class RuleEngine:
                 valor = str(tag_cond.get("valor", ""))
                 return str(node_text) != valor
             elif "valor_permitido" in tag_cond:
-                return node_text in tag_cond["valor_permitido"]
+                res = node_text in tag_cond["valor_permitido"]
+                return res
+        
+        # Condição para verificar se hr_Inicial = hr_Final
+        if "condicao_horarios_iguais" in condition:
+            horarios_cond = condition["condicao_horarios_iguais"]
+            xpath_hr_inicial = horarios_cond.get("xpath_hr_inicial", "./ptu:hr_Inicial")
+            xpath_hr_final = horarios_cond.get("xpath_hr_final", "./ptu:hr_Final")
+            
+            nodes_inicial = self.xml_reader.find_elements_by_xpath(element, xpath_hr_inicial)
+            nodes_final = self.xml_reader.find_elements_by_xpath(element, xpath_hr_final)
+            
+            if nodes_inicial and nodes_final:
+                hr_inicial = self.xml_reader.get_element_text(nodes_inicial[0])
+                hr_final = self.xml_reader.get_element_text(nodes_final[0])
+                
+                # Retorna True se os horários são iguais (condição atendida)
+                return hr_inicial == hr_final
+            return False
         
         return True
 
@@ -231,6 +257,72 @@ class RuleEngine:
         """Aplica uma ação de modificação em um elemento XML com base na configuração da regra."""
         action_type = action_config.get("tipo_acao")
         tag_alvo_xpath = action_config.get("tag_alvo")
+        
+        # Inicializar modified para evitar NameError no final da função
+        modified = False
+
+
+        # Ação: Copiar horários de outro item da guia (usado para taxas de observação)
+        if action_type == "copiar_horarios_de_outro_item":
+            tag_hr_inicial = action_config.get("tag_hr_inicial", "./ptu:hr_Inicial")
+            tag_hr_final = action_config.get("tag_hr_final", "./ptu:hr_Final")
+            
+            # Obter horários atuais do item (taxa de observação)
+            hr_inicial_nodes = self.xml_reader.find_elements_by_xpath(element, tag_hr_inicial)
+            hr_final_nodes = self.xml_reader.find_elements_by_xpath(element, tag_hr_final)
+            
+            if not hr_inicial_nodes or not hr_final_nodes:
+                return False
+            
+            hr_inicial_atual = hr_inicial_nodes[0].text
+            hr_final_atual = hr_final_nodes[0].text
+            
+            # Verificar se precisa corrigir: horários iguais OU hr_Inicial inválido (00:00:00)
+            hr_inicial_invalido = hr_inicial_atual.startswith("00:00") if hr_inicial_atual else False
+            horarios_iguais = hr_inicial_atual == hr_final_atual
+            
+            if not horarios_iguais and not hr_inicial_invalido:
+                return False
+            
+            # Buscar outro procedimentosExecutados na mesma guia com horários válidos
+            parent_dados_guia = element.getparent()  # dadosGuia
+            
+            if parent_dados_guia is None:
+                logger.warning("copiar_horarios: parent_dados_guia is None")
+                return False
+            
+            # Buscar todos os irmãos procedimentosExecutados
+            todos_procs = self.xml_reader.find_elements_by_xpath(parent_dados_guia, "./ptu:procedimentosExecutados")
+            logger.debug(f"copiar_horarios: encontrados {len(todos_procs)} procedimentosExecutados")
+            
+            hr_inicial_novo = None
+            hr_final_novo = None
+            
+            for i, proc in enumerate(todos_procs):
+                if proc is element:  # Pular o próprio elemento
+                    continue
+                
+                hr_ini_nodes = self.xml_reader.find_elements_by_xpath(proc, "./ptu:hr_Inicial")
+                hr_fim_nodes = self.xml_reader.find_elements_by_xpath(proc, "./ptu:hr_Final")
+                
+                if hr_ini_nodes and hr_fim_nodes:
+                    hr_ini = hr_ini_nodes[0].text
+                    hr_fim = hr_fim_nodes[0].text
+                    
+                    # Verificar se os horários são válidos (diferentes entre si)
+                    if hr_ini and hr_fim and hr_ini != hr_fim:
+                        hr_inicial_novo = hr_ini
+                        hr_final_novo = hr_fim
+                        break
+            
+            if hr_inicial_novo and hr_final_novo:
+                # Aplicar os novos horários
+                hr_inicial_nodes[0].text = hr_inicial_novo
+                hr_final_nodes[0].text = hr_final_novo
+                
+                logger.info(f"Horários taxa observação corrigidos: {hr_inicial_atual}/{hr_final_atual} -> {hr_inicial_novo}/{hr_final_novo}")
+                modified = True
+                return modified
 
         if action_type == "multiplas_acoes":
             modified = False
@@ -759,7 +851,8 @@ class RuleEngine:
             logger.warning(f"ALERTA: {mensagem} - Dados: {alerta_info['dados']}")
             # Não modifica o XML, mas retorna True para indicar que a regra foi processada
             modified = True
-                
+        
+        # Ação: Copiar horários de outro item da guia (usado para taxas de observação)
         return modified
     
     def apply_rules_to_xml(self, xml_tree, execution_id=-1, file_name=""):
@@ -777,7 +870,6 @@ class RuleEngine:
         alterations_made = False
         root = xml_tree.getroot()
         
-        # Armazenar o nome do arquivo para uso nos alertas
         self._current_file_name = file_name
         
         for rule in self.loaded_rules:
@@ -788,7 +880,8 @@ class RuleEngine:
                 target_elements = self.xml_reader.find_elements_by_xpath(root, f".//ptu:{tipo_elemento}") if tipo_elemento else [root]
                 
                 for element in target_elements:
-                    if self._evaluate_condition(element, conditions):
+                    cond_result = self._evaluate_condition(element, conditions)
+                    if cond_result:
                         if self._apply_action(element, rule.get("acao", {})):
                             logger.info(f"Regra '{rule.get('id')}' aplicada com sucesso.")
                             alterations_made = True
