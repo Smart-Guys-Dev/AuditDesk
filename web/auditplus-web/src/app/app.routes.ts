@@ -23,6 +23,11 @@ export const routes: Routes = [
     canActivate: [authGuard]
   },
   {
+    path: 'relatorios',
+    loadComponent: () => import('./features/relatorios/relatorios.component').then(m => m.RelatoriosComponent),
+    canActivate: [authGuard]
+  },
+  {
     path: '**',
     redirectTo: 'dashboard'
   }

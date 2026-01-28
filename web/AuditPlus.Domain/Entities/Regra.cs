@@ -72,4 +72,14 @@ public class Regra : BaseEntity
     /// Versão da regra para controle de alterações
     /// </summary>
     public int Versao { get; set; } = 1;
+    
+    /// <summary>
+    /// Total de vezes que a regra foi aplicada
+    /// </summary>
+    public int TotalAplicacoes { get; set; }
+    
+    /// <summary>
+    /// Total de glosas evitadas por esta regra
+    /// </summary>
+    public int TotalGlosasEvitadas { get; set; }
 }

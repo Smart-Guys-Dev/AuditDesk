@@ -60,4 +60,14 @@ public class Execucao : BaseEntity
     /// Mensagem de erro (se houver)
     /// </summary>
     public string? MensagemErro { get; set; }
+    
+    /// <summary>
+    /// Total de correções aplicadas
+    /// </summary>
+    public int TotalCorrecoes { get; set; }
+    
+    /// <summary>
+    /// Valor economizado (glosas evitadas)
+    /// </summary>
+    public decimal ValorEconomizado { get; set; }
 }
