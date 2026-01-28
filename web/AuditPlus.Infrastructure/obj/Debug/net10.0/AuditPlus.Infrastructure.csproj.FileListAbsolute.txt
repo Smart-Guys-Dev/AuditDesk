@@ -1,0 +1,16 @@
+C:\Users\pedro.freitas\OneDrive - UNIMEDCG\AuditPlusv2.0\web\AuditPlus.Infrastructure\bin\Debug\net10.0\AuditPlus.Infrastructure.deps.json
+C:\Users\pedro.freitas\OneDrive - UNIMEDCG\AuditPlusv2.0\web\AuditPlus.Infrastructure\bin\Debug\net10.0\AuditPlus.Infrastructure.dll
+C:\Users\pedro.freitas\OneDrive - UNIMEDCG\AuditPlusv2.0\web\AuditPlus.Infrastructure\bin\Debug\net10.0\AuditPlus.Infrastructure.pdb
+C:\Users\pedro.freitas\OneDrive - UNIMEDCG\AuditPlusv2.0\web\AuditPlus.Infrastructure\bin\Debug\net10.0\AuditPlus.Domain.dll
+C:\Users\pedro.freitas\OneDrive - UNIMEDCG\AuditPlusv2.0\web\AuditPlus.Infrastructure\bin\Debug\net10.0\AuditPlus.Domain.pdb
+C:\Users\pedro.freitas\OneDrive - UNIMEDCG\AuditPlusv2.0\web\AuditPlus.Infrastructure\obj\Debug\net10.0\AuditPlus.Infrastructure.csproj.AssemblyReference.cache
+C:\Users\pedro.freitas\OneDrive - UNIMEDCG\AuditPlusv2.0\web\AuditPlus.Infrastructure\obj\Debug\net10.0\AuditPlus.Infrastructure.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\pedro.freitas\OneDrive - UNIMEDCG\AuditPlusv2.0\web\AuditPlus.Infrastructure\obj\Debug\net10.0\AuditPlus.Infrastructure.AssemblyInfoInputs.cache
+C:\Users\pedro.freitas\OneDrive - UNIMEDCG\AuditPlusv2.0\web\AuditPlus.Infrastructure\obj\Debug\net10.0\AuditPlus.Infrastructure.AssemblyInfo.cs
+C:\Users\pedro.freitas\OneDrive - UNIMEDCG\AuditPlusv2.0\web\AuditPlus.Infrastructure\obj\Debug\net10.0\AuditPlus.Infrastructure.csproj.CoreCompileInputs.cache
+C:\Users\pedro.freitas\OneDrive - UNIMEDCG\AuditPlusv2.0\web\AuditPlus.Infrastructure\obj\Debug\net10.0\AuditPlus.Infrastructure.sourcelink.json
+C:\Users\pedro.freitas\OneDrive - UNIMEDCG\AuditPlusv2.0\web\AuditPlus.Infrastructure\obj\Debug\net10.0\AuditPlu.5F1A1627.Up2Date
+C:\Users\pedro.freitas\OneDrive - UNIMEDCG\AuditPlusv2.0\web\AuditPlus.Infrastructure\obj\Debug\net10.0\AuditPlus.Infrastructure.dll
+C:\Users\pedro.freitas\OneDrive - UNIMEDCG\AuditPlusv2.0\web\AuditPlus.Infrastructure\obj\Debug\net10.0\refint\AuditPlus.Infrastructure.dll
+C:\Users\pedro.freitas\OneDrive - UNIMEDCG\AuditPlusv2.0\web\AuditPlus.Infrastructure\obj\Debug\net10.0\AuditPlus.Infrastructure.pdb
+C:\Users\pedro.freitas\OneDrive - UNIMEDCG\AuditPlusv2.0\web\AuditPlus.Infrastructure\obj\Debug\net10.0\ref\AuditPlus.Infrastructure.dll
