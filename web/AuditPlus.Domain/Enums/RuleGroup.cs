@@ -6,53 +6,27 @@ namespace AuditPlus.Domain.Enums;
 /// </summary>
 public enum RuleGroup
 {
-    /// <summary>
-    /// Equipe Profissional - CPF, CBO, Conselho
-    /// </summary>
+    // Grupos de campo de atuação
+    DATAS,
+    VALORES,
+    QUANTIDADES,
+    CODIGOS,
+    DUPLICIDADES,
+    AUTORIZACAO,
+    BENEFICIARIO,
+    PRESTADOR,
+    TISS,
+    
+    // Grupos funcionais
     EQUIPE_PROF,
-    
-    /// <summary>
-    /// Tipo de Participação - tp_Participacao
-    /// </summary>
     PARTICIPACAO,
-    
-    /// <summary>
-    /// Regras de Internação
-    /// </summary>
     INTERNACAO,
-    
-    /// <summary>
-    /// Procedimentos e Serviços
-    /// </summary>
     PROCEDIMENTOS,
-    
-    /// <summary>
-    /// Dados de Auditoria
-    /// </summary>
     AUDITORIA,
-    
-    /// <summary>
-    /// CNES de Prestadores
-    /// </summary>
     CNES,
-    
-    /// <summary>
-    /// Ordem/estrutura de XML
-    /// </summary>
     LAYOUT,
-    
-    /// <summary>
-    /// Conversão PJ para PF
-    /// </summary>
     CONVERSAO,
-    
-    /// <summary>
-    /// Terapias Seriadas
-    /// </summary>
     TERAPIAS,
     
-    /// <summary>
-    /// Outras regras não categorizadas
-    /// </summary>
     OUTROS
 }
