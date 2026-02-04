@@ -23,6 +23,16 @@ export const routes: Routes = [
     canActivate: [authGuard]
   },
   {
+    path: 'upload',
+    loadComponent: () => import('./features/upload/upload.component').then(m => m.UploadComponent),
+    canActivate: [authGuard]
+  },
+  {
+    path: 'validation',
+    loadComponent: () => import('./features/validation/validation.component').then(m => m.ValidationComponent),
+    canActivate: [authGuard]
+  },
+  {
     path: 'relatorios',
     loadComponent: () => import('./features/relatorios/relatorios.component').then(m => m.RelatoriosComponent),
     canActivate: [authGuard]

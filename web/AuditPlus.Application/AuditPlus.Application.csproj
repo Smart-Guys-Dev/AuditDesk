@@ -2,6 +2,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\AuditPlus.Domain\AuditPlus.Domain.csproj" />
+    <ProjectReference Include="..\AuditPlus.Infrastructure\AuditPlus.Infrastructure.csproj" />
   </ItemGroup>
 
   <ItemGroup>

@@ -23,5 +23,6 @@ export interface RegraCreate {
   categoria: RuleCategory;
   grupo: RuleGroup;
   prioridade: number;
+  ativo?: boolean;
   logica?: string;
 }

@@ -4,7 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { RegrasService } from '../../core/services/regras.service';
 import { AuthService } from '../../core/services/auth.service';
-import { Regra, RuleCategory, RuleGroup } from '../../core/models/regra.model';
+import { Regra, RegraCreate, RuleCategory, RuleGroup } from '../../core/models/regra.model';
 
 @Component({
   selector: 'app-regras',
@@ -50,7 +50,7 @@ import { Regra, RuleCategory, RuleGroup } from '../../core/models/regra.model';
           </select>
         </div>
         
-        <button class="btn-add" (click)="showAddModal = true">
+        <button class="btn-add" (click)="openAddModal()">
           + Nova Regra
         </button>
       </div>
@@ -103,7 +103,7 @@ import { Regra, RuleCategory, RuleGroup } from '../../core/models/regra.model';
                     </button>
                   </td>
                   <td class="actions">
-                    <button class="btn-icon" title="Editar" (click)="editRegra(regra)">✏️</button>
+                    <button class="btn-icon" title="Editar" (click)="openEditModal(regra)">✏️</button>
                     <button class="btn-icon" title="Excluir" (click)="deleteRegra(regra)">🗑️</button>
                   </td>
                 </tr>
@@ -112,6 +112,69 @@ import { Regra, RuleCategory, RuleGroup } from '../../core/models/regra.model';
           </table>
         }
       </div>
+      
+      <!-- Modal Add/Edit -->
+      @if (showModal) {
+        <div class="modal-overlay" (click)="closeModal()">
+          <div class="modal-content" (click)="$event.stopPropagation()">
+            <div class="modal-header">
+              <h2>{{ editingRegra ? 'Editar Regra' : 'Nova Regra' }}</h2>
+              <button class="modal-close" (click)="closeModal()">×</button>
+            </div>
+            
+            <form (ngSubmit)="saveRegra()" class="modal-form">
+              <div class="form-row">
+                <label>Código *</label>
+                <input type="text" [(ngModel)]="formData.codigo" name="codigo" required [disabled]="!!editingRegra">
+              </div>
+              
+              <div class="form-row">
+                <label>Nome *</label>
+                <input type="text" [(ngModel)]="formData.nome" name="nome" required>
+              </div>
+              
+              <div class="form-row">
+                <label>Descrição</label>
+                <textarea [(ngModel)]="formData.descricao" name="descricao" rows="3"></textarea>
+              </div>
+              
+              <div class="form-grid">
+                <div class="form-row">
+                  <label>Categoria</label>
+                  <select [(ngModel)]="formData.categoria" name="categoria">
+                    <option value="GLOSA_GUIA">Glosa Guia</option>
+                    <option value="GLOSA_ITEM">Glosa Item</option>
+                    <option value="VALIDACAO">Validação</option>
+                    <option value="OTIMIZACAO">Otimização</option>
+                  </select>
+                </div>
+                
+                <div class="form-row">
+                  <label>Grupo</label>
+                  <select [(ngModel)]="formData.grupo" name="grupo">
+                    <option value="DATAS">Datas</option>
+                    <option value="VALORES">Valores</option>
+                    <option value="PRESTADOR">Prestador</option>
+                    <option value="DUPLICIDADES">Duplicidades</option>
+                    <option value="EQUIPE_PROF">Equipe Prof</option>
+                    <option value="OUTROS">Outros</option>
+                  </select>
+                </div>
+              </div>
+              
+              <div class="form-row">
+                <label>Prioridade (menor = maior prioridade)</label>
+                <input type="number" [(ngModel)]="formData.prioridade" name="prioridade" min="1" max="999">
+              </div>
+              
+              <div class="modal-actions">
+                <button type="button" class="btn-cancel" (click)="closeModal()">Cancelar</button>
+                <button type="submit" class="btn-save">{{ editingRegra ? 'Salvar' : 'Criar' }}</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      }
     </div>
   `,
   styles: [`
@@ -130,11 +193,7 @@ import { Regra, RuleCategory, RuleGroup } from '../../core/models/regra.model';
       border-bottom: 1px solid rgba(255, 255, 255, 0.1);
     }
     
-    .header-left {
-      display: flex;
-      align-items: center;
-      gap: 20px;
-    }
+    .header-left { display: flex; align-items: center; gap: 20px; }
     
     .back-btn {
       color: rgba(255, 255, 255, 0.6);
@@ -144,19 +203,9 @@ import { Regra, RuleCategory, RuleGroup } from '../../core/models/regra.model';
       transition: all 0.2s;
     }
     
-    .back-btn:hover {
-      background: rgba(255, 255, 255, 0.1);
-      color: #fff;
-    }
-    
+    .back-btn:hover { background: rgba(255, 255, 255, 0.1); color: #fff; }
     .page-header h1 { margin: 0; font-size: 1.5rem; }
-    
-    .header-right {
-      display: flex;
-      align-items: center;
-      gap: 15px;
-    }
-    
+    .header-right { display: flex; align-items: center; gap: 15px; }
     .user-info { color: rgba(255, 255, 255, 0.7); }
     
     .btn-logout {
@@ -176,10 +225,7 @@ import { Regra, RuleCategory, RuleGroup } from '../../core/models/regra.model';
       flex-wrap: wrap;
     }
     
-    .search-box {
-      flex: 1;
-      min-width: 200px;
-    }
+    .search-box { flex: 1; min-width: 200px; }
     
     .search-box input {
       width: 100%;
@@ -191,10 +237,7 @@ import { Regra, RuleCategory, RuleGroup } from '../../core/models/regra.model';
       font-size: 1rem;
     }
     
-    .filters {
-      display: flex;
-      gap: 10px;
-    }
+    .filters { display: flex; gap: 10px; }
     
     .filters select {
       padding: 12px;
@@ -215,9 +258,7 @@ import { Regra, RuleCategory, RuleGroup } from '../../core/models/regra.model';
       transition: transform 0.2s;
     }
     
-    .btn-add:hover {
-      transform: translateY(-2px);
-    }
+    .btn-add:hover { transform: translateY(-2px); }
     
     .stats-bar {
       padding: 10px 40px;
@@ -227,9 +268,7 @@ import { Regra, RuleCategory, RuleGroup } from '../../core/models/regra.model';
       font-size: 0.9rem;
     }
     
-    .table-container {
-      padding: 0 40px 40px;
-    }
+    .table-container { padding: 0 40px 40px; }
     
     .data-table {
       width: 100%;
@@ -252,14 +291,8 @@ import { Regra, RuleCategory, RuleGroup } from '../../core/models/regra.model';
       border-bottom: 1px solid rgba(255, 255, 255, 0.05);
     }
     
-    .data-table tr:hover {
-      background: rgba(255, 255, 255, 0.02);
-    }
-    
-    .data-table tr.inactive {
-      opacity: 0.5;
-    }
-    
+    .data-table tr:hover { background: rgba(255, 255, 255, 0.02); }
+    .data-table tr.inactive { opacity: 0.5; }
     .code { font-family: monospace; color: #00d9ff; }
     .priority { text-align: center; }
     
@@ -313,6 +346,109 @@ import { Regra, RuleCategory, RuleGroup } from '../../core/models/regra.model';
       padding: 60px;
       color: rgba(255, 255, 255, 0.5);
     }
+    
+    /* Modal */
+    .modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.7);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+    }
+    
+    .modal-content {
+      background: linear-gradient(145deg, #1e2a45 0%, #16213e 100%);
+      border-radius: 20px;
+      padding: 30px;
+      width: 100%;
+      max-width: 500px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+    }
+    
+    .modal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 25px;
+    }
+    
+    .modal-header h2 { margin: 0; font-size: 1.4rem; }
+    
+    .modal-close {
+      background: none;
+      border: none;
+      color: #fff;
+      font-size: 2rem;
+      cursor: pointer;
+      opacity: 0.6;
+    }
+    
+    .modal-close:hover { opacity: 1; }
+    
+    .modal-form { display: flex; flex-direction: column; gap: 20px; }
+    
+    .form-row { display: flex; flex-direction: column; gap: 8px; }
+    
+    .form-row label {
+      font-size: 0.9rem;
+      color: rgba(255, 255, 255, 0.7);
+    }
+    
+    .form-row input,
+    .form-row select,
+    .form-row textarea {
+      padding: 12px;
+      border-radius: 10px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      background: rgba(255, 255, 255, 0.05);
+      color: #fff;
+      font-size: 1rem;
+    }
+    
+    .form-row input:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+    
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 15px;
+    }
+    
+    .modal-actions {
+      display: flex;
+      gap: 15px;
+      justify-content: flex-end;
+      margin-top: 10px;
+    }
+    
+    .btn-cancel {
+      padding: 12px 24px;
+      border-radius: 10px;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      background: transparent;
+      color: #fff;
+      cursor: pointer;
+    }
+    
+    .btn-save {
+      padding: 12px 24px;
+      border-radius: 10px;
+      border: none;
+      background: linear-gradient(135deg, #00d9ff 0%, #00a8cc 100%);
+      color: #fff;
+      font-weight: 600;
+      cursor: pointer;
+    }
+    
+    .btn-save:hover { transform: translateY(-1px); }
   `]
 })
 export class RegrasComponent implements OnInit {
@@ -326,7 +462,18 @@ export class RegrasComponent implements OnInit {
   searchTerm = '';
   filterCategoria = '';
   filterAtivo = '';
-  showAddModal = false;
+  
+  showModal = false;
+  editingRegra: Regra | null = null;
+  
+  formData = {
+    codigo: '',
+    nome: '',
+    descricao: '',
+    categoria: 'VALIDACAO' as RuleCategory,
+    grupo: 'OUTROS' as RuleGroup,
+    prioridade: 100
+  };
   
   regrasAtivas = computed(() => this.regras().filter(r => r.ativo).length);
   
@@ -365,13 +512,75 @@ export class RegrasComponent implements OnInit {
     this.regrasService.toggle(regra.id).subscribe();
   }
   
-  editRegra(regra: Regra): void {
-    // TODO: Abrir modal de edição
-    console.log('Editar:', regra);
+  openAddModal(): void {
+    this.editingRegra = null;
+    this.formData = {
+      codigo: '',
+      nome: '',
+      descricao: '',
+      categoria: 'VALIDACAO',
+      grupo: 'OUTROS',
+      prioridade: 100
+    };
+    this.showModal = true;
+  }
+  
+  openEditModal(regra: Regra): void {
+    this.editingRegra = regra;
+    this.formData = {
+      codigo: regra.codigo,
+      nome: regra.nome,
+      descricao: regra.descricao || '',
+      categoria: regra.categoria,
+      grupo: regra.grupo,
+      prioridade: regra.prioridade
+    };
+    this.showModal = true;
+  }
+  
+  closeModal(): void {
+    this.showModal = false;
+    this.editingRegra = null;
+  }
+  
+  saveRegra(): void {
+    if (this.editingRegra) {
+      // Atualizar
+      const updated: Regra = {
+        ...this.editingRegra,
+        nome: this.formData.nome,
+        descricao: this.formData.descricao,
+        categoria: this.formData.categoria,
+        grupo: this.formData.grupo,
+        prioridade: this.formData.prioridade
+      };
+      this.regrasService.update(this.editingRegra.id, updated).subscribe(success => {
+        if (success) {
+          this.closeModal();
+          this.regrasService.loadAll().subscribe();
+        }
+      });
+    } else {
+      // Criar
+      const newRegra: RegraCreate = {
+        codigo: this.formData.codigo,
+        nome: this.formData.nome,
+        descricao: this.formData.descricao,
+        categoria: this.formData.categoria,
+        grupo: this.formData.grupo,
+        prioridade: this.formData.prioridade,
+        ativo: true
+      };
+      this.regrasService.create(newRegra).subscribe(created => {
+        if (created) {
+          this.closeModal();
+        }
+      });
+    }
   }
   
   deleteRegra(regra: Regra): void {
-    if (confirm(`Excluir regra ${regra.codigo}?`)) {
+    if (confirm(`Tem certeza que deseja excluir a regra "${regra.codigo}"?`)) {
       this.regrasService.delete(regra.id).subscribe();
     }
   }

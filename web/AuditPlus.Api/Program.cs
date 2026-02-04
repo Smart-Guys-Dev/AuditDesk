@@ -63,6 +63,9 @@ builder.Services.AddScoped<IExecucaoRepository, ExecucaoRepository>();
 
 // Dependency Injection - Services
 builder.Services.AddScoped<IAuthService, AuthService>();
+builder.Services.AddScoped<XmlValidationService>();
+builder.Services.AddScoped<RuleImportService>();
+builder.Services.AddScoped<HashCalculatorService>();
 
 // CORS para Angular
 builder.Services.AddCors(options =>

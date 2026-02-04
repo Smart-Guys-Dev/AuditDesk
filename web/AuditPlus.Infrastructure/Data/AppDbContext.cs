@@ -33,6 +33,21 @@ public class AppDbContext : DbContext
     /// </summary>
     public DbSet<Fatura> Faturas { get; set; }
     
+    /// <summary>
+    /// Tabela de regras de validação (motor de regras)
+    /// </summary>
+    public DbSet<ValidationRule> ValidationRules { get; set; }
+    
+    /// <summary>
+    /// Tabela de arquivos XML processados
+    /// </summary>
+    public DbSet<ArquivoXml> ArquivosXml { get; set; }
+    
+    /// <summary>
+    /// Tabela de correções aplicadas
+    /// </summary>
+    public DbSet<Correcao> Correcoes { get; set; }
+    
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         base.OnModelCreating(modelBuilder);

@@ -75,7 +75,7 @@ interface DashboardStats {
               <span class="action-icon">📝</span>
               <span class="action-label">Gerenciar Regras</span>
             </a>
-            <a routerLink="/execucoes" class="action-card">
+            <a routerLink="/upload" class="action-card">
               <span class="action-icon">▶️</span>
               <span class="action-label">Nova Execução</span>
             </a>
