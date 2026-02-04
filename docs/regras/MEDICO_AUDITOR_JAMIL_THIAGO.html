@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Documentação de Regra: MÉDICO AUDITOR JAMIL THIAGO</title>
+    <style>
+        :root {
+            --primary-color: #00995D;
+            --secondary-color: #263238;
+            --bg-color: #f4f6f8;
+            --card-bg: #ffffff;
+            --text-color: #333;
+            --border-radius: 8px;
+        }
+        body {
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            margin: 0;
+            padding: 30px;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+        .container { max-width: 900px; margin: 0 auto; }
+        header {
+            background-color: var(--card-bg);
+            padding: 25px 35px;
+            border-radius: var(--border-radius);
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.04);
+            margin-bottom: 30px;
+            border-left: 6px solid var(--primary-color);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        h1 { color: var(--primary-color); margin: 0; font-size: 24px; font-weight: 600; }
+        .status-badge {
+            padding: 6px 14px;
+            border-radius: 15px;
+            font-weight: bold;
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .status-implementado { background-color: #e8f5e9; color: #00995D; border: 1px solid #c8e6c9; }
+        .card {
+            background-color: var(--card-bg);
+            border-radius: var(--border-radius);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+            padding: 30px;
+            margin-bottom: 25px;
+            border: 1px solid rgba(0, 0, 0, 0.02);
+        }
+        h2 {
+            color: #444;
+            border-bottom: 2px solid #f0f0f0;
+            padding-bottom: 12px;
+            margin-top: 0;
+            font-size: 18px;
+            font-weight: 600;
+        }
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+        .info-item label {
+            display: block;
+            font-size: 11px;
+            text-transform: uppercase;
+            color: var(--primary-color);
+            margin-bottom: 5px;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            opacity: 0.9;
+        }
+        .info-item span { font-size: 16px; color: var(--secondary-color); font-weight: 500; word-break: break-all; }
+        .info-item p { margin: 5px 0 0 0; font-size: 14px; }
+        .metric-cards {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        .metric-card {
+            background: #fff;
+            border: 1px solid #e0e0e0;
+            border-radius: var(--border-radius);
+            padding: 20px;
+            text-align: center;
+            transition: transform 0.2s;
+        }
+        .metric-card:hover { transform: translateY(-2px); box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05); }
+        .metric-card:nth-child(1) { border-top: 3px solid #ff7043; }
+        .metric-card:nth-child(2) { border-top: 3px solid var(--primary-color); }
+        .metric-card:nth-child(3) { border-top: 3px solid #42a5f5; }
+        .metric-card:nth-child(4) { border-top: 3px solid #ab47bc; }
+        .metric-value { font-size: 22px; font-weight: bold; color: #333; display: block; }
+        .metric-label { font-size: 11px; color: #777; text-transform: uppercase; letter-spacing: 0.5px; }
+        pre {
+            background-color: #263238;
+            color: #eceff1;
+            padding: 20px;
+            border-radius: var(--border-radius);
+            overflow-x: auto;
+            font-family: 'Consolas', 'Monaco', monospace;
+            font-size: 13px;
+            line-height: 1.5;
+        }
+        .json-key { color: #80cbc4; }
+        .json-string { color: #a5d6a7; }
+        .json-number { color: #ffab91; }
+        .json-boolean { color: #ce93d8; }
+        .xml-tag { color: #80cbc4; }
+        .xml-attr { color: #ffab91; }
+        .xml-value { color: #a5d6a7; }
+        .xml-comment { color: #78909c; font-style: italic; }
+        .comparison-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+        .comparison-box {
+            background: #fafafa;
+            border-radius: var(--border-radius);
+            padding: 15px;
+        }
+        .comparison-box.before { border-left: 4px solid #f44336; }
+        .comparison-box.after { border-left: 4px solid #4caf50; }
+        .comparison-box h4 {
+            margin: 0 0 10px 0;
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .comparison-box.before h4 { color: #c62828; }
+        .comparison-box.after h4 { color: #2e7d32; }
+        .flowchart {
+            background: #fafafa;
+            border-radius: var(--border-radius);
+            padding: 20px;
+            font-family: 'Consolas', monospace;
+            font-size: 12px;
+            line-height: 1.8;
+            overflow-x: auto;
+        }
+        .category-badge {
+            display: inline-block;
+            padding: 3px 10px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+        .cat-glosa-guia { background: #ffebee; color: #c62828; }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+        }
+        th, td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        th {
+            background-color: #f5f5f5;
+            font-weight: 600;
+            font-size: 12px;
+            text-transform: uppercase;
+            color: #666;
+        }
+        .highlight { background-color: #fff3cd; padding: 2px 6px; border-radius: 3px; }
+        .success { color: #2e7d32; }
+        .error { color: #c62828; }
+        footer {
+            text-align: center;
+            font-size: 13px;
+            color: #777;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #e0e0e0;
+        }
+        .alert {
+            background: #fff3e0;
+            border-left: 4px solid #ff9800;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 0 var(--border-radius) var(--border-radius) 0;
+        }
+        .alert-title {
+            font-weight: 600;
+            color: #e65100;
+            margin-bottom: 8px;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <header>
+        <h1>Relatório de Implementação de Regra</h1>
+        <span class="status-badge status-implementado">IMPLEMENTADO</span>
+    </header>
+
+    <div class="card">
+        <h2>📋 Informações da Regra</h2>
+        <div class="info-grid">
+            <div class="info-item">
+                <label>ID das Regras</label>
+                <span>REGRA_JAMIL_THIAGO_COMPLETAR_CRM<br>REGRA_JAMIL_THIAGO_COMPLETAR_UF</span>
+            </div>
+            <div class="info-item">
+                <label>Grupo</label>
+                <span>Dados de Auditoria</span>
+            </div>
+            <div class="info-item">
+                <label>Categoria</label>
+                <span class="category-badge cat-glosa-guia">GLOSA_GUIA</span>
+            </div>
+            <div class="info-item">
+                <label>Tipo de Ação</label>
+                <span>garantir_tag_com_conteudo</span>
+            </div>
+        </div>
+        <div class="info-item">
+            <label>Descrição</label>
+            <p>Quando o médico auditor é JAMIL THIAGO ROSA RIBEIRO e as tags de CRM ou UF estão ausentes, insere automaticamente os valores corretos (CRM 15332, UF 50 - MS) para evitar glosa total da guia.</p>
+        </div>
+    </div>
+
+    <div class="card">
+        <h2>👨‍⚕️ Dados do Profissional</h2>
+        <table>
+            <tr>
+                <th>Campo</th>
+                <th>Valor</th>
+                <th>Fonte</th>
+            </tr>
+            <tr>
+                <td>Nome Completo</td>
+                <td><strong>JAMIL THIAGO ROSA RIBEIRO</strong></td>
+                <td>XML Original</td>
+            </tr>
+            <tr>
+                <td>Número CRM</td>
+                <td><span class="highlight">15332</span></td>
+                <td>CFM - Conselho Federal de Medicina</td>
+            </tr>
+            <tr>
+                <td>UF do CRM</td>
+                <td><span class="highlight">50</span> (MS - Mato Grosso do Sul)</td>
+                <td>CFM - Conselho Federal de Medicina</td>
+            </tr>
+            <tr>
+                <td>Data da Consulta</td>
+                <td>04/02/2026</td>
+                <td>Portal CFM</td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="card">
+        <h2>📊 Métricas de Desenvolvimento</h2>
+        <div class="metric-cards">
+            <div class="metric-card">
+                <span class="metric-value">04/02</span>
+                <span class="metric-label">Data</span>
+            </div>
+            <div class="metric-card">
+                <span class="metric-value">17:24</span>
+                <span class="metric-label">Início</span>
+            </div>
+            <div class="metric-card">
+                <span class="metric-value">17:45</span>
+                <span class="metric-label">Conclusão</span>
+            </div>
+            <div class="metric-card">
+                <span class="metric-value">2</span>
+                <span class="metric-label">Regras</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="card">
+        <h2>⚠️ Problema Identificado</h2>
+        <p>Em algumas guias de internação, o bloco <code>&lt;dadosAuditoria&gt;</code> vem apenas com o nome do médico auditor, sem as tags de CRM e UF:</p>
+        
+        <div class="alert">
+            <div class="alert-title">⚠️ Consequência</div>
+            <p>Ausência dessas tags resulta em <strong>glosa total da guia</strong> pela operadora de destino, já que o preenchimento é obrigatório conforme Padrão TISS/PTU.</p>
+        </div>
+
+        <pre><span class="xml-comment">&lt;!-- XML Original com problema --&gt;</span>
+<span class="xml-tag">&lt;ptu:dadosAuditoria&gt;</span>
+    <span class="xml-tag">&lt;ptu:nm_MedicoAuditor&gt;</span>JAMIL THIAGO ROSA RIBEIRO<span class="xml-tag">&lt;/ptu:nm_MedicoAuditor&gt;</span>
+    <span class="xml-comment">&lt;!-- ❌ FALTA: nr_CrmAuditor --&gt;</span>
+    <span class="xml-comment">&lt;!-- ❌ FALTA: cd_UFCRM --&gt;</span>
+    <span class="xml-tag">&lt;ptu:nm_EnfAuditor&gt;</span>GRAZIELA APARECIDA MENDIETA<span class="xml-tag">&lt;/ptu:nm_EnfAuditor&gt;</span>
+    <span class="xml-tag">&lt;ptu:nr_CorenAuditor&gt;</span>591874<span class="xml-tag">&lt;/ptu:nr_CorenAuditor&gt;</span>
+    <span class="xml-tag">&lt;ptu:cd_UFCoren&gt;</span>50<span class="xml-tag">&lt;/ptu:cd_UFCoren&gt;</span>
+<span class="xml-tag">&lt;/ptu:dadosAuditoria&gt;</span></pre>
+    </div>
+
+    <div class="card">
+        <h2>🔄 Antes vs Depois</h2>
+        <div class="comparison-grid">
+            <div class="comparison-box before">
+                <h4>❌ Antes (Incompleto)</h4>
+                <pre style="background: #fff; color: #333; font-size: 11px;">&lt;ptu:dadosAuditoria&gt;
+  &lt;ptu:nm_MedicoAuditor&gt;
+    JAMIL THIAGO ROSA RIBEIRO
+  &lt;/ptu:nm_MedicoAuditor&gt;
+  &lt;ptu:nm_EnfAuditor&gt;...&lt;/ptu:nm_EnfAuditor&gt;
+  ...
+&lt;/ptu:dadosAuditoria&gt;</pre>
+            </div>
+            <div class="comparison-box after">
+                <h4>✅ Depois (Corrigido)</h4>
+                <pre style="background: #fff; color: #333; font-size: 11px;">&lt;ptu:dadosAuditoria&gt;
+  &lt;ptu:nm_MedicoAuditor&gt;
+    JAMIL THIAGO ROSA RIBEIRO
+  &lt;/ptu:nm_MedicoAuditor&gt;
+  <strong style="color:#2e7d32">&lt;ptu:nr_CrmAuditor&gt;15332&lt;/ptu:nr_CrmAuditor&gt;</strong>
+  <strong style="color:#2e7d32">&lt;ptu:cd_UFCRM&gt;50&lt;/ptu:cd_UFCRM&gt;</strong>
+  &lt;ptu:nm_EnfAuditor&gt;...&lt;/ptu:nm_EnfAuditor&gt;
+  ...
+&lt;/ptu:dadosAuditoria&gt;</pre>
+            </div>
+        </div>
+    </div>
+
+    <div class="card">
+        <h2>📐 Fluxo de Decisão</h2>
+        <div class="flowchart">
+┌─────────────────────────────────────────┐
+│ Bloco é &lt;dadosAuditoria&gt;?               │
+└────────────────┬────────────────────────┘
+                 │ SIM
+                 ▼
+┌─────────────────────────────────────────┐
+│ nm_MedicoAuditor = "JAMIL THIAGO..."?   │
+└────────────────┬────────────────────────┘
+                 │ SIM
+                 ▼
+┌─────────────────────────────────────────┐
+│ nr_CrmAuditor existe?                   │
+└────────┬───────────────┬────────────────┘
+      NÃO│               │SIM
+         ▼               ▼
+┌────────────────┐   ┌────────────────────┐
+│ <span class="success">INSERIR CRM</span>    │   │ Nenhuma ação       │
+│ <span class="success">15332</span>          │   │ (já existe)        │
+└────────────────┘   └────────────────────┘
+         │
+         ▼
+┌─────────────────────────────────────────┐
+│ cd_UFCRM existe?                        │
+└────────┬───────────────┬────────────────┘
+      NÃO│               │SIM
+         ▼               ▼
+┌────────────────┐   ┌────────────────────┐
+│ <span class="success">INSERIR UF</span>     │   │ Nenhuma ação       │
+│ <span class="success">50 (MS)</span>        │   │ (já existe)        │
+└────────────────┘   └────────────────────┘
+        </div>
+    </div>
+
+    <div class="card">
+        <h2>⚙️ Configuração JSON - Regra 1 (CRM)</h2>
+        <pre>{
+    <span class="json-key">"id"</span>: <span class="json-string">"REGRA_JAMIL_THIAGO_COMPLETAR_CRM"</span>,
+    <span class="json-key">"descricao"</span>: <span class="json-string">"Quando o médico auditor é JAMIL THIAGO ROSA RIBEIRO e falta o CRM, insere o CRM correto 15332."</span>,
+    <span class="json-key">"ativo"</span>: <span class="json-boolean">true</span>,
+    <span class="json-key">"metadata_glosa"</span>: {
+        <span class="json-key">"categoria"</span>: <span class="json-string">"GLOSA_GUIA"</span>,
+        <span class="json-key">"impacto"</span>: <span class="json-string">"ALTO"</span>,
+        <span class="json-key">"razao"</span>: <span class="json-string">"Ausência de CRM do médico auditor resulta em glosa total da guia"</span>
+    },
+    <span class="json-key">"condicoes"</span>: {
+        <span class="json-key">"tipo_elemento"</span>: <span class="json-string">"dadosAuditoria"</span>,
+        <span class="json-key">"condicao_multipla"</span>: {
+            <span class="json-key">"tipo"</span>: <span class="json-string">"AND"</span>,
+            <span class="json-key">"sub_condicoes"</span>: [
+                {
+                    <span class="json-key">"condicao_tag_valor"</span>: {
+                        <span class="json-key">"xpath"</span>: <span class="json-string">"./ptu:nm_MedicoAuditor"</span>,
+                        <span class="json-key">"tipo_comparacao"</span>: <span class="json-string">"valor_atual_igual"</span>,
+                        <span class="json-key">"valor_atual"</span>: <span class="json-string">"JAMIL THIAGO ROSA RIBEIRO"</span>
+                    }
+                },
+                {
+                    <span class="json-key">"condicao_tag_valor"</span>: {
+                        <span class="json-key">"xpath"</span>: <span class="json-string">"./ptu:nr_CrmAuditor"</span>,
+                        <span class="json-key">"tipo_comparacao"</span>: <span class="json-string">"nao_existe"</span>
+                    }
+                }
+            ]
+        }
+    },
+    <span class="json-key">"acao"</span>: {
+        <span class="json-key">"tipo_acao"</span>: <span class="json-string">"garantir_tag_com_conteudo"</span>,
+        <span class="json-key">"tag_alvo"</span>: <span class="json-string">"./ptu:nr_CrmAuditor"</span>,
+        <span class="json-key">"novo_conteudo"</span>: <span class="json-string">"15332"</span>,
+        <span class="json-key">"tag_referencia_posicao"</span>: <span class="json-string">"./ptu:nm_MedicoAuditor"</span>
+    },
+    <span class="json-key">"log_sucesso"</span>: <span class="json-string">"CRM 15332 inserido para médico auditor JAMIL THIAGO ROSA RIBEIRO."</span>
+}</pre>
+    </div>
+
+    <div class="card">
+        <h2>⚙️ Configuração JSON - Regra 2 (UF)</h2>
+        <pre>{
+    <span class="json-key">"id"</span>: <span class="json-string">"REGRA_JAMIL_THIAGO_COMPLETAR_UF"</span>,
+    <span class="json-key">"descricao"</span>: <span class="json-string">"Quando o médico auditor é JAMIL THIAGO ROSA RIBEIRO e falta o cd_UFCRM, insere UF 50 (MS)."</span>,
+    <span class="json-key">"ativo"</span>: <span class="json-boolean">true</span>,
+    <span class="json-key">"metadata_glosa"</span>: {
+        <span class="json-key">"categoria"</span>: <span class="json-string">"GLOSA_GUIA"</span>,
+        <span class="json-key">"impacto"</span>: <span class="json-string">"ALTO"</span>,
+        <span class="json-key">"razao"</span>: <span class="json-string">"Ausência de UF do CRM do médico auditor resulta em glosa total da guia"</span>
+    },
+    <span class="json-key">"condicoes"</span>: {
+        <span class="json-key">"tipo_elemento"</span>: <span class="json-string">"dadosAuditoria"</span>,
+        <span class="json-key">"condicao_multipla"</span>: {
+            <span class="json-key">"tipo"</span>: <span class="json-string">"AND"</span>,
+            <span class="json-key">"sub_condicoes"</span>: [
+                {
+                    <span class="json-key">"condicao_tag_valor"</span>: {
+                        <span class="json-key">"xpath"</span>: <span class="json-string">"./ptu:nm_MedicoAuditor"</span>,
+                        <span class="json-key">"tipo_comparacao"</span>: <span class="json-string">"valor_atual_igual"</span>,
+                        <span class="json-key">"valor_atual"</span>: <span class="json-string">"JAMIL THIAGO ROSA RIBEIRO"</span>
+                    }
+                },
+                {
+                    <span class="json-key">"condicao_tag_valor"</span>: {
+                        <span class="json-key">"xpath"</span>: <span class="json-string">"./ptu:cd_UFCRM"</span>,
+                        <span class="json-key">"tipo_comparacao"</span>: <span class="json-string">"nao_existe"</span>
+                    }
+                }
+            ]
+        }
+    },
+    <span class="json-key">"acao"</span>: {
+        <span class="json-key">"tipo_acao"</span>: <span class="json-string">"garantir_tag_com_conteudo"</span>,
+        <span class="json-key">"tag_alvo"</span>: <span class="json-string">"./ptu:cd_UFCRM"</span>,
+        <span class="json-key">"novo_conteudo"</span>: <span class="json-string">"50"</span>,
+        <span class="json-key">"tag_referencia_posicao"</span>: <span class="json-string">"./ptu:nr_CrmAuditor"</span>
+    },
+    <span class="json-key">"log_sucesso"</span>: <span class="json-string">"UF 50 (MS) inserida para médico auditor JAMIL THIAGO ROSA RIBEIRO."</span>
+}</pre>
+    </div>
+
+    <div class="card">
+        <h2>📝 Justificativa Técnica</h2>
+        <table>
+            <tr>
+                <th>Aspecto</th>
+                <th>Justificativa</th>
+            </tr>
+            <tr>
+                <td>Fonte Oficial</td>
+                <td>CRM 15332/MS verificado no site oficial do CFM (Conselho Federal de Medicina)</td>
+            </tr>
+            <tr>
+                <td>Consistência</td>
+                <td>O médico aparece corretamente em outras guias do mesmo prestador</td>
+            </tr>
+            <tr>
+                <td>Prevenção de Glosa</td>
+                <td>Evita rejeição total da guia por dados incompletos no bloco de auditoria</td>
+            </tr>
+            <tr>
+                <td>Reordenação Automática</td>
+                <td>A regra REGRA_ORDEM_DADOS_AUDITORIA garante ordem correta das tags após inserção</td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="card">
+        <h2>📋 Metadados da Glosa</h2>
+        <table>
+            <tr>
+                <th>Campo</th>
+                <th>Valor</th>
+            </tr>
+            <tr>
+                <td>Categoria</td>
+                <td><span class="category-badge cat-glosa-guia">GLOSA_GUIA</span></td>
+            </tr>
+            <tr>
+                <td>Impacto Financeiro</td>
+                <td><strong class="error">ALTO</strong></td>
+            </tr>
+            <tr>
+                <td>Risco de Erro</td>
+                <td><strong class="success">BAIXO</strong></td>
+            </tr>
+            <tr>
+                <td>Razão</td>
+                <td>Ausência de CRM/UF do auditor resulta em glosa total da guia</td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="card">
+        <h2>📂 Arquivos Relacionados</h2>
+        <table>
+            <tr>
+                <th>Arquivo</th>
+                <th>Descrição</th>
+            </tr>
+            <tr>
+                <td><code>src/config/regras/auditoria.json</code></td>
+                <td>Contém as duas regras JAMIL_THIAGO</td>
+            </tr>
+            <tr>
+                <td><code>src/config/medicos_auditores.json</code></td>
+                <td>Arquivo de referência com dados do profissional</td>
+            </tr>
+            <tr>
+                <td><code>docs/regras/MEDICO_AUDITOR_JAMIL_THIAGO.md</code></td>
+                <td>Documentação em Markdown</td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="card">
+        <h2>📜 Histórico de Alterações</h2>
+        <table>
+            <tr>
+                <th>Data</th>
+                <th>Versão</th>
+                <th>Alteração</th>
+                <th>Autor</th>
+            </tr>
+            <tr>
+                <td>04/02/2026</td>
+                <td>1.0</td>
+                <td>Criação das regras JAMIL_THIAGO_COMPLETAR_CRM e _COMPLETAR_UF</td>
+                <td>Equipe de Faturamento</td>
+            </tr>
+        </table>
+    </div>
+
+    <footer>
+        Unimed Campo Grande • 04/02/2026 17:45 • AuditPlus v2.0 • Documentado por: Pedro Lucas Lima de Freitas
+    </footer>
+</div>
+</body>
+</html>
