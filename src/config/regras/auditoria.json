@@ -96,5 +96,81 @@
       "tag_referencia_posicao": "./ptu:nr_CrmAuditor"
     },
     "log_sucesso": "Tag <cd_UFCRM> inserida pois estava ausente."
+  },
+  {
+    "id": "REGRA_JAMIL_THIAGO_COMPLETAR_CRM",
+    "descricao": "Quando o médico auditor é JAMIL THIAGO ROSA RIBEIRO e falta o CRM, insere o CRM correto 15332.",
+    "ativo": true,
+    "metadata_glosa": {
+      "categoria": "GLOSA_GUIA",
+      "impacto": "ALTO",
+      "razao": "Ausência de CRM do médico auditor JAMIL THIAGO resulta em glosa total da guia"
+    },
+    "condicoes": {
+      "tipo_elemento": "dadosAuditoria",
+      "condicao_multipla": {
+        "tipo": "AND",
+        "sub_condicoes": [
+          {
+            "condicao_tag_valor": {
+              "xpath": "./ptu:nm_MedicoAuditor",
+              "tipo_comparacao": "valor_atual_igual",
+              "valor_atual": "JAMIL THIAGO ROSA RIBEIRO"
+            }
+          },
+          {
+            "condicao_tag_valor": {
+              "xpath": "./ptu:nr_CrmAuditor",
+              "tipo_comparacao": "nao_existe"
+            }
+          }
+        ]
+      }
+    },
+    "acao": {
+      "tipo_acao": "garantir_tag_com_conteudo",
+      "tag_alvo": "./ptu:nr_CrmAuditor",
+      "novo_conteudo": "15332",
+      "tag_referencia_posicao": "./ptu:nm_MedicoAuditor"
+    },
+    "log_sucesso": "CRM 15332 inserido para médico auditor JAMIL THIAGO ROSA RIBEIRO."
+  },
+  {
+    "id": "REGRA_JAMIL_THIAGO_COMPLETAR_UF",
+    "descricao": "Quando o médico auditor é JAMIL THIAGO ROSA RIBEIRO e falta o cd_UFCRM, insere UF 50 (MS).",
+    "ativo": true,
+    "metadata_glosa": {
+      "categoria": "GLOSA_GUIA",
+      "impacto": "ALTO",
+      "razao": "Ausência de UF do CRM do médico auditor JAMIL THIAGO resulta em glosa total da guia"
+    },
+    "condicoes": {
+      "tipo_elemento": "dadosAuditoria",
+      "condicao_multipla": {
+        "tipo": "AND",
+        "sub_condicoes": [
+          {
+            "condicao_tag_valor": {
+              "xpath": "./ptu:nm_MedicoAuditor",
+              "tipo_comparacao": "valor_atual_igual",
+              "valor_atual": "JAMIL THIAGO ROSA RIBEIRO"
+            }
+          },
+          {
+            "condicao_tag_valor": {
+              "xpath": "./ptu:cd_UFCRM",
+              "tipo_comparacao": "nao_existe"
+            }
+          }
+        ]
+      }
+    },
+    "acao": {
+      "tipo_acao": "garantir_tag_com_conteudo",
+      "tag_alvo": "./ptu:cd_UFCRM",
+      "novo_conteudo": "50",
+      "tag_referencia_posicao": "./ptu:nr_CrmAuditor"
+    },
+    "log_sucesso": "UF 50 (MS) inserida para médico auditor JAMIL THIAGO ROSA RIBEIRO."
   }
 ]
