@@ -572,5 +572,49 @@
       "razao": "CNES incorreto causa glosa total da guia pela operadora",
       "contabilizar": true
     }
+  },
+  {
+    "id": "REGRA_CORRIGIR_CNPJ_CNES_UNIMED_CGR_03315918000118",
+    "descricao": "Corrige o CNPJ da filial (03315918000118) para a matriz (03315918000541) e garante o CNES correto (3018903) para UNIMED CAMPO GRANDE no dadosExecutante.",
+    "ativo": true,
+    "condicoes": {
+      "tipo_elemento": "dadosExecutante",
+      "condicao_multipla": {
+        "tipo": "AND",
+        "sub_condicoes": [
+          {
+            "condicao_tag_valor": {
+              "xpath": "./ptu:CPF_CNPJ/ptu:cd_cnpj",
+              "valor_permitido": [
+                "03315918000118"
+              ]
+            }
+          }
+        ]
+      }
+    },
+    "acao": {
+      "tipo_acao": "multiplas_acoes",
+      "sub_acoes": [
+        {
+          "tipo_acao": "garantir_tag_com_conteudo",
+          "tag_alvo": "./ptu:CPF_CNPJ/ptu:cd_cnpj",
+          "novo_conteudo": "03315918000541"
+        },
+        {
+          "tipo_acao": "garantir_tag_com_conteudo",
+          "tag_alvo": "./ptu:CNES",
+          "novo_conteudo": "3018903",
+          "tag_referencia_posicao": "./ptu:CPF_CNPJ"
+        }
+      ]
+    },
+    "log_sucesso": "CNPJ filial 03315918000118 corrigido para matriz 03315918000541 e CNES corrigido para 3018903.",
+    "metadata_glosa": {
+      "categoria": "GLOSA_GUIA",
+      "impacto": "ALTO",
+      "razao": "CNPJ de filial incorreta e CNES divergente causam glosa total da guia pela operadora",
+      "contabilizar": true
+    }
   }
 ]
