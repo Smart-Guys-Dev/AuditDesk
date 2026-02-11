@@ -46,6 +46,29 @@ Distribuição/
 Correção XML/
 PASTA TESTE DOCS/
 
+# Scripts avulsos / debug (one-off)
+debug_*.py
+temp_*.py
+test_rule_*.py
+extract_*.py
+analisar_guias.py
+corretor_taxas_k.py
+
+# Outputs de análise
+resultado_analise*.txt
+xsd_output.txt
+
+# Dados de processamento (XMLs originais e corrigidos)
+taxas_complementares_k/
+
+# Data exports
+data/historico_distribuicao/*.xlsx
+
+# Testes avulsos
+tests/hash_test_result.txt
+tests/HashTest.cs
+tests/test_hash_comparison.py
+
 # OS
 .DS_Store
 Thumbs.db
