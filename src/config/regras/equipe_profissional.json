@@ -672,5 +672,126 @@
       "impacto": "MEDIO",
       "razao": "Operadora glosa apenas o procedimento específico"
     }
+  },
+  {
+    "id": "REGRA_40202550_NORMALIZAR_EQUIPE_DRA_CAROLINE",
+    "descricao": "Para cd_Servico=40202550, se a equipe estiver incorreta (ex: HOSPITAL ou conselho inválido), substitui pelos dados da Dra. CAROLINE JOSINO LEONARDI NASCIMENTO (Endoscopista).",
+    "ativo": true,
+    "condicoes": {
+      "tipo_elemento": "procedimentosExecutados",
+      "condicao_multipla": {
+        "tipo": "AND",
+        "sub_condicoes": [
+          {
+            "condicao_tag_valor": {
+              "xpath": "./ptu:procedimentos/ptu:cd_Servico",
+              "valor_permitido": [
+                "40202550"
+              ]
+            }
+          },
+          {
+            "condicao_multipla": {
+              "tipo": "OR",
+              "sub_condicoes": [
+                {
+                  "condicao_tag_valor": {
+                    "xpath": "./ptu:equipe_Profissional/ptu:nm_Profissional",
+                    "tipo_comparacao": "contem",
+                    "valor": "HOSPITAL"
+                  }
+                },
+                {
+                  "condicao_tag_valor": {
+                    "xpath": "./ptu:equipe_Profissional/ptu:nm_Profissional",
+                    "tipo_comparacao": "contem",
+                    "valor": "COXIM"
+                  }
+                },
+                {
+                  "condicao_tag_valor": {
+                    "xpath": "./ptu:equipe_Profissional/ptu:dadosConselho/ptu:sg_Conselho",
+                    "valor_permitido": [
+                      "OUT"
+                    ]
+                  }
+                },
+                {
+                  "condicao_tag_valor": {
+                    "xpath": "./ptu:equipe_Profissional/ptu:dadosConselho/ptu:nr_Conselho",
+                    "valor_permitido": [
+                      "0",
+                      "00"
+                    ]
+                  }
+                }
+              ]
+            }
+          }
+        ]
+      }
+    },
+    "acao": {
+      "tipo_acao": "multiplas_acoes",
+      "sub_acoes": [
+        {
+          "tipo_acao": "garantir_tag_com_conteudo",
+          "tag_alvo": "./ptu:equipe_Profissional/ptu:tp_Participacao",
+          "novo_conteudo": "00"
+        },
+        {
+          "tipo_acao": "garantir_tag_com_conteudo",
+          "tag_alvo": "./ptu:equipe_Profissional/ptu:Prestador/ptu:cd_Uni_Prest",
+          "novo_conteudo": "51"
+        },
+        {
+          "tipo_acao": "garantir_tag_com_conteudo",
+          "tag_alvo": "./ptu:equipe_Profissional/ptu:Prestador/ptu:cd_Prest",
+          "novo_conteudo": "2121"
+        },
+        {
+          "tipo_acao": "remover_tag_inteira",
+          "tag_alvo": "./ptu:equipe_Profissional/ptu:cdCnpjCpf/ptu:cd_cnpj"
+        },
+        {
+          "tipo_acao": "garantir_tag_com_conteudo",
+          "tag_alvo": "./ptu:equipe_Profissional/ptu:cdCnpjCpf/ptu:cd_cpf",
+          "novo_conteudo": "00148996124",
+          "posicao_insercao": "primeiro_filho",
+          "tag_pai_referencia": "./ptu:equipe_Profissional/ptu:cdCnpjCpf"
+        },
+        {
+          "tipo_acao": "garantir_tag_com_conteudo",
+          "tag_alvo": "./ptu:equipe_Profissional/ptu:nm_Profissional",
+          "novo_conteudo": "CAROLINE JOSINO LEONARDI NASCIMENTO"
+        },
+        {
+          "tipo_acao": "garantir_tag_com_conteudo",
+          "tag_alvo": "./ptu:equipe_Profissional/ptu:dadosConselho/ptu:sg_Conselho",
+          "novo_conteudo": "CRM"
+        },
+        {
+          "tipo_acao": "garantir_tag_com_conteudo",
+          "tag_alvo": "./ptu:equipe_Profissional/ptu:dadosConselho/ptu:nr_Conselho",
+          "novo_conteudo": "6833"
+        },
+        {
+          "tipo_acao": "garantir_tag_com_conteudo",
+          "tag_alvo": "./ptu:equipe_Profissional/ptu:dadosConselho/ptu:UF",
+          "novo_conteudo": "50"
+        },
+        {
+          "tipo_acao": "garantir_tag_com_conteudo",
+          "tag_alvo": "./ptu:equipe_Profissional/ptu:CBO",
+          "novo_conteudo": "225310"
+        }
+      ]
+    },
+    "log_sucesso": "Equipe do 40202550 normalizada para Dra. Caroline Josino (Endoscopista).",
+    "metadata_glosa": {
+      "categoria": "GLOSA_ITEM",
+      "impacto": "MEDIO",
+      "razao": "Operadora glosa o procedimento se equipe estiver incorreta"
+    }
   }
 ]
