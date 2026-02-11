@@ -525,6 +525,9 @@
             "projectReferences": {
               "C:\\Users\\pedro.freitas\\OneDrive - UNIMEDCG\\AuditPlusv2.0\\web\\AuditPlus.Domain\\AuditPlus.Domain.csproj": {
                 "projectPath": "C:\\Users\\pedro.freitas\\OneDrive - UNIMEDCG\\AuditPlusv2.0\\web\\AuditPlus.Domain\\AuditPlus.Domain.csproj"
+              },
+              "C:\\Users\\pedro.freitas\\OneDrive - UNIMEDCG\\AuditPlusv2.0\\web\\AuditPlus.Infrastructure\\AuditPlus.Infrastructure.csproj": {
+                "projectPath": "C:\\Users\\pedro.freitas\\OneDrive - UNIMEDCG\\AuditPlusv2.0\\web\\AuditPlus.Infrastructure\\AuditPlus.Infrastructure.csproj"
               }
             }
           }

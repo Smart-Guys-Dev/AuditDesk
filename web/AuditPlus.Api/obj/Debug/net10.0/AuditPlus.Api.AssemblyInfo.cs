@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("AuditPlus.Api")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+e7f9253908b8c7564889a478b318f3e6d9e03721")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+9b679efb360b54f0fb21ef0c8a92db65359b8bb4")]
 [assembly: System.Reflection.AssemblyProductAttribute("AuditPlus.Api")]
 [assembly: System.Reflection.AssemblyTitleAttribute("AuditPlus.Api")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

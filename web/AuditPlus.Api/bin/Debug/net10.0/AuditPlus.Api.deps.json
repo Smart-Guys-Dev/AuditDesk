@@ -356,6 +356,7 @@
       "AuditPlus.Application/1.0.0": {
         "dependencies": {
           "AuditPlus.Domain": "1.0.0",
+          "AuditPlus.Infrastructure": "1.0.0",
           "BCrypt.Net-Next": "4.0.3",
           "System.IdentityModel.Tokens.Jwt": "8.15.0"
         },
