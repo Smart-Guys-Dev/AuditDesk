@@ -72,3 +72,14 @@ tests/test_hash_comparison.py
 # OS
 .DS_Store
 Thumbs.db
+
+# .NET
+**/bin/
+**/obj/
+
+# Angular / Node
+node_modules/
+.angular/
+
+# Upload temp files
+web/AuditPlus.Api/uploads/
