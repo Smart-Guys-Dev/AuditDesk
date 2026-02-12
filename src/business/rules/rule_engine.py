@@ -461,7 +461,7 @@ class RuleEngine:
                     "nome": "RODRIGO DOMINGUES LARAYA",
                     "cpf": "20034717153",
                     "cd_prest": "11021",
-                    "crm": "5432",
+                    "crm": "5185",
                     "uf": "50",
                     "cbo": "225125"
                 },
