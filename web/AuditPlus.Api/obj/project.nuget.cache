@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "oO8sEuxNAl8=",
+  "dgSpecHash": "hH7WzsdAkiM=",
   "success": true,
   "projectFilePath": "C:\\Users\\pedro.freitas\\OneDrive - UNIMEDCG\\AuditPlusv2.0\\web\\AuditPlus.Api\\AuditPlus.Api.csproj",
   "expectedPackageFiles": [
@@ -22,11 +22,18 @@
     "C:\\Users\\pedro.freitas\\.nuget\\packages\\microsoft.identitymodel.protocols.openidconnect\\8.0.1\\microsoft.identitymodel.protocols.openidconnect.8.0.1.nupkg.sha512",
     "C:\\Users\\pedro.freitas\\.nuget\\packages\\microsoft.identitymodel.tokens\\8.15.0\\microsoft.identitymodel.tokens.8.15.0.nupkg.sha512",
     "C:\\Users\\pedro.freitas\\.nuget\\packages\\microsoft.openapi\\2.0.0\\microsoft.openapi.2.0.0.nupkg.sha512",
+    "C:\\Users\\pedro.freitas\\.nuget\\packages\\oracle.entityframeworkcore\\10.23.26100\\oracle.entityframeworkcore.10.23.26100.nupkg.sha512",
+    "C:\\Users\\pedro.freitas\\.nuget\\packages\\oracle.manageddataaccess.core\\23.26.100\\oracle.manageddataaccess.core.23.26.100.nupkg.sha512",
     "C:\\Users\\pedro.freitas\\.nuget\\packages\\sqlitepclraw.bundle_e_sqlite3\\2.1.11\\sqlitepclraw.bundle_e_sqlite3.2.1.11.nupkg.sha512",
     "C:\\Users\\pedro.freitas\\.nuget\\packages\\sqlitepclraw.core\\2.1.11\\sqlitepclraw.core.2.1.11.nupkg.sha512",
     "C:\\Users\\pedro.freitas\\.nuget\\packages\\sqlitepclraw.lib.e_sqlite3\\2.1.11\\sqlitepclraw.lib.e_sqlite3.2.1.11.nupkg.sha512",
     "C:\\Users\\pedro.freitas\\.nuget\\packages\\sqlitepclraw.provider.e_sqlite3\\2.1.11\\sqlitepclraw.provider.e_sqlite3.2.1.11.nupkg.sha512",
-    "C:\\Users\\pedro.freitas\\.nuget\\packages\\system.identitymodel.tokens.jwt\\8.15.0\\system.identitymodel.tokens.jwt.8.15.0.nupkg.sha512"
+    "C:\\Users\\pedro.freitas\\.nuget\\packages\\system.configuration.configurationmanager\\8.0.0\\system.configuration.configurationmanager.8.0.0.nupkg.sha512",
+    "C:\\Users\\pedro.freitas\\.nuget\\packages\\system.diagnostics.performancecounter\\8.0.0\\system.diagnostics.performancecounter.8.0.0.nupkg.sha512",
+    "C:\\Users\\pedro.freitas\\.nuget\\packages\\system.directoryservices.protocols\\8.0.2\\system.directoryservices.protocols.8.0.2.nupkg.sha512",
+    "C:\\Users\\pedro.freitas\\.nuget\\packages\\system.identitymodel.tokens.jwt\\8.15.0\\system.identitymodel.tokens.jwt.8.15.0.nupkg.sha512",
+    "C:\\Users\\pedro.freitas\\.nuget\\packages\\system.security.cryptography.pkcs\\8.0.1\\system.security.cryptography.pkcs.8.0.1.nupkg.sha512",
+    "C:\\Users\\pedro.freitas\\.nuget\\packages\\system.security.cryptography.protecteddata\\8.0.0\\system.security.cryptography.protecteddata.8.0.0.nupkg.sha512"
   ],
   "logs": []
 }

@@ -1,27 +1,17 @@
 import { Component, inject, signal } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { RouterModule, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { UploadService } from '../../core/services/upload.service';
-import { AuthService } from '../../core/services/auth.service';
 import { UploadResult, ArquivoInfo } from '../../core/models/upload.model';
 
 @Component({
   selector: 'app-upload',
   standalone: true,
-  imports: [CommonModule, RouterModule],
+  imports: [],
   template: `
-    <div class="page-container">
-      <!-- Header -->
-      <header class="page-header">
-        <div class="header-left">
-          <a routerLink="/dashboard" class="back-btn">← Dashboard</a>
-          <h1>📤 Upload de XMLs</h1>
-        </div>
-        <div class="header-right">
-          <span class="user-info">{{ currentUser()?.fullName }}</span>
-          <button class="btn-logout" (click)="logout()">Sair</button>
-        </div>
-      </header>
+    <div class="upload-page">
+      <div class="page-title">
+        <h1>Upload de XMLs</h1>
+      </div>
       
       <main class="content">
         @if (!resultado()) {
@@ -147,43 +137,17 @@ import { UploadResult, ArquivoInfo } from '../../core/models/upload.model';
     </div>
   `,
   styles: [`
-    .page-container {
-      min-height: 100vh;
-      background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
-      color: #fff;
+    .upload-page {
+      padding: var(--ap-page-padding);
     }
-    
-    .page-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 20px 40px;
-      background: rgba(0, 0, 0, 0.2);
-      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+
+    .page-title h1 {
+      font-size: 1.8rem;
+      font-weight: 700;
+      margin: 0 0 24px;
     }
-    
-    .header-left { display: flex; align-items: center; gap: 20px; }
-    .back-btn {
-      color: rgba(255, 255, 255, 0.6);
-      text-decoration: none;
-      padding: 8px 12px;
-      border-radius: 8px;
-      transition: all 0.2s;
-    }
-    .back-btn:hover { background: rgba(255, 255, 255, 0.1); color: #fff; }
-    .page-header h1 { margin: 0; font-size: 1.5rem; }
-    .header-right { display: flex; align-items: center; gap: 15px; }
-    .user-info { color: rgba(255, 255, 255, 0.7); }
-    .btn-logout {
-      padding: 8px 16px;
-      border-radius: 8px;
-      border: 1px solid rgba(255, 255, 255, 0.3);
-      background: transparent;
-      color: #fff;
-      cursor: pointer;
-    }
-    
-    .content { padding: 40px; max-width: 900px; margin: 0 auto; }
+
+    .content { max-width: 900px; margin: 0 auto; }
     
     .upload-zone {
       border: 3px dashed rgba(255, 255, 255, 0.2);
@@ -422,10 +386,8 @@ import { UploadResult, ArquivoInfo } from '../../core/models/upload.model';
 })
 export class UploadComponent {
   private uploadService = inject(UploadService);
-  private authService = inject(AuthService);
   private router = inject(Router);
   
-  currentUser = this.authService.currentUser;
   isUploading = this.uploadService.isUploading;
   progress = this.uploadService.progress;
   
@@ -494,17 +456,17 @@ export class UploadComponent {
   }
   
   processarLote(): void {
-    // TODO: Navegar para tela de processamento
-    alert('Funcionalidade em desenvolvimento - Sprint 2');
+    const result = this.resultado();
+    if (!result) return;
+    
+    this.router.navigate(['/validation'], {
+      queryParams: { execucaoId: result.execucaoId }
+    });
   }
   
   formatSize(bytes: number): string {
     if (bytes < 1024) return bytes + ' B';
     if (bytes < 1024 * 1024) return (bytes / 1024).toFixed(1) + ' KB';
     return (bytes / (1024 * 1024)).toFixed(1) + ' MB';
-  }
-  
-  logout(): void {
-    this.authService.logout();
   }
 }

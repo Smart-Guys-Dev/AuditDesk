@@ -78,7 +78,6 @@ public class UploadController : ControllerBase
                     await file.CopyToAsync(stream);
                     
                     info.Status = "ACEITO";
-                    info.Caminho = filePath;
                     resultado.ArquivosAceitos++;
                 }
                 catch (Exception ex)
@@ -155,5 +154,4 @@ public record ArquivoInfo
     public long Tamanho { get; set; }
     public string Status { get; set; } = string.Empty;
     public string? Motivo { get; set; }
-    public string? Caminho { get; set; }
 }

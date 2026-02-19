@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("AuditPlus.Tests")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+1dd471cf605f160647981b5fd3a32747b9f45c12")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+95d181e5096fa31d76497fe9a02644f5c45b4a11")]
 [assembly: System.Reflection.AssemblyProductAttribute("AuditPlus.Tests")]
 [assembly: System.Reflection.AssemblyTitleAttribute("AuditPlus.Tests")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

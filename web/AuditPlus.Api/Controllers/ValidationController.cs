@@ -8,6 +8,7 @@ namespace AuditPlus.Api.Controllers;
 
 /// <summary>
 /// Controller para validação e processamento de XMLs.
+/// OWASP A01: Requer autenticação. A05: Sem exposição de paths internos.
 /// </summary>
 [ApiController]
 [Route("api/[controller]")]
@@ -80,8 +81,8 @@ public class ValidationController : ControllerBase
             sucesso = arquivosSalvos.Count > 0,
             totalArquivos = arquivosSalvos.Count,
             arquivos = arquivosSalvos,
-            erros = erros,
-            pastaUpload = pastaUploads
+            erros = erros
+            // OWASP A05: Não expor paths internos do servidor
         });
     }
     
@@ -285,7 +286,14 @@ public class ValidationController : ControllerBase
                 
                 // Aplicar correções ao XML
                 var xmlContent = await System.IO.File.ReadAllTextAsync(caminhoOriginal);
-                var doc = System.Xml.Linq.XDocument.Parse(xmlContent);
+                using var xmlReader = System.Xml.XmlReader.Create(
+                    new StringReader(xmlContent),
+                    new System.Xml.XmlReaderSettings 
+                    { 
+                        DtdProcessing = System.Xml.DtdProcessing.Prohibit, 
+                        XmlResolver = null 
+                    });
+                var doc = System.Xml.Linq.XDocument.Load(xmlReader);
                 
                 foreach (var correcao in correcoes)
                 {
@@ -336,8 +344,9 @@ public class ValidationController : ControllerBase
             ExecucaoId = execucaoId,
             ArquivosAplicados = arquivosAplicados,
             TotalArquivos = arquivos.Count,
-            PastaBackup = pastaBackup,
-            PastaCorrigidos = pastaCorrigidos,
+            // OWASP A05: Não expor paths internos na resposta
+            PastaBackup = $"backup_exec_{execucaoId}",
+            PastaCorrigidos = $"corrigidos_exec_{execucaoId}",
             Erros = erros,
             Sucesso = !erros.Any()
         });

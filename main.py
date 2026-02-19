@@ -19,6 +19,14 @@ def main():
     # 3. Inicializar Banco de Dados
     db_manager.init_db()
     
+    # 4. Migração e Sincronização Automática de Regras
+    try:
+        from src.database.rule_migrator import run_migration
+        logger.info("Verificando atualizações nas regras (JSON -> SQLite)...")
+        run_migration()
+    except Exception as e:
+        logger.error(f"Erro na migração automática de regras: {e}")
+    
     app = QApplication(sys.argv)
     
     # Variáveis para manter referência

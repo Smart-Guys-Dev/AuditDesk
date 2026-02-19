@@ -48,6 +48,11 @@ public class AppDbContext : DbContext
     /// </summary>
     public DbSet<Correcao> Correcoes { get; set; }
     
+    /// <summary>
+    /// Tabela de log de auditoria de segurança
+    /// </summary>
+    public DbSet<AuditLog> AuditLogs { get; set; }
+    
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         base.OnModelCreating(modelBuilder);

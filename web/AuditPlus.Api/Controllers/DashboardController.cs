@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using AuditPlus.Infrastructure.Data;
@@ -8,9 +9,11 @@ namespace AuditPlus.Api.Controllers;
 /// <summary>
 /// Controller para o Dashboard.
 /// Fornece estatísticas e métricas do sistema.
+/// OWASP A01: Todos os endpoints requerem autenticação.
 /// </summary>
 [ApiController]
 [Route("api/[controller]")]
+[Authorize]
 public class DashboardController : ControllerBase
 {
     private readonly AppDbContext _context;

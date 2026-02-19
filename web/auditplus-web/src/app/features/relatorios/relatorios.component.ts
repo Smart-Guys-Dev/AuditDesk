@@ -1,28 +1,18 @@
 import { Component, inject, OnInit, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { RouterModule } from '@angular/router';
 import { RelatoriosService } from '../../core/services/relatorios.service';
-import { AuthService } from '../../core/services/auth.service';
 import { RelatorioGlosasEvitadas, RegraEfetividade, ResumoMensal } from '../../core/models/relatorio.model';
 
 @Component({
   selector: 'app-relatorios',
   standalone: true,
-  imports: [CommonModule, FormsModule, RouterModule],
+  imports: [CommonModule, FormsModule],
   template: `
-    <div class="page-container">
-      <!-- Header -->
-      <header class="page-header">
-        <div class="header-left">
-          <a routerLink="/dashboard" class="back-btn">← Dashboard</a>
-          <h1>📊 Relatórios</h1>
-        </div>
-        <div class="header-right">
-          <span class="user-info">{{ currentUser()?.fullName }}</span>
-          <button class="btn-logout" (click)="logout()">Sair</button>
-        </div>
-      </header>
+    <div class="relatorios-page">
+      <div class="page-title">
+        <h1>Relatórios</h1>
+      </div>
       
       <!-- Tabs -->
       <div class="tabs">
@@ -184,67 +174,41 @@ import { RelatorioGlosasEvitadas, RegraEfetividade, ResumoMensal } from '../../c
     </div>
   `,
   styles: [`
-    .page-container {
-      min-height: 100vh;
-      background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
-      color: #fff;
+    .relatorios-page {
+      padding: var(--ap-page-padding);
     }
-    
-    .page-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 20px 40px;
-      background: rgba(0, 0, 0, 0.2);
-      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+
+    .page-title h1 {
+      font-size: 1.8rem;
+      font-weight: 700;
+      margin: 0 0 24px;
     }
-    
-    .header-left { display: flex; align-items: center; gap: 20px; }
-    .back-btn {
-      color: rgba(255, 255, 255, 0.6);
-      text-decoration: none;
-      padding: 8px 12px;
-      border-radius: 8px;
-      transition: all 0.2s;
-    }
-    .back-btn:hover { background: rgba(255, 255, 255, 0.1); color: #fff; }
-    .page-header h1 { margin: 0; font-size: 1.5rem; }
-    .header-right { display: flex; align-items: center; gap: 15px; }
-    .user-info { color: rgba(255, 255, 255, 0.7); }
-    .btn-logout {
-      padding: 8px 16px;
-      border-radius: 8px;
-      border: 1px solid rgba(255, 255, 255, 0.3);
-      background: transparent;
-      color: #fff;
-      cursor: pointer;
-    }
-    
+
     .tabs {
       display: flex;
       gap: 5px;
-      padding: 20px 40px;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      margin-bottom: 24px;
+      border-bottom: 1px solid var(--ap-border);
     }
-    
+
     .tab {
       padding: 12px 24px;
       border: none;
       background: rgba(255, 255, 255, 0.05);
-      color: rgba(255, 255, 255, 0.6);
+      color: var(--ap-text-muted);
       border-radius: 10px 10px 0 0;
       cursor: pointer;
       transition: all 0.2s;
     }
-    
+
     .tab:hover { background: rgba(255, 255, 255, 0.1); }
     .tab.active {
       background: rgba(0, 217, 255, 0.2);
-      color: #00d9ff;
-      border-bottom: 2px solid #00d9ff;
+      color: var(--ap-cyan);
+      border-bottom: 2px solid var(--ap-cyan);
     }
-    
-    .content { padding: 30px 40px; }
+
+    .content { max-width: 1200px; }
     
     .filters-row {
       display: flex;
@@ -376,9 +340,7 @@ import { RelatorioGlosasEvitadas, RegraEfetividade, ResumoMensal } from '../../c
 })
 export class RelatoriosComponent implements OnInit {
   private relatoriosService = inject(RelatoriosService);
-  private authService = inject(AuthService);
   
-  currentUser = this.authService.currentUser;
   isLoading = this.relatoriosService.isLoading;
   
   activeTab: 'glosas' | 'efetividade' | 'mensal' = 'glosas';
@@ -434,9 +396,5 @@ export class RelatoriosComponent implements OnInit {
   
   getTotalEconomizado(): number {
     return this.resumoMensal().reduce((sum, m) => sum + m.valorEconomizado, 0);
-  }
-  
-  logout(): void {
-    this.authService.logout();
   }
 }

@@ -1,0 +1,49 @@
+# ==================================================
+# AuditPlus — Docker Compose
+# API (.NET 10) + Frontend (Nginx)
+# ==================================================
+
+services:
+  # --- Backend API ---
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: auditplus-api
+    ports:
+      - "5000:8080"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Production
+      - ASPNETCORE_URLS=http://+:8080
+      - Jwt__SecretKey=${JWT_SECRET_KEY:?Set JWT_SECRET_KEY in .env}
+      - Jwt__Issuer=AuditPlus
+      - Jwt__Audience=AuditPlusWeb
+      - Jwt__ExpirationHours=8
+      - Cors__AllowedOrigins=http://localhost:4200,http://localhost:80
+      - Admin__DefaultPassword=${ADMIN_DEFAULT_PASSWORD:-Admin@Secure2024!}
+    volumes:
+      - auditplus-data:/app/data
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080/api/auth"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+
+  # --- Frontend (Nginx) ---
+  web:
+    image: nginx:alpine
+    container_name: auditplus-web
+    ports:
+      - "80:80"
+    volumes:
+      - ./auditplus-web/dist/auditplus-web/browser:/usr/share/nginx/html:ro
+      - ./nginx.conf:/etc/nginx/conf.d/default.conf:ro
+    depends_on:
+      api:
+        condition: service_healthy
+    restart: unless-stopped
+
+volumes:
+  auditplus-data:
+    driver: local

@@ -1,6 +1,7 @@
 using System.Security.Claims;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.RateLimiting;
 using AuditPlus.Application.DTOs;
 using AuditPlus.Application.Interfaces;
 
@@ -24,21 +25,29 @@ public class AuthController : ControllerBase
     }
     
     /// <summary>
-    /// Realiza login e retorna token JWT
+    /// Realiza login e retorna token JWT.
+    /// OWASP A04: Rate limited a 5 req/min por IP.
+    /// OWASP A09: Loga tentativas com IP.
     /// </summary>
     [HttpPost("login")]
     [AllowAnonymous]
+    [EnableRateLimiting("login")]
     public async Task<ActionResult<LoginResponse>> Login([FromBody] LoginRequest request)
     {
+        var clientIp = HttpContext.Connection.RemoteIpAddress?.ToString() ?? "unknown";
         var result = await _authService.LoginAsync(request);
         
         if (result == null)
         {
-            _logger.LogWarning("Tentativa de login falha para usuário: {Username}", request.Username);
+            _logger.LogWarning(
+                "SECURITY: Login falho para {Username} de IP {ClientIp}", 
+                request.Username, clientIp);
             return Unauthorized(new { message = "Usuário ou senha inválidos" });
         }
         
-        _logger.LogInformation("Login bem-sucedido: {Username}", request.Username);
+        _logger.LogInformation(
+            "SECURITY: Login bem-sucedido {Username} de IP {ClientIp}", 
+            request.Username, clientIp);
         return Ok(result);
     }
     

@@ -12,7 +12,6 @@ export interface ArquivoInfo {
   tamanho: number;
   status: 'ACEITO' | 'REJEITADO' | 'ERRO';
   motivo?: string;
-  caminho?: string;
 }
 
 export interface Lote {

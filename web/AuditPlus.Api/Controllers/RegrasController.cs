@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using AuditPlus.Domain.Entities;
 using AuditPlus.Domain.Interfaces;
@@ -11,6 +12,7 @@ namespace AuditPlus.Api.Controllers;
 /// </summary>
 [ApiController]
 [Route("api/[controller]")]
+[Authorize]
 public class RegrasController : ControllerBase
 {
     private readonly IRegraRepository _regraRepository;

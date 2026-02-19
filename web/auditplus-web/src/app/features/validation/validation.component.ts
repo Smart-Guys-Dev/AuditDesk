@@ -1,26 +1,16 @@
 import { Component, inject, OnInit, signal } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { RouterModule, Router, ActivatedRoute } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { ValidationService, ValidationResult, PreviewResult, ValidationStats, AplicarResult, HashResult } from '../../core/services/validation.service';
-import { AuthService } from '../../core/services/auth.service';
 
 @Component({
   selector: 'app-validation',
   standalone: true,
-  imports: [CommonModule, RouterModule],
+  imports: [],
   template: `
-    <div class="page-container">
-      <!-- Header -->
-      <header class="page-header">
-        <div class="header-left">
-          <a routerLink="/dashboard" class="back-btn">← Dashboard</a>
-          <h1>⚡ Validação de XMLs</h1>
-        </div>
-        <div class="header-right">
-          <span class="user-info">{{ currentUser()?.fullName }}</span>
-          <button class="btn-logout" (click)="logout()">Sair</button>
-        </div>
-      </header>
+    <div class="validation-page">
+      <div class="page-title">
+        <h1>Validação de XMLs</h1>
+      </div>
       
       <main class="content">
         <!-- Stats Cards -->
@@ -317,43 +307,17 @@ import { AuthService } from '../../core/services/auth.service';
     </div>
   `,
   styles: [`
-    .page-container {
-      min-height: 100vh;
-      background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
-      color: #fff;
+    .validation-page {
+      padding: var(--ap-page-padding);
     }
-    
-    .page-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 20px 40px;
-      background: rgba(0, 0, 0, 0.2);
-      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+
+    .page-title h1 {
+      font-size: 1.8rem;
+      font-weight: 700;
+      margin: 0 0 24px;
     }
-    
-    .header-left { display: flex; align-items: center; gap: 20px; }
-    .back-btn {
-      color: rgba(255, 255, 255, 0.6);
-      text-decoration: none;
-      padding: 8px 12px;
-      border-radius: 8px;
-      transition: all 0.2s;
-    }
-    .back-btn:hover { background: rgba(255, 255, 255, 0.1); color: #fff; }
-    .page-header h1 { margin: 0; font-size: 1.5rem; }
-    .header-right { display: flex; align-items: center; gap: 15px; }
-    .user-info { color: rgba(255, 255, 255, 0.7); }
-    .btn-logout {
-      padding: 8px 16px;
-      border-radius: 8px;
-      border: 1px solid rgba(255, 255, 255, 0.3);
-      background: transparent;
-      color: #fff;
-      cursor: pointer;
-    }
-    
-    .content { padding: 40px; max-width: 1200px; margin: 0 auto; }
+
+    .content { max-width: 1200px; margin: 0 auto; }
     
     .stats-grid {
       display: grid;
@@ -876,11 +840,9 @@ import { AuthService } from '../../core/services/auth.service';
 })
 export class ValidationComponent implements OnInit {
   private validationService = inject(ValidationService);
-  private authService = inject(AuthService);
   private router = inject(Router);
   private route = inject(ActivatedRoute);
   
-  currentUser = this.authService.currentUser;
   isProcessing = this.validationService.isProcessing;
   
   execucaoId = signal<number>(0);
@@ -1038,9 +1000,5 @@ export class ValidationComponent implements OnInit {
     if (!result) return;
     
     this.validationService.exportarZipPtu(result.execucaoId);
-  }
-  
-  logout(): void {
-    this.authService.logout();
   }
 }

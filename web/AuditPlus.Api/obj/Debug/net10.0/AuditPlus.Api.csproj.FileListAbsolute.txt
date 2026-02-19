@@ -79,3 +79,15 @@ C:\Users\pedro.freitas\OneDrive - UNIMEDCG\AuditPlusv2.0\web\AuditPlus.Api\obj\D
 C:\Users\pedro.freitas\OneDrive - UNIMEDCG\AuditPlusv2.0\web\AuditPlus.Api\obj\Debug\net10.0\AuditPlus.Api.pdb
 C:\Users\pedro.freitas\OneDrive - UNIMEDCG\AuditPlusv2.0\web\AuditPlus.Api\obj\Debug\net10.0\AuditPlus.Api.genruntimeconfig.cache
 C:\Users\pedro.freitas\OneDrive - UNIMEDCG\AuditPlusv2.0\web\AuditPlus.Api\obj\Debug\net10.0\ref\AuditPlus.Api.dll
+C:\Users\pedro.freitas\OneDrive - UNIMEDCG\AuditPlusv2.0\web\AuditPlus.Api\bin\Debug\net10.0\appsettings.Production.json
+C:\Users\pedro.freitas\OneDrive - UNIMEDCG\AuditPlusv2.0\web\AuditPlus.Api\bin\Debug\net10.0\appsettings.Oracle.json
+C:\Users\pedro.freitas\OneDrive - UNIMEDCG\AuditPlusv2.0\web\AuditPlus.Api\bin\Debug\net10.0\Oracle.EntityFrameworkCore.dll
+C:\Users\pedro.freitas\OneDrive - UNIMEDCG\AuditPlusv2.0\web\AuditPlus.Api\bin\Debug\net10.0\Oracle.ManagedDataAccess.dll
+C:\Users\pedro.freitas\OneDrive - UNIMEDCG\AuditPlusv2.0\web\AuditPlus.Api\bin\Debug\net10.0\System.Configuration.ConfigurationManager.dll
+C:\Users\pedro.freitas\OneDrive - UNIMEDCG\AuditPlusv2.0\web\AuditPlus.Api\bin\Debug\net10.0\System.Diagnostics.PerformanceCounter.dll
+C:\Users\pedro.freitas\OneDrive - UNIMEDCG\AuditPlusv2.0\web\AuditPlus.Api\bin\Debug\net10.0\System.DirectoryServices.Protocols.dll
+C:\Users\pedro.freitas\OneDrive - UNIMEDCG\AuditPlusv2.0\web\AuditPlus.Api\bin\Debug\net10.0\System.Security.Cryptography.ProtectedData.dll
+C:\Users\pedro.freitas\OneDrive - UNIMEDCG\AuditPlusv2.0\web\AuditPlus.Api\bin\Debug\net10.0\runtimes\win\lib\net8.0\System.Diagnostics.PerformanceCounter.dll
+C:\Users\pedro.freitas\OneDrive - UNIMEDCG\AuditPlusv2.0\web\AuditPlus.Api\bin\Debug\net10.0\runtimes\linux\lib\net8.0\System.DirectoryServices.Protocols.dll
+C:\Users\pedro.freitas\OneDrive - UNIMEDCG\AuditPlusv2.0\web\AuditPlus.Api\bin\Debug\net10.0\runtimes\osx\lib\net8.0\System.DirectoryServices.Protocols.dll
+C:\Users\pedro.freitas\OneDrive - UNIMEDCG\AuditPlusv2.0\web\AuditPlus.Api\bin\Debug\net10.0\runtimes\win\lib\net8.0\System.DirectoryServices.Protocols.dll

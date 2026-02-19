@@ -1,41 +1,31 @@
 import { Component, inject, OnInit, signal, computed } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { RouterModule } from '@angular/router';
 import { RegrasService } from '../../core/services/regras.service';
-import { AuthService } from '../../core/services/auth.service';
 import { Regra, RegraCreate, RuleCategory, RuleGroup } from '../../core/models/regra.model';
 
 @Component({
   selector: 'app-regras',
   standalone: true,
-  imports: [CommonModule, FormsModule, RouterModule],
+  imports: [FormsModule],
   template: `
-    <div class="page-container">
-      <!-- Header -->
-      <header class="page-header">
-        <div class="header-left">
-          <a routerLink="/dashboard" class="back-btn">← Dashboard</a>
-          <h1>📋 Regras de Auditoria</h1>
-        </div>
-        <div class="header-right">
-          <span class="user-info">{{ currentUser()?.fullName }}</span>
-          <button class="btn-logout" (click)="logout()">Sair</button>
-        </div>
-      </header>
+    <div class="regras-page">
+      <div class="page-title">
+        <h1>Regras de Auditoria</h1>
+      </div>
       
       <!-- Toolbar -->
       <div class="toolbar">
         <div class="search-box">
           <input 
             type="text" 
-            [(ngModel)]="searchTerm"
-            placeholder="🔍 Buscar regras..."
+            [ngModel]="searchTerm()"
+            (ngModelChange)="searchTerm.set($event)"
+            placeholder="Buscar regras..."
           >
         </div>
         
         <div class="filters">
-          <select [(ngModel)]="filterCategoria">
+          <select [ngModel]="filterCategoria()" (ngModelChange)="filterCategoria.set($event)">
             <option value="">Todas Categorias</option>
             <option value="GLOSA_GUIA">Glosa Guia</option>
             <option value="GLOSA_ITEM">Glosa Item</option>
@@ -43,7 +33,7 @@ import { Regra, RegraCreate, RuleCategory, RuleGroup } from '../../core/models/r
             <option value="OTIMIZACAO">Otimização</option>
           </select>
           
-          <select [(ngModel)]="filterAtivo">
+          <select [ngModel]="filterAtivo()" (ngModelChange)="filterAtivo.set($event)">
             <option value="">Todas</option>
             <option value="true">Ativas</option>
             <option value="false">Inativas</option>
@@ -178,136 +168,74 @@ import { Regra, RegraCreate, RuleCategory, RuleGroup } from '../../core/models/r
     </div>
   `,
   styles: [`
-    .page-container {
-      min-height: 100vh;
-      background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
-      color: #fff;
+    .regras-page {
+      padding: var(--ap-page-padding);
     }
-    
-    .page-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 20px 40px;
-      background: rgba(0, 0, 0, 0.2);
-      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+
+    .page-title h1 {
+      font-size: 1.8rem;
+      font-weight: 700;
+      margin: 0 0 24px;
     }
-    
-    .header-left { display: flex; align-items: center; gap: 20px; }
-    
-    .back-btn {
-      color: rgba(255, 255, 255, 0.6);
-      text-decoration: none;
-      padding: 8px 12px;
-      border-radius: 8px;
-      transition: all 0.2s;
-    }
-    
-    .back-btn:hover { background: rgba(255, 255, 255, 0.1); color: #fff; }
-    .page-header h1 { margin: 0; font-size: 1.5rem; }
-    .header-right { display: flex; align-items: center; gap: 15px; }
-    .user-info { color: rgba(255, 255, 255, 0.7); }
-    
-    .btn-logout {
-      padding: 8px 16px;
-      border-radius: 8px;
-      border: 1px solid rgba(255, 255, 255, 0.3);
-      background: transparent;
-      color: #fff;
-      cursor: pointer;
-    }
-    
+
     .toolbar {
       display: flex;
-      gap: 20px;
-      padding: 20px 40px;
+      gap: 16px;
+      margin-bottom: 16px;
       align-items: center;
       flex-wrap: wrap;
     }
-    
+
     .search-box { flex: 1; min-width: 200px; }
-    
+
     .search-box input {
       width: 100%;
       padding: 12px 16px;
-      border-radius: 10px;
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      background: rgba(255, 255, 255, 0.05);
-      color: #fff;
+      border-radius: var(--ap-radius-md);
+      border: 1px solid var(--ap-border);
+      background: var(--ap-bg-input);
+      color: var(--ap-text-primary);
       font-size: 1rem;
     }
-    
+
+    .search-box input:focus { outline: none; border-color: var(--ap-cyan); }
+
     .filters { display: flex; gap: 10px; }
-    
+
     .filters select {
       padding: 12px;
-      border-radius: 10px;
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      background: rgba(255, 255, 255, 0.05);
-      color: #fff;
+      border-radius: var(--ap-radius-md);
+      border: 1px solid var(--ap-border);
+      background: var(--ap-bg-input);
+      color: var(--ap-text-primary);
     }
-    
+
     .btn-add {
       padding: 12px 24px;
-      border-radius: 10px;
+      border-radius: var(--ap-radius-md);
       border: none;
-      background: linear-gradient(135deg, #00d9ff 0%, #00a8cc 100%);
+      background: var(--ap-gradient-accent);
       color: #fff;
       font-weight: 600;
       cursor: pointer;
-      transition: transform 0.2s;
+      transition: transform var(--ap-transition-fast);
     }
-    
+
     .btn-add:hover { transform: translateY(-2px); }
-    
+
     .stats-bar {
-      padding: 10px 40px;
+      padding: 8px 0;
       display: flex;
-      gap: 30px;
-      color: rgba(255, 255, 255, 0.6);
-      font-size: 0.9rem;
+      gap: 24px;
+      color: var(--ap-text-muted);
+      font-size: 0.85rem;
+      margin-bottom: 16px;
     }
-    
-    .table-container { padding: 0 40px 40px; }
-    
-    .data-table {
-      width: 100%;
-      border-collapse: collapse;
-      background: rgba(255, 255, 255, 0.03);
-      border-radius: 12px;
-      overflow: hidden;
-    }
-    
-    .data-table th {
-      background: rgba(0, 0, 0, 0.3);
-      padding: 15px;
-      text-align: left;
-      font-weight: 600;
-      color: rgba(255, 255, 255, 0.8);
-    }
-    
-    .data-table td {
-      padding: 15px;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-    }
-    
-    .data-table tr:hover { background: rgba(255, 255, 255, 0.02); }
-    .data-table tr.inactive { opacity: 0.5; }
-    .code { font-family: monospace; color: #00d9ff; }
+
+    .table-container { margin-bottom: 40px; }
     .priority { text-align: center; }
-    
-    .badge {
-      padding: 4px 10px;
-      border-radius: 20px;
-      font-size: 0.8rem;
-      font-weight: 500;
-    }
-    
-    .badge.glosa-guia { background: rgba(255, 82, 82, 0.2); color: #ff5252; }
-    .badge.glosa-item { background: rgba(255, 152, 0, 0.2); color: #ff9800; }
-    .badge.validacao { background: rgba(0, 230, 118, 0.2); color: #00e676; }
-    .badge.otimizacao { background: rgba(0, 217, 255, 0.2); color: #00d9ff; }
-    
+    .actions { display: flex; gap: 8px; }
+
     .status-toggle {
       padding: 6px 12px;
       border-radius: 20px;
@@ -316,152 +244,51 @@ import { Regra, RegraCreate, RuleCategory, RuleGroup } from '../../core/models/r
       font-size: 0.85rem;
       transition: all 0.2s;
     }
-    
+
     .status-toggle.active {
       background: rgba(0, 230, 118, 0.2);
-      color: #00e676;
+      color: var(--ap-green);
     }
-    
+
     .status-toggle:not(.active) {
       background: rgba(255, 255, 255, 0.1);
-      color: rgba(255, 255, 255, 0.5);
+      color: var(--ap-text-muted);
     }
-    
-    .actions { display: flex; gap: 8px; }
-    
-    .btn-icon {
-      background: none;
-      border: none;
-      font-size: 1.1rem;
-      cursor: pointer;
-      padding: 5px;
-      opacity: 0.7;
-      transition: opacity 0.2s;
-    }
-    
-    .btn-icon:hover { opacity: 1; }
-    
-    .loading, .empty {
-      text-align: center;
-      padding: 60px;
-      color: rgba(255, 255, 255, 0.5);
-    }
-    
-    /* Modal */
-    .modal-overlay {
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: rgba(0, 0, 0, 0.7);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      z-index: 1000;
-    }
-    
-    .modal-content {
-      background: linear-gradient(145deg, #1e2a45 0%, #16213e 100%);
-      border-radius: 20px;
-      padding: 30px;
-      width: 100%;
-      max-width: 500px;
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
-    }
-    
-    .modal-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 25px;
-    }
-    
-    .modal-header h2 { margin: 0; font-size: 1.4rem; }
-    
-    .modal-close {
-      background: none;
-      border: none;
-      color: #fff;
-      font-size: 2rem;
-      cursor: pointer;
-      opacity: 0.6;
-    }
-    
-    .modal-close:hover { opacity: 1; }
-    
+
     .modal-form { display: flex; flex-direction: column; gap: 20px; }
-    
-    .form-row { display: flex; flex-direction: column; gap: 8px; }
-    
-    .form-row label {
-      font-size: 0.9rem;
-      color: rgba(255, 255, 255, 0.7);
-    }
-    
-    .form-row input,
-    .form-row select,
-    .form-row textarea {
-      padding: 12px;
-      border-radius: 10px;
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      background: rgba(255, 255, 255, 0.05);
-      color: #fff;
-      font-size: 1rem;
-    }
-    
-    .form-row input:disabled {
-      opacity: 0.5;
-      cursor: not-allowed;
-    }
-    
-    .form-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 15px;
-    }
-    
-    .modal-actions {
-      display: flex;
-      gap: 15px;
-      justify-content: flex-end;
-      margin-top: 10px;
-    }
-    
+
     .btn-cancel {
       padding: 12px 24px;
-      border-radius: 10px;
-      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: var(--ap-radius-md);
+      border: 1px solid var(--ap-border-medium);
       background: transparent;
       color: #fff;
       cursor: pointer;
     }
-    
+
     .btn-save {
       padding: 12px 24px;
-      border-radius: 10px;
+      border-radius: var(--ap-radius-md);
       border: none;
-      background: linear-gradient(135deg, #00d9ff 0%, #00a8cc 100%);
+      background: var(--ap-gradient-accent);
       color: #fff;
       font-weight: 600;
       cursor: pointer;
+      transition: transform var(--ap-transition-fast);
     }
-    
+
     .btn-save:hover { transform: translateY(-1px); }
   `]
 })
 export class RegrasComponent implements OnInit {
   private regrasService = inject(RegrasService);
-  private authService = inject(AuthService);
   
   regras = this.regrasService.regras;
   isLoading = this.regrasService.isLoading;
-  currentUser = this.authService.currentUser;
   
-  searchTerm = '';
-  filterCategoria = '';
-  filterAtivo = '';
+  searchTerm = signal('');
+  filterCategoria = signal('');
+  filterAtivo = signal('');
   
   showModal = false;
   editingRegra: Regra | null = null;
@@ -480,20 +307,23 @@ export class RegrasComponent implements OnInit {
   regrasFiltradas = computed(() => {
     let result = this.regras();
     
-    if (this.searchTerm) {
-      const term = this.searchTerm.toLowerCase();
+    const term = this.searchTerm();
+    if (term) {
+      const lowerTerm = term.toLowerCase();
       result = result.filter(r => 
-        r.codigo.toLowerCase().includes(term) ||
-        r.nome.toLowerCase().includes(term)
+        r.codigo.toLowerCase().includes(lowerTerm) ||
+        r.nome.toLowerCase().includes(lowerTerm)
       );
     }
     
-    if (this.filterCategoria) {
-      result = result.filter(r => r.categoria === this.filterCategoria);
+    const cat = this.filterCategoria();
+    if (cat) {
+      result = result.filter(r => r.categoria === cat);
     }
     
-    if (this.filterAtivo !== '') {
-      const isAtivo = this.filterAtivo === 'true';
+    const ativo = this.filterAtivo();
+    if (ativo !== '') {
+      const isAtivo = ativo === 'true';
       result = result.filter(r => r.ativo === isAtivo);
     }
     
@@ -583,9 +413,5 @@ export class RegrasComponent implements OnInit {
     if (confirm(`Tem certeza que deseja excluir a regra "${regra.codigo}"?`)) {
       this.regrasService.delete(regra.id).subscribe();
     }
-  }
-  
-  logout(): void {
-    this.authService.logout();
   }
 }

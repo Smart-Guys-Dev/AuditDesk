@@ -26,9 +26,7 @@ import { AuthService } from '../../core/services/auth.service';
           <!-- Ícone do App (Logo Vetorial Personalizado) -->
           <!-- Ícone do App (Logo Ribbon A+) -->
           <div class="app-icon-3d">
-          <div class="app-icon-3d">
             <img src="logo-auditplus-new.png" alt="Logo AuditPlus" class="app-icon-img">
-          </div>
           </div>
           
           <!-- Nome e tagline -->

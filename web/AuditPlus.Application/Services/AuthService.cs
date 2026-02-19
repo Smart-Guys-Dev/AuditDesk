@@ -1,6 +1,7 @@
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
+using System.Text.RegularExpressions;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using AuditPlus.Application.DTOs;
@@ -18,11 +19,16 @@ namespace AuditPlus.Application.Services;
 public class AuthService : IAuthService
 {
     private readonly IUserRepository _userRepository;
+    private readonly IPasswordHasher _passwordHasher;
     private readonly JwtSettings _jwtSettings;
     
-    public AuthService(IUserRepository userRepository, IOptions<JwtSettings> jwtSettings)
+    public AuthService(
+        IUserRepository userRepository,
+        IPasswordHasher passwordHasher,
+        IOptions<JwtSettings> jwtSettings)
     {
         _userRepository = userRepository;
+        _passwordHasher = passwordHasher;
         _jwtSettings = jwtSettings.Value;
     }
     
@@ -39,7 +45,7 @@ public class AuthService : IAuthService
             return null;
             
         // Verificar senha
-        if (!BCrypt.Net.BCrypt.Verify(request.Password, user.PasswordHash))
+        if (!_passwordHasher.VerifyPassword(request.Password, user.PasswordHash))
         {
             // Incrementar tentativas falhas
             user.FailedLoginAttempts++;
@@ -76,12 +82,18 @@ public class AuthService : IAuthService
         // Verificar se username já existe
         if (await _userRepository.UsernameExistsAsync(request.Username))
             return null;
+        
+        // OWASP A07: Validar força da senha
+        var passwordErrors = ValidatePasswordStrength(request.Password);
+        if (passwordErrors.Count > 0)
+            throw new ArgumentException(
+                $"Senha fraca: {string.Join("; ", passwordErrors)}");
             
         // Criar usuário
         var user = new User
         {
             Username = request.Username,
-            PasswordHash = BCrypt.Net.BCrypt.HashPassword(request.Password),
+            PasswordHash = _passwordHasher.HashPassword(request.Password),
             FullName = request.FullName,
             Email = request.Email,
             Role = Enum.Parse<Domain.Enums.UserRole>(request.Role, ignoreCase: true),
@@ -126,11 +138,17 @@ public class AuthService : IAuthService
             return false;
             
         // Verificar senha atual
-        if (!BCrypt.Net.BCrypt.Verify(request.CurrentPassword, user.PasswordHash))
+        if (!_passwordHasher.VerifyPassword(request.CurrentPassword, user.PasswordHash))
             return false;
+        
+        // OWASP A07: Validar força da nova senha
+        var passwordErrors = ValidatePasswordStrength(request.NewPassword);
+        if (passwordErrors.Count > 0)
+            throw new ArgumentException(
+                $"Senha fraca: {string.Join("; ", passwordErrors)}");
             
         // Atualizar senha
-        user.PasswordHash = BCrypt.Net.BCrypt.HashPassword(request.NewPassword);
+        user.PasswordHash = _passwordHasher.HashPassword(request.NewPassword);
         await _userRepository.UpdateAsync(user);
         
         return true;
@@ -191,5 +209,33 @@ public class AuthService : IAuthService
         );
         
         return new JwtSecurityTokenHandler().WriteToken(token);
+    }
+    
+    /// <summary>
+    /// OWASP A07: Valida força da senha.
+    /// Mínimo 8 caracteres, maiúscula, minúscula, dígito e especial.
+    /// </summary>
+    private static List<string> ValidatePasswordStrength(string password)
+    {
+        var errors = new List<string>();
+        
+        if (string.IsNullOrWhiteSpace(password))
+        {
+            errors.Add("Senha não pode ser vazia");
+            return errors;
+        }
+        
+        if (password.Length < 8)
+            errors.Add("Mínimo 8 caracteres");
+        if (!Regex.IsMatch(password, @"[A-Z]"))
+            errors.Add("Deve conter letra maiúscula");
+        if (!Regex.IsMatch(password, @"[a-z]"))
+            errors.Add("Deve conter letra minúscula");
+        if (!Regex.IsMatch(password, @"[0-9]"))
+            errors.Add("Deve conter dígito");
+        if (!Regex.IsMatch(password, @"[!@#$%^&*()_+\-=\[\]{};':""\\|,.<>\/?]"))
+            errors.Add("Deve conter caractere especial (!@#$%...)");
+        
+        return errors;
     }
 }

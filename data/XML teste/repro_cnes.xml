@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ptu:loteGuias xmlns:ptu="http://ptu.unimed.coop.br/schemas/V3_0">
+  <ptu:guiaConsulta>
+    <ptu:dadosExecutante>
+      <ptu:UnimedPrestador>
+        <ptu:cd_Uni_Prest>51</ptu:cd_Uni_Prest>
+        <ptu:cd_Prest>8150</ptu:cd_Prest>
+      </ptu:UnimedPrestador>
+      <ptu:nome>UNIMED CAMPO GRANDE COOP TRAB MEDICOS</ptu:nome>
+      <ptu:CPF_CNPJ>
+        <ptu:cd_cnpj>03315918000118</ptu:cd_cnpj>
+      </ptu:CPF_CNPJ>
+      <ptu:CNES>6750842</ptu:CNES>
+    </ptu:dadosExecutante>
+  </ptu:guiaConsulta>
+</ptu:loteGuias>

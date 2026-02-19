@@ -742,6 +742,10 @@
             "Microsoft.EntityFrameworkCore.Sqlite": {
               "target": "Package",
               "version": "[10.0.2, )"
+            },
+            "Oracle.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[10.23.26100, )"
             }
           },
           "imports": [
@@ -1062,6 +1066,9 @@
             "projectReferences": {
               "C:\\Users\\pedro.freitas\\OneDrive - UNIMEDCG\\AuditPlusv2.0\\web\\AuditPlus.Application\\AuditPlus.Application.csproj": {
                 "projectPath": "C:\\Users\\pedro.freitas\\OneDrive - UNIMEDCG\\AuditPlusv2.0\\web\\AuditPlus.Application\\AuditPlus.Application.csproj"
+              },
+              "C:\\Users\\pedro.freitas\\OneDrive - UNIMEDCG\\AuditPlusv2.0\\web\\AuditPlus.Domain\\AuditPlus.Domain.csproj": {
+                "projectPath": "C:\\Users\\pedro.freitas\\OneDrive - UNIMEDCG\\AuditPlusv2.0\\web\\AuditPlus.Domain\\AuditPlus.Domain.csproj"
               }
             }
           }
@@ -1085,6 +1092,10 @@
             "Microsoft.NET.Test.Sdk": {
               "target": "Package",
               "version": "[17.14.1, )"
+            },
+            "Moq": {
+              "target": "Package",
+              "version": "[4.20.72, )"
             },
             "coverlet.collector": {
               "target": "Package",

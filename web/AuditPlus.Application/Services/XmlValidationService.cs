@@ -1,5 +1,6 @@
 using System.IO.Compression;
 using System.Text.Json;
+using System.Xml;
 using System.Xml.Linq;
 using AuditPlus.Domain.Entities;
 using AuditPlus.Infrastructure.Data;
@@ -11,6 +12,7 @@ namespace AuditPlus.Application.Services;
 /// <summary>
 /// Serviço de validação e correção de arquivos XML.
 /// Implementa o motor de regras do AuditPlus.
+/// OWASP A03: XML parsing com DTD/XXE desabilitado.
 /// </summary>
 public class XmlValidationService
 {
@@ -19,6 +21,15 @@ public class XmlValidationService
     
     // Namespace PTU usado nos XMLs TISS
     private static readonly XNamespace PtuNs = "http://www.ans.gov.br/padroes/tiss/schemas";
+    
+    // OWASP A03: Settings seguros para parsing XML (sem DTD/XXE)
+    private static readonly XmlReaderSettings SafeXmlSettings = new()
+    {
+        DtdProcessing = DtdProcessing.Prohibit,
+        XmlResolver = null,
+        MaxCharactersFromEntities = 0,
+        MaxCharactersInDocument = 50_000_000 // 50MB max
+    };
     
     public XmlValidationService(AppDbContext context, ILogger<XmlValidationService> logger)
     {
@@ -137,8 +148,9 @@ public class XmlValidationService
         var correcoesAplicadas = 0;
         var nomeArquivo = Path.GetFileName(caminhoArquivo);
         
-        // Carregar XML
-        var doc = XDocument.Load(caminhoArquivo);
+        // Carregar XML com settings seguros (OWASP A03: sem DTD/XXE)
+        using var reader = XmlReader.Create(caminhoArquivo, SafeXmlSettings);
+        var doc = XDocument.Load(reader);
         var raiz = doc.Root;
         
         if (raiz == null)

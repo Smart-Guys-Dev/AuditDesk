@@ -1,6 +1,7 @@
 using System.Security.Cryptography;
 using System.Text;
 using System.Text.RegularExpressions;
+using System.Xml;
 using System.Xml.Linq;
 using Microsoft.Extensions.Logging;
 
@@ -9,10 +10,19 @@ namespace AuditPlus.Application.Services;
 /// <summary>
 /// Serviço de cálculo de hash para XMLs PTU.
 /// Porta direta da lógica de src/business/processing/hash_calculator.py
+/// OWASP A03: XML parsing com DTD/XXE desabilitado.
 /// </summary>
 public class HashCalculatorService
 {
     private readonly ILogger<HashCalculatorService> _logger;
+    
+    // OWASP A03: Settings seguros para parsing XML
+    private static readonly XmlReaderSettings SafeXmlSettings = new()
+    {
+        DtdProcessing = DtdProcessing.Prohibit,
+        XmlResolver = null,
+        MaxCharactersFromEntities = 0
+    };
 
     public HashCalculatorService(ILogger<HashCalculatorService> logger)
     {
@@ -35,8 +45,9 @@ public class HashCalculatorService
 
         try
         {
-            // Parse do XML
-            var doc = XDocument.Parse(xmlContent);
+            // Parse seguro do XML (OWASP A03)
+            using var reader = XmlReader.Create(new StringReader(xmlContent), SafeXmlSettings);
+            var doc = XDocument.Load(reader);
             
             // Localizar bloco <GuiaCobrancaUtilizacao> usando XPath equivalente
             // XPath original: //*[local-name()='GuiaCobrancaUtilizacao']
@@ -111,7 +122,8 @@ public class HashCalculatorService
     {
         try
         {
-            var doc = XDocument.Parse(xmlContent);
+            using var reader = XmlReader.Create(new StringReader(xmlContent), SafeXmlSettings);
+            var doc = XDocument.Load(reader);
             
             // Localizar tag <hash> dentro de GuiaCobrancaUtilizacao
             var guiaNode = doc.Descendants()

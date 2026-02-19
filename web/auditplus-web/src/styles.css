@@ -1,3 +1,70 @@
+/* ===================================================
+   AuditPlus — Global Design System
+   =================================================== */
+
+/* --- CSS Custom Properties (Design Tokens) --- */
+:root {
+  /* Brand Colors */
+  --ap-green: #00e676;
+  --ap-green-dark: #00c853;
+  --ap-cyan: #00d9ff;
+  --ap-cyan-dark: #00a8cc;
+  --ap-orange: #ff9800;
+  --ap-red: #ff5252;
+
+  /* Background */
+  --ap-bg-primary: #1a1a2e;
+  --ap-bg-secondary: #16213e;
+  --ap-bg-tertiary: #0f3460;
+  --ap-bg-card: rgba(255, 255, 255, 0.03);
+  --ap-bg-card-hover: rgba(255, 255, 255, 0.06);
+  --ap-bg-input: rgba(255, 255, 255, 0.05);
+  --ap-bg-overlay: rgba(0, 0, 0, 0.7);
+
+  /* Text */
+  --ap-text-primary: #ffffff;
+  --ap-text-secondary: rgba(255, 255, 255, 0.7);
+  --ap-text-muted: rgba(255, 255, 255, 0.5);
+  --ap-text-faint: rgba(255, 255, 255, 0.3);
+
+  /* Borders */
+  --ap-border: rgba(255, 255, 255, 0.1);
+  --ap-border-light: rgba(255, 255, 255, 0.05);
+  --ap-border-medium: rgba(255, 255, 255, 0.2);
+  --ap-border-strong: rgba(255, 255, 255, 0.3);
+
+  /* Gradients */
+  --ap-gradient-bg: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+  --ap-gradient-accent: linear-gradient(135deg, #00d9ff 0%, #00a8cc 100%);
+  --ap-gradient-modal: linear-gradient(145deg, #1e2a45 0%, #16213e 100%);
+
+  /* Spacing */
+  --ap-page-padding: 40px;
+  --ap-radius-sm: 8px;
+  --ap-radius-md: 10px;
+  --ap-radius-lg: 12px;
+  --ap-radius-xl: 20px;
+
+  /* Typography */
+  --ap-font-family:
+    'Inter', 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, Oxygen, Ubuntu, sans-serif;
+  --ap-font-size-xs: 0.75rem;
+  --ap-font-size-sm: 0.85rem;
+  --ap-font-size-base: 1rem;
+  --ap-font-size-lg: 1.2rem;
+  --ap-font-size-xl: 1.4rem;
+  --ap-font-size-2xl: 1.5rem;
+
+  /* Sidebar */
+  --ap-sidebar-width: 260px;
+  --ap-sidebar-collapsed-width: 72px;
+
+  /* Transitions */
+  --ap-transition-fast: 0.2s ease;
+  --ap-transition-normal: 0.3s ease;
+}
+
+/* --- Reset --- */
 * {
   margin: 0;
   padding: 0;
@@ -6,26 +73,19 @@
 
 html,
 body {
-  font-family:
-    'Segoe UI',
-    -apple-system,
-    BlinkMacSystemFont,
-    Roboto,
-    Oxygen,
-    Ubuntu,
-    sans-serif;
-  background: #1a1a2e;
-  color: #fff;
+  font-family: var(--ap-font-family);
+  background: var(--ap-bg-primary);
+  color: var(--ap-text-primary);
   min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-/* Reset de links */
 a {
   color: inherit;
   text-decoration: none;
 }
 
-/* Forms */
 input,
 button,
 select,
@@ -33,7 +93,7 @@ textarea {
   font-family: inherit;
 }
 
-/* Scrollbar customizada */
+/* --- Scrollbar --- */
 ::-webkit-scrollbar {
   width: 8px;
 }
@@ -49,4 +109,278 @@ textarea {
 
 ::-webkit-scrollbar-thumb:hover {
   background: rgba(255, 255, 255, 0.3);
+}
+
+/* --- Buttons --- */
+.btn-primary {
+  padding: 12px 24px;
+  border-radius: var(--ap-radius-md);
+  border: none;
+  background: var(--ap-gradient-accent);
+  color: var(--ap-text-primary);
+  font-weight: 600;
+  cursor: pointer;
+  font-size: var(--ap-font-size-base);
+  transition:
+    transform var(--ap-transition-fast),
+    box-shadow var(--ap-transition-fast);
+}
+
+.btn-primary:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(0, 217, 255, 0.3);
+}
+
+.btn-primary:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.btn-secondary {
+  padding: 12px 24px;
+  border-radius: var(--ap-radius-md);
+  border: 1px solid var(--ap-border-medium);
+  background: transparent;
+  color: var(--ap-text-primary);
+  cursor: pointer;
+  transition: background var(--ap-transition-fast);
+}
+
+.btn-secondary:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.btn-icon {
+  background: none;
+  border: none;
+  font-size: 1.1rem;
+  cursor: pointer;
+  padding: 5px;
+  opacity: 0.7;
+  transition: opacity var(--ap-transition-fast);
+}
+
+.btn-icon:hover {
+  opacity: 1;
+}
+
+/* --- Data Tables --- */
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: var(--ap-bg-card);
+  border-radius: var(--ap-radius-lg);
+  overflow: hidden;
+}
+
+.data-table th {
+  background: rgba(0, 0, 0, 0.3);
+  padding: 15px;
+  text-align: left;
+  font-weight: 600;
+  color: var(--ap-text-secondary);
+  font-size: var(--ap-font-size-sm);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.data-table td {
+  padding: 15px;
+  border-bottom: 1px solid var(--ap-border-light);
+}
+
+.data-table tr:hover {
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.data-table tr.inactive {
+  opacity: 0.5;
+}
+
+/* --- Badges --- */
+.badge {
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: var(--ap-font-size-xs);
+  font-weight: 500;
+  display: inline-block;
+}
+
+.badge.glosa-guia {
+  background: rgba(255, 82, 82, 0.2);
+  color: var(--ap-red);
+}
+.badge.glosa-item {
+  background: rgba(255, 152, 0, 0.2);
+  color: var(--ap-orange);
+}
+.badge.validacao {
+  background: rgba(0, 230, 118, 0.2);
+  color: var(--ap-green);
+}
+.badge.otimizacao {
+  background: rgba(0, 217, 255, 0.2);
+  color: var(--ap-cyan);
+}
+
+.badge.success {
+  background: rgba(0, 230, 118, 0.2);
+  color: var(--ap-green);
+}
+.badge.warning {
+  background: rgba(255, 152, 0, 0.2);
+  color: var(--ap-orange);
+}
+.badge.error {
+  background: rgba(255, 82, 82, 0.2);
+  color: var(--ap-red);
+}
+
+/* --- Modal --- */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: var(--ap-bg-overlay);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  background: var(--ap-gradient-modal);
+  border-radius: var(--ap-radius-xl);
+  padding: 30px;
+  width: 100%;
+  max-width: 500px;
+  border: 1px solid var(--ap-border);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 25px;
+}
+
+.modal-header h2 {
+  margin: 0;
+  font-size: var(--ap-font-size-xl);
+}
+
+.modal-close {
+  background: none;
+  border: none;
+  color: var(--ap-text-primary);
+  font-size: 2rem;
+  cursor: pointer;
+  opacity: 0.6;
+  transition: opacity var(--ap-transition-fast);
+}
+
+.modal-close:hover {
+  opacity: 1;
+}
+
+.modal-actions {
+  display: flex;
+  gap: 15px;
+  justify-content: flex-end;
+  margin-top: 10px;
+}
+
+/* --- Forms --- */
+.form-row {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.form-row label {
+  font-size: var(--ap-font-size-sm);
+  color: var(--ap-text-secondary);
+}
+
+.form-row input,
+.form-row select,
+.form-row textarea {
+  padding: 12px;
+  border-radius: var(--ap-radius-md);
+  border: 1px solid var(--ap-border);
+  background: var(--ap-bg-input);
+  color: var(--ap-text-primary);
+  font-size: var(--ap-font-size-base);
+  transition: border-color var(--ap-transition-fast);
+}
+
+.form-row input:focus,
+.form-row select:focus,
+.form-row textarea:focus {
+  outline: none;
+  border-color: var(--ap-cyan);
+}
+
+.form-row input:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
+}
+
+/* --- Spinner --- */
+.spinner {
+  width: 50px;
+  height: 50px;
+  border: 4px solid rgba(255, 255, 255, 0.2);
+  border-top-color: var(--ap-cyan);
+  border-radius: 50%;
+  animation: ap-spin 1s linear infinite;
+}
+
+@keyframes ap-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* --- Utility classes --- */
+.loading,
+.empty {
+  text-align: center;
+  padding: 60px;
+  color: var(--ap-text-muted);
+}
+
+.code {
+  font-family: 'Cascadia Code', 'Fira Code', monospace;
+  color: var(--ap-cyan);
+}
+
+.text-muted {
+  color: var(--ap-text-muted);
+}
+
+.text-secondary {
+  color: var(--ap-text-secondary);
+}
+
+.text-success {
+  color: var(--ap-green);
+}
+
+.text-warning {
+  color: var(--ap-orange);
+}
+
+.text-error {
+  color: var(--ap-red);
 }
