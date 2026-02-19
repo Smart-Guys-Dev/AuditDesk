@@ -1,0 +1,22 @@
+# --- .NET ---
+bin/
+obj/
+*.user
+*.suo
+.vs/
+*.dll
+*.exe
+appsettings.Development.json
+
+# --- Angular ---
+node_modules/
+dist/
+.angular/
+connect.lock
+coverage/
+
+# --- VS Code ---
+.vscode/
+
+# --- Environment ---
+.env
