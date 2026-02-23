@@ -15,6 +15,7 @@ from .execution_log import ExecutionLog
 from .file_log import FileLog
 from .roi_metrics import ROIMetrics
 from .alert_metrics import AlertMetrics
+from .audit_log import AuditLog
 
 __all__ = [
     'Base',
@@ -22,5 +23,6 @@ __all__ = [
     'ExecutionLog',
     'FileLog',
     'ROIMetrics',
-    'AlertMetrics'
+    'AlertMetrics',
+    'AuditLog'
 ]

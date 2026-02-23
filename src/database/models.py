@@ -14,7 +14,8 @@ from src.models.domain import (
     ExecutionLog,
     FileLog,
     ROIMetrics,
-    AlertMetrics
+    AlertMetrics,
+    AuditLog
 )
 
 # Re-export tudo para manter compatibilidade
@@ -24,5 +25,7 @@ __all__ = [
     'ExecutionLog',
     'FileLog',
     'ROIMetrics',
-    'AlertMetrics'
+    'AlertMetrics',
+    'AuditLog'
 ]
+

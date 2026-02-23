@@ -17,7 +17,7 @@ class PasswordManager:
     """
     
     @staticmethod
-    def hash_password(password: str) -> bytes:
+    def hash_password(password: str) -> str:
         """
         Cria hash seguro da senha usando bcrypt.
         
@@ -25,7 +25,7 @@ class PasswordManager:
             password: Senha em texto plano
             
         Returns:
-            Hash bcrypt da senha (bytes)
+            Hash bcrypt da senha (string)
         """
         if not password:
             raise ValueError("Senha não pode ser vazia")
@@ -35,7 +35,7 @@ class PasswordManager:
         hashed = bcrypt.hashpw(password_bytes, bcrypt.gensalt(rounds=12))
         
         logger.debug("Senha hasheada com bcrypt (salt único gerado)")
-        return hashed
+        return hashed.decode('utf-8')
     
     @staticmethod
     def verify_password(password: str, password_hash: bytes) -> bool:

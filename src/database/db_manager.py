@@ -1,9 +1,11 @@
 import os
+from dotenv import load_dotenv
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker, scoped_session
 from datetime import datetime
 from .models import Base, ExecutionLog, FileLog, User, ROIMetrics
 from .models_fatura import Fatura, FaturaHistorico  # Modelos de faturas para consulta
+from .models_rules import AuditRule, AuditRuleHistory, AuditRuleList  # Modelos de regras
 
 # ✅ SEGURANÇA: Importar gerenciador seguro de senhas
 from src.infrastructure.security.password_manager import PasswordManager
@@ -13,12 +15,28 @@ import logging
 
 logger = logging.getLogger(__name__)
 
-# Nome do arquivo do banco de dados
-DB_FILE = "audit_plus.db"
-DATABASE_URL = f"sqlite:///{DB_FILE}"
+# Carregar variáveis de ambiente
+load_dotenv()
 
-# Engine global
-engine = create_engine(DATABASE_URL, echo=False)
+# ======== Configuração Dual-Provider ========
+DB_PROVIDER = os.getenv("DB_PROVIDER", "sqlite").lower().strip()
+
+if DB_PROVIDER == "postgresql":
+    # PostgreSQL
+    PG_HOST = os.getenv("POSTGRES_HOST", "localhost")
+    PG_PORT = os.getenv("POSTGRES_PORT", "5432")
+    PG_DB   = os.getenv("POSTGRES_DB", "audit_plus")
+    PG_USER = os.getenv("POSTGRES_USER", "postgres")
+    PG_PASS = os.getenv("POSTGRES_PASSWORD", "")
+    DATABASE_URL = f"postgresql+psycopg2://{PG_USER}:{PG_PASS}@{PG_HOST}:{PG_PORT}/{PG_DB}"
+    engine = create_engine(DATABASE_URL, echo=False, pool_size=10, max_overflow=20, pool_pre_ping=True)
+    logger.info(f"Banco de dados: PostgreSQL em {PG_HOST}:{PG_PORT}/{PG_DB}")
+else:
+    # SQLite (fallback)
+    DB_FILE = os.getenv("DATABASE_PATH", "audit_plus.db")
+    DATABASE_URL = f"sqlite:///{DB_FILE}"
+    engine = create_engine(DATABASE_URL, echo=False)
+    logger.info(f"Banco de dados: SQLite em {os.path.abspath(DB_FILE)}")
 
 # Session Factory
 SessionFactory = sessionmaker(bind=engine)
@@ -27,7 +45,7 @@ Session = scoped_session(SessionFactory)
 def init_db():
     """Cria as tabelas no banco de dados se não existirem e cria usuário admin."""
     Base.metadata.create_all(engine)
-    logger.info(f"Banco de dados inicializado em: {os.path.abspath(DB_FILE)}")
+    logger.info(f"Banco de dados inicializado ({DB_PROVIDER})")
     
     # ✅ SEGURANÇA: Criar usuário admin sem senha padrão
     session = get_session()
@@ -269,7 +287,7 @@ def get_all_users():
     finally:
         session.close()
 
-def create_user(username, password, full_name, role='AUDITOR'):
+def create_user(username, password, full_name, role='AUDITOR', email=None, birth_date=None):
     """
     Cria um novo usuário.
     
@@ -301,6 +319,8 @@ def create_user(username, password, full_name, role='AUDITOR'):
             username=username,
             password_hash=pwd_hash,
             full_name=full_name,
+            email=email,
+            birth_date=birth_date,
             role=role
         )
         session.add(new_user)
@@ -324,7 +344,7 @@ def create_user(username, password, full_name, role='AUDITOR'):
     finally:
         session.close()
 
-def update_user(user_id, full_name, role, is_active):
+def update_user(user_id, full_name, role, is_active, email=None, birth_date=None):
     """Atualiza dados de um usuário (exceto senha)."""
     session = get_session()
     try:
@@ -335,6 +355,8 @@ def update_user(user_id, full_name, role, is_active):
         user.full_name = full_name
         user.role = role
         user.is_active = is_active
+        user.email = email
+        user.birth_date = birth_date
         session.commit()
         return True, "Usuário atualizado com sucesso."
     except Exception as e:

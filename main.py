@@ -1,17 +1,15 @@
 import sys
 from PyQt6.QtWidgets import QApplication
-import sys
-from PyQt6.QtWidgets import QApplication
 from src.main_window import MainWindow
-from src.logger_config import setup_logging
+from src.infrastructure.logging.logger_config import setup_logging
 from src.database import db_manager
-from src.exception_handler import install_exception_handler
-from src.login_window import LoginWindow
+from src.infrastructure.workers.exception_handler import install_exception_handler
+from src.views.login_window import LoginWindow
 
 def main():
     # 1. Configurar Logging
     logger = setup_logging()
-    logger.info("=== Iniciando Audit+ v2.0 ===")
+    logger.info("=== Iniciando Audit+ v3.0 ===")
     
     # 2. Instalar Tratamento Global de Erros
     install_exception_handler()
@@ -22,7 +20,7 @@ def main():
     # 4. Migração e Sincronização Automática de Regras
     try:
         from src.database.rule_migrator import run_migration
-        logger.info("Verificando atualizações nas regras (JSON -> SQLite)...")
+        logger.info("Verificando atualizações nas regras (JSON -> DB)...")
         run_migration()
     except Exception as e:
         logger.error(f"Erro na migração automática de regras: {e}")

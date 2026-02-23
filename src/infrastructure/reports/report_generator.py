@@ -8,7 +8,9 @@ from openpyxl import utils as openpyxl_utils
 from datetime import datetime
 from typing import List, Dict, Any, Optional, Tuple
 
-logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - (report_generator) - %(message)s')
+
+# Configuração de logger específico para o módulo
+logger = logging.getLogger(__name__)
 
 # --- CONSTANTES ---
 REGIME_INTERNACAO_MAP = {
@@ -60,6 +62,7 @@ def _formatar_valor_para_numero(valor_str: Optional[str]) -> float:
         return float(valor_corrigido_str)
     except (ValueError, TypeError):
         logging.warning(f"Não foi possível converter valor '{valor_str}' para número. Usando 0.0.")
+        logger.warning(f"Não foi possível converter valor '{valor_str}' para número. Usando 0.0.")
         return 0.0
 
 def _formatar_unimed_destino(cod_unimed: Optional[str], nome_unimed: Optional[str]) -> str:
@@ -83,7 +86,7 @@ def gerar_relatorio_distribuicao(plano_distribuicao: Dict[str, Any],
     NOVO: Também salva uma cópia no histórico e auto-importa para o banco de faturas.
     """
     if not plano_distribuicao:
-        logging.error("Plano de distribuição está vazio. Relatório Excel não gerado.")
+        logger.error("Plano de distribuição está vazio. Relatório Excel não gerado.")
         return False, None
 
     nome_arquivo_excel = "DISTRIBUIÇÃO.xlsx"
@@ -97,7 +100,7 @@ def gerar_relatorio_distribuicao(plano_distribuicao: Dict[str, Any],
         sheet = workbook.active
         
         if sheet is None:
-            logging.error("Não foi possível obter a planilha ativa do novo workbook Excel.")
+            logger.error("Não foi possível obter a planilha ativa do novo workbook Excel.")
             return False, None
         
         sheet.title = "Distribuição Faturas Audit+"
@@ -160,7 +163,7 @@ def gerar_relatorio_distribuicao(plano_distribuicao: Dict[str, Any],
 
         # Salvar na pasta de distribuição
         workbook.save(filename=caminho_completo_excel)
-        logging.info(f"Relatório '{nome_arquivo_excel}' gerado com sucesso em '{caminho_pasta_distribuicao}'.")
+        logger.info(f"Relatório '{nome_arquivo_excel}' gerado com sucesso em '{caminho_pasta_distribuicao}'.")
         
         # ✅ NOVO: Salvar cópia no histórico com timestamp
         try:
@@ -172,29 +175,29 @@ def gerar_relatorio_distribuicao(plano_distribuicao: Dict[str, Any],
             caminho_historico = os.path.join(historico_dir, nome_historico)
             
             workbook.save(filename=caminho_historico)
-            logging.info(f"📁 Cópia salva no histórico: {caminho_historico}")
+            logger.info(f"📁 Cópia salva no histórico: {caminho_historico}")
         except Exception as e:
-            logging.warning(f"Não foi possível salvar cópia no histórico: {e}")
+            logger.warning(f"Não foi possível salvar cópia no histórico: {e}")
         
         # ✅ NOVO: Auto-importar faturas para o banco de consulta
         try:
             from src.database.fatura_repository import importar_lote
             stats = importar_lote(faturas_para_importar, f"Distribuição {datetime.now().strftime('%d/%m/%Y')}")
-            logging.info(f"📊 {stats['criadas']} faturas criadas, {stats['atualizadas']} atualizadas no banco.")
+            logger.info(f"📊 {stats['criadas']} faturas criadas, {stats['atualizadas']} atualizadas no banco.")
         except Exception as e:
-            logging.warning(f"Não foi possível importar faturas para o banco: {e}")
+            logger.warning(f"Não foi possível importar faturas para o banco: {e}")
         
         return True, caminho_completo_excel
 
     except Exception as e:
-        logging.exception(f"Falha ao gerar o relatório Excel. Erro: {e}")
+        logger.exception(f"Falha ao gerar o relatório Excel. Erro: {e}")
         return False, None
 
 def gerar_csv_internacao(guias_relevantes: List[Dict[str, Any]],
                          output_folder: str) -> bool:
     """Gera CSV com guias de internação relevantes."""
     if not guias_relevantes:
-        logging.warning("Nenhuma guia de internação relevante fornecida. CSV não gerado.")
+        logger.warning("Nenhuma guia de internação relevante fornecida. CSV não gerado.")
         return True
 
     output_filename = "Guias de Internação Relevantes.csv"
@@ -206,7 +209,7 @@ def gerar_csv_internacao(guias_relevantes: List[Dict[str, Any]],
         "Valor p/ Filtro (R$)", "Valor Real Total (R$)"
     ]
 
-    logging.info(f"Gerando CSV de guias de internação: {output_path}")
+    logger.info(f"Gerando CSV de guias de internação: {output_path}")
 
     try:
         with open(output_path, 'w', newline='', encoding='utf-8-sig') as csvfile:
@@ -230,14 +233,14 @@ def gerar_csv_internacao(guias_relevantes: List[Dict[str, Any]],
                     valor_real_str
                 ])
 
-        logging.info(f"CSV gerado com sucesso: {len(guias_relevantes)} guias")
+        logger.info(f"CSV gerado com sucesso: {len(guias_relevantes)} guias")
         return True
         
     except IOError as e:
-        logging.exception(f"Erro de E/S ao escrever CSV em {output_path}: {e}")
+        logger.exception(f"Erro de E/S ao escrever CSV em {output_path}: {e}")
         return False
     except Exception as e:
-        logging.exception(f"Erro inesperado ao gerar CSV: {e}")
+        logger.exception(f"Erro inesperado ao gerar CSV: {e}")
         return False
 
 def gerar_csv_alertas_internacao_curta(guias_para_sinalizar: List[Dict[str, Any]],
@@ -277,7 +280,7 @@ def gerar_csv_alertas_internacao_curta(guias_para_sinalizar: List[Dict[str, Any]
                     linhas_escritas += 1
                     
                 except Exception as e:
-                    logging.warning(f"Erro ao escrever guia no CSV: {e}")
+                    logger.warning(f"Erro ao escrever guia no CSV: {e}")
                     continue
 
         if linhas_escritas == 0:
@@ -287,12 +290,12 @@ def gerar_csv_alertas_internacao_curta(guias_para_sinalizar: List[Dict[str, Any]
                 pass
             return False, "Nenhum alerta pôde ser escrito no CSV."
 
-        logging.info(f"CSV de alertas gerado com sucesso: {linhas_escritas} alertas")
+        logger.info(f"CSV de alertas gerado com sucesso: {linhas_escritas} alertas")
         return True, f"Relatório de alertas gerado com {linhas_escritas} registros: {output_path}"
         
     except IOError as e:
-        logging.exception(f"Erro de E/S ao gerar CSV de alertas em {output_path}: {e}")
+        logger.exception(f"Erro de E/S ao gerar CSV de alertas em {output_path}: {e}")
         return False, f"Erro de acesso ao arquivo: {e}"
     except Exception as e:
-        logging.exception(f"Erro inesperado ao gerar CSV de alertas: {e}")
+        logger.exception(f"Erro inesperado ao gerar CSV de alertas: {e}")
         return False, f"Erro inesperado: {e}"

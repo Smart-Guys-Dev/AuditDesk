@@ -7,9 +7,13 @@ import hashlib
 import lxml.etree as etree
 from typing import Callable, List, Optional
 
-from . import (data_manager, distribution_engine, file_manager,
-               hash_calculator, report_generator, xml_parser,
-               rule_engine)
+from src import data_manager
+from src.business.processing import distribution_engine
+from src.business.processing import hash_calculator
+from src.business.rules import rule_engine
+from src.infrastructure.files import file_manager
+from src.infrastructure.reports import report_generator
+from src.infrastructure.parsers import xml_parser
 from .database import db_manager
 from .models.repositories.execution_repository import ExecutionRepository
 

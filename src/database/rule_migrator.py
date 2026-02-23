@@ -67,7 +67,7 @@ def run_migration(config_path: str = None):
         logger.error(f"Diretório de configuração não encontrado: {config_path}")
         return
 
-    logger.info(f"Iniciando migração de regras a partir de: {config_path}")
+    logger.debug(f"Iniciando migração de regras a partir de: {config_path}")
     
     stats = {
         'rules_migrated': 0,
@@ -91,7 +91,12 @@ def run_migration(config_path: str = None):
         if os.path.exists(filepath):
             _migrate_list_file_safe(filepath, list_id, stats)
             
-    logger.info(f"Dados migrados com sucesso.")
+    total_r = stats['rules_migrated'] + stats['rules_skipped']
+    total_l = stats['lists_migrated']
+    if stats['rules_migrated'] > 0 or stats['errors']:
+        logger.info(f"Regras sincronizadas ({total_r} regras, {total_l} listas)")
+    else:
+        logger.debug(f"Regras sincronizadas ({total_r} regras, {total_l} listas) — nenhuma alteração.")
     return stats
 
 def _scan_and_migrate(folder, stats):
@@ -157,7 +162,7 @@ def _migrate_rule_file_safe(filepath, grupo, stats):
             
         if migrated_count > 0:
             session.commit()
-            logger.info(f"Arquivo {os.path.basename(filepath)}: {migrated_count} novas regras migradas.")
+            logger.debug(f"Arquivo {os.path.basename(filepath)}: {migrated_count} novas regras migradas.")
             
     except Exception as e:
         session.rollback()

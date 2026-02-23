@@ -1,9 +1,12 @@
 from PyQt6.QtWidgets import (QWidget, QVBoxLayout, QHBoxLayout, QLabel, QLineEdit, 
                              QPushButton, QMessageBox, QTableWidget, QTableWidgetItem, 
-                             QDialog, QFormLayout, QComboBox, QCheckBox, QHeaderView, QFrame)
-from PyQt6.QtCore import Qt
+                             QDialog, QFormLayout, QComboBox, QCheckBox, QHeaderView,
+                             QFrame, QDateEdit)
+from PyQt6.QtCore import Qt, QDate
 from PyQt6.QtGui import QColor
 from src.database import db_manager
+from src.database.db_manager import get_session
+from src.database.models import User
 
 class UserManagementWindow(QWidget):
     def __init__(self):
@@ -180,13 +183,23 @@ class UserManagementWindow(QWidget):
             QMessageBox.warning(self, "Atenção", "Selecione um usuário para editar.")
             return
             
-        row = self.table.currentRow()
-        username = self.table.item(row, 1).text()
-        full_name = self.table.item(row, 2).text()
-        role = self.table.item(row, 3).text()
-        is_active = self.table.item(row, 4).text() == "Ativo"
+        # Buscar dados completos do banco (incluindo email e birth_date)
+        session = get_session()
+        try:
+            user = session.query(User).filter_by(id=user_id).first()
+            if not user:
+                QMessageBox.warning(self, "Erro", "Usuário não encontrado.")
+                return
+            
+            dialog = UserDialog(
+                self, user_id, user.username, user.full_name or "",
+                user.role, user.is_active,
+                email=user.email or "",
+                birth_date=user.birth_date
+            )
+        finally:
+            session.close()
         
-        dialog = UserDialog(self, user_id, username, full_name, role, is_active)
         if dialog.exec():
             self.load_users()
 
@@ -214,13 +227,15 @@ class UserManagementWindow(QWidget):
 
 
 class UserDialog(QDialog):
-    def __init__(self, parent=None, user_id=None, username="", full_name="", role="AUDITOR", is_active=True):
+    def __init__(self, parent=None, user_id=None, username="", full_name="", role="AUDITOR", is_active=True, email="", birth_date=None):
         super().__init__(parent)
         self.user_id = user_id
         self.is_edit = user_id is not None
+        self._email = email
+        self._birth_date = birth_date
         
         self.setWindowTitle("Editar Usuário" if self.is_edit else "Novo Usuário")
-        self.setFixedSize(450, 400)
+        self.setFixedSize(450, 500)
         
         # Estilo do Dialog
         self.setStyleSheet("""
@@ -288,6 +303,33 @@ class UserDialog(QDialog):
         self.cmb_role.setCurrentText(role)
         form_layout.addRow("Perfil:", self.cmb_role)
         
+        self.txt_email = QLineEdit(self._email)
+        self.txt_email.setPlaceholderText("nome@unimed.com.br")
+        form_layout.addRow("E-mail:", self.txt_email)
+        
+        self.date_birth = QDateEdit()
+        self.date_birth.setCalendarPopup(True)
+        self.date_birth.setDisplayFormat("dd/MM/yyyy")
+        if self._birth_date:
+            self.date_birth.setDate(QDate(self._birth_date.year, self._birth_date.month, self._birth_date.day))
+        else:
+            self.date_birth.setDate(QDate(1990, 1, 1))
+        self.date_birth.setStyleSheet(self.date_birth.styleSheet() + """
+            QDateEdit {
+                background-color: #3B4252;
+                border: 1px solid #4C566A;
+                border-radius: 4px;
+                padding: 8px;
+                color: #ECEFF4;
+                font-size: 14px;
+            }
+            QDateEdit:focus {
+                border: 1px solid #88C0D0;
+                background-color: #434C5E;
+            }
+        """)
+        form_layout.addRow("Nascimento:", self.date_birth)
+        
         self.txt_password = QLineEdit()
         self.txt_password.setEchoMode(QLineEdit.EchoMode.Password)
         self.txt_password.setPlaceholderText("Deixe vazio para manter a atual" if self.is_edit else "Obrigatório")
@@ -343,20 +385,28 @@ class UserDialog(QDialog):
         role = self.cmb_role.currentText()
         is_active = self.chk_active.isChecked()
         password = self.txt_password.text().strip()
+        email = self.txt_email.text().strip() or None
+        birth_date = self.date_birth.date().toPyDate()
         
         if not username:
             QMessageBox.warning(self, "Erro", "O campo Usuário é obrigatório.")
             return
 
         if self.is_edit:
-            success, msg = db_manager.update_user(self.user_id, full_name, role, is_active)
+            success, msg = db_manager.update_user(
+                self.user_id, full_name, role, is_active,
+                email=email, birth_date=birth_date
+            )
             if success and password:
                 db_manager.change_password(self.user_id, password)
         else:
             if not password:
                 QMessageBox.warning(self, "Erro", "A senha é obrigatória para novos usuários.")
                 return
-            success, msg = db_manager.create_user(username, password, full_name, role)
+            success, msg = db_manager.create_user(
+                username, password, full_name, role,
+                email=email, birth_date=birth_date
+            )
             
         if success:
             QMessageBox.information(self, "Sucesso", msg)

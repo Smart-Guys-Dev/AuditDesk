@@ -7,7 +7,7 @@ Registro de auditoria para compliance (LGPD).
 from sqlalchemy import Column, Integer, String, DateTime, Text, ForeignKey
 from sqlalchemy.orm import relationship
 from datetime import datetime
-from .base import Base
+from . import Base
 
 
 class AuditLog(Base):

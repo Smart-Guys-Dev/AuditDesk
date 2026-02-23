@@ -1,8 +1,9 @@
 # Validador XML/core/xml_reader.py
 import lxml.etree as etree
 import logging
+logger = logging.getLogger(__name__)
 
-logging.basicConfig(level=logging.DEBUG, format='%(asctime)s - %(levelname)s - (xml_reader) - %(message)s')
+
 
 # NAMESPACES globais para uso consistente
 NAMESPACES = {'ptu': 'http://ptu.unimed.coop.br/schemas/V3_0'} 
@@ -20,10 +21,10 @@ class XMLReader:
             tree = etree.parse(xml_path, self.parser)
             return tree
         except etree.XMLSyntaxError as e:
-            logging.error(f"Erro de sintaxe XML ao carregar {xml_path}: {e}")
+            logger.error(f"Erro de sintaxe XML ao carregar {xml_path}: {e}")
             return None
         except Exception as e:
-            logging.error(f"Erro ao carregar XML {xml_path}: {e}")
+            logger.error(f"Erro ao carregar XML {xml_path}: {e}")
             return None
     
     def find_elements_by_xpath(self, element, xpath_expr):
@@ -38,7 +39,7 @@ class XMLReader:
         Retorna o texto de um elemento, tratando None e espaços em branco.
         """
         if element is None:
-            logging.debug(f"DEBUG: get_element_text recebendo elemento None. Retornando None.")
+            logger.debug(f"DEBUG: get_element_text recebendo elemento None. Retornando None.")
             return None
         
         # Garante que o texto seja tratado como string e strip() remove espaços/quebras de linha

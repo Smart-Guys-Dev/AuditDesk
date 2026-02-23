@@ -818,5 +818,89 @@
       "razao": "Participação incorreta causa glosa do item pela operadora",
       "contabilizar": true
     }
+  },
+  {
+    "id": "REGRA_PARTICIPACAO_PREST_1462_LUIZ_LANI",
+    "descricao": "Garante tp_Participacao = '00' para o profissional LUIZ ALEXANDRE LANI (cd_Prest 1462).",
+    "ativo": true,
+    "condicoes": {
+      "tipo_elemento": "procedimentosExecutados",
+      "condicao_multipla": {
+        "tipo": "AND",
+        "sub_condicoes": [
+          {
+            "condicao_tag_valor": {
+              "xpath": "./ptu:equipe_Profissional/ptu:Prestador/ptu:cd_Prest",
+              "valor_permitido": [
+                "1462"
+              ]
+            }
+          },
+          {
+            "condicao_tag_valor": {
+              "xpath": "./ptu:equipe_Profissional/ptu:tp_Participacao",
+              "valor_permitido": [
+                "11"
+              ]
+            }
+          }
+        ]
+      }
+    },
+    "acao": {
+      "tipo_acao": "garantir_tag_com_conteudo",
+      "tag_alvo": "./ptu:equipe_Profissional/ptu:tp_Participacao",
+      "novo_conteudo": "00",
+      "posicao_insercao": "primeiro_filho",
+      "tag_pai_referencia": "./ptu:equipe_Profissional"
+    },
+    "metadata_glosa": {
+      "categoria": "GLOSA_ITEM",
+      "impacto": "MEDIO",
+      "razao": "Participação incorreta (11 ao invés de 00) causa glosa do item pela operadora",
+      "contabilizar": true
+    }
+  },
+  {
+    "id": "REGRA_PARTICIPACAO_PREST_986_CELSO_MENDONCA",
+    "descricao": "Garante tp_Participacao = '00' para o profissional CELSO JORGE CORDOBA MENDONCA (cd_Prest 986).",
+    "ativo": true,
+    "condicoes": {
+      "tipo_elemento": "procedimentosExecutados",
+      "condicao_multipla": {
+        "tipo": "AND",
+        "sub_condicoes": [
+          {
+            "condicao_tag_valor": {
+              "xpath": "./ptu:equipe_Profissional/ptu:Prestador/ptu:cd_Prest",
+              "valor_permitido": [
+                "986"
+              ]
+            }
+          },
+          {
+            "condicao_tag_valor": {
+              "xpath": "./ptu:equipe_Profissional/ptu:tp_Participacao",
+              "valor_permitido": [
+                "11"
+              ]
+            }
+          }
+        ]
+      }
+    },
+    "acao": {
+      "tipo_acao": "garantir_tag_com_conteudo",
+      "tag_alvo": "./ptu:equipe_Profissional/ptu:tp_Participacao",
+      "novo_conteudo": "00",
+      "posicao_insercao": "primeiro_filho",
+      "tag_pai_referencia": "./ptu:equipe_Profissional"
+    },
+    "metadata_glosa": {
+      "categoria": "GLOSA_ITEM",
+      "impacto": "MEDIO",
+      "razao": "Participação incorreta (11 ao invés de 00) causa glosa do item pela operadora",
+      "contabilizar": true
+    }
   }
 ]

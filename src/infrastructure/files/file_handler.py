@@ -4,7 +4,9 @@ import glob
 import logging
 import lxml.etree as etree # Garanta que esta importação existe
 
-logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - (file_handler) - %(message)s')
+
+# Configuração de logger específico para o módulo
+logger = logging.getLogger(__name__)
 
 class FileHandler:
     def __init__(self):
@@ -35,8 +37,8 @@ class FileHandler:
             etree.indent(xml_tree.getroot(), space="")
 
             xml_tree.write(output_path, encoding='ISO-8859-1', xml_declaration=True, pretty_print=True)
-            logging.info(f"XML salvo em: {output_path}")
+            logger.info(f"XML salvo em: {output_path}")
             return True
         except Exception as e:
-            logging.error(f"Erro ao salvar XML em {output_path}: {e}")
+            logger.error(f"Erro ao salvar XML em {output_path}: {e}")
             return False
