@@ -4,7 +4,8 @@ Dashboard premium com KPIs operacionais e atividade recente.
 """
 from PyQt6.QtWidgets import (QWidget, QVBoxLayout, QHBoxLayout, QLabel,
                              QFrame, QTableWidget, QTableWidgetItem,
-                             QHeaderView, QGraphicsDropShadowEffect)
+                             QHeaderView, QGraphicsDropShadowEffect,
+                             QPushButton, QMessageBox)
 from PyQt6.QtCore import Qt, pyqtSignal
 from PyQt6.QtGui import QColor, QMouseEvent
 
@@ -90,8 +91,8 @@ class PaginaBoasVindas(QWidget):
         lbl_quick.setObjectName("section_title")
         main_layout.addWidget(lbl_quick)
 
-        cards_layout = QHBoxLayout()
-        cards_layout.setSpacing(12)
+        grid_layout = QHBoxLayout()
+        grid_layout.setSpacing(12)
 
         # page_index: 1=Processador, 2=Validador, 6=Consultar
         card1 = self._create_compact_card("⚙️", "Processador",
@@ -101,11 +102,27 @@ class PaginaBoasVindas(QWidget):
         card3 = self._create_compact_card("🔍", "Consultar Fatura",
                                           "Buscar status por número", "#D2A8FF", 6)
 
-        cards_layout.addWidget(card1)
-        cards_layout.addWidget(card2)
-        cards_layout.addWidget(card3)
+        grid_layout.addWidget(card1)
+        grid_layout.addWidget(card2)
+        grid_layout.addWidget(card3)
 
-        main_layout.addLayout(cards_layout)
+        main_layout.addLayout(grid_layout)
+
+        # ── Admin Actions ──
+        admin_actions_layout = QHBoxLayout()
+        admin_actions_layout.setContentsMargins(0, 10, 0, 0)
+        
+        self.btn_reset_db = QPushButton("🗑️ Limpar Histórico de Processamento")
+        self.btn_reset_db.setObjectName("btn_danger")
+        self.btn_reset_db.setCursor(Qt.CursorShape.PointingHandCursor)
+        self.btn_reset_db.setFixedWidth(280)
+        self.btn_reset_db.clicked.connect(self._confirm_reset_db)
+        
+        admin_actions_layout.addWidget(self.btn_reset_db)
+        admin_actions_layout.addStretch()
+        
+        main_layout.addLayout(admin_actions_layout)
+
 
         # ── Atividade Recente ──
         lbl_activity = QLabel("Atividade Recente")
@@ -252,3 +269,25 @@ class PaginaBoasVindas(QWidget):
             else:
                 status_item.setForeground(QColor("#8B949E"))
             self.table.setItem(row, 4, status_item)
+
+    def _confirm_reset_db(self):
+        """Mostra confirmação antes de resetar o banco."""
+        reply = QMessageBox.question(
+            self, "Confirmar Reset",
+            "Você tem certeza que deseja limpar todo o histórico de processamento?\n\n"
+            "Isso permitirá re-validar arquivos que já foram processados anteriormente.\n"
+            "⚠️ Esta ação não pode ser desfeita.",
+            QMessageBox.StandardButton.Yes | QMessageBox.StandardButton.No,
+            QMessageBox.StandardButton.No
+        )
+
+        if reply == QMessageBox.StandardButton.Yes:
+            from src.database import db_manager
+            success, message = db_manager.reset_processing_data()
+            if success:
+                QMessageBox.information(self, "Sucesso", message)
+                # Recarregar estatísticas e tabela
+                self.setup_ui() # Gamble: redesenha tudo
+            else:
+                QMessageBox.critical(self, "Erro", message)
+

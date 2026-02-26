@@ -637,3 +637,34 @@ def get_alert_stats(execution_id: int) -> dict:
         return {'total_alertas': 0, 'roi_potencial': 0.0}
     finally:
         session.close()
+def reset_processing_data():
+    """
+    Remove todos os registros de execução, logs de arquivos e métricas.
+    Útil para reiniciar o processamento do zero ou re-processar mesmos arquivos.
+    Mantém usuários e configurações.
+    """
+    session = get_session()
+    try:
+        from sqlalchemy import text
+        
+        # Ordem de remoção para respeitar FKs
+        if DB_PROVIDER == "postgresql":
+            # Usar TRUNCATE no PostgreSQL para ser mais rápido e resetar IDs
+            session.execute(text("TRUNCATE TABLE alert_metrics, roi_metrics, file_logs, execution_logs, audit_logs CASCADE"))
+        else:
+            # SQLite
+            session.query(AlertMetrics).delete()
+            session.query(ROIMetrics).delete()
+            session.query(FileLog).delete()
+            session.query(ExecutionLog).delete()
+            session.query(AuditLog).delete()
+            
+        session.commit()
+        logger.info("🗑️ Banco de dados de processamento resetado com sucesso.")
+        return True, "Dados de processamento limpos com sucesso!"
+    except Exception as e:
+        session.rollback()
+        logger.error(f"Erro ao resetar banco: {e}")
+        return False, f"Erro ao resetar: {e}"
+    finally:
+        session.close()
