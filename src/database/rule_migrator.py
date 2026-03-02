@@ -118,6 +118,7 @@ def _migrate_rule_file_safe(filepath, grupo, stats):
             rules = [rules]
             
         migrated_count = 0
+        updated_count = 0
         
         for rule_data in rules:
             if not rule_data.get('id'): continue
@@ -127,12 +128,26 @@ def _migrate_rule_file_safe(filepath, grupo, stats):
                 AuditRule.id == rule_data['id']
             ).first()
             
-            # Se não existe, cria. Se existe, PODEMOS atualizar (opcional, aqui vamos manter se não existir)
-            # Para "auto-update" real, deveríamos atualizar se o JSON for mais novo ou diferente.
-            # Por segurança e simplicidade inicial, vamos apenas inserir novas.
+            new_condicoes = json.dumps(rule_data.get('condicoes', {}))
+            new_acao = json.dumps(rule_data.get('acao', {}))
+            new_ativo = rule_data.get('ativo', True)
             
             if existing:
-                stats['rules_skipped'] += 1
+                # Comparar conteúdo: se JSON mudou, atualizar no banco
+                if (existing.condicoes != new_condicoes or 
+                    existing.acao != new_acao or
+                    existing.ativo != new_ativo):
+                    existing.condicoes = new_condicoes
+                    existing.acao = new_acao
+                    existing.ativo = new_ativo
+                    existing.descricao = rule_data.get('descricao', existing.descricao)
+                    existing.log_sucesso = rule_data.get('log_sucesso', existing.log_sucesso)
+                    existing.versao += 1
+                    existing.atualizado_por = 'auto_sync'
+                    updated_count += 1
+                    logger.info(f"Regra atualizada pelo JSON: {rule_data['id']} (v{existing.versao})")
+                else:
+                    stats['rules_skipped'] += 1
                 continue
                 
             categoria = detect_category(rule_data)
@@ -144,10 +159,10 @@ def _migrate_rule_file_safe(filepath, grupo, stats):
                 grupo=grupo,
                 nome=rule_data.get('descricao', rule_data['id'])[:200],
                 descricao=rule_data.get('descricao', ''),
-                ativo=rule_data.get('ativo', True),
+                ativo=new_ativo,
                 prioridade=rule_data.get('prioridade', 100),
-                condicoes=json.dumps(rule_data.get('condicoes', {})),
-                acao=json.dumps(rule_data.get('acao', {})),
+                condicoes=new_condicoes,
+                acao=new_acao,
                 log_sucesso=rule_data.get('log_sucesso', ''),
                 impacto_financeiro=rule_data.get('metadata_glosa', {}).get('impacto', 'MEDIO'),
                 contabilizar_roi=rule_data.get('metadata_glosa', {}).get('contabilizar', True),
@@ -160,9 +175,14 @@ def _migrate_rule_file_safe(filepath, grupo, stats):
             migrated_count += 1
             stats['rules_migrated'] += 1
             
-        if migrated_count > 0:
+        if migrated_count > 0 or updated_count > 0:
             session.commit()
-            logger.debug(f"Arquivo {os.path.basename(filepath)}: {migrated_count} novas regras migradas.")
+            from src.database.rule_repository import RuleRepository
+            RuleRepository.invalidate_cache()
+            if migrated_count > 0:
+                logger.debug(f"Arquivo {os.path.basename(filepath)}: {migrated_count} novas regras migradas.")
+            if updated_count > 0:
+                logger.info(f"Arquivo {os.path.basename(filepath)}: {updated_count} regras atualizadas.")
             
     except Exception as e:
         session.rollback()
