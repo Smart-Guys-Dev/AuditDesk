@@ -19,8 +19,15 @@ FILE_TO_GROUP = {
     "conselho.json": "EQUIPE_PROF",
     "auditoria.json": "AUDITORIA",
     "internacao.json": "INTERNACAO",
+    "internacao_dia31.json": "INTERNACAO",
     "procedimentos.json": "PROCEDIMENTOS",
     "pj_para_pf.json": "CONVERSAO",
+    "pj_pf_rotativo.json": "CONVERSAO",
+    "intensivista_rotativo.json": "EQUIPE_PROF",
+    "solicitante_rotativo.json": "EQUIPE_PROF",
+    "profissional_rotativo.json": "EQUIPE_PROF",
+    "remocao.json": "PROCEDIMENTOS",
+    "taxas_observacao.json": "PROCEDIMENTOS",
     "outros.json": "OUTROS",
 }
 
