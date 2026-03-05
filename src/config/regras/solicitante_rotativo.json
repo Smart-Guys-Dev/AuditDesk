@@ -31,5 +31,75 @@
             "tipo_acao": "corrigir_solicitante_rotativo"
         },
         "log_sucesso": "Solicitante genérico corrigido com rotação de profissionais."
+    },
+    {
+        "id": "REGRA_SOLICITANTE_REMOCAO_PJ_PARA_PF_ROTATIVO",
+        "descricao": "Para códigos de remoção (ambulância), quando o profissional solicitante tiver nome institucional (UNIMED, HOSPITAL, CLINICA, SOS, PLANTONISTA), converte para PF com rotação.",
+        "ativo": true,
+        "condicoes": {
+            "tipo_elemento": "dadosSolicitante",
+            "condicao_multipla": {
+                "tipo": "AND",
+                "sub_condicoes": [
+                    {
+                        "condicao_tag_valor": {
+                            "xpath": "./ptu:profissional/ptu:nm_Profissional",
+                            "tipo_comparacao": "existe"
+                        }
+                    },
+                    {
+                        "condicao_multipla": {
+                            "tipo": "OR",
+                            "sub_condicoes": [
+                                {
+                                    "condicao_tag_valor": {
+                                        "xpath": "./ptu:profissional/ptu:nm_Profissional",
+                                        "tipo_comparacao": "contem",
+                                        "valor": "UNIMED"
+                                    }
+                                },
+                                {
+                                    "condicao_tag_valor": {
+                                        "xpath": "./ptu:profissional/ptu:nm_Profissional",
+                                        "tipo_comparacao": "contem",
+                                        "valor": "HOSPITAL"
+                                    }
+                                },
+                                {
+                                    "condicao_tag_valor": {
+                                        "xpath": "./ptu:profissional/ptu:nm_Profissional",
+                                        "tipo_comparacao": "contem",
+                                        "valor": "CLINICA"
+                                    }
+                                },
+                                {
+                                    "condicao_tag_valor": {
+                                        "xpath": "./ptu:profissional/ptu:nm_Profissional",
+                                        "tipo_comparacao": "contem",
+                                        "valor": "SOS"
+                                    }
+                                },
+                                {
+                                    "condicao_tag_valor": {
+                                        "xpath": "./ptu:profissional/ptu:nm_Profissional",
+                                        "tipo_comparacao": "contem",
+                                        "valor": "PLANTONISTA"
+                                    }
+                                }
+                            ]
+                        }
+                    }
+                ]
+            }
+        },
+        "acao": {
+            "tipo_acao": "corrigir_solicitante_rotativo"
+        },
+        "log_sucesso": "Solicitante PJ de remoção/ambulância corrigido para PF com rotação.",
+        "metadata_glosa": {
+            "categoria": "GLOSA_ITEM",
+            "impacto": "ALTO",
+            "razao": "Profissional solicitante não pode ser PJ para códigos de remoção/ambulância"
+        }
     }
 ]
