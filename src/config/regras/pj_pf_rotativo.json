@@ -13,7 +13,8 @@
                             "xpath": "./ptu:procedimentos/ptu:cd_Servico",
                             "valor_permitido": [
                                 "10101039",
-                                "40401014"
+                                "40401014",
+                                "20104421"
                             ]
                         }
                     },
