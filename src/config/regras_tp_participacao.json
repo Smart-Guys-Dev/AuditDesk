@@ -1026,7 +1026,7 @@
   },
   {
     "id": "REGRA_PARTICIPACAO_AGRUPADA_11_PARA_00",
-    "descricao": "Garante tp_Participacao = '00' para os serviços agrupados, quando informado como '11' (ex: 30712017, 30713137, 30729130, 30306019, 30712025)",
+    "descricao": "Garante tp_Participacao = '00' para os serviços agrupados, quando informado como '11' (ex: 30712017, 30713137, 30729130, 30306019, 30712025, 31303021)",
     "ativo": true,
     "condicoes": {
       "tipo_elemento": "procedimentosExecutados",
@@ -1041,7 +1041,8 @@
                 "30713137",
                 "30729130",
                 "30306019",
-                "30712025"
+                "30712025",
+                "31303021"
               ]
             }
           },
